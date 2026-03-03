@@ -1,0 +1,147 @@
+<div class="page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">🍽 Smart Catering</div>
+    <div class="nav-links">
+      <a>Home</a>
+      <a>Menu</a>
+      <a>Cart</a>
+      <a class="active">Account</a>
+    </div>
+  </nav>
+
+  <div class="main">
+
+    <!-- LEFT SECTION -->
+    <div class="left">
+      <div class="icon">🍽</div>
+      <h1>Welcome to Smart Catering</h1>
+      <p>Your healthy meal solution for every occasion</p>
+
+      <ul>
+        <li><span>✔</span> Fresh, healthy meals delivered</li>
+        <li><span>✔</span> Flexible subscription plans</li>
+        <li><span>✔</span> Custom catering for events</li>
+      </ul>
+    </div>
+
+    <!-- RIGHT CARD -->
+    <div class="card">
+
+      <!-- TOGGLE -->
+      <div class="toggle">
+        <button 
+          [class.active]="isLogin"
+          (click)="switchToLogin()">
+          Login
+        </button>
+
+        <button 
+          [class.active]="!isLogin"
+          (click)="switchToSignup()">
+          Sign Up
+        </button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div *ngIf="isLogin">
+
+        <h2>Welcome Back!</h2>
+
+        <label>Email Address</label>
+        <div class="input-box">
+          <span>✉️</span>
+          <input type="email" placeholder="your@email.com">
+        </div>
+
+        <label>Password</label>
+        <div class="input-box">
+          <span>🔒</span>
+          <input type="password" placeholder="••••••••">
+        </div>
+
+        <div class="remember">
+          <label><input type="checkbox"> Remember me</label>
+          <span class="forgot">Forgot password?</span>
+        </div>
+
+        <button class="login-btn" (click)="login()">
+          LOGIN
+        </button>
+
+        <p class="switch-text">
+          Don’t have an account?
+          <span (click)="switchToSignup()">Sign Up</span>
+        </p>
+
+      </div>
+
+      <!-- SIGNUP FORM -->
+      <div *ngIf="!isLogin">
+
+        <h2>Create Account</h2>
+
+        <label>Full Name</label>
+        <div class="input-box">
+          <span>👤</span>
+          <input type="text" placeholder="John Doe">
+        </div>
+
+        <label>Email Address</label>
+        <div class="input-box">
+          <span>✉️</span>
+          <input type="email" placeholder="your@email.com">
+        </div>
+
+        <label>Phone Number</label>
+        <div class="input-box">
+          <span>📞</span>
+          <input type="tel" placeholder="+1 (555) 000-0000">
+        </div>
+
+        <label>Password</label>
+        <div class="input-box">
+          <span>🔒</span>
+          <input type="password" placeholder="••••••••">
+        </div>
+
+        <div class="terms">
+          <input type="checkbox" id="terms">
+          <label for="terms">
+            I agree to the 
+            <span>Terms & Conditions</span> and 
+            <span>Privacy Policy</span>
+          </label>
+        </div>
+
+        <div class="signup-buttons">
+          <button class="customer-btn" (click)="signupAsCustomer()">
+            Create Account as Customer
+          </button>
+
+          <button class="vendor-btn" (click)="signupAsVendor()">
+            Create Account as Vendor
+          </button>
+        </div>
+
+        <p class="switch-text">
+          Already have an account?
+          <span (click)="switchToLogin()">Login</span>
+        </p>
+
+      </div>
+
+      <!-- DIVIDER -->
+      <div class="divider">
+        <span>Or continue with</span>
+      </div>
+
+      <!-- GOOGLE ONLY -->
+      <div class="social">
+        <button class="google">Continue with Google</button>
+      </div>
+
+    </div>
+  </div>
+</div>
