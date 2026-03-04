@@ -1,0 +1,28 @@
+USE [catering_nutrition_db]
+GO
+
+/****** Object:  Table [dbo].[SubscriptionTypes]    Script Date: 2026-03-03 6:55:40 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SubscriptionTypes](
+	[SubscriptionTypeId] [int] IDENTITY(1,1) NOT NULL,
+	[SubscriptionName] [varchar](10) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[SubscriptionTypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[SubscriptionName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[SubscriptionTypes]  WITH CHECK ADD CHECK  (([SubscriptionName]='Paid' OR [SubscriptionName]='Free'))
+GO
+
+
