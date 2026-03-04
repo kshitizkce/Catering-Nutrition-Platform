@@ -1,0 +1,232 @@
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="logo-icon">🏠</div>
+
+    <div class="nav-item" [class.active]="activePage==='home'" (click)="setPage('home')">🏠</div>
+    <div class="nav-item" [class.active]="activePage==='orders'" (click)="setPage('orders')">📦</div>
+    <div class="nav-item" [class.active]="activePage==='vendors'" (click)="setPage('vendors')">👥</div>
+    <div class="nav-item" [class.active]="activePage==='settings'" (click)="setPage('settings')">⚙️</div>
+    <div class="nav-item logout" (click)="logout()">🚪</div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+
+    <!-- TOP NAV -->
+    <div class="top-nav">
+      <div class="brand">Logo</div>
+
+      <div class="top-links">
+        <span [class.active-link]="activePage==='home'" (click)="setPage('home')">Home</span>
+        <span [class.active-link]="activePage==='orders'" (click)="setPage('orders')">Orders</span>
+        <span [class.active-link]="activePage==='vendors'" (click)="setPage('vendors')">Vendors</span>
+        <span [class.active-link]="activePage==='settings'" (click)="setPage('settings')">Settings</span>
+      </div>
+    </div>
+
+    <!-- ================= HOME ================= -->
+    <div *ngIf="activePage==='home'">
+
+      <h1>Admin Dashboard</h1>
+
+      <div class="revenue-card">
+        <p>Revenue:</p>
+        <h2>$520</h2>
+      </div>
+
+      <div class="menu-card">
+
+        <div class="menu-item">
+          <div class="icon">🍗</div>
+          <div>
+            <h3>Menu Item</h3>
+            <p>$520</p>
+          </div>
+          <button class="green-btn">GET DETAILS</button>
+        </div>
+
+        <div class="menu-item">
+          <div class="icon">🥗</div>
+          <div>
+            <h3>Menu Name</h3>
+            <p>$120</p>
+          </div>
+          <button class="green-btn">GET DETAILS</button>
+        </div>
+
+        <div class="menu-item">
+          <div class="icon">🍜</div>
+          <div>
+            <h3>Menu Name</h3>
+            <p>$120</p>
+          </div>
+          <button class="green-btn">GET DETAILS</button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ================= ORDERS ================= -->
+    <div *ngIf="activePage==='orders'">
+
+      <h1>Order Management</h1>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Search Catering Services...">
+      </div>
+
+      <div class="table">
+
+        <div class="row header">
+          <div>#</div>
+          <div>Name</div>
+          <div>Date</div>
+          <div>Status</div>
+          <div>$</div>
+        </div>
+
+        <div class="row">
+          <div>1</div>
+          <div>Sarah M.</div>
+          <div>Apr 28</div>
+          <div class="status green">Active</div>
+          <div>$220</div>
+        </div>
+
+        <div class="row">
+          <div>2</div>
+          <div>John D.</div>
+          <div>Apr 27</div>
+          <div>Pending</div>
+          <div>$180</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ================= VENDORS ================= -->
+    <div *ngIf="activePage==='vendors'">
+
+      <h1>Account Information</h1>
+
+      <!-- TOOLBAR -->
+      <div class="vendor-toolbar">
+
+        <div class="left-buttons">
+          <button class="grey-btn" (click)="logout()">LogOut</button>
+          <button class="grey-btn">Active</button>
+          <button class="grey-btn">Cancelled</button>
+        </div>
+
+        <div class="right-controls">
+
+          <input class="search-input" type="text" placeholder="Search">
+
+          <button class="grey-btn">Status ▼</button>
+          <button class="grey-btn">Data ▼</button>
+          <button class="blue-btn">Settings</button>
+
+        </div>
+
+      </div>
+
+      <h2>Vendor List</h2>
+
+      <div class="table">
+
+        <div class="row header">
+          <div>Name</div>
+          <div>#</div>
+          <div>Status</div>
+          <div>Category</div>
+          <div>Price</div>
+        </div>
+
+        <div class="row">
+          <div>Vendor A</div>
+          <div>1</div>
+          <div>Local</div>
+          <div>Local</div>
+          <div>$350</div>
+        </div>
+
+        <div class="row">
+          <div>Vendor B</div>
+          <div>2</div>
+          <div>Gourmet</div>
+          <div>Gourmet</div>
+          <div>$379</div>
+        </div>
+
+        <div class="row">
+          <div>Vendor C</div>
+          <div>3</div>
+          <div>Gourmet</div>
+          <div>Gourmet</div>
+          <div>$382</div>
+        </div>
+
+        <div class="row">
+          <div>Vendor D</div>
+          <div>4</div>
+          <div>Local</div>
+          <div>Local</div>
+          <div>$260</div>
+        </div>
+
+      </div>
+
+      <button class="primary-btn" (click)="requestInfo()">REQUEST INFORMATION</button>
+
+    </div>
+
+    <!-- ================= SETTINGS ================= -->
+    <div *ngIf="activePage==='settings'">
+
+      <h1>Admin Settings</h1>
+
+      <div class="settings-card">
+
+        <h3>General Settings</h3>
+
+        <div class="form-row">
+          <label>Site Name</label>
+          <input type="text" value="Smart Catering">
+        </div>
+
+        <div class="form-row">
+          <label>Contact Email</label>
+          <input type="email" value="admin@smartcatering.com">
+        </div>
+
+        <div class="form-row">
+          <label>Support Phone</label>
+          <input type="text" value="+1 (555) 123-4567">
+        </div>
+
+        <h3>Notifications</h3>
+
+        <div class="checkbox">
+          <input type="checkbox" checked> Email notifications for new orders
+        </div>
+
+        <div class="checkbox">
+          <input type="checkbox" checked> SMS alerts for urgent issues
+        </div>
+
+        <div class="checkbox">
+          <input type="checkbox"> Weekly revenue reports
+        </div>
+
+        <button class="green-btn" (click)="saveSettings()">SAVE SETTINGS</button>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

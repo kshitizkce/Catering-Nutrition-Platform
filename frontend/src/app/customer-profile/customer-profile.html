@@ -1,0 +1,183 @@
+<div class="profile-page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">🍽 Smart Catering</div>
+
+    <div class="nav-links">
+      <a (click)="goHome()">Home</a>
+      <a (click)="goMenu()">Menu</a>
+      <a class="active" (click)="goAccount()">Account</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <h1 class="page-title">My Profile</h1>
+
+    <div class="profile-grid">
+
+      <!-- LEFT PROFILE CARD -->
+      <div class="profile-card">
+
+        <div class="avatar">
+          {{userName ? userName.charAt(0).toUpperCase() : 'U'}}
+        </div>
+
+        <h2>{{userName}}</h2>
+        <p class="email">{{userEmail}}</p>
+        <p class="phone">+1 (555) 123-4567</p>
+
+        <div class="membership">
+          ⭐ Gold Member
+          <small>Member since Jan 2026</small>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <h3>24</h3>
+            <span>Orders</span>
+          </div>
+
+          <div class="stat">
+            <h3>$2400</h3>
+            <span>Spent</span>
+          </div>
+
+          <div class="stat">
+            <h3>150</h3>
+            <span>Points</span>
+          </div>
+
+          <div class="stat">
+            <h3>8</h3>
+            <span>Saved</span>
+          </div>
+        </div>
+
+        <button class="edit-btn" (click)="editProfile()">Edit Profile</button>
+        <button class="logout-btn" (click)="logout()">Logout</button>
+
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div class="right-section">
+
+        <!-- QUICK ACTIONS -->
+        <div class="card">
+          <h2>Quick Actions</h2>
+
+          <div class="action-grid">
+            <div class="action orange" (click)="openSection('orders')">
+              Order History
+            </div>
+
+            <div class="action green" (click)="openSection('track')">
+              Track Order
+            </div>
+
+            <div class="action blue" (click)="openSection('subscriptions')">
+              Subscriptions
+            </div>
+
+            <div class="action purple" (click)="openSection('saved')">
+              Saved Items
+            </div>
+          </div>
+        </div>
+
+        <!-- ACCOUNT SETTINGS -->
+        <div class="card">
+
+          <h2>Account Settings</h2>
+
+          <div class="setting-item" (click)="openSection('personal')">
+            Personal Information
+          </div>
+
+          <div class="setting-item" (click)="openSection('address')">
+            Saved Addresses
+          </div>
+
+          <div class="setting-item" (click)="openSection('payment')">
+            Payment Methods
+          </div>
+
+          <div class="setting-item" (click)="openSection('notifications')">
+            Notifications
+          </div>
+
+        </div>
+
+        <!-- REWARDS -->
+        <div class="rewards-card">
+
+          <h2>Rewards Points</h2>
+
+          <p>Your Balance</p>
+          <h1>150</h1>
+
+          <div class="progress-bar">
+            <div class="progress"></div>
+          </div>
+
+          <button class="catalog-btn">
+            View Rewards Catalog
+          </button>
+
+        </div>
+
+        <!-- DYNAMIC SECTIONS -->
+
+        <div *ngIf="activeSection === 'orders'" class="card">
+          <h2>Your Order History</h2>
+          <p>No orders yet.</p>
+        </div>
+
+        <div *ngIf="activeSection === 'track'" class="card">
+          <h2>Track Your Order</h2>
+          <p>Tracking system coming soon.</p>
+        </div>
+
+        <div *ngIf="activeSection === 'subscriptions'" class="card">
+          <h2>Your Subscriptions</h2>
+          <p>No active subscriptions.</p>
+        </div>
+
+        <div *ngIf="activeSection === 'saved'" class="card">
+          <h2>Saved Items</h2>
+          <p>No saved items yet.</p>
+        </div>
+
+        <div *ngIf="activeSection === 'personal'" class="card">
+          <h2>Personal Information</h2>
+          <p>Name: {{userName}}</p>
+          <p>Email: {{userEmail}}</p>
+        </div>
+
+        <div *ngIf="activeSection === 'address'" class="card">
+          <h2>Saved Addresses</h2>
+          <p>No address added.</p>
+        </div>
+
+        <div *ngIf="activeSection === 'payment'" class="card">
+          <h2>Payment Methods</h2>
+          <p>No payment methods added.</p>
+        </div>
+
+        <div *ngIf="activeSection === 'notifications'" class="card">
+          <h2>Notifications</h2>
+          <p>Email notifications enabled.</p>
+        </div>
+
+        <div *ngIf="activeSection === 'edit'" class="card">
+          <h2>Edit Profile</h2>
+          <p>You can edit your profile information here.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

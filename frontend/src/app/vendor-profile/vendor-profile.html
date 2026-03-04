@@ -1,0 +1,193 @@
+<div class="vendor-layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="logo-icon">🍽</div>
+
+    <div class="nav-item"
+         [class.active]="activePage==='dashboard'"
+         (click)="setPage('dashboard')">🏠</div>
+
+    <div class="nav-item"
+         [class.active]="activePage==='orders'"
+         (click)="setPage('orders')">📦</div>
+
+    <div class="nav-item"
+         [class.active]="activePage==='menu'"
+         (click)="setPage('menu')">📋</div>
+
+    <div class="nav-item"
+         [class.active]="activePage==='subscribers'"
+         (click)="setPage('subscribers')">👥</div>
+
+    <div class="nav-item logout"
+         (click)="logout()">🚪</div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+
+    <!-- TOP NAV -->
+    <div class="top-nav">
+      <h2>Vendor Panel</h2>
+
+      <div class="top-links">
+        <span (click)="setPage('dashboard')"
+              [class.active-link]="activePage==='dashboard'">Dashboard</span>
+
+        <span (click)="setPage('orders')"
+              [class.active-link]="activePage==='orders'">Orders</span>
+
+        <span (click)="setPage('menu')"
+              [class.active-link]="activePage==='menu'">Menu</span>
+
+        <span (click)="setPage('subscribers')"
+              [class.active-link]="activePage==='subscribers'">Subscribers</span>
+      </div>
+    </div>
+
+    <!-- ================= DASHBOARD ================= -->
+    <div *ngIf="activePage==='dashboard'">
+
+      <h1>Vendor Dashboard</h1>
+
+      <div class="revenue-card">
+        <h2>$2,100</h2>
+        <p>This week</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">Total Orders <span>380</span></div>
+        <div class="stat-box">Completed <span>350</span></div>
+        <div class="stat-box highlight">Earnings <span>$380</span></div>
+        <div class="stat-box">Revenue <span>$1560</span></div>
+      </div>
+
+      <button class="primary-btn"
+              (click)="viewOrders()">
+        VIEW ORDERS
+      </button>
+
+    </div>
+
+    <!-- ================= ORDERS ================= -->
+    <div *ngIf="activePage==='orders'">
+
+      <h1>Manage Orders</h1>
+
+      <div class="table">
+
+        <div class="row header">
+          <div>Name</div>
+          <div>Order ID</div>
+          <div>Amount</div>
+          <div>Status</div>
+        </div>
+
+        <div class="row">
+          <div>Sarah M.</div>
+          <div>#5217</div>
+          <div>$350</div>
+          <div class="status yellow">Pending</div>
+        </div>
+
+        <div class="row">
+          <div>Lily U.</div>
+          <div>#5081</div>
+          <div>$265</div>
+          <div class="status green">Completed</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================= MENU ================= -->
+    <div *ngIf="activePage==='menu'">
+
+      <h1>Menu Management</h1>
+
+      <div class="table">
+
+        <div class="row header">
+          <div>Name</div>
+          <div>Category</div>
+          <div>Price</div>
+          <div>Action</div>
+        </div>
+
+        <div class="row">
+          <div>Chicken Biryani</div>
+          <div>Main Course</div>
+          <div>$170</div>
+          <div>
+            <button class="edit-btn"
+                    (click)="editItem('Chicken Biryani')">
+              Edit
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>Paneer Tikka</div>
+          <div>Starter</div>
+          <div>$120</div>
+          <div>
+            <button class="edit-btn"
+                    (click)="editItem('Paneer Tikka')">
+              Edit
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="edit-message" *ngIf="editMessage">
+        {{ editMessage }}
+      </p>
+
+    </div>
+
+    <!-- ================= SUBSCRIBERS ================= -->
+    <div *ngIf="activePage==='subscribers'">
+
+      <h1>Manage Subscribers</h1>
+
+      <div class="table">
+
+        <div class="row header">
+          <div>Name</div>
+          <div>Plan</div>
+          <div>Status</div>
+          <div>Action</div>
+        </div>
+
+        <div class="row">
+          <div>Julia W.</div>
+          <div>Monthly</div>
+          <div>Active</div>
+          <div>
+            <button class="update-btn"
+                    (click)="updateSubscriber('Julia W.')">
+              Update
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>Olivia R.</div>
+          <div>Weekly</div>
+          <div>Active</div>
+          <div>
+            <button class="update-btn"
+                    (click)="updateSubscriber('Olivia R.')">
+              Update
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
