@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService, RegisterDto, LoginDto } from '../services/auth';
 
 @Component({
   selector: 'app-signup',
@@ -14,88 +15,67 @@ export class SignupComponent {
 
   isLogin = true;
 
-  email: string = '';
-  password: string = '';
-  fullName: string = '';
+  fullName = '';
+  email = '';
+  phone = '';
+  password = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
-  switchToLogin() {
-    this.isLogin = true;
-  }
+  switchToLogin() { this.isLogin = true; }
+  switchToSignup() { this.isLogin = false; }
 
-  switchToSignup() {
-    this.isLogin = false;
-  }
-
-  // LOGIN
   login() {
+    if (!this.email || !this.password) { alert("Email and password required"); return; }
 
-    if (!this.email || this.email.trim() === '') {
-      alert('Please enter email');
-      return;
-    }
+    const dto: LoginDto = { email: this.email, password: this.password };
 
-    // ADMIN LOGIN
-    if (this.email === 'admin@smart.com') {
+    this.authService.login(dto).subscribe({
+      next: (res: any) => {
+        localStorage.setItem("userEmail", res.email);
+        localStorage.setItem("userRole", res.role);
+        localStorage.setItem("userName", res.fullName);
 
-      localStorage.setItem('userRole', 'admin');
-      localStorage.setItem('userEmail', this.email);
-      localStorage.setItem('userName', 'Admin');
-
-      this.router.navigate(['/admin-profile']);
-      return;
-    }
-
-    const role = localStorage.getItem('userRole');
-
-    localStorage.setItem('userEmail', this.email);
-
-    if (role === 'vendor') {
-
-      this.router.navigate(['/vendor-profile']);
-
-    } else {
-
-      // default customer login
-      this.router.navigate(['/home']);
-
-    }
-
+        if (res.role === "Admin") this.router.navigate(['/admin-profile']);
+        else if (res.role === "Vendor") this.router.navigate(['/vendor-profile']);
+        else this.router.navigate(['/home']);
+      },
+      error: (err: any) => alert(err.error || "Login failed")
+    });
   }
 
-  // SIGNUP AS CUSTOMER
-  signupAsCustomer() {
-
-    if (!this.email || this.email.trim() === '') {
-      alert('Please enter email');
-      return;
+  signup(roleType: 'customer' | 'vendor') {
+    if (!this.fullName || !this.email || !this.password || !this.phone) {
+      alert("All fields required"); return;
     }
 
-    localStorage.setItem('userEmail', this.email);
-    localStorage.setItem('userRole', 'customer');
+    const dto: RegisterDto = {
+      fullName: this.fullName,
+      email: this.email,
+      phone: this.phone,
+      password: this.password,
+      roleId: roleType === 'customer' ? 1 : 2,
+      subscriptionTypeId: 1
+    };
 
-    // store name for profile page
-    localStorage.setItem('userName', this.fullName || 'Customer');
+    this.authService.register(dto, roleType).subscribe({
+      next: (res: any) => {
+        alert("Registration successful");
 
-    this.router.navigate(['/home']);
+        localStorage.setItem("userEmail", this.email);
+        localStorage.setItem("userRole", roleType);
+        localStorage.setItem("userName", this.fullName);
+
+        if (roleType === 'customer') this.router.navigate(['/home']);
+        else this.router.navigate(['/vendor-profile']);
+      },
+      error: (err: any) => alert(err.error || "Registration failed")
+    });
   }
 
-  // SIGNUP AS VENDOR
-  signupAsVendor() {
-
-    if (!this.email || this.email.trim() === '') {
-      alert('Please enter email');
-      return;
-    }
-
-    localStorage.setItem('userEmail', this.email);
-    localStorage.setItem('userRole', 'vendor');
-
-    // store name
-    localStorage.setItem('userName', this.fullName || 'Vendor');
-
-    this.router.navigate(['/vendor-profile']);
-  }
-
+  signupAsCustomer() { this.signup('customer'); }
+  signupAsVendor() { this.signup('vendor'); }
 }
