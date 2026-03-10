@@ -1,0 +1,268 @@
+<div class="page">
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+<div class="logo">
+🍽 Smart Catering
+</div>
+
+<div class="nav-links">
+
+<span (click)="router.navigate(['/home'])">
+🏠 Home
+</span>
+
+<span (click)="router.navigate(['/menu'])">
+📋 Menu
+</span>
+
+<span (click)="router.navigate(['/profile'])">
+👤 Account
+</span>
+
+</div>
+
+</nav>
+
+
+<!-- PAGE CONTENT -->
+
+<div class="subscription-page">
+
+
+<!-- HERO SECTION -->
+
+<div class="hero">
+
+<h1>Meal Subscription Plans</h1>
+
+<p>Healthy, delicious meals delivered to your door</p>
+
+<span>Flexible plans that fit your lifestyle</span>
+
+</div>
+
+
+<!-- HOW IT WORKS -->
+
+<section class="how-section">
+
+<h2>How It Works</h2>
+
+<div class="how-grid">
+
+<div class="how-card">
+<div class="step">1</div>
+<h3>Choose Your Plan</h3>
+<p>Select weekly or monthly subscription</p>
+</div>
+
+<div class="how-card">
+<div class="step">2</div>
+<h3>Select Meals</h3>
+<p>Pick from our healthy meal options</p>
+</div>
+
+<div class="how-card">
+<div class="step">3</div>
+<h3>Schedule Delivery</h3>
+<p>Choose your delivery day and time</p>
+</div>
+
+<div class="how-card">
+<div class="step">4</div>
+<h3>Enjoy!</h3>
+<p>Fresh meals delivered to your door</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PLAN SECTION -->
+
+<h2 class="plan-title">Choose Your Plan</h2>
+
+<div class="plans">
+
+
+<!-- WEEKLY PLAN -->
+
+<div class="plan-card"
+[class.active]="selectedPlan === 'weekly'">
+
+<h3>Weekly Plan</h3>
+
+<div class="price">$99 <span>/ weekly</span></div>
+
+<p>Number of meals:</p>
+
+<div class="meal-options">
+
+<button
+(click)="selectMeals(5)"
+[class.active]="selectedMeals === 5">
+5
+</button>
+
+<button
+(click)="selectMeals(7)"
+[class.active]="selectedMeals === 7">
+7
+</button>
+
+<button
+(click)="selectMeals(10)"
+[class.active]="selectedMeals === 10">
+10
+</button>
+
+</div>
+
+<ul>
+
+<li>✔ Fresh meals delivered weekly</li>
+<li>✔ Flexible menu selection</li>
+<li>✔ Skip or pause anytime</li>
+<li>✔ Nutrition tracking included</li>
+
+</ul>
+
+<button
+class="plan-btn"
+(click)="selectPlan('weekly')">
+
+{{ selectedPlan === 'weekly' ? 'Selected' : 'Select Plan' }}
+
+</button>
+
+</div>
+
+
+
+<!-- MONTHLY PLAN -->
+
+<div class="plan-card"
+[class.active]="selectedPlan === 'monthly'">
+
+<span class="save">Save 15%</span>
+
+<h3>Monthly Plan</h3>
+
+<div class="price">$349 <span>/ monthly</span></div>
+
+<p>Number of meals:</p>
+
+<div class="meal-options">
+
+<button
+(click)="selectMeals(20)"
+[class.active]="selectedMeals === 20">
+20
+</button>
+
+<button
+(click)="selectMeals(28)"
+[class.active]="selectedMeals === 28">
+28
+</button>
+
+<button
+(click)="selectMeals(40)"
+[class.active]="selectedMeals === 40">
+40
+</button>
+
+</div>
+
+<ul>
+
+<li>✔ Fresh meals delivered weekly</li>
+<li>✔ Priority menu selection</li>
+<li>✔ Skip or pause anytime</li>
+<li>✔ Nutrition tracking included</li>
+<li>✔ Free delivery</li>
+<li>✔ Exclusive meal options</li>
+
+</ul>
+
+<button
+class="plan-btn"
+(click)="selectPlan('monthly')">
+
+{{ selectedPlan === 'monthly' ? 'Selected' : 'Select Plan' }}
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- MEAL CATEGORIES -->
+
+<h2 class="category-title">Our Meal Categories</h2>
+
+<div class="categories">
+
+<div class="cat-card">
+🍗
+<h3>Chicken</h3>
+<p>High-protein options</p>
+</div>
+
+<div class="cat-card">
+🥗
+<h3>Vegan</h3>
+<p>Plant-based meals</p>
+</div>
+
+<div class="cat-card">
+🐟
+<h3>Fish</h3>
+<p>Omega-3 rich dishes</p>
+</div>
+
+<div class="cat-card">
+🥩
+<h3>Low-Carb</h3>
+<p>Keto-friendly meals</p>
+</div>
+
+</div>
+
+
+<!-- READY SECTION -->
+
+<div class="ready-box">
+
+<h2>Ready to Start Your Subscription?</h2>
+
+<p *ngIf="!selectedPlan">
+Select a plan above to get started
+</p>
+
+<p *ngIf="selectedPlan">
+You've selected the {{selectedPlan}} plan with {{selectedMeals}} meals
+</p>
+
+<button *ngIf="!selectedPlan" class="browse-btn">
+Select a Plan First
+</button>
+
+<button *ngIf="selectedPlan"
+class="browse-btn"
+(click)="router.navigate(['/menu'])">
+
+Browse Meals →
+
+</button>
+
+</div>
+
+</div>
+
+</div>

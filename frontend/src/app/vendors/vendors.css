@@ -1,0 +1,88 @@
+.page{
+padding-top:80px;
+font-family:Arial;
+background:#f5f6f8;
+min-height:100vh;
+}
+
+.navbar{
+position:fixed;
+top:0;
+width:100%;
+height:70px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:0 30px;
+
+background:white;
+border-bottom:1px solid #eee;
+}
+
+.nav-links{
+display:flex;
+gap:25px;
+}
+
+.nav-links span{
+cursor:pointer;
+}
+
+.vendors-container{
+max-width:1100px;
+margin:auto;
+padding:40px;
+text-align:center;
+}
+
+.subtitle{
+color:#666;
+margin-bottom:30px;
+}
+
+.vendor-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.vendor-card{
+background:white;
+border-radius:10px;
+padding:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.vendor-card img{
+width:100%;
+height:160px;
+object-fit:cover;
+border-radius:8px;
+margin-bottom:10px;
+}
+
+.vendor-card h3{
+margin:5px 0;
+}
+
+.category{
+color:#ff7a00;
+font-weight:500;
+}
+
+.desc{
+font-size:14px;
+color:#555;
+margin:10px 0;
+}
+
+button{
+background:#ff7a00;
+border:none;
+color:white;
+padding:8px 14px;
+border-radius:6px;
+cursor:pointer;
+}
