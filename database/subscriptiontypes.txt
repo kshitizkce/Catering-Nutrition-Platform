@@ -1,7 +1,7 @@
 USE [catering_nutrition_db]
 GO
 
-/****** Object:  Table [dbo].[SubscriptionTypes]    Script Date: 2026-03-03 6:55:40 PM ******/
+/****** Object:  Table [dbo].[SubscriptionTypes]    Script Date: 2026-03-04 11:04:44 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,6 +11,7 @@ GO
 CREATE TABLE [dbo].[SubscriptionTypes](
 	[SubscriptionTypeId] [int] IDENTITY(1,1) NOT NULL,
 	[SubscriptionName] [varchar](10) NOT NULL,
+	[Price] [decimal](10, 2) NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[SubscriptionTypeId] ASC
@@ -22,7 +23,16 @@ UNIQUE NONCLUSTERED
 ) ON [PRIMARY]
 GO
 
+ALTER TABLE [dbo].[SubscriptionTypes] ADD  CONSTRAINT [DF_SubscriptionTypes_Price]  DEFAULT ((0)) FOR [Price]
+GO
+
 ALTER TABLE [dbo].[SubscriptionTypes]  WITH CHECK ADD CHECK  (([SubscriptionName]='Paid' OR [SubscriptionName]='Free'))
+GO
+
+ALTER TABLE [dbo].[SubscriptionTypes]  WITH CHECK ADD  CONSTRAINT [CK_SubscriptionTypes_Price] CHECK  (([Price]>=(0)))
+GO
+
+ALTER TABLE [dbo].[SubscriptionTypes] CHECK CONSTRAINT [CK_SubscriptionTypes_Price]
 GO
 
 
