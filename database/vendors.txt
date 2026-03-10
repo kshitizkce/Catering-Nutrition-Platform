@@ -1,0 +1,37 @@
+USE [catering_nutrition_db];
+GO
+
+CREATE TABLE dbo.Vendors
+(
+    VendorId            INT IDENTITY(1,1) PRIMARY KEY,
+    UserId              INT NOT NULL,
+    VendorName          NVARCHAR(150) NOT NULL,
+    BusinessDescription NVARCHAR(500) NULL,
+    VendorPhone         NVARCHAR(30) NULL,
+    VendorEmail         NVARCHAR(320) NULL,
+    VendorAddress       NVARCHAR(255) NULL,
+    City                NVARCHAR(100) NULL,
+
+    Rating              DECIMAL(2,1) NULL,
+
+    Status              VARCHAR(20) NOT NULL 
+        CONSTRAINT DF_Vendors_Status DEFAULT ('Active'),
+
+    CreatedAt           DATETIME2(0) NOT NULL 
+        CONSTRAINT DF_Vendors_CreatedAt DEFAULT (SYSDATETIME()),
+
+    UpdatedAt           DATETIME2(0) NULL,
+
+    CONSTRAINT FK_Vendors_Users
+        FOREIGN KEY (UserId) REFERENCES dbo.Users(UserId),
+
+    CONSTRAINT UQ_Vendors_UserId
+        UNIQUE (UserId),
+
+    CONSTRAINT CK_Vendors_Status
+        CHECK (Status IN ('Active', 'Inactive')),
+
+    CONSTRAINT CK_Vendors_Rating
+        CHECK (Rating IS NULL OR (Rating >= 0 AND Rating <= 5))
+);
+GO
