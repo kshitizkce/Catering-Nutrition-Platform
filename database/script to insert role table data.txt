@@ -1,0 +1,10 @@
+USE [catering_nutrition_db]
+GO
+
+INSERT INTO [dbo].[Roles]
+           ([RoleName])
+     VALUES
+           ('Customer'),
+		   ('Vendor'),
+		   ('Admin');
+GO

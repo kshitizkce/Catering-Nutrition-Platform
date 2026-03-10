@@ -1,0 +1,14 @@
+USE [catering_nutrition_db];
+GO
+
+CREATE TABLE dbo.MenuCategories
+(
+    CategoryId    INT IDENTITY(1,1) PRIMARY KEY,
+    CategoryName  NVARCHAR(100) NOT NULL,
+    Description   NVARCHAR(255) NULL,
+    IsActive      BIT NOT NULL CONSTRAINT DF_MenuCategories_IsActive DEFAULT (1),
+
+    CONSTRAINT UQ_MenuCategories_CategoryName
+        UNIQUE (CategoryName)
+);
+GO
