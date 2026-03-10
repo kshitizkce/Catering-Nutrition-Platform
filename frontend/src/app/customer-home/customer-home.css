@@ -102,3 +102,69 @@ body {
     flex-direction: column;
   }
 }
+/* VIEW ALL BUTTON */
+
+.view-all-btn{
+
+background:#ff7a00;
+color:white;
+
+border:none;
+
+padding:8px 16px;
+
+border-radius:6px;
+
+font-size:14px;
+font-weight:500;
+
+cursor:pointer;
+
+transition:0.2s;
+
+display:flex;
+align-items:center;
+gap:5px;
+
+}
+
+.view-all-btn:hover{
+
+background:#e56700;
+
+}
+
+
+/* HEADER ALIGNMENT */
+
+.header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+margin-bottom:20px;
+
+}
+
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width:768px){
+
+.header{
+
+flex-direction:column;
+align-items:flex-start;
+gap:10px;
+
+}
+
+.view-all-btn{
+
+font-size:13px;
+padding:7px 14px;
+
+}
+
+}

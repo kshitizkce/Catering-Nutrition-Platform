@@ -1,0 +1,56 @@
+<div class="menu-page">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+<div class="logo">🍽 Smart Catering</div>
+
+<div class="nav-links">
+<span (click)="goHome()">🏠 Home</span>
+<span class="active">📋 Menu</span>
+<span (click)="goAccount()">👤 Account</span>
+</div>
+
+</nav>
+
+
+<!-- PAGE CONTENT -->
+
+<div class="menu-container">
+
+<h1>Our Menu</h1>
+<p class="subtitle">Choose from our healthy and delicious meals</p>
+
+<div class="menu-grid">
+
+<div class="menu-card" *ngFor="let item of menuItems">
+
+<img [src]="item.image">
+
+<div class="menu-info">
+
+<h3>{{item.name}}</h3>
+
+<p class="category">{{item.category}}</p>
+
+<p class="desc">{{item.description}}</p>
+
+<div class="bottom">
+
+<span class="price">${{item.price}}</span>
+
+<button (click)="selectMeal(item)">
+Select Meal
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
