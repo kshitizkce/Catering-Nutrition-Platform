@@ -1,72 +1,110 @@
 <div class="page">
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="logo">🍽 Smart Catering</div>
+<!-- NAVBAR -->
+<nav class="navbar">
 
-    <div class="nav-links">
-      <span>🏠 Home</span>
-      <span>📋 Menu</span>
+<div class="logo">🍽 Smart Catering</div>
 
-      <!-- Account button now works -->
-      <span class="account-btn" (click)="goToAccount()">👤 Account</span>
+<div class="nav-links">
 
-    </div>
-  </nav>
+<span (click)="goHome()">🏠 Home</span>
 
-  <!-- HERO -->
-  <div class="hero">
-    <h1>Fresh, Healthy Meals</h1>
-    <p>Delivered to your door</p>
-    <button (click)="bookCatering()">BOOK CATERING →</button>
-  </div>
+<span (click)="goToMenu()">📋 Menu</span>
 
-  <!-- SEARCH -->
-  <div class="search">
-    <input type="text" placeholder="Search catering services...">
-  </div>
+<span (click)="goToAccount()">👤 Account</span>
 
-  <!-- OPTIONS -->
-  <div class="options">
-    <div class="card yellow" (click)="bookCatering()">
-      📅 Book Catering
-    </div>
+</div>
 
-    <div class="card green" (click)="goToSubscription()">
-      💳 Meal Subscription
-    </div>
-  </div>
+</nav>
 
-  <!-- TOP CATERERS -->
-  <div class="caterers">
-    <div class="header">
-      <h2>Top Caterers</h2>
-      <span>View All →</span>
-    </div>
 
-    <div class="caterer-card">
-      <div>
-        <h3>Healthy Bites Catering</h3>
-        <p>Healthy & Organic ⭐ 4.8</p>
-      </div>
-      <button (click)="viewCaterer('Healthy Bites')">View</button>
-    </div>
+<!-- HERO -->
 
-    <div class="caterer-card">
-      <div>
-        <h3>Gourmet Express</h3>
-        <p>International Cuisine ⭐ 4.6</p>
-      </div>
-      <button (click)="viewCaterer('Gourmet Express')">View</button>
-    </div>
+<div class="hero">
 
-    <div class="caterer-card">
-      <div>
-        <h3>Fresh Kitchen Co.</h3>
-        <p>Farm to Table ⭐ 4.9</p>
-      </div>
-      <button (click)="viewCaterer('Fresh Kitchen')">View</button>
-    </div>
-  </div>
+<h1>Fresh, Healthy Meals</h1>
+
+<p>Delivered to your door</p>
+
+<button (click)="bookCatering()">
+BOOK CATERING →
+</button>
+
+</div>
+
+
+<!-- SEARCH -->
+
+<div class="search">
+<input type="text" placeholder="Search catering services...">
+</div>
+
+
+<!-- OPTIONS -->
+
+<div class="options">
+
+<div class="card yellow" (click)="bookCatering()">
+📅 Book Catering
+</div>
+
+<div class="card green" (click)="goToSubscription()">
+💳 Meal Subscription
+</div>
+
+</div>
+
+
+<!-- TOP CATERERS -->
+
+<div class="caterers">
+
+<div class="header">
+
+<h2>Top Caterers</h2>
+
+<button class="view-all-btn" (click)="viewAllVendors()">
+View All →
+</button>
+
+</div>
+
+
+<div class="caterer-card">
+
+<div>
+<h3>Healthy Bites Catering</h3>
+<p>Healthy & Organic ⭐ 4.8</p>
+</div>
+
+<button (click)="goToMenu()">View</button>
+
+</div>
+
+
+<div class="caterer-card">
+
+<div>
+<h3>Gourmet Express</h3>
+<p>International Cuisine ⭐ 4.6</p>
+</div>
+
+<button (click)="goToMenu()">View</button>
+
+</div>
+
+
+<div class="caterer-card">
+
+<div>
+<h3>Fresh Kitchen Co.</h3>
+<p>Farm to Table ⭐ 4.9</p>
+</div>
+
+<button (click)="goToMenu()">View</button>
+
+</div>
+
+</div>
 
 </div>

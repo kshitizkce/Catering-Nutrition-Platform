@@ -1,0 +1,49 @@
+<div class="page">
+
+<nav class="navbar">
+
+<div class="logo">🍽 Smart Catering</div>
+
+<div class="nav-links">
+
+<span (click)="router.navigate(['/home'])">🏠 Home</span>
+<span (click)="router.navigate(['/menu'])">📋 Menu</span>
+<span (click)="router.navigate(['/profile'])">👤 Account</span>
+
+</div>
+
+</nav>
+
+<div class="vendors-container">
+
+<h1>Thunder Bay Catering Vendors</h1>
+
+<p class="subtitle">
+Explore catering services available in Thunder Bay
+</p>
+
+<div class="vendor-grid">
+
+<div class="vendor-card" *ngFor="let vendor of vendors">
+
+<img [src]="vendor.image">
+
+<h3>{{vendor.name}}</h3>
+
+<p class="category">{{vendor.category}}</p>
+
+<p class="rating">⭐ {{vendor.rating}}</p>
+
+<p class="desc">{{vendor.description}}</p>
+
+<button (click)="viewVendor(vendor.name)">
+View Vendor
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>

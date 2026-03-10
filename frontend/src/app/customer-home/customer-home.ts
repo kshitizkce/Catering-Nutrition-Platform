@@ -3,34 +3,46 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-customer-home',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './customer-home.html',
-  styleUrls: ['./customer-home.css']
+selector: 'app-customer-home',
+standalone: true,
+imports: [CommonModule],
+templateUrl: './customer-home.html',
+styleUrls: ['./customer-home.css']
 })
 export class CustomerHomeComponent {
 
-  userEmail: string | null = '';
+constructor(private router: Router) {}
 
-  constructor(private router: Router) {
-    this.userEmail = localStorage.getItem('userEmail');
-  }
+/* NAVIGATION FUNCTIONS */
 
-  bookCatering(){
-    alert('Booking page coming soon');
-  }
+goHome(){
+this.router.navigate(['/home']);
+}
 
-  goToSubscription(){
-    alert('Subscription page coming soon');
-  }
+goToMenu(){
+this.router.navigate(['/menu']);
+}
 
-  viewCaterer(name:string){
-    alert('Viewing ' + name);
-  }
+goToAccount(){
+this.router.navigate(['/profile']);
+}
 
-  goToAccount(){
-    this.router.navigate(['/profile']);
-  }
+viewAllVendors(){
+this.router.navigate(['/vendors']);
+}
+
+/* PAGE BUTTONS */
+
+bookCatering(){
+this.router.navigate(['/book-catering']);
+}
+
+goToSubscription(){
+this.router.navigate(['/subscription']);
+}
+
+viewCaterer(name:string){
+alert("Viewing " + name);
+}
 
 }

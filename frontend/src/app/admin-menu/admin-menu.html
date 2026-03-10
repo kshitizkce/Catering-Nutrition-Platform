@@ -1,0 +1,44 @@
+<div class="admin-menu-page">
+
+<h1>Admin Menu Manager</h1>
+
+<div class="add-form">
+
+<h2>Add Menu Item</h2>
+
+<input type="text" placeholder="Food Name" [(ngModel)]="name">
+
+<input type="text" placeholder="Category" [(ngModel)]="category">
+
+<input type="number" placeholder="Price" [(ngModel)]="price">
+
+<input type="text" placeholder="Image URL" [(ngModel)]="image">
+
+<textarea placeholder="Description" [(ngModel)]="description"></textarea>
+
+<button (click)="addMenu()">Add Menu</button>
+
+</div>
+
+
+<h2>Menu List</h2>
+
+<div class="menu-list">
+
+<div class="menu-card" *ngFor="let item of menuItems; let i=index">
+
+<img [src]="item.image">
+
+<h3>{{item.name}}</h3>
+
+<p>{{item.category}}</p>
+
+<p>${{item.price}}</p>
+
+<button class="delete-btn" (click)="deleteItem(i)">Delete</button>
+
+</div>
+
+</div>
+
+</div>

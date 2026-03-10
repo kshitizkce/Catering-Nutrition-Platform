@@ -6,6 +6,10 @@
 
     <div class="nav-item" [class.active]="activePage==='home'" (click)="setPage('home')">🏠</div>
     <div class="nav-item" [class.active]="activePage==='orders'" (click)="setPage('orders')">📦</div>
+
+    <!-- NEW REQUESTS ICON -->
+    <div class="nav-item" [class.active]="activePage==='requests'" (click)="setPage('requests')">📋</div>
+
     <div class="nav-item" [class.active]="activePage==='vendors'" (click)="setPage('vendors')">👥</div>
     <div class="nav-item" [class.active]="activePage==='settings'" (click)="setPage('settings')">⚙️</div>
     <div class="nav-item logout" (click)="logout()">🚪</div>
@@ -21,6 +25,10 @@
       <div class="top-links">
         <span [class.active-link]="activePage==='home'" (click)="setPage('home')">Home</span>
         <span [class.active-link]="activePage==='orders'" (click)="setPage('orders')">Orders</span>
+
+        <!-- NEW REQUESTS LINK -->
+        <span [class.active-link]="activePage==='requests'" (click)="setPage('requests')">Requests</span>
+
         <span [class.active-link]="activePage==='vendors'" (click)="setPage('vendors')">Vendors</span>
         <span [class.active-link]="activePage==='settings'" (click)="setPage('settings')">Settings</span>
       </div>
@@ -102,6 +110,52 @@
           <div>Apr 27</div>
           <div>Pending</div>
           <div>$180</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ================= CATERING REQUESTS ================= -->
+    <div *ngIf="activePage==='requests'">
+
+      <h1>Catering Requests</h1>
+
+      <div class="table">
+
+        <div class="row header">
+          <div>Event</div>
+          <div>Guests</div>
+          <div>Date</div>
+          <div>Budget</div>
+          <div>Status</div>
+          <div>Action</div>
+        </div>
+
+        <div class="row" *ngFor="let r of cateringRequests; let i=index">
+
+          <div>{{r.eventType}}</div>
+          <div>{{r.guests}}</div>
+          <div>{{r.date}}</div>
+          <div>{{r.budget}}</div>
+          <div>{{r.status}}</div>
+
+          <div>
+
+            <button class="green-btn" (click)="approveRequest(i)">
+              Approve
+            </button>
+
+            <button class="grey-btn" (click)="rejectRequest(i)">
+              Reject
+            </button>
+
+            <button class="primary-btn" (click)="deleteRequest(i)">
+              Delete
+            </button>
+
+          </div>
+
         </div>
 
       </div>

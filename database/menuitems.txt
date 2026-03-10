@@ -1,0 +1,39 @@
+USE [catering_nutrition_db];
+GO
+
+CREATE TABLE dbo.MenuItems
+(
+    MenuItemId       INT IDENTITY(1,1) PRIMARY KEY,
+    VendorId         INT NOT NULL,
+    CategoryId       INT NOT NULL,
+    ItemName         NVARCHAR(150) NOT NULL,
+    ItemDescription  NVARCHAR(500) NULL,
+
+    Rating           DECIMAL(2,1) NULL,
+
+    Price            DECIMAL(10,2) NOT NULL,
+
+    IsAvailable      BIT NOT NULL 
+        CONSTRAINT DF_MenuItems_IsAvailable DEFAULT (1),
+
+    Calories         INT NULL,
+
+    CreatedAt        DATETIME2(0) NOT NULL 
+        CONSTRAINT DF_MenuItems_CreatedAt DEFAULT (SYSDATETIME()),
+
+    CONSTRAINT FK_MenuItems_Vendors
+        FOREIGN KEY (VendorId) REFERENCES dbo.Vendors(VendorId),
+
+    CONSTRAINT FK_MenuItems_MenuCategories
+        FOREIGN KEY (CategoryId) REFERENCES dbo.MenuCategories(CategoryId),
+
+    CONSTRAINT CK_MenuItems_Price
+        CHECK (Price >= 0),
+
+    CONSTRAINT CK_MenuItems_Calories
+        CHECK (Calories IS NULL OR Calories >= 0),
+
+    CONSTRAINT CK_MenuItems_Rating
+        CHECK (Rating IS NULL OR (Rating >= 0 AND Rating <= 5))
+);
+GO
