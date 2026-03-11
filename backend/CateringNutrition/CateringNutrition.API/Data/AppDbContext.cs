@@ -12,6 +12,12 @@ namespace CateringNutrition.API.Data
         public DbSet<Roles> Roles { get; set; }
         public DbSet<SubscriptionTypes> SubscriptionTypes { get; set; }
 
+        public DbSet<Vendors> Vendors { get; set; }
+
+        public DbSet<MenuItems> MenuItems { get; set; }
+
+        public DbSet<MenuCategories> MenuCategories { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
