@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CateringNutrition.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3bbb5eb172c77dccb1a99588c68340a84bb3d78c")]
 [assembly: System.Reflection.AssemblyProductAttribute("CateringNutrition.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CateringNutrition.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

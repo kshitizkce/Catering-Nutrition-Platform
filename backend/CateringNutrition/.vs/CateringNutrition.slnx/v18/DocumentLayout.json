@@ -1,85 +1,108 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\",
+  "WorkspaceRootPath": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\models\\vendors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\models\\vendors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\services\\menuservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\services\\menuservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\controllers\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\controllers\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\cateringnutrition.api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\cateringnutrition.api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\models\\menuitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\models\\menuitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\cateringnutrition.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\cateringnutrition.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\interfaces\\imenuservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\interfaces\\imenuservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310094758_FixUsersSubscriptionFK.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CateringNutrition.API\\Migrations\\20260310094758_FixUsersSubscriptionFK.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\models\\menucategories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\models\\menucategories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\migrations\\20260310095627_fixuserssubscriptionfk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\migrations\\20260310095627_fixuserssubscriptionfk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\migrations\\20260310095313_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\migrations\\20260310095313_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\dtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\dtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\models\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\models\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\models\\subscriptiontypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\models\\subscriptiontypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\source\\repos\\cateringnutrition\\cateringnutrition.api\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\dtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\dtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\models\\subscriptiontypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\models\\subscriptiontypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\models\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\models\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\cateringnutrition.api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\cateringnutrition.api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\cateringnutrition.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\cateringnutrition.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310094758_FixUsersSubscriptionFK.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\migrations\\20260310095627_fixuserssubscriptionfk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\migrations\\20260310095627_fixuserssubscriptionfk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\migrations\\20260310095313_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\migrations\\20260310095313_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -90,7 +113,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -102,212 +125,306 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "WeatherForecastController.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Controllers\\WeatherForecastController.cs",
-              "RelativeDocumentMoniker": "CateringNutrition.API\\Controllers\\WeatherForecastController.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Controllers\\WeatherForecastController.cs",
-              "RelativeToolTip": "CateringNutrition.API\\Controllers\\WeatherForecastController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "MenuCategories.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\MenuCategories.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\MenuCategories.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\MenuCategories.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Models\\MenuCategories.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T16:44:12.572Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "CateringNutrition.API.csproj",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\CateringNutrition.API.csproj",
-              "RelativeDocumentMoniker": "CateringNutrition.API\\CateringNutrition.API.csproj",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\CateringNutrition.API.csproj",
-              "RelativeToolTip": "CateringNutrition.API\\CateringNutrition.API.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-03-04T15:41:23.2Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "LoginDto.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Dtos\\LoginDto.cs",
-              "RelativeDocumentMoniker": "CateringNutrition.API\\Dtos\\LoginDto.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Dtos\\LoginDto.cs",
-              "RelativeToolTip": "CateringNutrition.API\\Dtos\\LoginDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T16:11:34.434Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CateringNutrition.API.http",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\CateringNutrition.API.http",
-              "RelativeDocumentMoniker": "CateringNutrition.API\\CateringNutrition.API.http",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\CateringNutrition.API.http",
-              "RelativeToolTip": "CateringNutrition.API\\CateringNutrition.API.http",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2026-03-04T16:08:18.034Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IAuthService.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Interfaces\\IAuthService.cs",
-              "RelativeDocumentMoniker": "CateringNutrition.API\\Interfaces\\IAuthService.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Interfaces\\IAuthService.cs",
-              "RelativeToolTip": "CateringNutrition.API\\Interfaces\\IAuthService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T16:13:08.151Z",
+              "WhenOpened": "2026-03-11T02:08:09.532Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "CateringNutrition.API\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "CateringNutrition.API\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAiwAwAAAAAAAAAAAAAAA==",
+              "Title": "Vendors.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\Vendors.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\Vendors.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\Vendors.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Models\\Vendors.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T16:20:06.92Z",
+              "WhenOpened": "2026-03-11T02:05:58.113Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Program.cs",
-              "RelativeDocumentMoniker": "CateringNutrition.API\\Program.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Program.cs",
-              "RelativeToolTip": "CateringNutrition.API\\Program.cs",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAAAA4AAAAVAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "MenuController.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Controllers\\MenuController.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Controllers\\MenuController.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Controllers\\MenuController.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Controllers\\MenuController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T16:05:40.025Z",
+              "WhenOpened": "2026-03-11T02:01:57.762Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Users.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Models\\Users.cs",
-              "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\Users.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Models\\Users.cs",
-              "RelativeToolTip": "CateringNutrition.API\\Models\\Users.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAADwvyIAAAABAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "MenuService.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Services\\MenuService.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Services\\MenuService.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Services\\MenuService.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Services\\MenuService.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAmwCEAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T15:52:39.914Z"
+              "WhenOpened": "2026-03-11T02:00:06.409Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
+              "Title": "IMenuService.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Interfaces\\IMenuService.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Interfaces\\IMenuService.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Interfaces\\IMenuService.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Interfaces\\IMenuService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-11T01:57:45.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "LoginDto.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Dtos\\LoginDto.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Dtos\\LoginDto.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Dtos\\LoginDto.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Dtos\\LoginDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T16:11:34.434Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "RegisterDto.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Dtos\\RegisterDto.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Dtos\\RegisterDto.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Dtos\\RegisterDto.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Dtos\\RegisterDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T16:10:33.119Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Services\\AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Services\\AuthService.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Services\\AuthService.cs",
               "RelativeToolTip": "CateringNutrition.API\\Services\\AuthService.cs",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAAAFAAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEcAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-04T16:16:01.909Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "SubscriptionTypes.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Models\\SubscriptionTypes.cs",
-              "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\SubscriptionTypes.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Models\\SubscriptionTypes.cs",
-              "RelativeToolTip": "CateringNutrition.API\\Models\\SubscriptionTypes.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABKAAAAAAAAAA==",
+              "DocumentIndex": 15,
+              "Title": "Roles.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\Roles.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\Roles.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\Roles.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Models\\Roles.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T15:54:28.821Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "CateringNutrition.API\\appsettings.Development.json",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\appsettings.Development.json",
-              "RelativeToolTip": "CateringNutrition.API\\appsettings.Development.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-03-04T16:23:18.865Z",
+              "WhenOpened": "2026-03-04T15:53:39.825Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 14,
+              "Title": "SubscriptionTypes.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\SubscriptionTypes.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\SubscriptionTypes.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\SubscriptionTypes.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Models\\SubscriptionTypes.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T15:54:28.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Users.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\Users.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\Users.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\Users.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Models\\Users.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAwwCIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T15:52:39.914Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Program.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Program.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Program.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T16:05:40.025Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T15:57:33.245Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "IAuthService.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Interfaces\\IAuthService.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Interfaces\\IAuthService.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Interfaces\\IAuthService.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Interfaces\\IAuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T16:13:08.151Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "JwtService.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Services\\JwtService.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Services\\JwtService.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Services\\JwtService.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Services\\JwtService.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Services\\JwtService.cs",
               "RelativeToolTip": "CateringNutrition.API\\Services\\JwtService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAwCAAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-10T11:05:25.639Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "20260310094758_FixUsersSubscriptionFK.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310094758_FixUsersSubscriptionFK.cs",
-              "RelativeDocumentMoniker": "CateringNutrition.API\\Migrations\\20260310094758_FixUsersSubscriptionFK.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310094758_FixUsersSubscriptionFK.cs",
-              "RelativeToolTip": "CateringNutrition.API\\Migrations\\20260310094758_FixUsersSubscriptionFK.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAApAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-10T09:47:58.387Z"
+              "WhenOpened": "2026-03-04T16:20:06.92Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\appsettings.json",
               "RelativeDocumentMoniker": "CateringNutrition.API\\appsettings.json",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\appsettings.json",
               "RelativeToolTip": "CateringNutrition.API\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-03-04T16:07:56.644Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "RegisterDto.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Dtos\\RegisterDto.cs",
-              "RelativeDocumentMoniker": "CateringNutrition.API\\Dtos\\RegisterDto.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Dtos\\RegisterDto.cs",
-              "RelativeToolTip": "CateringNutrition.API\\Dtos\\RegisterDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAoAAAABAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "MenuItems.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\MenuItems.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\MenuItems.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\MenuItems.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Models\\MenuItems.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T16:10:33.119Z"
+              "WhenOpened": "2026-03-11T02:09:18.993Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Roles.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Models\\Roles.cs",
-              "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\Roles.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Models\\Roles.cs",
-              "RelativeToolTip": "CateringNutrition.API\\Models\\Roles.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 18,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "CateringNutrition.API\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T15:53:39.825Z"
+              "WhenOpened": "2026-03-04T16:44:12.572Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 19,
+              "Title": "CateringNutrition.API.http",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\CateringNutrition.API.http",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\CateringNutrition.API.http",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\CateringNutrition.API.http",
+              "RelativeToolTip": "CateringNutrition.API\\CateringNutrition.API.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2026-03-04T16:08:18.034Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "CateringNutrition.API.csproj",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\CateringNutrition.API.csproj",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\CateringNutrition.API.csproj",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\CateringNutrition.API.csproj",
+              "RelativeToolTip": "CateringNutrition.API\\CateringNutrition.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-03-04T15:41:23.2Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\appsettings.Development.json",
+              "RelativeToolTip": "CateringNutrition.API\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-04T16:23:18.865Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "20260310094758_FixUsersSubscriptionFK.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310094758_FixUsersSubscriptionFK.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310094758_FixUsersSubscriptionFK.cs",
+              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310094758_FixUsersSubscriptionFK.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310094758_FixUsersSubscriptionFK.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-10T09:47:58.387Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
               "Title": "20260310095313_InitialCreate.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310095313_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310095313_InitialCreate.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Migrations\\20260310095313_InitialCreate.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310095313_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310095313_InitialCreate.cs",
               "RelativeToolTip": "CateringNutrition.API\\Migrations\\20260310095313_InitialCreate.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -315,11 +432,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 23,
               "Title": "20260310095627_FixUsersSubscriptionFK.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310095627_FixUsersSubscriptionFK.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310095627_FixUsersSubscriptionFK.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Migrations\\20260310095627_FixUsersSubscriptionFK.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310095627_FixUsersSubscriptionFK.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Migrations\\20260310095627_FixUsersSubscriptionFK.cs",
               "RelativeToolTip": "CateringNutrition.API\\Migrations\\20260310095627_FixUsersSubscriptionFK.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -327,23 +444,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "CateringNutrition.API\\Data\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "CateringNutrition.API\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAA7wCEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T15:57:33.245Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 25,
               "Title": "WeatherForecast.cs",
-              "DocumentMoniker": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\WeatherForecast.cs",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\WeatherForecast.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\WeatherForecast.cs",
-              "ToolTip": "C:\\Users\\tanka\\source\\repos\\CateringNutrition\\CateringNutrition.API\\WeatherForecast.cs",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\WeatherForecast.cs",
               "RelativeToolTip": "CateringNutrition.API\\WeatherForecast.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

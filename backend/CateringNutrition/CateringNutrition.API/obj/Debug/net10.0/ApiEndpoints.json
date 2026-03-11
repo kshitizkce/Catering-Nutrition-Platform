@@ -47,6 +47,58 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "CateringNutrition.API.Controllers.MenuController",
+    "Method": "GetAllCategories",
+    "RelativePath": "api/Menu/categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CateringNutrition.API.Controllers.MenuController",
+    "Method": "GetMenuItemsByCategories",
+    "RelativePath": "api/Menu/menuitems/categories",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryIds",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CateringNutrition.API.Controllers.MenuController",
+    "Method": "GetMenuItemsByVendor",
+    "RelativePath": "api/Menu/menuitems/vendor/{vendorId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vendorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CateringNutrition.API.Controllers.MenuController",
+    "Method": "GetAllVendors",
+    "RelativePath": "api/Menu/vendors",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "CateringNutrition.API.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",
