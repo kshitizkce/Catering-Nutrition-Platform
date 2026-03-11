@@ -1,0 +1,9 @@
+INSERT INTO [catering_nutrition_db].[dbo].[MenuCategories]
+(CategoryName, Description, IsActive)
+VALUES
+('Breakfast', 'Start Your day', 1),
+('Lunch', 'Middy Meal', 1),
+('Dinner', 'Evening Delights', 1),
+('Snacks', 'Light snacks and quick bites', 1),
+('Drinks', 'Beverage and refreshments', 1),
+('Dessert', 'Sweet Treats', 1);
