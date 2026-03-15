@@ -1,0 +1,32 @@
+USE [catering_nutrition_db];
+GO
+
+CREATE TABLE dbo.Orders
+(
+    OrderId             INT IDENTITY(1,1) PRIMARY KEY,
+    CustomerUserId      INT NOT NULL,
+    VendorId            INT NOT NULL,
+    OrderDate           DATETIME2(0) NOT NULL 
+        CONSTRAINT DF_Orders_OrderDate DEFAULT (SYSDATETIME()),
+    DeliveryAddress     NVARCHAR(255) NULL,
+    Status              VARCHAR(20) NOT NULL 
+        CONSTRAINT DF_Orders_Status DEFAULT ('Pending'),
+    TotalAmount         DECIMAL(10,2) NOT NULL 
+        CONSTRAINT DF_Orders_TotalAmount DEFAULT (0),
+    CreatedAt           DATETIME2(0) NOT NULL 
+        CONSTRAINT DF_Orders_CreatedAt DEFAULT (SYSDATETIME()),
+    UpdatedAt           DATETIME2(0) NULL,
+
+    CONSTRAINT FK_Orders_Users
+        FOREIGN KEY (CustomerUserId) REFERENCES dbo.Users(UserId),
+
+    CONSTRAINT FK_Orders_Vendors
+        FOREIGN KEY (VendorId) REFERENCES dbo.Vendors(VendorId),
+
+    CONSTRAINT CK_Orders_Status
+        CHECK (Status IN ('Pending', 'Confirmed', 'Preparing', 'Delivered', 'Cancelled')),
+
+    CONSTRAINT CK_Orders_TotalAmount
+        CHECK (TotalAmount >= 0)
+);
+GO

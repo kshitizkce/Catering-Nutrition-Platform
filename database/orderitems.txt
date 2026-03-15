@@ -1,0 +1,27 @@
+USE [catering_nutrition_db];
+GO
+
+CREATE TABLE dbo.OrderItems
+(
+    OrderItemId         INT IDENTITY(1,1) PRIMARY KEY,
+    OrderId             INT NOT NULL,
+    MenuItemId          INT NOT NULL,
+    Quantity            INT NOT NULL,
+    UnitPrice           DECIMAL(10,2) NOT NULL,
+    LineTotal           AS (Quantity * UnitPrice) PERSISTED,
+    CreatedAt           DATETIME2(0) NOT NULL 
+        CONSTRAINT DF_OrderItems_CreatedAt DEFAULT (SYSDATETIME()),
+
+    CONSTRAINT FK_OrderItems_Orders
+        FOREIGN KEY (OrderId) REFERENCES dbo.Orders(OrderId),
+
+    CONSTRAINT FK_OrderItems_MenuItems
+        FOREIGN KEY (MenuItemId) REFERENCES dbo.MenuItems(MenuItemId),
+
+    CONSTRAINT CK_OrderItems_Quantity
+        CHECK (Quantity > 0),
+
+    CONSTRAINT CK_OrderItems_UnitPrice
+        CHECK (UnitPrice >= 0)
+);
+GO

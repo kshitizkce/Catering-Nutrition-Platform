@@ -1,0 +1,26 @@
+USE [catering_nutrition_db];
+GO
+
+CREATE TABLE dbo.Subscribers
+(
+    SubscriberId        INT IDENTITY(1,1) PRIMARY KEY,
+    UserId              INT NOT NULL,
+    SubscriptionTypeId  INT NOT NULL,
+    StartDate           DATE NOT NULL,
+    EndDate             DATE NULL,
+    Status              VARCHAR(20) NOT NULL 
+        CONSTRAINT DF_Subscribers_Status DEFAULT ('Active'),
+    CreatedAt           DATETIME2(0) NOT NULL 
+        CONSTRAINT DF_Subscribers_CreatedAt DEFAULT (SYSDATETIME()),
+    UpdatedAt           DATETIME2(0) NULL,
+
+    CONSTRAINT FK_Subscribers_Users
+        FOREIGN KEY (UserId) REFERENCES dbo.Users(UserId),
+
+    CONSTRAINT FK_Subscribers_SubscriptionTypes
+        FOREIGN KEY (SubscriptionTypeId) REFERENCES dbo.SubscriptionTypes(SubscriptionTypeId),
+
+    CONSTRAINT CK_Subscribers_Status
+        CHECK (Status IN ('Active', 'Expired', 'Cancelled'))
+);
+GO
