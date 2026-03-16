@@ -1,4 +1,6 @@
-﻿using CateringNutrition.API.Models;
+﻿using CateringNutrition.API.Models.authorization;
+using CateringNutrition.API.Models.vendor;
+using EllipticCurve.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace CateringNutrition.API.Data
@@ -18,6 +20,10 @@ namespace CateringNutrition.API.Data
 
         public DbSet<MenuCategories> MenuCategories { get; set; }
 
+        public DbSet<Orders> Orders { get; set; }
+        public DbSet<OrderItems> OrderItems { get; set; }
+        public DbSet<Subscribers> Subscribers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -35,6 +41,27 @@ namespace CateringNutrition.API.Data
                 .WithMany(s => s.Users) // <-- map the collection in SubscriptionTypes
                 .HasForeignKey(u => u.SubscriptionTypeId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // Orders -> Customer
+            modelBuilder.Entity<Orders>()
+                .HasOne(o => o.Customer)
+                .WithMany(u => u.CustomerOrders)
+                .HasForeignKey(o => o.CustomerUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Orders -> Vendor
+            modelBuilder.Entity<Orders>()
+                .HasOne(o => o.Vendor)
+                .WithMany(u => u.VendorOrders)
+                .HasForeignKey(o => o.VendorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // OrderItems -> Orders
+            modelBuilder.Entity<OrderItems>()
+                .HasOne(oi => oi.Order)
+                .WithMany(o => o.OrderItems)
+                .HasForeignKey(oi => oi.OrderId);
         }
+
     }
 }

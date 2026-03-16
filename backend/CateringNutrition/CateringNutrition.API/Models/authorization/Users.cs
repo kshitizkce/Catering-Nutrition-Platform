@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CateringNutrition.API.Models.vendor;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Numerics;
 
-namespace CateringNutrition.API.Models
+namespace CateringNutrition.API.Models.authorization
 {
     public class Users
     {
@@ -31,5 +33,18 @@ namespace CateringNutrition.API.Models
         public SubscriptionTypes SubscriptionType { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        public string? ResetToken { get; set; }//password
+
+        public DateTime? ResetTokenExpiry { get; set; }//password reset
+
+        public ICollection<Subscribers> Subscribers { get; set; }
+
+        // Orders
+        public ICollection<Orders> CustomerOrders { get; set; }
+
+    public ICollection<Orders> VendorOrders { get; set; }
+        
+
     }
 }

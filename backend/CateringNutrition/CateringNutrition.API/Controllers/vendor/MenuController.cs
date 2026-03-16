@@ -1,10 +1,11 @@
-﻿using CateringNutrition.API.Interfaces;
+﻿using CateringNutrition.API.Interfaces.vendor;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CateringNutrition.API.Controllers
+namespace CateringNutrition.API.Controllers.vendor
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class MenuController : ControllerBase
     {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CateringNutrition.API.Models
+namespace CateringNutrition.API.Models.vendor
 {
     public class Vendors
     {

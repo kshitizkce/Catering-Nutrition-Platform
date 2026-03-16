@@ -1,6 +1,22 @@
 [
   {
-    "ContainingType": "CateringNutrition.API.Controllers.AuthController",
+    "ContainingType": "CateringNutrition.API.Controllers.authorization.AuthController",
+    "Method": "ForgotPassword",
+    "RelativePath": "api/Auth/forgot-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "CateringNutrition.API.Dtos.authorization.ForgotPasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CateringNutrition.API.Controllers.authorization.AuthController",
     "Method": "Login",
     "RelativePath": "api/Auth/login",
     "HttpMethod": "POST",
@@ -9,14 +25,14 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "CateringNutrition.API.Dtos.LoginDto",
+        "Type": "CateringNutrition.API.Dtos.authorization.LoginDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "CateringNutrition.API.Controllers.AuthController",
+    "ContainingType": "CateringNutrition.API.Controllers.authorization.AuthController",
     "Method": "Register",
     "RelativePath": "api/Auth/register",
     "HttpMethod": "POST",
@@ -25,7 +41,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "CateringNutrition.API.Dtos.RegisterDto",
+        "Type": "CateringNutrition.API.Dtos.authorization.RegisterDto",
         "IsRequired": true
       },
       {
@@ -37,7 +53,55 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "CateringNutrition.API.Controllers.AuthController",
+    "ContainingType": "CateringNutrition.API.Controllers.authorization.AuthController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/Auth/reset-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "CateringNutrition.API.Dtos.authorization.ResetPasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CateringNutrition.API.Controllers.authorization.AuthController",
+    "Method": "SendEmailOtp",
+    "RelativePath": "api/Auth/send-email-otp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "CateringNutrition.API.Dtos.authorization.SendEmailOtpDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CateringNutrition.API.Controllers.authorization.AuthController",
+    "Method": "SendSmsOtp",
+    "RelativePath": "api/Auth/send-sms-otp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "CateringNutrition.API.Dtos.authorization.SendSmsOtpDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CateringNutrition.API.Controllers.authorization.AuthController",
     "Method": "Test",
     "RelativePath": "api/Auth/test",
     "HttpMethod": "GET",
@@ -47,7 +111,39 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "CateringNutrition.API.Controllers.MenuController",
+    "ContainingType": "CateringNutrition.API.Controllers.authorization.AuthController",
+    "Method": "VerifyEmailOtp",
+    "RelativePath": "api/Auth/verify-email-otp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "CateringNutrition.API.Dtos.authorization.VerifyEmailOtpDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CateringNutrition.API.Controllers.authorization.AuthController",
+    "Method": "VerifySmsOtp",
+    "RelativePath": "api/Auth/verify-sms-otp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "CateringNutrition.API.Dtos.authorization.VerifySmsOtpDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CateringNutrition.API.Controllers.vendor.MenuController",
     "Method": "GetAllCategories",
     "RelativePath": "api/Menu/categories",
     "HttpMethod": "GET",
@@ -57,7 +153,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "CateringNutrition.API.Controllers.MenuController",
+    "ContainingType": "CateringNutrition.API.Controllers.vendor.MenuController",
     "Method": "GetMenuItemsByCategories",
     "RelativePath": "api/Menu/menuitems/categories",
     "HttpMethod": "POST",
@@ -73,7 +169,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "CateringNutrition.API.Controllers.MenuController",
+    "ContainingType": "CateringNutrition.API.Controllers.vendor.MenuController",
     "Method": "GetMenuItemsByVendor",
     "RelativePath": "api/Menu/menuitems/vendor/{vendorId}",
     "HttpMethod": "GET",
@@ -89,7 +185,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "CateringNutrition.API.Controllers.MenuController",
+    "ContainingType": "CateringNutrition.API.Controllers.vendor.MenuController",
     "Method": "GetAllVendors",
     "RelativePath": "api/Menu/vendors",
     "HttpMethod": "GET",
@@ -99,24 +195,103 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "CateringNutrition.API.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
+    "ContainingType": "CateringNutrition.API.Controllers.vendor.VendorController",
+    "Method": "UpdateOrder",
+    "RelativePath": "api/vendor/{vendorId}/order/{orderId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vendorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedOrder",
+        "Type": "CateringNutrition.API.Dtos.vendorDto.UpdateOrderDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CateringNutrition.API.Controllers.vendor.VendorController",
+    "Method": "GetOrders",
+    "RelativePath": "api/vendor/{vendorId}/orders",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
+    "Parameters": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[CateringNutrition.API.WeatherForecast, CateringNutrition.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "vendorId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
-    "EndpointName": "GetWeatherForecast"
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CateringNutrition.API.Controllers.vendor.VendorController",
+    "Method": "UpdateSubscriberType",
+    "RelativePath": "api/vendor/{vendorId}/subscriber/{subscriberId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vendorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "subscriberId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "newSubscriptionTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CateringNutrition.API.Controllers.vendor.VendorController",
+    "Method": "GetSubscribers",
+    "RelativePath": "api/vendor/{vendorId}/subscribers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vendorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CateringNutrition.API.Controllers.vendor.VendorController",
+    "Method": "GetUserDetails",
+    "RelativePath": "api/vendor/user/{customerUserId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "customerUserId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

@@ -3,7 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace CateringNutrition.API.Services
+namespace CateringNutrition.API.Services.authorizationservice
 {
     public class JwtService
     {

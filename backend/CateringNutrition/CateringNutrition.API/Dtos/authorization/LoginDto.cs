@@ -1,4 +1,4 @@
-﻿namespace CateringNutrition.API.Dtos
+﻿namespace CateringNutrition.API.Dtos.authorization
 {
     public class LoginDto
     {

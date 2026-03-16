@@ -1,6 +1,6 @@
-﻿using CateringNutrition.API.Models;
+﻿using CateringNutrition.API.Models.vendor;
 
-namespace CateringNutrition.API.Interfaces
+namespace CateringNutrition.API.Interfaces.vendor
 {
     public interface IMenuService
     {

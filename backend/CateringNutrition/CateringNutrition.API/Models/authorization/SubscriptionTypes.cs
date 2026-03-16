@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CateringNutrition.API.Models.vendor;
+using System.ComponentModel.DataAnnotations;
 
-namespace CateringNutrition.API.Models
+namespace CateringNutrition.API.Models.authorization
 {
     public class SubscriptionTypes
     {
@@ -9,5 +10,8 @@ namespace CateringNutrition.API.Models
         public string SubscriptionName { get; set; }
 
         public ICollection<Users> Users { get; set; } = new List<Users>();
+
+        public ICollection<Subscribers> Subscribers { get; set; } = new List<Subscribers>();
+
     }
 }

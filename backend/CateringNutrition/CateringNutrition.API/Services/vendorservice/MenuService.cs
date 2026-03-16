@@ -1,9 +1,9 @@
 ﻿using CateringNutrition.API.Data;
-using CateringNutrition.API.Interfaces;
-using CateringNutrition.API.Models;
+using CateringNutrition.API.Interfaces.vendor;
+using CateringNutrition.API.Models.vendor;
 using Microsoft.EntityFrameworkCore;
 
-namespace CateringNutrition.API.Services
+namespace CateringNutrition.API.Services.vendorservice
 {
     public class MenuService : IMenuService
     {

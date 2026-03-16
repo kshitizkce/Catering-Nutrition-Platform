@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CateringNutrition.API.Models
+namespace CateringNutrition.API.Models.vendor
 {
     public class MenuCategories
     {
