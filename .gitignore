@@ -8,7 +8,8 @@
 *.suo
 *.cache
 *.db
-appsettings*.json   # exclude secrets
+/backend/CateringNutrition/CateringNutrition.API/appsettings.json
+/backend/CateringNutrition/CateringNutrition.API/appsettings.Development.json
 
 # =========================
 # Frontend (Angular)
