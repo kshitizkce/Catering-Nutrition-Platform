@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -20,37 +20,120 @@ export class SignupComponent {
   phone = '';
   password = '';
 
+  emailOtp = '';
+phoneOtp = '';
+
+emailVerified = false;
+phoneVerified = false;
+
+showEmailVerify = false;
+showPhoneVerify = false;
+
+showEmailOtpInput = false;
+showPhoneOtpInput = false;
+
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private ngZone: NgZone
   ) {}
 
-  switchToLogin() { this.isLogin = true; }
-  switchToSignup() { this.isLogin = false; }
+  
+  switchToLogin() {
+  this.isLogin = true;
+  this.clearSignupState();
+}
 
-  login() {
-    if (!this.email || !this.password) { alert("Email and password required"); return; }
+switchToSignup() {
+  this.isLogin = false;
+  this.clearSignupState();
+}
 
-    const dto: LoginDto = { email: this.email, password: this.password };
+// Reset OTP & input state
+clearSignupState() {
+  this.fullName = '';
+  this.email = '';
+  this.phone = '';
+  this.password = '';
 
-    this.authService.login(dto).subscribe({
-      next: (res: any) => {
-        localStorage.setItem("userEmail", res.email);
-        localStorage.setItem("userRole", res.role);
-        localStorage.setItem("userName", res.fullName);
+  this.emailOtp = '';
+  this.phoneOtp = '';
 
-        if (res.role === "Admin") this.router.navigate(['/admin-profile']);
-        else if (res.role === "Vendor") this.router.navigate(['/vendor-profile']);
-        else this.router.navigate(['/home']);
-      },
-      error: (err: any) => alert(err.error || "Login failed")
-    });
+  this.emailVerified = false;
+  this.phoneVerified = false;
+
+  this.showEmailVerify = false;
+  this.showPhoneVerify = false;
+
+  this.showEmailOtpInput = false;
+  this.showPhoneOtpInput = false;
+}
+
+  // LOGIN
+ login() {
+  if (!this.email || !this.password) {
+    alert("Email and password required");
+    return;
   }
 
-  signup(roleType: 'customer' | 'vendor') {
-    if (!this.fullName || !this.email || !this.password || !this.phone) {
-      alert("All fields required"); return;
+  const dto: LoginDto = { email: this.email, password: this.password };
+
+  this.authService.login(dto).subscribe({
+    next: (res: any) => {
+      this.ngZone.run(() => {
+
+        alert(res.message || "Login successful");
+
+        // Store user info
+        localStorage.setItem("token", res.token);
+        localStorage.setItem("userEmail", res.email);
+        localStorage.setItem("userName", res.fullName);
+
+        // Roles array returned from backend
+        localStorage.setItem("userRoles", JSON.stringify(res.roles || [res.role]));
+
+        // If only one role, redirect directly
+        if ((res.roles || []).length === 1) {
+          const role = res.roles[0] || res.role;
+          if (role === "Admin") this.router.navigate(['/admin-profile']);
+          else if (role === "Vendor") this.router.navigate(['/vendor-profile']);
+          else this.router.navigate(['/home']);
+        } else {
+          // multiple roles → show role selection
+          this.router.navigate(['/role-select']);
+        }
+
+      });
+    },
+    error: (err: any) => {
+      this.ngZone.run(() => {
+        const msg =
+          err?.error?.message ||
+          err?.error ||
+          err?.message ||
+          "Login failed";
+        alert(msg);
+      });
     }
+  });
+}
+  // SIGNUP
+  signup(roleType: 'customer' | 'vendor') {
+
+    if (!this.fullName || !this.email || !this.password || !this.phone) {
+      alert("All fields required");
+      return;
+    }
+
+    if (!this.emailVerified) {
+  alert("Please verify email first");
+  return;
+}
+
+if (!this.phoneVerified) {
+  alert("Please verify phone first");
+  return;
+}
 
     const dto: RegisterDto = {
       fullName: this.fullName,
@@ -62,20 +145,146 @@ export class SignupComponent {
     };
 
     this.authService.register(dto, roleType).subscribe({
-      next: (res: any) => {
-        alert("Registration successful");
 
-        localStorage.setItem("userEmail", this.email);
-        localStorage.setItem("userRole", roleType);
-        localStorage.setItem("userName", this.fullName);
+next: (res: any) => {
+  this.ngZone.run(() => {
 
-        if (roleType === 'customer') this.router.navigate(['/home']);
-        else this.router.navigate(['/vendor-profile']);
-      },
-      error: (err: any) => alert(err.error || "Registration failed")
+    alert(res.message || "Registration successful. Please login.");
+
+    
+    // clear form
+    this.fullName = '';
+    this.email = '';
+    this.phone = '';
+    this.password = '';
+
+    // force UI refresh event
+    this.isLogin = false;
+
+    setTimeout(() => {
+      this.isLogin = true;
+    }, 0);
+
+  });
+},
+      error: (err: any) => {
+        this.ngZone.run(() => {
+
+          const msg =
+            err?.error?.message ||
+            err?.error ||
+            err?.message ||
+            "Registration failed";
+
+          alert(msg);
+
+        });
+      }
+
     });
   }
 
-  signupAsCustomer() { this.signup('customer'); }
-  signupAsVendor() { this.signup('vendor'); }
+  onEmailChange() {
+  this.showEmailVerify = this.email.length > 3;
+
+  // Reset verification if user deletes or changes email
+  this.emailVerified = false;
+  this.showEmailOtpInput = false;
+  this.emailOtp = '';
+}
+
+sendEmailOtp() {
+
+  if (!this.email) {
+    alert("Enter email first");
+    return;
+  }
+
+  this.authService.sendEmailOtp(this.email).subscribe({
+    next: (res:any) => {
+      alert(res.message);
+      this.showEmailOtpInput = true;
+    },
+    error: (err:any) => {
+      alert(err?.error?.message || "Failed to send OTP");
+    }
+  });
+
+}
+
+verifyEmailOtp() {
+
+  this.authService.verifyEmailOtp(this.email, this.emailOtp).subscribe({
+
+    next:(res:any)=>{
+      alert(res.message);
+      this.emailVerified = true;
+      this.showEmailOtpInput = false;
+    },
+
+    error:(err:any)=>{
+      alert(err?.error?.message || "Invalid OTP");
+    }
+
+  });
+
+}
+sendPhoneOtp() {
+
+  if (!this.phone) {
+    alert("Enter phone first");
+    return;
+  }
+
+  this.authService.sendPhoneOtp(this.phone).subscribe({
+
+    next:(res:any)=>{
+      alert(res.message);
+      this.showPhoneOtpInput = true;
+    },
+
+    error:(err:any)=>{
+      alert(err?.error?.message || "OTP send failed");
+    }
+
+  });
+
+}
+
+verifyPhoneOtp() {
+
+  this.authService.verifyPhoneOtp(this.phone, this.phoneOtp).subscribe({
+
+    next:(res:any)=>{
+      alert(res.message);
+      this.phoneVerified = true;
+      this.showPhoneOtpInput = false;
+    },
+
+    error:(err:any)=>{
+      alert(err?.error?.message || "Invalid OTP");
+    }
+
+  });
+
+}
+onPhoneChange() {
+  this.showPhoneVerify = this.phone.length > 5;
+
+  // Reset verification if user deletes or changes phone
+  this.phoneVerified = false;
+  this.showPhoneOtpInput = false;
+  this.phoneOtp = '';
+}
+  signupAsCustomer() {
+    this.signup('customer');
+  }
+
+  signupAsVendor() {
+    this.signup('vendor');
+  }
+
+  goToForgotPassword() {
+    this.router.navigate(['/forgot-password']);
+  }
 }

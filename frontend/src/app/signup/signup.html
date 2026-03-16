@@ -41,6 +41,7 @@
           <input type="password" [(ngModel)]="password" placeholder="••••••••" required>
         </div>
         <button class="login-btn" (click)="login()">LOGIN</button>
+  <button class="forgot-btn" (click)="goToForgotPassword()">Forgot Password?</button>
         <p class="switch-text">Don’t have an account? <span (click)="switchToSignup()">Sign Up</span></p>
       </div>
 
@@ -53,15 +54,76 @@
           <input type="text" [(ngModel)]="fullName" placeholder="John Doe" required>
         </div>
         <label>Email Address</label>
-        <div class="input-box">
-          <span>✉️</span>
-          <input type="email" [(ngModel)]="email" placeholder="your@email.com" required>
-        </div>
+
+<div class="input-box">
+  <span>✉️</span>
+
+  <input
+  type="email"
+  [(ngModel)]="email"
+  (ngModelChange)="onEmailChange()"
+  placeholder="your@email.com">
+
+  <button
+    *ngIf="showEmailVerify && !emailVerified"
+    class="verify-btn"
+    (click)="sendEmailOtp()">
+    Verify
+  </button>
+
+  <span *ngIf="emailVerified">✔</span>
+
+</div>
+
+<div *ngIf="showEmailOtpInput" class="input-box">
+
+  <input
+    type="text"
+    [(ngModel)]="emailOtp"
+    placeholder="Enter Email OTP">
+
+  <button class="verify-btn" (click)="verifyEmailOtp()">
+    Verify OTP
+  </button>
+
+</div>
+
         <label>Phone Number</label>
-        <div class="input-box">
-          <span>📞</span>
-          <input type="tel" [(ngModel)]="phone" placeholder="+1 (555) 000-0000" required>
-        </div>
+
+<div class="input-box">
+
+  <span>📞</span>
+
+  <input
+  type="tel"
+  [(ngModel)]="phone"
+  (ngModelChange)="onPhoneChange()"
+  placeholder="+1 (555) 000-0000">
+
+  <button
+    *ngIf="showPhoneVerify && !phoneVerified"
+    class="verify-btn"
+    (click)="sendPhoneOtp()">
+    Verify
+  </button>
+
+  <span *ngIf="phoneVerified">✔</span>
+
+</div>
+
+
+<div *ngIf="showPhoneOtpInput" class="input-box">
+
+  <input
+    type="text"
+    [(ngModel)]="phoneOtp"
+    placeholder="Enter Phone OTP">
+
+  <button class="verify-btn" (click)="verifyPhoneOtp()">
+    Verify OTP
+  </button>
+
+</div>
         <label>Password</label>
         <div class="input-box">
           <span>🔒</span>

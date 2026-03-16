@@ -1,0 +1,22 @@
+.role-select-card {
+  width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.role-btn {
+  margin: 10px 0;
+  padding: 10px;
+  background: #4CAF50;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.role-btn:hover {
+  background: #43a047;
+}

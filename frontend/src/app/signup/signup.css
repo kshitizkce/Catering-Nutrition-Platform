@@ -249,3 +249,28 @@ label {
   font-weight: 500;
   cursor: pointer;
 }
+.forgot-btn {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: transparent;
+  border: none;
+  color: #ff6600;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.verify-btn{
+  margin-left:10px;
+  padding:6px 10px;
+  border:none;
+  background:#4CAF50;
+  color:white;
+  border-radius:4px;
+  cursor:pointer;
+}
+
+.verify-btn:hover{
+  background:#43a047;
+}

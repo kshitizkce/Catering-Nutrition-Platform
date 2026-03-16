@@ -1,0 +1,8 @@
+<div class="role-select-card">
+  <h2>Select Role</h2>
+  <p>You have multiple roles. Choose one to continue:</p>
+  
+  <div *ngFor="let role of roles" class="role-btn" (click)="selectRole(role)">
+    {{ role }}
+  </div>
+</div>
