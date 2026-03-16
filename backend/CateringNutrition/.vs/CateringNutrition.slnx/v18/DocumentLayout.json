@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\services\\vendorservice\\vendorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\services\\vendorservice\\vendorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\cateringnutrition.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\cateringnutrition.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\dtos\\vendordto\\updateorderitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -83,10 +87,6 @@
       "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\interfaces\\authorization\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|c:\\users\\tanka\\downloads\\college\\4th sem\\capstone project\\catering \u0026 nutrition project\\backend\\cateringnutrition\\cateringnutrition.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{AE5C5BF2-B766-8FA6-F776-76ABCD5CF34E}|CateringNutrition.API\\CateringNutrition.API.csproj|solutionrelative:cateringnutrition.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -138,7 +138,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 16,
           "Children": [
             {
               "$type": "Bookmark",
@@ -150,7 +150,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Program.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Program.cs",
@@ -158,12 +158,11 @@
               "RelativeToolTip": "CateringNutrition.API\\Program.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAUwBsAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T19:24:37.627Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-14T19:24:37.627Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "MenuItems.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\vendor\\MenuItems.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\vendor\\MenuItems.cs",
@@ -171,25 +170,24 @@
               "RelativeToolTip": "CateringNutrition.API\\Models\\vendor\\MenuItems.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T09:57:29.863Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-15T09:57:29.863Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Data\\AppDbContext.cs",
               "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Data\\AppDbContext.cs",
               "RelativeToolTip": "CateringNutrition.API\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAAABgAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAxwBoAAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-11T04:16:12.917Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Services\\authorizationservice\\AuthService.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Services\\authorizationservice\\AuthService.cs",
@@ -197,12 +195,11 @@
               "RelativeToolTip": "CateringNutrition.API\\Services\\authorizationservice\\AuthService.cs",
               "ViewState": "AgIAAEMAAAAAAAAAAAAAAA0AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-11T04:28:31.262Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-11T04:28:31.262Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "OrderItems.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\vendor\\OrderItems.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\vendor\\OrderItems.cs",
@@ -210,12 +207,11 @@
               "RelativeToolTip": "CateringNutrition.API\\Models\\vendor\\OrderItems.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T09:22:28.486Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-15T09:22:28.486Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "UpdateOrderDto.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Dtos\\vendorDto\\UpdateOrderDto.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Dtos\\vendorDto\\UpdateOrderDto.cs",
@@ -223,12 +219,11 @@
               "RelativeToolTip": "CateringNutrition.API\\Dtos\\vendorDto\\UpdateOrderDto.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAUwAYAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T09:51:08.894Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-15T09:51:08.894Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "VendorController.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Controllers\\vendor\\VendorController.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Controllers\\vendor\\VendorController.cs",
@@ -236,12 +231,11 @@
               "RelativeToolTip": "CateringNutrition.API\\Controllers\\vendor\\VendorController.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAAADUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T09:24:37.431Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-15T09:24:37.431Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "MenuCategories.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\vendor\\MenuCategories.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\vendor\\MenuCategories.cs",
@@ -249,12 +243,11 @@
               "RelativeToolTip": "CateringNutrition.API\\Models\\vendor\\MenuCategories.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T09:57:26.371Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-15T09:57:26.371Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "MenuService.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Services\\vendorservice\\MenuService.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Services\\vendorservice\\MenuService.cs",
@@ -262,12 +255,11 @@
               "RelativeToolTip": "CateringNutrition.API\\Services\\vendorservice\\MenuService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T09:30:10.172Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-15T09:30:10.172Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "Vendors.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\vendor\\Vendors.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\vendor\\Vendors.cs",
@@ -275,8 +267,7 @@
               "RelativeToolTip": "CateringNutrition.API\\Models\\vendor\\Vendors.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T10:36:51.196Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-15T10:36:51.196Z"
             },
             {
               "$type": "Document",
@@ -288,12 +279,11 @@
               "RelativeToolTip": "CateringNutrition.API\\Controllers\\vendor\\MenuController.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAABUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-11T04:39:34.083Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-11T04:39:34.083Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "VendorService.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Services\\vendorservice\\VendorService.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Services\\vendorservice\\VendorService.cs",
@@ -306,7 +296,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "Users.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\authorization\\Users.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\authorization\\Users.cs",
@@ -314,12 +304,11 @@
               "RelativeToolTip": "CateringNutrition.API\\Models\\authorization\\Users.cs",
               "ViewState": "AgIAACIAAAAAAAAAAAAwwDEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-13T18:17:12.613Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-13T18:17:12.613Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Subscribers.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\vendor\\Subscribers.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\vendor\\Subscribers.cs",
@@ -327,25 +316,36 @@
               "RelativeToolTip": "CateringNutrition.API\\Models\\vendor\\Subscribers.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAABMAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T09:19:21.733Z",
+              "WhenOpened": "2026-03-15T09:19:21.733Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\appsettings.json",
+              "RelativeDocumentMoniker": "CateringNutrition.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\appsettings.json",
+              "RelativeToolTip": "CateringNutrition.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-11T04:11:28.983Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CateringNutrition.API",
+              "DocumentIndex": 4,
+              "Title": "CateringNutrition.API.csproj",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\CateringNutrition.API.csproj",
               "RelativeDocumentMoniker": "CateringNutrition.API\\CateringNutrition.API.csproj",
               "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\CateringNutrition.API.csproj",
               "RelativeToolTip": "CateringNutrition.API\\CateringNutrition.API.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-03-13T17:24:55.232Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-13T17:24:55.232Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "UpdateOrderItemDto.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Dtos\\vendorDto\\UpdateOrderItemDto.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Dtos\\vendorDto\\UpdateOrderItemDto.cs",
@@ -353,8 +353,7 @@
               "RelativeToolTip": "CateringNutrition.API\\Dtos\\vendorDto\\UpdateOrderItemDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T10:08:40.487Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-15T10:08:40.487Z"
             },
             {
               "$type": "Document",
@@ -366,12 +365,11 @@
               "RelativeToolTip": "CateringNutrition.API\\Dtos\\authorization\\ForgotPasswordDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-13T18:16:10.874Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-13T18:16:10.874Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "IAuthService.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Interfaces\\authorization\\IAuthService.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Interfaces\\authorization\\IAuthService.cs",
@@ -379,12 +377,11 @@
               "RelativeToolTip": "CateringNutrition.API\\Interfaces\\authorization\\IAuthService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-13T18:21:48.815Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-13T18:21:48.815Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Orders.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\vendor\\Orders.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\vendor\\Orders.cs",
@@ -392,12 +389,11 @@
               "RelativeToolTip": "CateringNutrition.API\\Models\\vendor\\Orders.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T09:21:12.253Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-15T09:21:12.253Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "SubscriptionTypes.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Models\\authorization\\SubscriptionTypes.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Models\\authorization\\SubscriptionTypes.cs",
@@ -405,12 +401,11 @@
               "RelativeToolTip": "CateringNutrition.API\\Models\\authorization\\SubscriptionTypes.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T09:46:58.934Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-15T09:46:58.934Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Controllers\\authorization\\AuthController.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Controllers\\authorization\\AuthController.cs",
@@ -418,21 +413,7 @@
               "RelativeToolTip": "CateringNutrition.API\\Controllers\\authorization\\AuthController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-11T04:28:48.831Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\appsettings.json",
-              "RelativeDocumentMoniker": "CateringNutrition.API\\appsettings.json",
-              "ToolTip": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\appsettings.json",
-              "RelativeToolTip": "CateringNutrition.API\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-03-11T04:11:28.983Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-11T04:28:48.831Z"
             },
             {
               "$type": "Document",
@@ -444,8 +425,7 @@
               "RelativeToolTip": "CateringNutrition.API\\Dtos\\authorization\\ResetPasswordDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-13T18:59:08.973Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-13T18:59:08.973Z"
             },
             {
               "$type": "Document",
@@ -457,12 +437,11 @@
               "RelativeToolTip": "CateringNutrition.API\\Dtos\\authorization\\RegisterDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T18:41:54.437Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-14T18:41:54.437Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "TwilioVerifyService.cs",
               "DocumentMoniker": "C:\\Users\\tanka\\Downloads\\College\\4th sem\\capstone project\\Catering \u0026 nutrition project\\backend\\CateringNutrition\\CateringNutrition.API\\Services\\authorizationservice\\TwilioVerifyService.cs",
               "RelativeDocumentMoniker": "CateringNutrition.API\\Services\\authorizationservice\\TwilioVerifyService.cs",
@@ -470,8 +449,7 @@
               "RelativeToolTip": "CateringNutrition.API\\Services\\authorizationservice\\TwilioVerifyService.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAAABYAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T19:23:40.333Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-14T19:23:40.333Z"
             },
             {
               "$type": "Document",
@@ -483,8 +461,7 @@
               "RelativeToolTip": "CateringNutrition.API\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-03-11T04:11:25.636Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-11T04:11:25.636Z"
             },
             {
               "$type": "Document",
@@ -496,8 +473,7 @@
               "RelativeToolTip": "CateringNutrition.API\\Dtos\\authorization\\SendSmsOtpDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T20:14:59.21Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-14T20:14:59.21Z"
             },
             {
               "$type": "Document",
@@ -509,8 +485,7 @@
               "RelativeToolTip": "CateringNutrition.API\\Dtos\\authorization\\VerifySmsOtpDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T20:15:37.973Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-14T20:15:37.973Z"
             },
             {
               "$type": "Document",
@@ -522,8 +497,7 @@
               "RelativeToolTip": "CateringNutrition.API\\Dtos\\authorization\\VerifyEmailOtpDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T20:17:05.315Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-14T20:17:05.315Z"
             },
             {
               "$type": "Document",
@@ -535,8 +509,7 @@
               "RelativeToolTip": "CateringNutrition.API\\Dtos\\authorization\\LoginDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-11T04:31:45.951Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-11T04:31:45.951Z"
             },
             {
               "$type": "Document",
@@ -548,8 +521,7 @@
               "RelativeToolTip": "CateringNutrition.API\\Services\\authorizationservice\\JwtService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-11T04:18:52.44Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-11T04:18:52.44Z"
             },
             {
               "$type": "Document",
@@ -561,8 +533,7 @@
               "RelativeToolTip": "CateringNutrition.API\\Dtos\\authorization\\SendEmailOtpDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T20:16:14.235Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-14T20:16:14.235Z"
             }
           ]
         }
