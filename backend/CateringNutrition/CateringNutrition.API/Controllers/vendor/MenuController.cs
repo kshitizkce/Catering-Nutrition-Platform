@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace CateringNutrition.API.Controllers.vendor
 {
     [Route("api/[controller]")]
-    [Authorize]
     [ApiController]
     public class MenuController : ControllerBase
     {

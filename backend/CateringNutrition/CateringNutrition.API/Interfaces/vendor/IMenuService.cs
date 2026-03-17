@@ -10,6 +10,6 @@ namespace CateringNutrition.API.Interfaces.vendor
 
         Task<IEnumerable<Vendors>> GetAllVendorsAsync();
 
-        Task<IEnumerable<MenuCategories>> GetAllCategoriesAsync();
+        Task<IEnumerable<Category>> GetAllCategoriesAsync();
     }
 }

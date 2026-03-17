@@ -10,12 +10,29 @@ namespace CateringNutrition.API.Controllers.vendor
         {
             private readonly VendorService _service;
 
-            public VendorController(VendorService service)
-            {
+        private readonly VendorDashboardService _dashboardService;
+
+            public VendorController(VendorService service, VendorDashboardService dashboardService)
+            { 
                 _service = service;
+
+            _dashboardService = dashboardService;
             }
 
-            [HttpGet("{vendorId}/orders")]
+
+        // ✅ GET vendor dashboard (vendor info + revenue + recent orders)
+        [HttpGet("{vendorId}/dashboard")]
+        public async Task<IActionResult> GetDashboard(int vendorId)
+        {
+            var dashboard = await _dashboardService.GetDashboardAsync(vendorId);
+
+            if (dashboard == null)
+                return NotFound(new { message = "Vendor not found" });
+
+            return Ok(dashboard);
+        }
+
+        [HttpGet("{vendorId}/orders")]
             public async Task<IActionResult> GetOrders(int vendorId)
             {
                 var result = await _service.GetOrdersAsync(vendorId);
@@ -43,16 +60,24 @@ namespace CateringNutrition.API.Controllers.vendor
                     : Ok(result);
             }
 
-            [HttpPut("{vendorId}/subscriber/{subscriberId}")]
-            public async Task<IActionResult> UpdateSubscriberType(int vendorId, int subscriberId, [FromBody] int newSubscriptionTypeId)
-            {
-                var result = await _service.UpdateSubscriberTypeAsync(vendorId, subscriberId, newSubscriptionTypeId);
-                return result is IDictionary<string, object> dict && dict.ContainsKey("Error") && (bool)dict["Error"]
-                    ? StatusCode(500, result)
-                    : Ok(result);
-            }
+        public class UpdateSubscriberDto
+        {
+            public int SubscriptionTypeId { get; set; }
+        }
 
-            [HttpGet("user/{customerUserId}")]
+        [HttpPut("{vendorId}/subscriber/{subscriberId}")]
+        public async Task<IActionResult> UpdateSubscriberType(
+            int vendorId,
+            int subscriberId,
+            [FromBody] UpdateSubscriberDto dto)
+        {
+            var result = await _service.UpdateSubscriberTypeAsync(vendorId, subscriberId, dto.SubscriptionTypeId);
+            return result is IDictionary<string, object> dict && dict.ContainsKey("Error") && (bool)dict["Error"]
+                ? StatusCode(500, result)
+                : Ok(result);
+        }
+
+        [HttpGet("user/{customerUserId}")]
             public async Task<IActionResult> GetUserDetails(int customerUserId)
             {
                 var result = await _service.GetUserDetailsAsync(customerUserId);
@@ -62,4 +87,5 @@ namespace CateringNutrition.API.Controllers.vendor
             }
 
         }
+
     }

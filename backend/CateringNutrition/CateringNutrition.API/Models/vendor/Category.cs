@@ -2,7 +2,7 @@
 
 namespace CateringNutrition.API.Models.vendor
 {
-    public class MenuCategories
+    public class Category
     {
         [Key]
         public int CategoryId { get; set; }
@@ -13,6 +13,9 @@ namespace CateringNutrition.API.Models.vendor
 
         [StringLength(255)]
         public string? Description { get; set; }
+
+        public ICollection<MenuItems> MenuItems { get; set; }
+
 
         public bool IsActive { get; set; } = true;
     }

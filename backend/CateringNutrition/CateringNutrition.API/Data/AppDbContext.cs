@@ -18,7 +18,7 @@ namespace CateringNutrition.API.Data
 
         public DbSet<MenuItems> MenuItems { get; set; }
 
-        public DbSet<MenuCategories> MenuCategories { get; set; }
+        public DbSet<Category> Category { get; set; } 
 
         public DbSet<Orders> Orders { get; set; }
         public DbSet<OrderItems> OrderItems { get; set; }
@@ -61,6 +61,11 @@ namespace CateringNutrition.API.Data
                 .HasOne(oi => oi.Order)
                 .WithMany(o => o.OrderItems)
                 .HasForeignKey(oi => oi.OrderId);
+
+            modelBuilder.Entity<MenuItems>()
+        .HasOne(m => m.Category)
+        .WithMany(c => c.MenuItems)
+        .HasForeignKey(m => m.CategoryId);
         }
 
     }

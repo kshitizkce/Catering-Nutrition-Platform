@@ -39,9 +39,9 @@ namespace CateringNutrition.API.Services.vendorservice
         }
 
         // 4️⃣ All categories
-        public async Task<IEnumerable<MenuCategories>> GetAllCategoriesAsync()
+        public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
         {
-            return await _context.MenuCategories
+            return await _context.Category
                 .Where(c => c.IsActive)
                 .ToListAsync();
         }

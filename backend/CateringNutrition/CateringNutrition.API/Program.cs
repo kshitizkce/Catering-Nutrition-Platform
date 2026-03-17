@@ -24,6 +24,7 @@ builder.Services.AddScoped<JwtService>();
 builder.Services.AddScoped<IMenuService, MenuService>();
 builder.Services.AddScoped<TwilioVerifyService>();
 builder.Services.AddScoped<VendorService>();
+builder.Services.AddScoped<CateringNutrition.API.Services.vendorservice.VendorDashboardService>();
 
 // JWT Configuration
 var jwtSettings = builder.Configuration.GetSection("Jwt");

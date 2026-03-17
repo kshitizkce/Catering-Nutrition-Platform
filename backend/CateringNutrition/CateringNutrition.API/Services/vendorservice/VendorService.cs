@@ -1,4 +1,5 @@
 ﻿using CateringNutrition.API.Data;
+using CateringNutrition.API.Dtos.OrderItemDto;
 using CateringNutrition.API.Dtos.vendorDto;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +12,76 @@ namespace CateringNutrition.API.Services.vendorservice
         public VendorService(AppDbContext context)
         {
             _context = context;
+
+
         }
+
+        public async Task<ServiceResult<List<OrderWithItemsDto>>> GetOrdersWithItemsAsync(int vendorId)
+        {
+            try
+            {
+                var orders = await _context.Orders
+                    .Where(o => o.VendorId == vendorId)
+                    .Include(o => o.Customer)
+                    .Include(o => o.OrderItems)
+                        .ThenInclude(oi => oi.MenuItem)
+                            .ThenInclude(mi => mi.Category)
+                    .ToListAsync();
+
+                // ✅ ADD THIS
+                var vendorRating = await _context.Vendors
+                    .Where(v => v.VendorId == vendorId)
+                    .Select(v => v.Rating)
+                    .FirstOrDefaultAsync();
+
+                var result = orders.Select(o => new OrderWithItemsDto
+                {
+                    OrderId = o.OrderId,
+                    CustomerName = o.Customer.FullName,
+                    CustomerEmail = o.Customer.Email,
+                    CustomerPhone = o.Customer.Phone,
+                    StatusId = o.OrderStatusId,
+                    Status = o.OrderStatusId == 1 ? "Pending" :
+                             o.OrderStatusId == 2 ? "Confirmed" :
+                             o.OrderStatusId == 3 ? "Shipped" :
+                             o.OrderStatusId == 4 ? "Delivered" : "Unknown",
+                    OrderDate = o.OrderDate,
+                    DeliveryAddress = o.DeliveryAddress,
+                    TotalAmount = o.TotalAmount,
+                    CreatedAt = o.CreatedAt,
+                    UpdatedAt = o.UpdatedAt,
+
+                    // ✅ ADD THIS
+                    VendorRating = (decimal)vendorRating,
+
+                    Items = o.OrderItems.Select(oi => new OrderItemDto
+                    {
+                        OrderItemId = oi.OrderItemId,
+                        MenuItemId = oi.MenuItemId,
+                        ItemName = oi.MenuItem.ItemName,
+                        CategoryName = oi.MenuItem.Category.CategoryName,
+                        Quantity = oi.Quantity,
+                        UnitPrice = oi.UnitPrice,
+                        Calories = (int)oi.MenuItem.Calories,
+                        Rating = (double)oi.MenuItem.Rating,
+                        Price = oi.MenuItem.Price,
+                        IsAvailable = oi.MenuItem.IsAvailable
+                    }).ToList()
+                }).ToList();
+
+                return new ServiceResult<List<OrderWithItemsDto>> { Data = result };
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResult<List<OrderWithItemsDto>>
+                {
+                    Error = true,
+                    Message = "Failed to fetch orders.",
+                    Data = null
+                };
+            }
+        }
+
 
         public async Task<object> GetOrdersAsync(int vendorId)
         {
@@ -19,10 +89,51 @@ namespace CateringNutrition.API.Services.vendorservice
             {
                 var orders = await _context.Orders
                     .Where(o => o.VendorId == vendorId)
+                    .Include(o => o.Customer)
                     .Include(o => o.OrderItems)
+                        .ThenInclude(oi => oi.MenuItem)
+                            .ThenInclude(mi => mi.Category) 
                     .ToListAsync();
 
-                return orders;
+                var result = orders.Select(o => new
+                {
+                    orderId = o.OrderId,
+
+                    customerName = o.Customer.FullName,
+                    customerEmail = o.Customer.Email,
+                    customerPhone = o.Customer.Phone,
+
+                    statusId = o.OrderStatusId,
+                    status = o.OrderStatusId == 1 ? "Pending" :
+                             o.OrderStatusId == 2 ? "Confirmed" :
+                             o.OrderStatusId == 3 ? "Shipped" :
+                             o.OrderStatusId == 4 ? "Delivered" : "Unknown",
+
+                    orderDate = o.OrderDate,
+                    deliveryAddress = o.DeliveryAddress,
+                    totalAmount = o.TotalAmount,
+                    createdAt = o.CreatedAt,
+                    updatedAt = o.UpdatedAt,
+
+                    // ✅ ORDER ITEMS + MENU DETAILS
+                    items = o.OrderItems.Select(i => new
+                    {
+                        orderItemId = i.OrderItemId,
+                        quantity = i.Quantity,
+                        unitPrice = i.UnitPrice,
+
+                        menuItemId = i.MenuItemId,
+                        itemName = i.MenuItem.ItemName,
+                        description = i.MenuItem.ItemDescription,
+                        rating = i.MenuItem.Rating,
+                        price = i.MenuItem.Price,
+                        calories = i.MenuItem.Calories,
+
+                        categoryName = i.MenuItem.Category.CategoryName
+                    })
+                });
+
+                return result;
             }
             catch (Exception ex)
             {
@@ -89,21 +200,31 @@ namespace CateringNutrition.API.Services.vendorservice
             try
             {
                 var subscriber = await _context.Subscribers
-                    .Include(s => s.User)
+                    .Include(s => s.User)  // includes the related User
                     .FirstOrDefaultAsync(s => s.SubscriberId == subscriberId);
 
                 if (subscriber == null)
                     return new { Error = true, Message = "Subscriber not found." };
 
-                var hasVendorOrder = await _context.Orders.AnyAsync(o => o.VendorId == vendorId && o.CustomerUserId == subscriber.UserId);
+                var hasVendorOrder = await _context.Orders
+                    .AnyAsync(o => o.VendorId == vendorId && o.CustomerUserId == subscriber.UserId);
+
                 if (!hasVendorOrder)
                     return new { Error = true, Message = "Vendor cannot update this subscriber." };
 
+                // Update subscriber table
                 subscriber.SubscriptionTypeId = newSubscriptionTypeId;
                 subscriber.UpdatedAt = DateTime.UtcNow;
 
+                // Update corresponding user table
+                if (subscriber.User != null)
+                {
+                    subscriber.User.SubscriptionTypeId = newSubscriptionTypeId;
+                }
+
                 await _context.SaveChangesAsync();
-                return new { Error = false, Message = "Subscriber updated successfully." };
+
+                return new { Error = false, Message = "Subscriber and user updated successfully." };
             }
             catch (Exception ex)
             {

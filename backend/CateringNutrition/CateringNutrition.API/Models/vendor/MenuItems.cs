@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CateringNutrition.API.Models.vendor
 {
@@ -13,6 +14,7 @@ namespace CateringNutrition.API.Models.vendor
         [Required]
         public int CategoryId { get; set; }
 
+        public Category Category;
         [Required]
         [StringLength(150)]
         public string ItemName { get; set; }
@@ -23,8 +25,7 @@ namespace CateringNutrition.API.Models.vendor
         [Range(0, 5)]
         public decimal? Rating { get; set; }
 
-        [Required]
-        [Range(0, 999999)]
+        [Column(TypeName = "decimal(10,2)")]
         public decimal Price { get; set; }
 
         public bool IsAvailable { get; set; } = true;
