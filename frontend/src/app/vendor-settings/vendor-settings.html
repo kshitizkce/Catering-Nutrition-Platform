@@ -1,0 +1,163 @@
+<div class="settings-page">
+
+<h1>Vendor Settings</h1>
+<p class="subtitle">Manage your account and business information</p>
+
+
+<!-- ACCOUNT MANAGEMENT -->
+
+<div class="card">
+
+<h2>Account Management</h2>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Owner Name</label>
+<input [(ngModel)]="settings.ownerName">
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input [(ngModel)]="settings.email">
+</div>
+
+<div class="form-group">
+<label>Phone</label>
+<input [(ngModel)]="settings.phone">
+</div>
+
+<div class="form-group">
+<label>Change Password</label>
+<input type="password" placeholder="New Password">
+</div>
+
+</div>
+
+</div>
+
+
+<!-- BUSINESS DETAILS -->
+ <div class="form-group">
+<label>Business Logo</label>
+
+<input type="file" (change)="uploadLogo($event)" accept="image/*">
+
+<div *ngIf="settings.logo" class="logo-preview">
+<img [src]="settings.logo">
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Business Details</h2>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Business Name</label>
+<input [(ngModel)]="settings.businessName">
+</div>
+
+<div class="form-group">
+<label>Contact Email</label>
+<input [(ngModel)]="settings.contactEmail">
+</div>
+
+<div class="form-group">
+<label>Contact Phone</label>
+<input [(ngModel)]="settings.contactPhone">
+</div>
+
+<div class="form-group">
+<label>Website</label>
+<input [(ngModel)]="settings.website">
+</div>
+
+<div class="form-group full">
+<label>Business Address</label>
+<input [(ngModel)]="settings.address">
+</div>
+
+<div class="form-group full">
+<label>Business Description</label>
+<textarea [(ngModel)]="settings.description"></textarea>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- BUSINESS HOURS -->
+
+<div class="card">
+
+<h2>Business Hours</h2>
+
+<div class="hours-grid">
+
+<div class="hour-row" *ngFor="let day of hours; let i=index">
+
+<span class="day">{{day.name}}</span>
+
+<input 
+type="time"
+[(ngModel)]="hours[i].open"
+>
+
+<span>to</span>
+
+<input 
+type="time"
+[(ngModel)]="hours[i].close"
+>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- NOTIFICATIONS -->
+
+<div class="card">
+
+<h2>Notification Preferences</h2>
+
+<label class="checkbox">
+<input type="checkbox" [(ngModel)]="settings.emailNotifications">
+Email notifications for new orders
+</label>
+
+<label class="checkbox">
+<input type="checkbox" [(ngModel)]="settings.smsAlerts">
+SMS alerts for urgent updates
+</label>
+
+<label class="checkbox">
+<input type="checkbox" [(ngModel)]="settings.weeklyReports">
+Weekly revenue reports
+</label>
+
+<label class="checkbox">
+<input type="checkbox" [(ngModel)]="settings.reviewNotifications">
+Customer review notifications
+</label>
+
+</div>
+
+
+<!-- ACTION BUTTONS -->
+
+<div class="buttons">
+
+<button class="cancel">Cancel</button>
+
+<button class="save" (click)="saveSettings()">Save All Changes</button>
+
+</div>
+
+</div>

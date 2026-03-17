@@ -1,0 +1,69 @@
+<h2>Orders</h2>
+
+<table>
+  <tr>
+    <th>Order ID</th>
+    <th>Customer</th>
+    <th>Contact</th>
+    <th>Date</th>
+    <th>Amount</th>
+    <th>Status</th>
+    <th>Address</th>
+  </tr>
+
+  <ng-container *ngFor="let o of orders">
+
+    <!-- Main Row -->
+    <tr>
+      <td>{{o.orderId}}</td>
+
+      <td>{{o.customerName}}</td>
+
+      <td>
+        {{o.customerEmail}} <br>
+        {{o.customerPhone}}
+      </td>
+
+      <td>{{o.orderDate | date:'short'}}</td>
+
+      <td>${{o.totalAmount}}</td>
+
+      <td (click)="toggleItems(o)" style="cursor:pointer">
+        <span class="status {{o.status.toLowerCase()}}">
+          {{o.status}}
+        </span>
+        ⬇
+      </td>
+
+      <td>{{o.deliveryAddress}}</td>
+    </tr>
+
+    <!-- Expandable Items Row -->
+    <tr *ngIf="o.showItems">
+      <td colspan="7" class="items-row">
+
+        <strong>Items:</strong>
+
+        <table class="inner-table">
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Calories</th>
+          </tr>
+
+          <tr *ngFor="let item of o.items">
+            <td>{{item.itemName}}</td>
+            <td>{{item.categoryName}}</td>
+            <td>{{item.quantity}}</td>
+            <td>${{item.unitPrice}}</td>
+            <td>{{item.calories}}</td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+
+  </ng-container>
+</table>

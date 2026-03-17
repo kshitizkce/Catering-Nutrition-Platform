@@ -2,7 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth';
+import { AuthService } from '../services/auth/auth';
 import { finalize } from 'rxjs/operators';
 
 @Component({

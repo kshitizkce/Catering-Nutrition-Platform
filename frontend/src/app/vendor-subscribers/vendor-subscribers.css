@@ -1,0 +1,147 @@
+/* Page container */
+.dashboard {
+  padding: 20px;
+  background-color: #f5f7fb;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Section title */
+.section-title {
+  margin-bottom: 15px;
+}
+
+.section-title h3 {
+  margin: 0;
+  font-size: 22px;
+  color: #333;
+}
+
+.section-title p {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 14px;
+}
+
+/* Card container */
+.table-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+/* Table header */
+table th {
+  text-align: left;
+  padding: 12px;
+  background-color: #f1f3f6;
+  color: #555;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Table rows */
+table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+/* Hover effect */
+table tr:hover {
+  background-color: #f9fbff;
+  transition: 0.2s;
+}
+
+/* Status badges */
+.status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status.active {
+  background-color: #e6f7ee;
+  color: #28a745;
+}
+
+.status.inactive {
+  background-color: #fdecea;
+  color: #dc3545;
+}
+
+.status.pending {
+  background-color: #fff4e5;
+  color: #ff9800;
+}
+
+/* Buttons */
+button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+/* Update button */
+button:not([disabled]) {
+  background-color: #007bff;
+  color: white;
+}
+
+button:not([disabled]):hover {
+  background-color: #0056b3;
+}
+
+/* Disabled button */
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Save button */
+button:nth-child(1) {
+  background-color: #28a745;
+  color: white;
+}
+
+button:nth-child(1):hover {
+  background-color: #1e7e34;
+}
+
+/* Cancel button */
+button:nth-child(2) {
+  background-color: #dc3545;
+  color: white;
+  margin-left: 5px;
+}
+
+button:nth-child(2):hover {
+  background-color: #b02a37;
+}
+
+/* Dropdown */
+select {
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+}
+
+/* Empty state */
+p {
+  text-align: center;
+  color: #888;
+  margin-top: 20px;
+}

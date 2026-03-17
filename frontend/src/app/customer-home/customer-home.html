@@ -35,8 +35,20 @@ BOOK CATERING →
 
 <!-- SEARCH -->
 
-<div class="search">
-<input type="text" placeholder="Search catering services...">
+<div class="search-container">
+
+<input
+type="text"
+placeholder="Search catering services..."
+[(ngModel)]="searchText"
+(input)="onSearchChange()"
+(keyup.enter)="search()"
+/>
+
+<button class="search-btn" (click)="search()">
+➜
+</button>
+
 </div>
 
 
@@ -70,40 +82,23 @@ View All →
 </div>
 
 
-<div class="caterer-card">
+<!-- VENDOR LIST (NOW DYNAMIC FOR SEARCH) -->
+
+<div class="caterer-card" *ngFor="let vendor of filteredVendors">
 
 <div>
-<h3>Healthy Bites Catering</h3>
-<p>Healthy & Organic ⭐ 4.8</p>
-</div>
+<h3>{{vendor.name}}</h3>
 
-<button (click)="goToMenu()">View</button>
+<p>{{vendor.description}}</p>
 
 </div>
 
-
-<div class="caterer-card">
-
-<div>
-<h3>Gourmet Express</h3>
-<p>International Cuisine ⭐ 4.6</p>
-</div>
-
-<button (click)="goToMenu()">View</button>
+<button (click)="viewVendor(vendor)">
+View Vendor
+</button>
 
 </div>
 
-
-<div class="caterer-card">
-
-<div>
-<h3>Fresh Kitchen Co.</h3>
-<p>Farm to Table ⭐ 4.9</p>
-</div>
-
-<button (click)="goToMenu()">View</button>
-
-</div>
 
 </div>
 

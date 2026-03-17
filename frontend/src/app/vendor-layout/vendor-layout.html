@@ -1,0 +1,53 @@
+<div class="topbar">
+
+  <!-- LOGO -->
+  <div class="logo">
+    🍽 Smart Catering - Vendor
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="nav-links">
+
+    <a routerLink="/vendor-dashboard" routerLinkActive="active">Dashboard</a>
+
+    <a routerLink="/vendor-menu" routerLinkActive="active">Menu</a>
+
+    <a routerLink="/vendor-orders" routerLinkActive="active">Orders</a>
+
+        <a routerLink="/vendor-subscribers" routerLinkActive="active">Subscribers</a> <!-- Added -->
+
+
+    <a routerLink="/vendor-settings" routerLinkActive="active">Settings</a>
+
+  </div>
+
+  <!-- RESTAURANT STATUS -->
+  <div class="status">
+
+    <span class="status-text">
+      {{isOpen ? '🟢 Open' : '🔴 Closed'}}
+    </span>
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        [(ngModel)]="isOpen"
+        (change)="toggleRestaurant()"
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+  </div>
+
+</div>
+
+
+<!-- PAGE CONTENT -->
+<div class="main">
+
+  <router-outlet></router-outlet>
+
+</div>

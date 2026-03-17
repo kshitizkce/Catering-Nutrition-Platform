@@ -1,0 +1,151 @@
+<div class="dashboard">
+
+
+<!-- HEADER -->
+
+<div class="vendor-header">
+
+<img *ngIf="vendor.logo" [src]="vendor.logo" class="vendor-logo">
+
+<div *ngIf="!vendor.logo" class="avatar">
+👨‍🍳
+</div>
+
+<div class="vendor-info">
+
+<h2>{{vendor.businessName}}</h2>
+
+<div class="rating">
+  ⭐ {{ vendor.rating }} ( 245 reviews)
+</div>
+
+<div class="contact">
+
+<span>Email: {{vendor.email}}</span>
+
+<span>Phone: {{vendor.phone}}</span>
+
+<span>Location: {{vendor.address}}</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- REVENUE -->
+
+<div class="stats-grid">  <!-- ✅ ADD THIS -->
+
+  <div class="stat-card">
+
+    <div class="stat-header">
+      <span>Weekly Revenue</span>
+      <div class="icon green">📅</div>
+    </div>
+
+    <h2>${{ revenue.weeklyRevenue }}</h2>
+
+    <p class="positive">+12.5% from last week</p>
+
+    <hr>
+
+    <div class="stat-footer">
+      <span>Total Orders <b>{{ revenue.weeklyOrders }}</b></span>
+      <span>Avg Order <b>${{ revenue.avgOrderAmount }}</b></span>
+    </div>
+
+  </div>
+
+
+  <div class="stat-card">
+
+    <div class="stat-header">
+      <span>Monthly Revenue</span>
+      <div class="icon blue">$</div>
+    </div>
+
+    <h2>${{ revenue.monthlyRevenue }}</h2>
+
+    <p class="positive">+8.3% from last month</p>
+
+    <hr>
+
+    <div class="stat-footer">
+      <span>Total Orders <b>{{ revenue.monthlyOrders }}</b></span>
+      <span>Avg Order <b>${{ revenue.avgOrderAmount }}</b></span>
+    </div>
+
+  </div>
+
+</div> <!-- ✅ END -->
+
+
+
+<!-- RECENT ORDERS -->
+
+<div class="table-card">
+
+  <table>
+
+    <tr>
+      <th>Order</th>
+      <th>Customer</th>
+      <th>Items</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+
+    <ng-container *ngFor="let o of orders">
+
+      <!-- MAIN ORDER ROW -->
+      <tr>
+        <td>
+          <b>#{{o.orderId}}</b><br>
+          <small>{{o.orderDate | date:'short'}}</small>
+        </td>
+
+        <td>
+          <b>{{o.customerName}}</b><br>
+          <small>{{o.customerEmail}}</small><br>
+          <small>{{o.customerPhone}}</small>
+        </td>
+
+        <!-- ITEMS -->
+        <td>
+          <div *ngFor="let item of o.items" class="item-box">
+            <b>{{item.itemName}}</b> (x{{item.quantity}})<br>
+            <small>{{item.categoryName}}</small><br>
+            <small>{{item.calories}} cal | ⭐ {{item.rating}}</small>
+          </div>
+        </td>
+
+        <td>${{o.totalAmount}}</td>
+
+        <td>
+          <span class="status {{o.status.toLowerCase()}}">
+            {{o.status}}
+          </span>
+        </td>
+
+        <!-- ACTION -->
+        <td>
+          <select (change)="updateOrderStatus(o, $any($event.target).value)">
+            <option [selected]="o.statusId == 1" value="1">Pending</option>
+            <option [selected]="o.statusId == 2" value="2">Confirmed</option>
+            <option [selected]="o.statusId == 3" value="3">Shipped</option>
+            <option [selected]="o.statusId == 4" value="4">Delivered</option>
+          </select>
+        </td>
+      </tr>
+
+    </ng-container>
+
+  </table>
+
+</div>
+
+</div>

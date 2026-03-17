@@ -2,7 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService, RegisterDto, LoginDto } from '../services/auth';
+import { AuthService, RegisterDto, LoginDto } from '../services/auth/auth';
 
 @Component({
   selector: 'app-signup',
@@ -96,7 +96,7 @@ clearSignupState() {
         if ((res.roles || []).length === 1) {
           const role = res.roles[0] || res.role;
           if (role === "Admin") this.router.navigate(['/admin-profile']);
-          else if (role === "Vendor") this.router.navigate(['/vendor-profile']);
+          else if (role === "Vendor") this.router.navigate(['/vendor-dashboard']);
           else this.router.navigate(['/home']);
         } else {
           // multiple roles → show role selection

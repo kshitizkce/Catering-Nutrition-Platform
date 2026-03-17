@@ -1,50 +1,28 @@
-<div class="page">
+<div class="vendor-menu-page">
 
-<nav class="navbar">
-
-<div class="logo">🍽 Smart Catering</div>
-
-<div class="nav-links">
-
-<span (click)="router.navigate(['/home'])">🏠 Home</span>
-<span (click)="router.navigate(['/menu'])">📋 Menu</span>
-<span (click)="router.navigate(['/profile'])">👤 Account</span>
-
-</div>
-
-</nav>
-
-<div class="vendor-container">
-
-<h1>{{vendorName}}</h1>
-
-<p class="subtitle">
-Explore the full menu from this vendor
-</p>
+<h1>Vendor Menu</h1>
 
 <div class="menu-grid">
 
-<div class="menu-card" *ngFor="let item of menu">
+<div class="menu-card" *ngFor="let item of menuItems">
 
-<img [src]="item.image">
+<img [src]="item.imageUrl" alt="food">
 
 <h3>{{item.name}}</h3>
 
+<p>{{item.description}}</p>
+
 <div class="nutrition">
 
-<span>🔥 {{item.calories}} cal</span>
-<span>💪 {{item.protein}}</span>
-<span>🍞 {{item.carbs}}</span>
-<span>🥑 {{item.fat}}</span>
+<span>🔥 Calories: {{item.calories}}</span>
+<span>💪 Protein: {{item.protein}}g</span>
+<span>🥑 Fat: {{item.fat}}g</span>
+<span>🍞 Carbs: {{item.carbs}}g</span>
 
 </div>
 
-<p class="price">
-${{item.price}}
-</p>
-
-<button>Select Meal</button>
-
+<div class="price">
+$ {{item.price}}
 </div>
 
 </div>

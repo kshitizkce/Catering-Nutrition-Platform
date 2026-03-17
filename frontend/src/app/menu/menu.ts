@@ -13,9 +13,19 @@ export class MenuComponent implements OnInit {
 
 menuItems:any[] = [];
 
+restaurantOpen:boolean = true;
+
 constructor(private router: Router) {}
 
 ngOnInit(){
+
+/* CHECK RESTAURANT STATUS */
+
+const status = localStorage.getItem('restaurantOpen');
+
+if(status === 'false'){
+this.restaurantOpen = false;
+}
 
 this.menuItems = [
 
@@ -104,7 +114,14 @@ image:"https://images.unsplash.com/photo-1603894584373-5ac82b2ae398"
 }
 
 selectMeal(item:any){
+
+if(!this.restaurantOpen){
+alert("Restaurant is currently closed.");
+return;
+}
+
 alert(item.name + " selected for your plan");
+
 }
 
 goHome(){

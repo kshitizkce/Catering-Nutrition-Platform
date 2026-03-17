@@ -1,64 +1,58 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { MenuService } from '../services/menu/menu';
 
 @Component({
-selector:'app-vendors',
-standalone:true,
+selector: 'app-vendors',
+standalone: true,
 imports:[CommonModule],
 templateUrl:'./vendors.html',
 styleUrls:['./vendors.css']
 })
-export class VendorsComponent{
 
-constructor(public router:Router){}
+export class VendorsComponent implements OnInit {
 
-vendors = [
+vendors:any[] = [];
 
-{
-name:"Healthy Bites Catering",
-category:"Healthy & Organic",
-rating:"4.8",
-description:"Fresh organic catering for events and corporate meals.",
-image:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"
-},
+constructor(
+private menuService:MenuService,
+private router:Router
+){}
 
-{
-name:"Thunder Bay Gourmet",
-category:"International Cuisine",
-rating:"4.7",
-description:"Premium catering services for weddings and parties.",
-image:"https://images.unsplash.com/photo-1504674900247-0877df9cc836"
-},
+ngOnInit(){
 
-{
-name:"Lakehead Catering",
-category:"Local Favorites",
-rating:"4.6",
-description:"Traditional Thunder Bay catering with local ingredients.",
-image:"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"
-},
+this.loadVendors();
 
-{
-name:"Northern Feast Catering",
-category:"Buffet Catering",
-rating:"4.5",
-description:"Large scale catering for weddings and corporate events.",
-image:"https://images.unsplash.com/photo-1551183053-bf91a1d81141"
-},
-
-{
-name:"Superior Events Catering",
-category:"Luxury Catering",
-rating:"4.9",
-description:"Luxury catering service for premium events.",
-image:"https://images.unsplash.com/photo-1473093226795-af9932fe5856"
 }
 
-];
+loadVendors(){
 
-viewVendor(name:string){
-this.router.navigate(['/vendor', name]);
+this.menuService.getVendors().subscribe({
+
+next:(data)=>{
+
+console.log("Vendors from API:",data);
+
+this.vendors=data;
+
+},
+
+error:(err)=>{
+
+console.error("Vendor API error",err);
+
+}
+
+});
+
+}
+
+
+openVendor(vendor:any){
+
+this.router.navigate(['/vendor',vendor.vendorId]);
+
 }
 
 }

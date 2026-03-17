@@ -1,0 +1,152 @@
+<div class="menu-layout">
+
+  <div class="sidebar">
+    <h3>Categories</h3>
+
+   <div class="category"
+     *ngFor="let c of categories"
+     (click)="selectCategory(c)"
+     [ngClass]="{'active': selectedCategory?.categoryId===c.categoryId}"
+     title="{{c.description}}">
+  {{c.categoryName}}
+</div>
+  </div>
+
+  <div class="content">
+    <h2>{{selectedCategory.categoryName}} Menu</h2>
+
+    <button class="add-btn" (click)="showForm=true">➕ Add New Item</button>
+
+    <!-- ADD MENU FORM -->
+    <div *ngIf="showForm" class="form-card">
+      <h3>Add Menu Item</h3>
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Item Name</label>
+          <input placeholder="Example: Chicken Burrito" [(ngModel)]="newItem.name">
+        </div>
+
+        <div class="form-group">
+          <label>Price ($)</label>
+          <input type="number" [(ngModel)]="newItem.price">
+        </div>
+
+        <div class="form-group">
+          <label>Calories</label>
+          <input type="number" [(ngModel)]="newItem.calories">
+        </div>
+
+        <div class="form-group">
+          <label>Protein (g)</label>
+          <input type="number" [(ngModel)]="newItem.protein">
+        </div>
+
+        <div class="form-group full">
+          <label>Description</label>
+          <textarea [(ngModel)]="newItem.description"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Image URL</label>
+          <input [(ngModel)]="newItem.image">
+        </div>
+
+        <div class="form-group">
+          <label>Vegetarian</label>
+          <select [(ngModel)]="newItem.vegetarian">
+            <option [value]="true">Yes</option>
+            <option [value]="false">No</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Popular Item</label>
+          <select [(ngModel)]="newItem.popular">
+            <option [value]="true">Yes</option>
+            <option [value]="false">No</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="form-buttons">
+        <button class="save" (click)="addMenuItem()">Save Item</button>
+        <button class="cancel" (click)="showForm=false">Cancel</button>
+      </div>
+    </div>
+
+    <!-- MENU ITEMS -->
+    <div class="menu-grid">
+      <div class="card" *ngFor="let item of filteredItems">
+
+        <!-- SOLD OUT BADGE -->
+        <div *ngIf="item.soldOut" class="soldout-badge">Sold Out</div>
+
+        <img *ngIf="item.image" [src]="item.image" class="food-img">
+        <h3>{{item.name}}</h3>
+        <p>{{item.description}}</p>
+
+        <div class="info">
+          <span>{{item.calories}} cal</span>
+          <span *ngIf="item.protein">{{item.protein}}g protein</span>
+        </div>
+
+        <div class="bottom">
+          <span class="price">${{item.price}}</span>
+          <div class="actions">
+            <button class="edit" (click)="editItem(item)">Edit</button>
+            <button class="soldout" (click)="toggleSoldOut(item)">
+              {{item.soldOut ? 'Mark Available' : 'Sold Out'}}
+            </button>
+            <button class="delete" (click)="deleteItem(item.id)">Delete</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- EDIT POPUP -->
+<div *ngIf="editingItem" class="edit-modal">
+  <div class="edit-box">
+    <h2>Edit Menu Item</h2>
+
+    <div class="form-group">
+      <label>Food Name</label>
+      <input [(ngModel)]="editingItem.name">
+    </div>
+
+    <div class="form-group">
+      <label>Price ($)</label>
+      <input type="number" [(ngModel)]="editingItem.price">
+    </div>
+
+    <div class="form-group">
+      <label>Calories (kcal)</label>
+      <input type="number" [(ngModel)]="editingItem.calories">
+    </div>
+
+    <div class="form-group">
+      <label>Protein (grams)</label>
+      <input type="number" [(ngModel)]="editingItem.protein">
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea [(ngModel)]="editingItem.description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Food Image URL</label>
+      <input [(ngModel)]="editingItem.image">
+    </div>
+
+    <div class="edit-buttons">
+      <button class="save" (click)="saveEdit()">Save Changes</button>
+      <button class="cancel" (click)="cancelEdit()">Cancel</button>
+    </div>
+  </div>
+</div>
