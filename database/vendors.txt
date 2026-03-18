@@ -1,37 +1,62 @@
-USE [catering_nutrition_db];
+USE [catering_nutrition_db]
 GO
 
-CREATE TABLE dbo.Vendors
+/****** Object:  Table [dbo].[Vendors]    Script Date: 2026-03-18 12:28:50 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Vendors](
+	[VendorId] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[VendorName] [nvarchar](150) NULL,
+	[BusinessDescription] [nvarchar](500) NULL,
+	[VendorPhone] [nvarchar](30) NULL,
+	[VendorEmail] [nvarchar](320) NULL,
+	[VendorAddress] [nvarchar](255) NULL,
+	[City] [nvarchar](100) NULL,
+	[Rating] [decimal](2, 1) NULL,
+	[Status] [varchar](20) NULL,
+	[CreatedAt] [datetime2](0) NOT NULL,
+	[UpdatedAt] [datetime2](0) NULL,
+	[BusinessHours] [nvarchar](max) NULL,
+	[BusinessLogo] [nvarchar](500) NULL,
+PRIMARY KEY CLUSTERED 
 (
-    VendorId            INT IDENTITY(1,1) PRIMARY KEY,
-    UserId              INT NOT NULL,
-    VendorName          NVARCHAR(150) NOT NULL,
-    BusinessDescription NVARCHAR(500) NULL,
-    VendorPhone         NVARCHAR(30) NULL,
-    VendorEmail         NVARCHAR(320) NULL,
-    VendorAddress       NVARCHAR(255) NULL,
-    City                NVARCHAR(100) NULL,
-
-    Rating              DECIMAL(2,1) NULL,
-
-    Status              VARCHAR(20) NOT NULL 
-        CONSTRAINT DF_Vendors_Status DEFAULT ('Active'),
-
-    CreatedAt           DATETIME2(0) NOT NULL 
-        CONSTRAINT DF_Vendors_CreatedAt DEFAULT (SYSDATETIME()),
-
-    UpdatedAt           DATETIME2(0) NULL,
-
-    CONSTRAINT FK_Vendors_Users
-        FOREIGN KEY (UserId) REFERENCES dbo.Users(UserId),
-
-    CONSTRAINT UQ_Vendors_UserId
-        UNIQUE (UserId),
-
-    CONSTRAINT CK_Vendors_Status
-        CHECK (Status IN ('Active', 'Inactive')),
-
-    CONSTRAINT CK_Vendors_Rating
-        CHECK (Rating IS NULL OR (Rating >= 0 AND Rating <= 5))
-);
+	[VendorId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [UQ_Vendors_UserId] UNIQUE NONCLUSTERED 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
+
+ALTER TABLE [dbo].[Vendors] ADD  CONSTRAINT [DF_Vendors_Status]  DEFAULT ('Active') FOR [Status]
+GO
+
+ALTER TABLE [dbo].[Vendors] ADD  CONSTRAINT [DF_Vendors_CreatedAt]  DEFAULT (sysdatetime()) FOR [CreatedAt]
+GO
+
+ALTER TABLE [dbo].[Vendors]  WITH CHECK ADD  CONSTRAINT [FK_Vendors_Users] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserId])
+GO
+
+ALTER TABLE [dbo].[Vendors] CHECK CONSTRAINT [FK_Vendors_Users]
+GO
+
+ALTER TABLE [dbo].[Vendors]  WITH CHECK ADD  CONSTRAINT [CK_Vendors_Rating] CHECK  (([Rating] IS NULL OR [Rating]>=(0) AND [Rating]<=(5)))
+GO
+
+ALTER TABLE [dbo].[Vendors] CHECK CONSTRAINT [CK_Vendors_Rating]
+GO
+
+ALTER TABLE [dbo].[Vendors]  WITH CHECK ADD  CONSTRAINT [CK_Vendors_Status] CHECK  (([Status]='Inactive' OR [Status]='Active'))
+GO
+
+ALTER TABLE [dbo].[Vendors] CHECK CONSTRAINT [CK_Vendors_Status]
+GO
+
+

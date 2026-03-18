@@ -1,0 +1,42 @@
+USE [catering_nutrition_db]
+GO
+
+/****** Object:  Table [dbo].[Orders]    Script Date: 2026-03-18 12:24:42 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Orders](
+	[OrderId] [int] IDENTITY(1,1) NOT NULL,
+	[CustomerUserId] [int] NOT NULL,
+	[VendorId] [int] NOT NULL,
+	[OrderStatusId] [int] NOT NULL,
+	[OrderDate] [datetime2](0) NULL,
+	[DeliveryAddress] [nvarchar](500) NOT NULL,
+	[TotalAmount] [decimal](18, 2) NOT NULL,
+	[CreatedAt] [datetime2](0) NULL,
+	[UpdatedAt] [datetime2](0) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[OrderId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Orders] ADD  DEFAULT (sysutcdatetime()) FOR [OrderDate]
+GO
+
+ALTER TABLE [dbo].[Orders] ADD  DEFAULT (sysutcdatetime()) FOR [CreatedAt]
+GO
+
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD FOREIGN KEY([CustomerUserId])
+REFERENCES [dbo].[Users] ([UserId])
+GO
+
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD FOREIGN KEY([VendorId])
+REFERENCES [dbo].[Vendors] ([VendorId])
+GO
+
+

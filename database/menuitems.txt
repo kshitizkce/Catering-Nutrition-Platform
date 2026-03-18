@@ -1,39 +1,52 @@
-USE [catering_nutrition_db];
+USE [catering_nutrition_db]
 GO
 
-CREATE TABLE dbo.MenuItems
+/****** Object:  Table [dbo].[MenuItems]    Script Date: 2026-03-18 12:19:02 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[MenuItems](
+	[MenuItemId] [int] IDENTITY(1,1) NOT NULL,
+	[VendorId] [int] NOT NULL,
+	[CategoryId] [int] NOT NULL,
+	[ItemName] [nvarchar](150) NOT NULL,
+	[ItemDescription] [nvarchar](500) NULL,
+	[Rating] [decimal](2, 1) NULL,
+	[Price] [decimal](10, 2) NOT NULL,
+	[IsAvailable] [bit] NULL,
+	[Calories] [int] NULL,
+	[CreatedAt] [datetime2](0) NULL,
+	[ImageUrl] [nvarchar](500) NULL,
+PRIMARY KEY CLUSTERED 
 (
-    MenuItemId       INT IDENTITY(1,1) PRIMARY KEY,
-    VendorId         INT NOT NULL,
-    CategoryId       INT NOT NULL,
-    ItemName         NVARCHAR(150) NOT NULL,
-    ItemDescription  NVARCHAR(500) NULL,
-
-    Rating           DECIMAL(2,1) NULL,
-
-    Price            DECIMAL(10,2) NOT NULL,
-
-    IsAvailable      BIT NOT NULL 
-        CONSTRAINT DF_MenuItems_IsAvailable DEFAULT (1),
-
-    Calories         INT NULL,
-
-    CreatedAt        DATETIME2(0) NOT NULL 
-        CONSTRAINT DF_MenuItems_CreatedAt DEFAULT (SYSDATETIME()),
-
-    CONSTRAINT FK_MenuItems_Vendors
-        FOREIGN KEY (VendorId) REFERENCES dbo.Vendors(VendorId),
-
-    CONSTRAINT FK_MenuItems_MenuCategories
-        FOREIGN KEY (CategoryId) REFERENCES dbo.MenuCategories(CategoryId),
-
-    CONSTRAINT CK_MenuItems_Price
-        CHECK (Price >= 0),
-
-    CONSTRAINT CK_MenuItems_Calories
-        CHECK (Calories IS NULL OR Calories >= 0),
-
-    CONSTRAINT CK_MenuItems_Rating
-        CHECK (Rating IS NULL OR (Rating >= 0 AND Rating <= 5))
-);
+	[MenuItemId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
 GO
+
+ALTER TABLE [dbo].[MenuItems] ADD  DEFAULT ((1)) FOR [IsAvailable]
+GO
+
+ALTER TABLE [dbo].[MenuItems] ADD  DEFAULT (sysdatetime()) FOR [CreatedAt]
+GO
+
+ALTER TABLE [dbo].[MenuItems]  WITH CHECK ADD FOREIGN KEY([CategoryId])
+REFERENCES [dbo].[Category] ([CategoryId])
+GO
+
+ALTER TABLE [dbo].[MenuItems]  WITH CHECK ADD FOREIGN KEY([VendorId])
+REFERENCES [dbo].[Vendors] ([VendorId])
+GO
+
+ALTER TABLE [dbo].[MenuItems]  WITH CHECK ADD CHECK  (([Calories] IS NULL OR [Calories]>=(0)))
+GO
+
+ALTER TABLE [dbo].[MenuItems]  WITH CHECK ADD CHECK  (([Price]>=(0)))
+GO
+
+ALTER TABLE [dbo].[MenuItems]  WITH CHECK ADD CHECK  (([Rating] IS NULL OR [Rating]>=(0) AND [Rating]<=(5)))
+GO
+

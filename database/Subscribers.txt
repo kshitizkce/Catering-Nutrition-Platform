@@ -1,0 +1,43 @@
+USE [catering_nutrition_db]
+GO
+
+/****** Object:  Table [dbo].[Subscribers]    Script Date: 2026-03-18 12:27:30 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Subscribers](
+	[SubscriberId] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[SubscriptionTypeId] [int] NOT NULL,
+	[VendorId] [int] NOT NULL,
+	[StartDate] [datetime2](0) NOT NULL,
+	[EndDate] [datetime2](0) NOT NULL,
+	[Status] [nvarchar](50) NOT NULL,
+	[CreatedAt] [datetime2](0) NULL,
+	[UpdatedAt] [datetime2](0) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[SubscriberId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Subscribers] ADD  DEFAULT (sysutcdatetime()) FOR [CreatedAt]
+GO
+
+ALTER TABLE [dbo].[Subscribers]  WITH CHECK ADD FOREIGN KEY([SubscriptionTypeId])
+REFERENCES [dbo].[SubscriptionTypes] ([SubscriptionTypeId])
+GO
+
+ALTER TABLE [dbo].[Subscribers]  WITH CHECK ADD FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserId])
+GO
+
+ALTER TABLE [dbo].[Subscribers]  WITH CHECK ADD FOREIGN KEY([VendorId])
+REFERENCES [dbo].[Vendors] ([VendorId])
+GO
+
+
