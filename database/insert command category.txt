@@ -1,4 +1,4 @@
-INSERT INTO [catering_nutrition_db].[dbo].[MenuCategories]
+INSERT INTO [catering_nutrition_db].[dbo].[Category]
 (CategoryName, Description, IsActive)
 VALUES
 ('Breakfast', 'Start Your day', 1),
