@@ -33,6 +33,8 @@ namespace CateringNutrition.API.Models.vendor
         [Range(0, int.MaxValue)]
         public int? Calories { get; set; }
 
+        public string? ImageUrl { get; set; } 
+
         public DateTime CreatedAt { get; set; }
     }
 }

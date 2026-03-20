@@ -1,4 +1,5 @@
 ﻿using CateringNutrition.API.Dtos.vendorDto;
+using CateringNutrition.API.Interfaces.vendor;
 using CateringNutrition.API.Services.vendorservice;
 using Microsoft.AspNetCore.Mvc;
 
@@ -86,6 +87,37 @@ namespace CateringNutrition.API.Controllers.vendor
                     : Ok(result);
             }
 
+        [HttpGet("{userId}/profile")]
+        public async Task<IActionResult> GetProfile(int userId)
+        {
+            try
+            {
+                var data = await _service.GetVendorProfile(userId);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
+
+        [HttpPost("profile")]
+        public async Task<IActionResult> SaveProfile([FromForm] VendorProfileDto dto,
+                                                    IFormFile? logo,
+                                                    IFormFile? file)
+        {
+            try
+            {
+                var result = await _service.SaveVendorProfile(dto, logo, file);
+                return Ok(new { message = result });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+    
+
+}
 
     }

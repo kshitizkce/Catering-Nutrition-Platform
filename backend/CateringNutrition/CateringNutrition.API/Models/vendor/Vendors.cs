@@ -42,5 +42,13 @@ namespace CateringNutrition.API.Models.vendor
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
+        public string? BusinessHours { get; set; }
+
+        // Stores vendor logo URL
+        [StringLength(500)]
+        public string? BusinessLogo { get; set; }
+
+        [StringLength(500)]
+        public string? BusinessFile { get; set; }   // NEW
     }
 }

@@ -1,4 +1,5 @@
-﻿using CateringNutrition.API.Models.vendor;
+﻿using CateringNutrition.API.Dtos.menuitemsDTOS;
+using CateringNutrition.API.Models.vendor;
 
 namespace CateringNutrition.API.Interfaces.vendor
 {
@@ -11,5 +12,21 @@ namespace CateringNutrition.API.Interfaces.vendor
         Task<IEnumerable<Vendors>> GetAllVendorsAsync();
 
         Task<IEnumerable<Category>> GetAllCategoriesAsync();
+
+        Task<MenuItems> AddMenuItemAsync(MenuItemDto dto);
+        Task<MenuItems> UpdateMenuItemAsync(int menuItemId, MenuItemDto dto);
+        Task<bool> DeleteMenuItemAsync(int menuItemId);
+
+        Task<IEnumerable<MenuItems>> GetMenuItemsByVendorAndCategoriesAsync(
+        int vendorId,
+        List<int> categoryIds,
+        int pageNumber = 1,
+        int pageSize = 50
+
+    );
+
+
     }
+
+
 }

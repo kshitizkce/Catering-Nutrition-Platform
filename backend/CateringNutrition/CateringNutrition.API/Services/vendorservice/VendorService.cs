@@ -1,6 +1,7 @@
 ﻿using CateringNutrition.API.Data;
 using CateringNutrition.API.Dtos.OrderItemDto;
 using CateringNutrition.API.Dtos.vendorDto;
+using CateringNutrition.API.Models.vendor;
 using Microsoft.EntityFrameworkCore;
 
 namespace CateringNutrition.API.Services.vendorservice
@@ -9,9 +10,13 @@ namespace CateringNutrition.API.Services.vendorservice
     {
         private readonly AppDbContext _context;
 
-        public VendorService(AppDbContext context)
+        private readonly IWebHostEnvironment _env;
+
+        public VendorService(AppDbContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
+
 
 
         }
@@ -260,6 +265,106 @@ namespace CateringNutrition.API.Services.vendorservice
                 return new { Error = true, Message = "Failed to fetch user details.", Detail = ex.Message };
             }
         }
+        public async Task<VendorProfileDto> GetVendorProfile(int userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            var vendor = await _context.Vendors.FirstOrDefaultAsync(v => v.UserId == userId);
 
+
+            if (user == null)
+                throw new Exception("User not found");
+
+            return new VendorProfileDto
+            {
+                UserId = user.UserId,
+                OwnerName = user.FullName,
+                Email = user.Email,
+                Phone = user.Phone,
+
+                BusinessName = vendor?.VendorName,
+                BusinessDescription = vendor?.BusinessDescription,
+                VendorAddress = vendor?.VendorAddress,
+                City = vendor?.City,
+                ContactEmail = vendor?.VendorEmail,
+                ContactPhone = vendor?.VendorPhone,
+                BusinessHours = vendor?.BusinessHours,
+                BusinessLogo = vendor?.BusinessLogo,
+                BusinessFile = vendor?.BusinessFile
+            };
+        }
+
+        public async Task<string> SaveVendorProfile(VendorProfileDto dto, IFormFile? logo, IFormFile? file)
+        {
+            var user = await _context.Users.FindAsync(dto.UserId);
+            if (user == null)
+                throw new Exception("User not found");
+
+            // UPDATE USER
+            user.FullName = dto.OwnerName;
+            user.Email = dto.Email;
+            user.Phone = dto.Phone;
+
+            if (!string.IsNullOrEmpty(dto.Password))
+                user.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password); 
+
+
+            var vendor = await _context.Vendors
+                .FirstOrDefaultAsync(v => v.UserId == dto.UserId);
+
+            if (vendor == null)
+            {
+                vendor = new Vendors
+                {
+                    UserId = dto.UserId,
+                    CreatedAt = DateTime.Now
+                };
+                _context.Vendors.Add(vendor);
+            }
+
+            string uploadPath = Path.Combine(_env.WebRootPath, "uploads");
+
+            if (!Directory.Exists(uploadPath))
+                Directory.CreateDirectory(uploadPath);
+
+            // LOGO
+            if (logo != null)
+            {
+                var fileName = Guid.NewGuid() + Path.GetExtension(logo.FileName);
+                var path = Path.Combine(uploadPath, fileName);
+
+                using var stream = new FileStream(path, FileMode.Create);
+                await logo.CopyToAsync(stream);
+
+                vendor.BusinessLogo = "/uploads/" + fileName;
+            }
+
+            // BUSINESS FILE
+            if (file != null)
+            {
+                var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+                var path = Path.Combine(uploadPath, fileName);
+
+                using var stream = new FileStream(path, FileMode.Create);
+                await file.CopyToAsync(stream);
+
+                vendor.BusinessFile = "/uploads/" + fileName;
+            }
+
+            // UPDATE VENDOR
+            vendor.VendorName = dto.BusinessName;
+            vendor.BusinessDescription = dto.BusinessDescription;
+            vendor.VendorAddress = dto.VendorAddress;
+            vendor.City = dto.City;
+            vendor.VendorEmail = dto.ContactEmail;
+            vendor.VendorPhone = dto.ContactPhone;
+            vendor.BusinessHours = dto.BusinessHours;
+            vendor.UpdatedAt = DateTime.Now;
+
+            await _context.SaveChangesAsync();
+
+            return "Vendor profile saved successfully";
+        }
     }
+
 }
+
