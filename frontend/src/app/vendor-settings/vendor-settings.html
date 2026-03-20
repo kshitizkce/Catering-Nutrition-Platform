@@ -3,11 +3,8 @@
 <h1>Vendor Settings</h1>
 <p class="subtitle">Manage your account and business information</p>
 
-
 <!-- ACCOUNT MANAGEMENT -->
-
 <div class="card">
-
 <h2>Account Management</h2>
 
 <div class="form-grid">
@@ -29,28 +26,30 @@
 
 <div class="form-group">
 <label>Change Password</label>
-<input type="password" placeholder="New Password">
+<input type="password" [(ngModel)]="settings.password" placeholder="New Password">
 </div>
 
 </div>
-
 </div>
 
-
-<!-- BUSINESS DETAILS -->
- <div class="form-group">
+<!-- BUSINESS LOGO -->
+<div class="form-group">
 <label>Business Logo</label>
-
 <input type="file" (change)="uploadLogo($event)" accept="image/*">
 
 <div *ngIf="settings.logo" class="logo-preview">
 <img [src]="settings.logo">
 </div>
-
 </div>
 
-<div class="card">
+<!-- ✅ NEW BUSINESS FILE -->
+<div class="form-group">
+<label>Business File</label>
+<input type="file" (change)="uploadFile($event)">
+</div>
 
+<!-- BUSINESS DETAILS -->
+<div class="card">
 <h2>Business Details</h2>
 
 <div class="form-grid">
@@ -86,45 +85,27 @@
 </div>
 
 </div>
-
 </div>
 
-
 <!-- BUSINESS HOURS -->
-
 <div class="card">
-
 <h2>Business Hours</h2>
 
 <div class="hours-grid">
-
 <div class="hour-row" *ngFor="let day of hours; let i=index">
 
 <span class="day">{{day.name}}</span>
 
-<input 
-type="time"
-[(ngModel)]="hours[i].open"
->
-
+<input type="time" [(ngModel)]="hours[i].open">
 <span>to</span>
-
-<input 
-type="time"
-[(ngModel)]="hours[i].close"
->
+<input type="time" [(ngModel)]="hours[i].close">
 
 </div>
-
 </div>
-
 </div>
-
 
 <!-- NOTIFICATIONS -->
-
 <div class="card">
-
 <h2>Notification Preferences</h2>
 
 <label class="checkbox">
@@ -149,15 +130,8 @@ Customer review notifications
 
 </div>
 
-
 <!-- ACTION BUTTONS -->
-
 <div class="buttons">
-
-<button class="cancel">Cancel</button>
-
+<button class="cancel" (click)="cancel()">Cancel</button>
 <button class="save" (click)="saveSettings()">Save All Changes</button>
-
-</div>
-
 </div>

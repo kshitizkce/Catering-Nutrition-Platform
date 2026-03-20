@@ -11,17 +11,16 @@ interface Category {
 }
 
 interface MenuItem {
-  id: number;
-  name: string;
-  description: string;
+  menuItemId?: number;
+  vendorId: number;
+  categoryId: number;
+  itemName: string;
+  rating :number,
+  itemDescription?: string;
   price: number;
-  calories: number;
-  protein: number;
-  image: string;
-  vegetarian: boolean;
-  popular: boolean;
-  soldOut: boolean;
-  category: string;
+  calories?: number;
+  isAvailable: boolean;
+  imageUrl?: string; // updated for backend
 }
 
 @Component({
@@ -32,28 +31,20 @@ interface MenuItem {
   styleUrls: ['./vendor-menu.css']
 })
 export class VendorMenuComponent implements OnInit {
+  vendorId: number = 5;
 
   categories: Category[] = [];
-  selectedCategory!: Category; // full object including categoryId
+  selectedCategory!: Category;
 
-  menuItems: MenuItem[] = []; // will be loaded from API
-
-  newItem: MenuItem = {
-    id: 0,
-    name: '',
-    description: '',
-    price: 0,
-    calories: 0,
-    protein: 0,
-    image: '',
-    vegetarian: false,
-    popular: false,
-    soldOut: false,
-    category: ''
-  };
+  menuItems: MenuItem[] = [];
+  pageNumber: number = 1;
+  pageSize: number = 50;
 
   showForm = false;
   editingItem: MenuItem | null = null;
+
+  newItem: MenuItem = this.getEmptyItem();
+  selectedFile: File | null = null;
 
   constructor(private menuService: MenuService) {}
 
@@ -61,83 +52,87 @@ export class VendorMenuComponent implements OnInit {
     this.loadCategories();
   }
 
-  // Load categories from API
+  getEmptyItem(): MenuItem {
+    return {
+      vendorId: this.vendorId,
+      categoryId: this.selectedCategory?.categoryId || 0,
+      itemName: '',
+      itemDescription: '',
+      price: 0,
+      calories: 0,
+      isAvailable: true,
+      rating : 0,
+      imageUrl: ''
+    };
+  }
+
   loadCategories() {
     this.menuService.getCategories().subscribe({
       next: (res: Category[]) => {
         this.categories = res.filter(c => c.isActive);
         if (this.categories.length > 0) {
-          this.selectCategory(this.categories[0]); // select first by default
+          this.selectCategory(this.categories[0]);
         }
       },
-      error: (err: any) => console.error('Failed to load categories', err)
+      error: err => console.error('Failed to load categories', err)
     });
   }
 
-  // When a category is clicked
   selectCategory(category: Category) {
     this.selectedCategory = category;
-    this.loadMenuItemsForCategory(category.categoryId);
+    this.pageNumber = 1;
+    this.loadMenuItems();
+    this.newItem.categoryId = category.categoryId;
   }
 
-  // Load menu items for selected category
-  loadMenuItemsForCategory(categoryId: number) {
-    this.menuService.getMenuByCategoryApi([categoryId]).subscribe({
-      next: (res: any[]) => {
-        this.menuItems = res.map(item => ({
-          id: item.menuItemId,
-          name: item.itemName,
-          description: item.itemDescription,
-          price: item.price,
-          calories: item.calories,
-          protein: item.protein || 0,
-          image: item.image || '',
-          vegetarian: item.vegetarian || false,
-          popular: item.popular || false,
-          soldOut: !item.isAvailable,
-          category: this.selectedCategory.categoryName
-        }));
-      },
-      error: (err: any) => console.error('Failed to load menu items', err)
+  loadMenuItems() {
+    this.menuService.getMenuByVendorAndCategoryApi(
+      this.vendorId,
+      [this.selectedCategory.categoryId],
+      this.pageNumber,
+      this.pageSize
+    ).subscribe({
+      next: (res: MenuItem[]) => this.menuItems = res,
+      error: err => console.error('Failed to load menu items', err)
     });
   }
 
-  get filteredItems() {
-    return this.menuItems;
+  nextPage() {
+    this.pageNumber++;
+    this.loadMenuItems();
+  }
+
+  prevPage() {
+    if (this.pageNumber > 1) {
+      this.pageNumber--;
+      this.loadMenuItems();
+    }
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+    // If using actual upload API:
+    if (this.selectedFile) {
+    this.menuService.uploadImage(this.selectedFile).subscribe({
+      next: res => {
+        this.newItem.imageUrl = res.imageUrl; // store URL returned by API
+      },
+      error: err => console.error('Image upload failed', err)
+    });
+  }
   }
 
   addMenuItem() {
-    const newId = this.menuItems.length + 1;
-    this.menuItems.push({
-      ...this.newItem,
-      id: newId,
-      category: this.selectedCategory.categoryName
+    this.newItem.vendorId = this.vendorId;
+    this.newItem.categoryId = this.selectedCategory.categoryId;
+
+    this.menuService.addMenuItem(this.newItem).subscribe({
+      next: () => {
+        this.loadMenuItems();
+        this.resetForm();
+      },
+      error: err => console.error('Failed to add menu item', err)
     });
-
-    // Reset form
-    this.newItem = {
-      id: 0,
-      name: '',
-      description: '',
-      price: 0,
-      calories: 0,
-      protein: 0,
-      image: '',
-      vegetarian: false,
-      popular: false,
-      soldOut: false,
-      category: ''
-    };
-
-    this.showForm = false;
-  }
-
-  deleteItem(id: number) {
-    this.menuItems = this.menuItems.filter(item => item.id !== id);
-  }
-
-  toggleSoldOut(item: MenuItem) {
-    item.soldOut = !item.soldOut;
   }
 
   editItem(item: MenuItem) {
@@ -146,15 +141,49 @@ export class VendorMenuComponent implements OnInit {
 
   saveEdit() {
     if (!this.editingItem) return;
-    const index = this.menuItems.findIndex(i => i.id === this.editingItem!.id);
-    if (index > -1) {
-      this.menuItems[index] = this.editingItem;
-    }
-    this.editingItem = null;
+
+    this.menuService.updateMenuItem(this.editingItem.menuItemId!, this.editingItem).subscribe({
+      next: () => {
+        this.loadMenuItems();
+        this.editingItem = null;
+      },
+      error: err => console.error('Failed to update menu item', err)
+    });
+  }
+
+  deleteItem(menuItemId?: number) {
+    if (!menuItemId) return;
+
+    this.menuService.deleteMenuItem(menuItemId).subscribe({
+      next: () => this.loadMenuItems(),
+      error: err => console.error('Failed to delete menu item', err)
+    });
   }
 
   cancelEdit() {
     this.editingItem = null;
   }
 
+  resetForm() {
+    this.newItem = this.getEmptyItem();
+    this.showForm = false;
+    this.selectedFile = null;
+  }
+
+  toggleSoldOut(item: MenuItem) {
+  // Flip the isAvailable flag
+  const updatedItem = { ...item, isAvailable: !item.isAvailable };
+
+  // Call update API
+  this.menuService.updateMenuItem(item.menuItemId!, updatedItem).subscribe({
+    next: () => {
+      // Update the item in the local array
+      const index = this.menuItems.findIndex(m => m.menuItemId === item.menuItemId);
+      if (index !== -1) {
+        this.menuItems[index].isAvailable = updatedItem.isAvailable;
+      }
+    },
+    error: err => console.error('Failed to toggle availability', err)
+  });
+}
 }

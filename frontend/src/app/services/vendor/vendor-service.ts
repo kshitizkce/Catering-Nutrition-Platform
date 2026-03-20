@@ -10,6 +10,8 @@ export class VendorService {
 
   constructor(private http: HttpClient) {}
 
+  
+
   getSubscribers(vendorId: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${vendorId}/subscribers`);
   }
@@ -28,5 +30,13 @@ updateOrder(vendorId: number, orderId: number, payload: any) {
 
 getDashboard(vendorId: number) {
   return this.http.get(`${this.baseUrl}/${vendorId}/dashboard`);
+}
+
+getVendorProfile(userId: number) {
+  return this.http.get(`${this.baseUrl}/${userId}/profile`);
+}
+
+saveVendorProfile(formData: FormData) {
+  return this.http.post(`${this.baseUrl}/profile`, formData);
 }
 }

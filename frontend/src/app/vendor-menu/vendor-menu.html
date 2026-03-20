@@ -3,13 +3,13 @@
   <div class="sidebar">
     <h3>Categories</h3>
 
-   <div class="category"
-     *ngFor="let c of categories"
-     (click)="selectCategory(c)"
-     [ngClass]="{'active': selectedCategory?.categoryId===c.categoryId}"
-     title="{{c.description}}">
-  {{c.categoryName}}
-</div>
+    <div class="category"
+      *ngFor="let c of categories"
+      (click)="selectCategory(c)"
+      [ngClass]="{'active': selectedCategory?.categoryId===c.categoryId}"
+      title="{{c.description}}">
+      {{c.categoryName}}
+    </div>
   </div>
 
   <div class="content">
@@ -24,7 +24,7 @@
 
         <div class="form-group">
           <label>Item Name</label>
-          <input placeholder="Example: Chicken Burrito" [(ngModel)]="newItem.name">
+          <input placeholder="Example: Chicken Burrito" [(ngModel)]="newItem.itemName">
         </div>
 
         <div class="form-group">
@@ -37,34 +37,21 @@
           <input type="number" [(ngModel)]="newItem.calories">
         </div>
 
-        <div class="form-group">
-          <label>Protein (g)</label>
-          <input type="number" [(ngModel)]="newItem.protein">
-        </div>
-
         <div class="form-group full">
           <label>Description</label>
-          <textarea [(ngModel)]="newItem.description"></textarea>
+          <textarea [(ngModel)]="newItem.itemDescription"></textarea>
         </div>
 
         <div class="form-group">
-          <label>Image URL</label>
-          <input [(ngModel)]="newItem.image">
+          <label>Food Image</label>
+          <input type="file" (change)="onFileSelected($event)">
         </div>
 
         <div class="form-group">
           <label>Vegetarian</label>
-          <select [(ngModel)]="newItem.vegetarian">
-            <option [value]="true">Yes</option>
-            <option [value]="false">No</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Popular Item</label>
-          <select [(ngModel)]="newItem.popular">
-            <option [value]="true">Yes</option>
-            <option [value]="false">No</option>
+          <select [(ngModel)]="newItem.isAvailable">
+            <option [value]="true">Available</option>
+            <option [value]="false">Sold Out</option>
           </select>
         </div>
 
@@ -78,18 +65,17 @@
 
     <!-- MENU ITEMS -->
     <div class="menu-grid">
-      <div class="card" *ngFor="let item of filteredItems">
+      <div class="card" *ngFor="let item of menuItems">
 
         <!-- SOLD OUT BADGE -->
-        <div *ngIf="item.soldOut" class="soldout-badge">Sold Out</div>
+        <div *ngIf="!item.isAvailable" class="soldout-badge">Sold Out</div>
 
-        <img *ngIf="item.image" [src]="item.image" class="food-img">
-        <h3>{{item.name}}</h3>
-        <p>{{item.description}}</p>
+        <!-- <img *ngIf="item.imageUrl" [src]="item.imageUrl" class="food-img"> -->
+        <h3>{{item.itemName}}</h3>
+        <p>{{item.itemDescription}}</p> 
 
         <div class="info">
           <span>{{item.calories}} cal</span>
-          <span *ngIf="item.protein">{{item.protein}}g protein</span>
         </div>
 
         <div class="bottom">
@@ -97,13 +83,20 @@
           <div class="actions">
             <button class="edit" (click)="editItem(item)">Edit</button>
             <button class="soldout" (click)="toggleSoldOut(item)">
-              {{item.soldOut ? 'Mark Available' : 'Sold Out'}}
+              {{item.isAvailable ? 'Mark Sold Out' : 'Mark Available'}}
             </button>
-            <button class="delete" (click)="deleteItem(item.id)">Delete</button>
+            <button class="delete" (click)="deleteItem(item.menuItemId)">Delete</button>
           </div>
         </div>
 
       </div>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="pageNumber === 1">⬅ Previous</button>
+      <span>Page {{pageNumber}}</span>
+      <button (click)="nextPage()" [disabled]="menuItems.length < pageSize">Next ➡</button>
     </div>
 
   </div>
@@ -116,7 +109,7 @@
 
     <div class="form-group">
       <label>Food Name</label>
-      <input [(ngModel)]="editingItem.name">
+      <input [(ngModel)]="editingItem.itemName">
     </div>
 
     <div class="form-group">
@@ -129,19 +122,15 @@
       <input type="number" [(ngModel)]="editingItem.calories">
     </div>
 
-    <div class="form-group">
-      <label>Protein (grams)</label>
-      <input type="number" [(ngModel)]="editingItem.protein">
-    </div>
-
-    <div class="form-group">
+    <div class="form-group full">
       <label>Description</label>
-      <textarea [(ngModel)]="editingItem.description"></textarea>
+      <textarea [(ngModel)]="editingItem.itemDescription"></textarea>
     </div>
 
     <div class="form-group">
-      <label>Food Image URL</label>
-      <input [(ngModel)]="editingItem.image">
+      <label>Food Image</label>
+      <input type="file" (change)="onFileSelected($event)">
+      <img *ngIf="editingItem.imageUrl" [src]="editingItem.imageUrl" class="preview-img">
     </div>
 
     <div class="edit-buttons">

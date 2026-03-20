@@ -105,16 +105,37 @@ clearSignupState() {
 
       });
     },
-    error: (err: any) => {
-      this.ngZone.run(() => {
-        const msg =
-          err?.error?.message ||
-          err?.error ||
-          err?.message ||
-          "Login failed";
-        alert(msg);
-      });
+    error: async (err: any) => {
+  this.ngZone.run(async () => {
+
+    let msg = "Login failed";
+
+    if (err.error) {
+      // ✅ Case 1: string
+      if (typeof err.error === 'string') {
+        msg = err.error;
+      }
+
+      // ✅ Case 2: object with message
+      else if (err.error.message) {
+        msg = err.error.message;
+      }
+
+      // ✅ Case 3: Blob (🔥 your likely issue)
+      else if (err.error instanceof Blob) {
+        const text = await err.error.text();
+        try {
+          const json = JSON.parse(text);
+          msg = json.message || text;
+        } catch {
+          msg = text;
+        }
+      }
     }
+
+    alert(msg);
+  });
+}
   });
 }
   // SIGNUP

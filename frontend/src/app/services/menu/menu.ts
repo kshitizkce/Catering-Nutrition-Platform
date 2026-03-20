@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { MenuItemDto } from '../../models/menu-item-dto';
+
 
 @Injectable({
   providedIn: 'root'
@@ -35,23 +37,37 @@ export class MenuService {
 getMenuByCategoryApi(categoryIds: number[]): Observable<any> {
   return this.http.post(`${this.api}/menuitems/categories`, categoryIds);
 }
+//get menu items by vendor id and category id with pagination feature
+getMenuByVendorAndCategoryApi(
+  vendorId: number,
+  categoryIds: number[],
+  pageNumber: number = 1,
+  pageSize: number = 50
+): Observable<any[]> {
+  return this.http.post<any[]>(
+    `${this.api}/menuitems/vendor/categories/${vendorId}?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+    categoryIds
+  );
+}
 
-  /* ADD MENU ITEM */
-
-  addMenuItem(data: any): Observable<any> {
-    return this.http.post(`${this.api}/menuitems`, data);
+addMenuItem(dto: MenuItemDto): Observable<any> {
+    return this.http.post(`${this.api}/menuitems`, dto);
   }
 
-  /* DELETE MENU ITEM */
-
-  deleteMenuItem(id: number): Observable<any> {
-    return this.http.delete(`${this.api}/menuitems/${id}`);
+  updateMenuItem(menuItemId: number, dto: MenuItemDto): Observable<any> {
+    return this.http.put(`${this.api}/menuitems/${menuItemId}`, dto);
   }
 
-  /* UPDATE MENU ITEM */
-
-  updateMenuItem(id: number, data: any): Observable<any> {
-    return this.http.put(`${this.api}/menuitems/${id}`, data);
+  deleteMenuItem(menuItemId: number): Observable<any> {
+    return this.http.delete(`${this.api}/menuitems/${menuItemId}`);
   }
+
+  // Optional: upload image to a server (if using real backend storage)
+  uploadImage(file: File): Observable<{ imageUrl: string }> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<{ imageUrl: string }>(`${this.api}/upload-image`, formData);
+  }
+
 
 }

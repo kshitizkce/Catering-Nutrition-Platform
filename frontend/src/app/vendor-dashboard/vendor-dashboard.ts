@@ -11,16 +11,17 @@ import { VendorService } from '../services/vendor/vendor-service';
   styleUrls: ['./vendor-dashboard.css']
 })
 export class VendorDashboardComponent implements OnInit {
+  settings: any = {};
+  
 
-  // Vendor profile
- vendor: any = {
-  businessName: 'Vendor Name',
-  email: '',
-  phone: '',
-  address: '',
-  rating: 0             // new
-};
-  // Revenue section
+  vendor: any = {
+    businessName: 'Vendor Name',
+    email: '',
+    phone: '',
+    address: '',
+    rating: 0
+  };
+
   revenue: any = {
     weeklyRevenue: 0,
     weeklyOrders: 0,
@@ -29,7 +30,6 @@ export class VendorDashboardComponent implements OnInit {
     avgOrderAmount: 0
   };
 
-  // Orders from backend
   orders: any[] = [];
   vendorId: number = 5;
 
@@ -37,33 +37,30 @@ export class VendorDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.loadDashboard();
+    this.loadVendorProfile(); // ✅ Load logo and other profile info
   }
 
-  // Load dashboard (vendor + revenue + recent orders)
   loadDashboard() {
     this.vendorService.getDashboard(this.vendorId).subscribe(
       (res: any) => {
-        // Vendor
-if (res.vendor) {
-  this.vendor.businessName = res.vendor.businessName;
-  this.vendor.email = res.vendor.email;
-  this.vendor.phone = res.vendor.phone;
-  this.vendor.address = res.vendor.address;
-}
+        if (res.vendor) {
+          this.vendor.businessName = res.vendor.businessName;
+          this.vendor.email = res.vendor.email;
+          this.vendor.phone = res.vendor.phone;
+          this.vendor.address = res.vendor.address;
+        }
 
-// Revenue
-if (res.revenue) {
-  this.revenue = res.revenue;
-}
+        if (res.revenue) {
+          this.revenue = res.revenue;
+        }
 
-// Orders + Rating
-if (res.recentOrders) {
-  this.orders = res.recentOrders;
+        if (res.recentOrders) {
+          this.orders = res.recentOrders;
 
-  if (res.recentOrders.length > 0) {
-    this.vendor.rating = res.recentOrders[0].vendorRating || 0;
-  }
-}
+          if (res.recentOrders.length > 0) {
+            this.vendor.rating = res.recentOrders[0].vendorRating || 0;
+          }
+        }
       },
       (err) => {
         console.error(err);
@@ -72,13 +69,27 @@ if (res.recentOrders) {
     );
   }
 
-  // Update order status only
+  loadVendorProfile() {
+    const userId = 1021;
+    this.vendorService.getVendorProfile(userId).subscribe(
+      (data: any) => {
+        this.settings.logo = data.businessLogo 
+          ? 'http://localhost:5197' + data.businessLogo
+          : '';
+      },
+      (err) => {
+        console.error(err);
+        this.settings.logo = '';
+      }
+    );
+  }
+
   updateOrderStatus(order: any, statusId: number) {
     const payload = {
       deliveryAddress: order.deliveryAddress,
       totalAmount: order.totalAmount,
       orderStatusId: statusId,
-      orderItems: [] // not needed for status change
+      orderItems: []
     };
 
     this.vendorService.updateOrder(this.vendorId, order.orderId, payload).subscribe(

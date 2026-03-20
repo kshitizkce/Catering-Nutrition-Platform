@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { VendorService } from '../services/vendor/vendor-service';
 
 @Component({
 selector:'app-vendor-settings',
@@ -12,11 +13,19 @@ styleUrls:['./vendor-settings.css']
 
 export class VendorSettingsComponent{
 
+constructor(private vendorService: VendorService){}
+
+userId = 1021; // TODO: replace with logged-in user
+
+selectedLogo!: File;
+selectedFile!: File;
+
 settings:any={
 businessName:'',
 ownerName:'',
 email:'',
 phone:'',
+password:'',
 contactEmail:'',
 contactPhone:'',
 address:'',
@@ -39,53 +48,98 @@ hours:any[]=[
 {name:'Sunday',open:'10:00',close:'16:00'}
 ];
 
-constructor(){
+ngOnInit() {
 
-const savedProfile=localStorage.getItem('vendorProfile');
+  this.vendorService.getVendorProfile(this.userId)
+    .subscribe({
+      next: (data: any) => {
 
-if(savedProfile){
+        this.settings.ownerName = data.ownerName;
+        this.settings.email = data.email;
+        this.settings.phone = data.phone;
 
-const data=JSON.parse(savedProfile);
+        this.settings.businessName = data.businessName;
+        this.settings.description = data.businessDescription;
+        this.settings.address = data.vendorAddress;
+        this.settings.contactEmail = data.contactEmail;
+        this.settings.contactPhone = data.contactPhone;
 
-this.settings=data.settings || this.settings;
-this.hours=data.hours || this.hours;
+        this.settings.logo = data.businessLogo 
+          ? 'http://localhost:5197' + data.businessLogo
+          : '';
 
-}
+        // ✅🔥 FIX HERE (PARSE BUSINESS HOURS)
+        if (data.businessHours) {
+          try {
+            this.hours = JSON.parse(data.businessHours);
+          } catch (e) {
+            console.error("Invalid businessHours JSON", e);
+          }
+        }
+
+      },
+      error: (err) => {
+        alert(err.error?.message || "Failed to load vendor data");
+      }
+    });
 
 }
 
 uploadLogo(event:any){
+this.selectedLogo = event.target.files[0];
 
-const file=event.target.files[0];
+if(!this.selectedLogo) return;
 
-if(!file) return;
-
-const reader=new FileReader();
-
-reader.onload=()=>{
-
-this.settings.logo=reader.result;
-
+const reader = new FileReader();
+reader.onload = () => {
+this.settings.logo = reader.result;
 };
+reader.readAsDataURL(this.selectedLogo);
+}
 
-reader.readAsDataURL(file);
-
+uploadFile(event:any){
+this.selectedFile = event.target.files[0];
 }
 
 saveSettings(){
 
-const data={
-settings:this.settings,
-hours:this.hours
-};
+const formData = new FormData();
 
-localStorage.setItem(
-'vendorProfile',
-JSON.stringify(data)
-);
+formData.append("UserId", this.userId.toString());
+formData.append("OwnerName", this.settings.ownerName);
+formData.append("Email", this.settings.email);
+formData.append("Phone", this.settings.phone);
+formData.append("Password", this.settings.password || '');
 
-alert('Vendor settings saved successfully');
+formData.append("BusinessName", this.settings.businessName);
+formData.append("BusinessDescription", this.settings.description);
+formData.append("VendorAddress", this.settings.address);
+formData.append("ContactEmail", this.settings.contactEmail);
+formData.append("ContactPhone", this.settings.contactPhone);
 
+// OPTIONAL: send business hours
+formData.append("BusinessHours", JSON.stringify(this.hours));
+
+if(this.selectedLogo)
+formData.append("logo", this.selectedLogo);
+
+if(this.selectedFile)
+formData.append("file", this.selectedFile);
+
+this.vendorService.saveVendorProfile(formData)
+.subscribe({
+next:(res:any)=>{
+alert(res.message);
+},
+error:(err)=>{
+alert(err.error?.message || "Save failed");
+}
+});
+
+}
+
+cancel(){
+window.location.href = "/vendor-dashboard";
 }
 
 }

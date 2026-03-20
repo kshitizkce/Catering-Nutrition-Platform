@@ -4,12 +4,14 @@
 <!-- HEADER -->
 
 <div class="vendor-header">
+  <!-- Show business logo if available -->
+  <img *ngIf="settings.logo" [src]="settings.logo" class="vendor-logo">
 
-<img *ngIf="vendor.logo" [src]="vendor.logo" class="vendor-logo">
+  <!-- Fallback avatar -->
+  <div *ngIf="!settings.logo" class="avatar">
+    👨‍🍳
+  </div>
 
-<div *ngIf="!vendor.logo" class="avatar">
-👨‍🍳
-</div>
 
 <div class="vendor-info">
 
@@ -37,50 +39,50 @@
 
 <!-- REVENUE -->
 
-<div class="stats-grid">  <!-- ✅ ADD THIS -->
+<div class="stat-card">
 
-  <div class="stat-card">
-
-    <div class="stat-header">
-      <span>Weekly Revenue</span>
-      <div class="icon green">📅</div>
-    </div>
-
-    <h2>${{ revenue.weeklyRevenue }}</h2>
-
-    <p class="positive">+12.5% from last week</p>
-
-    <hr>
-
-    <div class="stat-footer">
-      <span>Total Orders <b>{{ revenue.weeklyOrders }}</b></span>
-      <span>Avg Order <b>${{ revenue.avgOrderAmount }}</b></span>
-    </div>
-
+  <div class="stat-header">
+    <span>Weekly Revenue</span>
+    <div class="icon green">📅</div>
   </div>
 
+  <!-- ✅ FIX -->
+  <h2>${{ revenue.weeklyRevenue }}</h2>
 
-  <div class="stat-card">
+  <p class="positive">+12.5% from last week</p>
 
-    <div class="stat-header">
-      <span>Monthly Revenue</span>
-      <div class="icon blue">$</div>
-    </div>
+  <hr>
 
-    <h2>${{ revenue.monthlyRevenue }}</h2>
-
-    <p class="positive">+8.3% from last month</p>
-
-    <hr>
-
-    <div class="stat-footer">
-      <span>Total Orders <b>{{ revenue.monthlyOrders }}</b></span>
-      <span>Avg Order <b>${{ revenue.avgOrderAmount }}</b></span>
-    </div>
-
+  <div class="stat-footer">
+    <!-- ✅ FIX -->
+    <span>Total Orders <b>{{ revenue.weeklyOrders }}</b></span>
+    <span>Avg Order <b>${{ revenue.avgOrderAmount }}</b></span>
   </div>
 
-</div> <!-- ✅ END -->
+</div>
+
+
+<div class="stat-card">
+
+  <div class="stat-header">
+    <span>Monthly Revenue</span>
+    <div class="icon blue">$</div>
+  </div>
+
+  <!-- ✅ FIX -->
+  <h2>${{ revenue.monthlyRevenue }}</h2>
+
+  <p class="positive">+8.3% from last month</p>
+
+  <hr>
+
+  <div class="stat-footer">
+    <!-- ✅ FIX -->
+    <span>Total Orders <b>{{ revenue.monthlyOrders }}</b></span>
+    <span>Avg Order <b>${{ revenue.avgOrderAmount }}</b></span>
+  </div>
+
+</div>
 
 
 
