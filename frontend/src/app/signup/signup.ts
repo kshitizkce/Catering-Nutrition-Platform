@@ -89,15 +89,15 @@ clearSignupState() {
       this.authService.setUser(res);
     }),
 
-    // ✅ Step 2: fetch vendor using userId
-   switchMap((res: any) => {
-  return this.vendorService.getVendorByUserId(res.userId).pipe(
-    tap((vendor: any) => {
-      res.vendorId = vendor.vendorId;
-      this.authService.setUser(res);
-    })
-  );
-})
+//     // ✅ Step 2: fetch vendor using userId
+//    switchMap((res: any) => {
+//   return this.vendorService.getVendorByUserId(res.userId).pipe(
+//     tap((vendor: any) => {
+//       res.vendorId = vendor.vendorId;
+//       this.authService.setUser(res);
+//     })
+//   );
+// })
 
   ).subscribe({
 
