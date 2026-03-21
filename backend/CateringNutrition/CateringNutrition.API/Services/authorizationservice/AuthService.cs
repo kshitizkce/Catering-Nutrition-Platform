@@ -3,6 +3,7 @@ using CateringNutrition.API.Dtos.authorization;
 using CateringNutrition.API.Interfaces.authorization;
 using CateringNutrition.API.Models;
 using CateringNutrition.API.Models.authorization;
+using CateringNutrition.API.Models.vendor;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -80,17 +81,17 @@ namespace CateringNutrition.API.Services.authorizationservice
             try
             {
                 if (string.IsNullOrWhiteSpace(dto.Email))
-                    return "Email is required";
+                    return new { message = "Email is required" };
 
                 if (string.IsNullOrWhiteSpace(dto.FullName))
-                    return "Full name is required";
+                    return new { message = "Full name is required" };
 
                 if (string.IsNullOrWhiteSpace(dto.Password))
-                    return "Password is required";
+                    return new { message = "Password is required" };
 
                 // Check if email already exists
                 if (await _context.Users.AnyAsync(u => u.Email == dto.Email))
-                    return new { message = "This email is already registered"}; 
+                    return new { message = "This email is already registered" };
 
                 // Map roleType to RoleId
                 int roleId;
@@ -105,7 +106,6 @@ namespace CateringNutrition.API.Services.authorizationservice
                         break;
                 }
 
-                // Ensure SubscriptionTypeId exists
                 int subscriptionTypeId = dto.SubscriptionTypeId > 0 ? dto.SubscriptionTypeId : 1;
 
                 var user = new Users
@@ -120,33 +120,55 @@ namespace CateringNutrition.API.Services.authorizationservice
                 };
 
                 _context.Users.Add(user);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(); // ✅ UserId generated here
+
+                // ✅ INSERT INTO VENDORS TABLE (ONLY IF VENDOR)
+                if (roleId == 2 || roleId == 3) // Vendor
+                {
+                    var vendor = new Vendors
+                    {
+                        UserId = user.UserId, // 🔥 FK
+                        VendorName = user.FullName,
+                        BusinessDescription = null,
+                        VendorPhone = null,
+                        VendorEmail = null,
+                        VendorAddress = null,
+                        City = null,
+                        Rating = null,
+                        Status = "Not Verified",
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = null,
+                        BusinessHours = null,
+                        BusinessLogo = null,
+                        BusinessFile = null
+                    };
+
+                    _context.Vendors.Add(vendor);
+                    await _context.SaveChangesAsync();
+                }
 
                 return new { message = "User registered successfully" };
             }
             catch (DbUpdateException dbEx)
             {
-                // Handle database update exceptions (e.g., constraint violations)
                 if (dbEx.InnerException != null)
                 {
                     var message = dbEx.InnerException.Message;
 
                     if (message.Contains("UQ_Users_Email"))
-                        return "This email is already used by another user";
+                        return new { message = "This email is already used by another user" };
 
                     if (message.Contains("FK_Users_Roles"))
-                        return "Invalid role selected";
+                        return new { message = "Invalid role selected" };
 
                     if (message.Contains("FK_Users_SubscriptionTypes"))
-                        return "Invalid subscription type selected";
+                        return new { message = "Invalid subscription type selected" };
                 }
 
                 return new { message = "Database error occurred while registering user" };
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // Catch all other unexpected exceptions
-                // Log ex.Message somewhere for debugging
                 return new { message = "An unexpected error occurred. Please try again later" };
             }
         }

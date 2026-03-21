@@ -116,8 +116,22 @@ namespace CateringNutrition.API.Controllers.vendor
                 return StatusCode(500, new { message = ex.Message });
             }
         }
-    
 
-}
+        [HttpGet("by-user/{userId}")]
+        public async Task<IActionResult> GetVendorByUserId(int userId)
+        {
+            try
+            {
+                var result = await _service.GetVendorByUserId(userId);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+
+    }
 
     }

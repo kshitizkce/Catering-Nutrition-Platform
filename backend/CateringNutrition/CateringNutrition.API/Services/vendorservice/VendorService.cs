@@ -21,10 +21,26 @@ namespace CateringNutrition.API.Services.vendorservice
 
         }
 
+        public async Task<object> GetVendorByUserId(int userId)
+        {
+            var vendor = await _context.Vendors
+                .FirstOrDefaultAsync(v => v.UserId == userId);
+
+            if (vendor == null)
+                throw new Exception("Vendor not found");
+
+            return new
+            {
+                vendorId = vendor.VendorId,
+                vendorName = vendor.VendorName
+            };
+        }
+
         public async Task<ServiceResult<List<OrderWithItemsDto>>> GetOrdersWithItemsAsync(int vendorId)
         {
             try
             {
+                // Fetch all orders for this vendor and include customer + items + menu + category
                 var orders = await _context.Orders
                     .Where(o => o.VendorId == vendorId)
                     .Include(o => o.Customer)
@@ -33,18 +49,19 @@ namespace CateringNutrition.API.Services.vendorservice
                             .ThenInclude(mi => mi.Category)
                     .ToListAsync();
 
-                // ✅ ADD THIS
+                // Fetch vendor rating safely (nullable, default 0 if not found)
                 var vendorRating = await _context.Vendors
                     .Where(v => v.VendorId == vendorId)
-                    .Select(v => v.Rating)
-                    .FirstOrDefaultAsync();
+                    .Select(v => (decimal?)v.Rating) // cast to nullable decimal
+                    .FirstOrDefaultAsync() ?? 0;
 
+                // Map orders to DTO
                 var result = orders.Select(o => new OrderWithItemsDto
                 {
                     OrderId = o.OrderId,
-                    CustomerName = o.Customer.FullName,
-                    CustomerEmail = o.Customer.Email,
-                    CustomerPhone = o.Customer.Phone,
+                    CustomerName = o.Customer?.FullName ?? "Unknown",
+                    CustomerEmail = o.Customer?.Email ?? "",
+                    CustomerPhone = o.Customer?.Phone ?? "",
                     StatusId = o.OrderStatusId,
                     Status = o.OrderStatusId == 1 ? "Pending" :
                              o.OrderStatusId == 2 ? "Confirmed" :
@@ -56,33 +73,34 @@ namespace CateringNutrition.API.Services.vendorservice
                     CreatedAt = o.CreatedAt,
                     UpdatedAt = o.UpdatedAt,
 
-                    // ✅ ADD THIS
-                    VendorRating = (decimal)vendorRating,
+                    // Include vendor rating safely
+                    VendorRating = vendorRating,
 
-                    Items = o.OrderItems.Select(oi => new OrderItemDto
+                    Items = o.OrderItems?.Select(oi => new OrderItemDto
                     {
                         OrderItemId = oi.OrderItemId,
                         MenuItemId = oi.MenuItemId,
-                        ItemName = oi.MenuItem.ItemName,
-                        CategoryName = oi.MenuItem.Category.CategoryName,
+                        ItemName = oi.MenuItem?.ItemName ?? "",
+                        CategoryName = oi.MenuItem?.Category?.CategoryName ?? "",
                         Quantity = oi.Quantity,
                         UnitPrice = oi.UnitPrice,
-                        Calories = (int)oi.MenuItem.Calories,
-                        Rating = (double)oi.MenuItem.Rating,
-                        Price = oi.MenuItem.Price,
-                        IsAvailable = oi.MenuItem.IsAvailable
-                    }).ToList()
+                        Calories = oi.MenuItem?.Calories ?? 0,
+                        Rating = (double)(oi.MenuItem?.Rating ?? 0),
+                        Price = oi.MenuItem?.Price ?? 0,
+                        IsAvailable = oi.MenuItem?.IsAvailable ?? false
+                    }).ToList() ?? new List<OrderItemDto>()
                 }).ToList();
 
                 return new ServiceResult<List<OrderWithItemsDto>> { Data = result };
             }
             catch (Exception ex)
             {
+                // log ex if needed
                 return new ServiceResult<List<OrderWithItemsDto>>
                 {
                     Error = true,
                     Message = "Failed to fetch orders.",
-                    Data = null
+                    Data = new List<OrderWithItemsDto>()
                 };
             }
         }
@@ -268,11 +286,37 @@ namespace CateringNutrition.API.Services.vendorservice
         public async Task<VendorProfileDto> GetVendorProfile(int userId)
         {
             var user = await _context.Users.FindAsync(userId);
-            var vendor = await _context.Vendors.FirstOrDefaultAsync(v => v.UserId == userId);
-
 
             if (user == null)
                 throw new Exception("User not found");
+
+            var vendor = await _context.Vendors
+                .FirstOrDefaultAsync(v => v.UserId == userId);
+
+            // ✅🔥 CREATE VENDOR IF NOT EXISTS
+            if (vendor == null)
+            {
+                vendor = new Vendors
+                {
+                    UserId = user.UserId,
+                    VendorName = user.FullName,
+                    BusinessDescription = null,
+                    VendorPhone = null,
+                    VendorEmail = null,
+                    VendorAddress = null,
+                    City = null,
+                    Rating = null,
+                    Status = "Not Verified", // or "Inactive" based on your constraint
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = null,
+                    BusinessHours = null,
+                    BusinessLogo = null,
+                    BusinessFile = null
+                };
+
+                _context.Vendors.Add(vendor);
+                await _context.SaveChangesAsync();
+            }
 
             return new VendorProfileDto
             {
@@ -281,15 +325,15 @@ namespace CateringNutrition.API.Services.vendorservice
                 Email = user.Email,
                 Phone = user.Phone,
 
-                BusinessName = vendor?.VendorName,
-                BusinessDescription = vendor?.BusinessDescription,
-                VendorAddress = vendor?.VendorAddress,
-                City = vendor?.City,
-                ContactEmail = vendor?.VendorEmail,
-                ContactPhone = vendor?.VendorPhone,
-                BusinessHours = vendor?.BusinessHours,
-                BusinessLogo = vendor?.BusinessLogo,
-                BusinessFile = vendor?.BusinessFile
+                BusinessName = vendor.VendorName,
+                BusinessDescription = vendor.BusinessDescription,
+                VendorAddress = vendor.VendorAddress,
+                City = vendor.City,
+                ContactEmail = vendor.VendorEmail,
+                ContactPhone = vendor.VendorPhone,
+                BusinessHours = vendor.BusinessHours,
+                BusinessLogo = vendor.BusinessLogo,
+                BusinessFile = vendor.BusinessFile
             };
         }
 
