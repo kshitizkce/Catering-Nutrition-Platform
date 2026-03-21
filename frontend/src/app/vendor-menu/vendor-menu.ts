@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MenuService } from '../services/menu/menu';
+import { VendorService}from '../services/vendor/vendor-service';
+import { AuthService } from '../services/auth/auth';
+
+
 
 interface Category {
   categoryId: number;
@@ -31,8 +35,7 @@ interface MenuItem {
   styleUrls: ['./vendor-menu.css']
 })
 export class VendorMenuComponent implements OnInit {
-  vendorId: number = 5;
-
+vendorId: number = 0; // default
   categories: Category[] = [];
   selectedCategory!: Category;
 
@@ -46,11 +49,45 @@ export class VendorMenuComponent implements OnInit {
   newItem: MenuItem = this.getEmptyItem();
   selectedFile: File | null = null;
 
-  constructor(private menuService: MenuService) {}
+  constructor(private menuService: MenuService,
+    private vendorService :VendorService,
+        private authService : AuthService
 
-  ngOnInit() {
-    this.loadCategories();
+  ) {}
+
+  ngOnInit(): void {
+  const user = this.authService.getUser();
+
+  if (!user) {
+    console.error("User not logged in");
+    return;
   }
+
+  const userId = user.userId;
+
+  if (!userId) {
+    console.error("User ID not found");
+    return;
+  }
+
+  // ✅ Step 1: get vendorId from backend
+  this.vendorService.getVendorByUserId(userId).subscribe({
+    next: (vendor: any) => {
+      this.vendorId = vendor.vendorId;
+
+      if (!this.vendorId) {
+        console.error("Vendor ID not found");
+        return;
+      }
+
+      // ✅ Step 2: NOW load categories
+      this.loadCategories();
+    },
+    error: (err) => {
+      console.error("Failed to fetch vendor:", err);
+    }
+  });
+}
 
   getEmptyItem(): MenuItem {
     return {

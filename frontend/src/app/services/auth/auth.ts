@@ -30,9 +30,39 @@ export interface ResetPasswordDto {
 })
 export class AuthService {
 
+  private currentUser: any;
+
+  setUser(user: any) {
+  this.currentUser = user;
+  localStorage.setItem('user', JSON.stringify(user)); // ✅ persist
+}
+
+getUser() {
+  if (!this.currentUser) {
+    const data = localStorage.getItem('user');
+    if (data) {
+      this.currentUser = JSON.parse(data);
+    }
+  }
+  return this.currentUser;
+}
+
+getUserId() {
+  return this.getUser()?.userId;
+}
+
+getVendorId() {
+  return this.getUser()?.vendorId;
+}
+
   private apiUrl = "http://localhost:5197/api/auth";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  const user = localStorage.getItem('user');
+  if (user) {
+    this.currentUser = JSON.parse(user);
+  }
+}
 
   register(data: RegisterDto, roleType: 'customer' | 'vendor'): Observable<any> {
     return this.http.post(`${this.apiUrl}/register?roleType=${roleType}`, data);
@@ -64,4 +94,5 @@ sendPhoneOtp(phone: string): Observable<any> {
 verifyPhoneOtp(phone: string, otp: string): Observable<any> {
   return this.http.post(`${this.apiUrl}/verify-sms-otp`, { phone, otp });
 }
+
 }

@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService, RegisterDto, LoginDto } from '../services/auth/auth';
+import { VendorService } from '../services/vendor/vendor-service';
+import { switchMap, tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-signup',
@@ -35,6 +38,7 @@ showPhoneOtpInput = false;
   constructor(
     private router: Router,
     private authService: AuthService,
+    private vendorService: VendorService,
     private ngZone: NgZone
   ) {}
 
@@ -78,64 +82,75 @@ clearSignupState() {
 
   const dto: LoginDto = { email: this.email, password: this.password };
 
-  this.authService.login(dto).subscribe({
-    next: (res: any) => {
+  this.authService.login(dto).pipe(
+
+    // ✅ Step 1: store user temporarily
+    tap((res: any) => {
+      this.authService.setUser(res);
+    }),
+
+    // ✅ Step 2: fetch vendor using userId
+   switchMap((res: any) => {
+  return this.vendorService.getVendorByUserId(res.userId).pipe(
+    tap((vendor: any) => {
+      res.vendorId = vendor.vendorId;
+      this.authService.setUser(res);
+    })
+  );
+})
+
+  ).subscribe({
+
+    next: (vendorRes: any) => {
       this.ngZone.run(() => {
 
-        alert(res.message || "Login successful");
+        const user = this.authService.getUser();
 
-        // Store user info
-        localStorage.setItem("token", res.token);
-        localStorage.setItem("userEmail", res.email);
-        localStorage.setItem("userName", res.fullName);
+        alert("Login successful");
 
-        // Roles array returned from backend
-        localStorage.setItem("userRoles", JSON.stringify(res.roles || [res.role]));
+        // ✅ Store everything
+        localStorage.setItem("token", user.token);
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("userRoles", JSON.stringify(user.roles || [user.role]));
 
-        // If only one role, redirect directly
-        if ((res.roles || []).length === 1) {
-          const role = res.roles[0] || res.role;
+        // ✅ Redirect based on role
+        if ((user.roles || []).length === 1) {
+          const role = user.roles[0] || user.role;
+
           if (role === "Admin") this.router.navigate(['/admin-profile']);
           else if (role === "Vendor") this.router.navigate(['/vendor-dashboard']);
           else this.router.navigate(['/home']);
+
         } else {
-          // multiple roles → show role selection
           this.router.navigate(['/role-select']);
         }
 
       });
     },
+
     error: async (err: any) => {
-  this.ngZone.run(async () => {
+      this.ngZone.run(async () => {
 
-    let msg = "Login failed";
+        let msg = "Login failed";
 
-    if (err.error) {
-      // ✅ Case 1: string
-      if (typeof err.error === 'string') {
-        msg = err.error;
-      }
-
-      // ✅ Case 2: object with message
-      else if (err.error.message) {
-        msg = err.error.message;
-      }
-
-      // ✅ Case 3: Blob (🔥 your likely issue)
-      else if (err.error instanceof Blob) {
-        const text = await err.error.text();
-        try {
-          const json = JSON.parse(text);
-          msg = json.message || text;
-        } catch {
-          msg = text;
+        if (err.error) {
+          if (typeof err.error === 'string') msg = err.error;
+          else if (err.error.message) msg = err.error.message;
+          else if (err.error instanceof Blob) {
+            const text = await err.error.text();
+            try {
+              const json = JSON.parse(text);
+              msg = json.message || text;
+            } catch {
+              msg = text;
+            }
+          }
         }
-      }
+
+        alert(msg);
+      });
     }
 
-    alert(msg);
-  });
-}
   });
 }
   // SIGNUP

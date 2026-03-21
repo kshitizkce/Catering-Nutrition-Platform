@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VendorService } from '../services/vendor/vendor-service';
+import { AuthService } from '../services/auth/auth';
 
 @Component({
 selector:'app-vendor-settings',
@@ -13,10 +14,11 @@ styleUrls:['./vendor-settings.css']
 
 export class VendorSettingsComponent{
 
-constructor(private vendorService: VendorService){}
+constructor(private vendorService: VendorService
+    , private authService :AuthService
+){}
 
-userId = 1021; // TODO: replace with logged-in user
-
+userId!: number; // no default
 selectedLogo!: File;
 selectedFile!: File;
 
@@ -50,6 +52,16 @@ hours:any[]=[
 
 ngOnInit() {
 
+  const user = this.authService.getUser();
+
+  if (!user || !user.userId) {
+    alert("User not logged in");
+    return;
+  }
+
+  this.userId = user.userId;
+
+  // ✅ NOW call API
   this.vendorService.getVendorProfile(this.userId)
     .subscribe({
       next: (data: any) => {
@@ -68,7 +80,6 @@ ngOnInit() {
           ? 'http://localhost:5197' + data.businessLogo
           : '';
 
-        // ✅🔥 FIX HERE (PARSE BUSINESS HOURS)
         if (data.businessHours) {
           try {
             this.hours = JSON.parse(data.businessHours);
@@ -82,7 +93,6 @@ ngOnInit() {
         alert(err.error?.message || "Failed to load vendor data");
       }
     });
-
 }
 
 uploadLogo(event:any){

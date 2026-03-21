@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VendorService } from '../services/vendor/vendor-service';
+import { AuthService} from '../services/auth/auth';
+
 
 @Component({
   selector: 'app-vendor-dashboard',
@@ -31,14 +33,43 @@ export class VendorDashboardComponent implements OnInit {
   };
 
   orders: any[] = [];
-  vendorId: number = 5;
+    vendorId : number = 0;
 
-  constructor(private vendorService: VendorService) {}
+  constructor(private vendorService: VendorService, private authService: AuthService) {}
 
   ngOnInit() {
-    this.loadDashboard();
-    this.loadVendorProfile(); // ✅ Load logo and other profile info
+
+  const user = this.authService.getUser();
+
+  if (!user || !user.userId) {
+    alert("User not logged in");
+    return;
   }
+
+  const userId = user.userId;
+
+  // ✅ Step 1: fetch vendorId from backend
+  this.vendorService.getVendorByUserId(userId).subscribe({
+    next: (vendor: any) => {
+
+      this.vendorId = vendor.vendorId;
+
+      if (!this.vendorId) {
+        console.error("Vendor ID not found!");
+        return;
+      }
+
+      // ✅ Step 2: now safe to call APIs
+      this.loadDashboard();
+      this.loadVendorProfile();
+
+    },
+    error: (err) => {
+      console.error("Failed to fetch vendor:", err);
+      alert("Vendor not found");
+    }
+  });
+}
 
   loadDashboard() {
     this.vendorService.getDashboard(this.vendorId).subscribe(
@@ -70,19 +101,25 @@ export class VendorDashboardComponent implements OnInit {
   }
 
   loadVendorProfile() {
-    const userId = 1021;
-    this.vendorService.getVendorProfile(userId).subscribe(
-      (data: any) => {
-        this.settings.logo = data.businessLogo 
-          ? 'http://localhost:5197' + data.businessLogo
-          : '';
-      },
-      (err) => {
-        console.error(err);
-        this.settings.logo = '';
-      }
-    );
+  const userId = this.authService.getUserId();
+
+  if (!userId) {
+    console.error("User ID not found!");
+    return;
   }
+
+  this.vendorService.getVendorProfile(userId).subscribe(
+    (data: any) => {
+      this.settings.logo = data.businessLogo 
+        ? 'http://localhost:5197' + data.businessLogo
+        : '';
+    },
+    (err) => {
+      console.error(err);
+      this.settings.logo = '';
+    }
+  );
+}
 
   updateOrderStatus(order: any, statusId: number) {
     const payload = {

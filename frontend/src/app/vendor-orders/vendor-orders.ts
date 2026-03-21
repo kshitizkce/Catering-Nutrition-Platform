@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VendorService } from '../services/vendor/vendor-service';
+import { AuthService } from '../services/auth/auth';
 
 @Component({
   selector: 'app-vendor-orders',
@@ -12,13 +13,44 @@ import { VendorService } from '../services/vendor/vendor-service';
 export class VendorOrdersComponent implements OnInit {
 
   orders: any[] = [];
-  vendorId = 5; // ⚠️ Replace with actual logged-in vendor ID
+vendorId: number = 0; // default
+  constructor(private vendorService: VendorService,
+    private authService: AuthService)    
+    {}
 
-  constructor(private vendorService: VendorService) {}
+ ngOnInit(): void {
+  const user = this.authService.getUser();
 
-  ngOnInit(): void {
-    this.loadOrders();
+  if (!user) {
+    console.error("User not logged in");
+    return;
   }
+
+  const userId = user.userId;
+
+  if (!userId) {
+    console.error("User ID not found");
+    return;
+  }
+
+  // ✅ Step 1: get vendorId from backend
+  this.vendorService.getVendorByUserId(userId).subscribe({
+    next: (vendor: any) => {
+      this.vendorId = vendor.vendorId;
+
+      if (!this.vendorId) {
+        console.error("Vendor ID not found");
+        return;
+      }
+
+      // ✅ Step 2: NOW load orders
+      this.loadOrders();
+    },
+    error: (err) => {
+      console.error("Failed to fetch vendor:", err);
+    }
+  });
+}
 
   loadOrders() {
     this.vendorService.getOrders(this.vendorId).subscribe({

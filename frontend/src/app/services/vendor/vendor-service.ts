@@ -39,4 +39,9 @@ getVendorProfile(userId: number) {
 saveVendorProfile(formData: FormData) {
   return this.http.post(`${this.baseUrl}/profile`, formData);
 }
+
+getVendorByUserId(userId: number) {
+  return this.http.get(`${this.baseUrl}/by-user/${userId}`);
+
+}
 }

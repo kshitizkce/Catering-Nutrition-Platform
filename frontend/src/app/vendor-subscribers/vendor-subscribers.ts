@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { VendorService } from '../services/vendor/vendor-service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../services/auth/auth';
+
 
 @Component({
   selector: 'app-vendor-subscribers',
@@ -12,21 +14,52 @@ import { CommonModule } from '@angular/common';
 })
 export class VendorSubscribersComponent implements OnInit {
 
-  vendorId: number = 5;
+  vendorId: number = 0;
   subscribers: any[] = [];
   subscribersLoaded: boolean = false;
   editingSubscriber: any = null;
   isOpen: boolean = false;
 
-  constructor(private vendorService: VendorService) {}
+  constructor(private vendorService: VendorService
+    ,private authService: AuthService
+  ) {}
 
-  ngOnInit() {
-    // Get store status from localStorage
+  ngOnInit(): void {
+  const user = this.authService.getUser();
+
+  if (!user) {
+    console.error("User not logged in");
+    return;
+  }
+
+  const userId = user.userId;
+
+  if (!userId) {
+    console.error("User ID not found");
+    return;
+  }
+
+  // ✅ Step 1: get vendorId from backend
+  this.vendorService.getVendorByUserId(userId).subscribe({
+    next: (vendor: any) => {
+      this.vendorId = vendor.vendorId;
+
+      if (!this.vendorId) {
+        console.error("Vendor ID not found");
+        return;
+      }
+
+      // Get store status from localStorage
     const savedStatus = localStorage.getItem('restaurantOpen');
     this.isOpen = savedStatus === 'true';
 
     this.loadSubscribers();
-  }
+    },
+    error: (err) => {
+      console.error("Failed to fetch vendor:", err);
+    }
+  });
+}
 
   loadSubscribers() {
     this.subscribersLoaded = false;
