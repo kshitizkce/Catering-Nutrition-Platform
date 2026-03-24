@@ -1,0 +1,28 @@
+<div class="admin-container">
+
+  <aside class="sidebar">
+    <h2 class="logo">Admin Panel</h2>
+
+    <nav>
+      <a routerLink="/admin-dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/admin-vendors" routerLinkActive="active">Vendors</a>
+      <a routerLink="/admin-orders" routerLinkActive="active">Orders</a>
+      <a routerLink="/admin-menu" routerLinkActive="active">Vendors Menu</a>
+      <a routerLink="/admin-customers" routerLinkActive="active">Customers</a>
+      
+    </nav>
+  </aside>
+
+  <div class="main">
+
+    <header class="topbar">
+      <span>Admin</span>
+    </header>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+
+</div>

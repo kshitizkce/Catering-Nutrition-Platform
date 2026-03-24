@@ -1,0 +1,33 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card h4 {
+  color: var(--subtext);
+}
+
+.card p {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Chart */
+.chart-container {
+  margin-top: 20px;
+}
+
+.chart-box {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  height: 320px; /* 🔥 FIX HEIGHT */
+  position: relative;
+}

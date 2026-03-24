@@ -1,0 +1,45 @@
+<div class="customers">
+  <div class="header">
+    <h2>Customers</h2>
+
+    <div class="controls">
+      <input
+        type="text"
+        placeholder="Search customers..."
+        [(ngModel)]="searchText"
+      />
+
+      <div class="filters">
+        <button [class.active]="selectedFilter==='All'" (click)="setFilter('All')">All</button>
+        <button [class.active]="selectedFilter==='Active'" (click)="setFilter('Active')">Active</button>
+        <button [class.active]="selectedFilter==='Inactive'" (click)="setFilter('Inactive')">Inactive</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let c of filteredCustomers; trackBy: trackByUserId" (click)="openCustomer(c)">
+  <td>#{{ c.userId }}</td>
+  <td class="name">{{ c.fullName }}</td>
+  <td>{{ c.email }}</td>
+  <td>{{ c.phone }}</td>
+  <td>
+    <span class="status" [ngClass]="c.status?.toLowerCase()">{{ c.status }}</span>
+  </td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+</div>

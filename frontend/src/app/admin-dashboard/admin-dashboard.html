@@ -1,0 +1,36 @@
+<div class="dashboard">
+
+  <h2>Dashboard</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <h4>Vendors</h4>
+      <p>{{dashboard?.vendorsCount}}</p>
+    </div>
+
+    <div class="card">
+      <h4>Customers</h4>
+      <p>{{dashboard?.customersCount}}</p>
+    </div>
+
+    <div class="card">
+      <h4>Orders</h4>
+      <p>{{dashboard?.ordersCount}}</p>
+    </div>
+
+    <div class="card">
+      <h4>Revenue</h4>
+      <p>${{dashboard?.totalRevenue}}</p>
+    </div>
+
+  </div>
+
+  <div class="chart-container">
+    <h3>Revenue Overview</h3>
+    <div class="chart-box">
+      <canvas id="revenueChart"></canvas>
+    </div>
+  </div>
+
+</div>

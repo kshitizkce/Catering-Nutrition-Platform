@@ -22,7 +22,7 @@ export class RoleSelectComponent {
     this.ngZone.run(() => {
       if (role === "Customer") this.router.navigate(['/home']);
       else if (role === "Vendor") this.router.navigate(['/vendor-dashboard']);
-      else if (role === "Admin") this.router.navigate(['/admin-profile']);
+      else if (role === "Admin") this.router.navigate(['/admin-dashboard']);
     });
   }
 }

@@ -69,5 +69,11 @@ addMenuItem(dto: MenuItemDto): Observable<any> {
     return this.http.post<{ imageUrl: string }>(`${this.api}/upload-image`, formData);
   }
 
+  getAdminMenuItems(vendorId: number, categoryId: number, pageNumber: number, pageSize: number) {
+  return this.http.get<any[]>(
+    `${this.api}/admin/menuitems?vendorId=${vendorId}&categoryId=${categoryId}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+  );
+}
+
 
 }

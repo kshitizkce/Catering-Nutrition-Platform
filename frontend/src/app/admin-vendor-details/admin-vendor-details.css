@@ -1,0 +1,207 @@
+/* =======================
+   Page Layout
+======================= */
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px;
+  background: #f3f4f6;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* =======================
+   Back Button
+======================= */
+.back-btn {
+  width: fit-content;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #6366f1;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  background: #4f46e5;
+}
+
+/* =======================
+   Vendor Title
+======================= */
+h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* =======================
+   Cards
+======================= */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* =======================
+   Stats Cards
+======================= */
+.stats {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.stats .card {
+  flex: 1;
+  min-width: 180px;
+  text-align: center;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+}
+
+.stats h4 {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.stats p {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+/* =======================
+   Table Styling
+======================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+thead {
+  background: #f9fafb;
+}
+
+th {
+  text-align: left;
+  padding: 12px;
+  font-size: 14px;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+td {
+  padding: 12px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #4b5563;
+}
+
+tr {
+  transition: 0.2s;
+}
+
+tr:hover {
+  background: #f3f4f6;
+  cursor: pointer;
+}
+
+/* =======================
+   Order Items Section
+======================= */
+.order-items {
+  margin-top: 10px;
+  background: #f9fafb;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: white;
+  transition: 0.2s;
+}
+
+.item-row:hover {
+  background: #eef2ff;
+}
+
+.item-name {
+  font-weight: 600;
+  flex: 1;
+  color: #111827;
+}
+
+.item-details {
+  flex: 1;
+  color: #6b7280;
+}
+
+.item-total {
+  font-weight: bold;
+  color: #16a34a;
+}
+
+.no-items {
+  text-align: center;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* =======================
+   Pagination Buttons
+======================= */
+.pagination {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.pagination button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #6366f1;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #4f46e5;
+}
+
+.pagination button:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-weight: 500;
+}
+
+/* =======================
+   Responsive Design
+======================= */
+@media (max-width: 768px) {
+  .stats {
+    flex-direction: column;
+  }
+
+  th, td {
+    padding: 10px 8px;
+  }
+}

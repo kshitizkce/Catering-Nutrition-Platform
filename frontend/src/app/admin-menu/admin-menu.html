@@ -1,44 +1,152 @@
-<div class="admin-menu-page">
+<div class="menu-layout">
 
-<h1>Admin Menu Manager</h1>
+  <!-- Sidebar for Categories -->
+  <div class="sidebar">
+    <h3>Categories</h3>
 
-<div class="add-form">
+    <div class="category"
+      *ngFor="let c of categories"
+      (click)="selectCategory(c)"
+      [ngClass]="{'active': selectedCategory?.categoryId===c.categoryId}"
+      title="{{c.description}}">
+      {{c.categoryName}}
+    </div>
+  </div>
 
-<h2>Add Menu Item</h2>
+  <!-- Main Content -->
+  <div class="content">
 
-<input type="text" placeholder="Food Name" [(ngModel)]="name">
+    <!-- Professional Vendor Selection -->
+    <div class="vendor-select-card">
+      <label for="vendorSelect">Select Vendor</label>
+      <select id="vendorSelect" [(ngModel)]="selectedVendorId" (change)="onVendorChange()">
+        <option *ngFor="let v of vendors" [value]="v.vendorId">
+          {{ v.vendorName }}
+        </option>
+      </select>
+    </div>
 
-<input type="text" placeholder="Category" [(ngModel)]="category">
+    <h2>{{selectedCategory.categoryName}} Menu</h2>
 
-<input type="number" placeholder="Price" [(ngModel)]="price">
+    <button class="add-btn" (click)="showForm=true">➕ Add New Item</button>
 
-<input type="text" placeholder="Image URL" [(ngModel)]="image">
+    <!-- ADD MENU FORM -->
+    <div *ngIf="showForm" class="form-card">
+      <h3>Add Menu Item</h3>
+      <div class="form-grid">
 
-<textarea placeholder="Description" [(ngModel)]="description"></textarea>
+        <div class="form-group">
+          <label>Item Name</label>
+          <input placeholder="Example: Chicken Burrito" [(ngModel)]="newItem.itemName">
+        </div>
 
-<button (click)="addMenu()">Add Menu</button>
+        <div class="form-group">
+          <label>Price ($)</label>
+          <input type="number" [(ngModel)]="newItem.price">
+        </div>
 
+        <div class="form-group">
+          <label>Calories</label>
+          <input type="number" [(ngModel)]="newItem.calories">
+        </div>
+
+        <div class="form-group full">
+          <label>Description</label>
+          <textarea [(ngModel)]="newItem.itemDescription"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Food Image</label>
+          <input type="file" (change)="onFileSelected($event)">
+        </div>
+
+        <div class="form-group">
+          <label>Availability</label>
+          <select [(ngModel)]="newItem.isAvailable">
+            <option [value]="true">Available</option>
+            <option [value]="false">Sold Out</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="form-buttons">
+        <button class="save" (click)="addMenuItem()">Save Item</button>
+        <button class="cancel" (click)="showForm=false">Cancel</button>
+      </div>
+    </div>
+
+    <!-- MENU ITEMS -->
+    <div class="menu-grid">
+      <div class="card" *ngFor="let item of menuItems">
+
+        <div *ngIf="!item.isAvailable" class="soldout-badge">Sold Out</div>
+
+        <h3>{{item.itemName}}</h3>
+        <p>{{item.itemDescription}}</p> 
+
+        <div class="info">
+          <span>{{item.calories}} cal</span>
+        </div>
+
+        <div class="bottom">
+          <span class="price">${{item.price}}</span>
+          <div class="actions">
+            <button class="edit" (click)="editItem(item)">Edit</button>
+            <button class="soldout" (click)="toggleSoldOut(item)">
+              {{item.isAvailable ? 'Mark Sold Out' : 'Mark Available'}}
+            </button>
+            <button class="delete" (click)="deleteItem(item.menuItemId)">Delete</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="pageNumber === 1">⬅ Previous</button>
+      <span>Page {{pageNumber}}</span>
+      <button (click)="nextPage()" [disabled]="menuItems.length < pageSize">Next ➡</button>
+    </div>
+
+  </div>
 </div>
 
+<!-- EDIT POPUP -->
+<div *ngIf="editingItem" class="edit-modal">
+  <div class="edit-box">
+    <h2>Edit Menu Item</h2>
 
-<h2>Menu List</h2>
+    <div class="form-group">
+      <label>Food Name</label>
+      <input [(ngModel)]="editingItem.itemName">
+    </div>
 
-<div class="menu-list">
+    <div class="form-group">
+      <label>Price ($)</label>
+      <input type="number" [(ngModel)]="editingItem.price">
+    </div>
 
-<div class="menu-card" *ngFor="let item of menuItems; let i=index">
+    <div class="form-group">
+      <label>Calories (kcal)</label>
+      <input type="number" [(ngModel)]="editingItem.calories">
+    </div>
 
-<img [src]="item.image">
+    <div class="form-group full">
+      <label>Description</label>
+      <textarea [(ngModel)]="editingItem.itemDescription"></textarea>
+    </div>
 
-<h3>{{item.name}}</h3>
+    <div class="form-group">
+      <label>Food Image</label>
+      <input type="file" (change)="onFileSelected($event)">
+      <img *ngIf="editingItem.imageUrl" [src]="editingItem.imageUrl" class="preview-img">
+    </div>
 
-<p>{{item.category}}</p>
-
-<p>${{item.price}}</p>
-
-<button class="delete-btn" (click)="deleteItem(i)">Delete</button>
-
-</div>
-
-</div>
-
+    <div class="edit-buttons">
+      <button class="save" (click)="saveEdit()">Save Changes</button>
+      <button class="cancel" (click)="cancelEdit()">Cancel</button>
+    </div>
+  </div>
 </div>

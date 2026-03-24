@@ -1,0 +1,85 @@
+<div *ngIf="customer" class="details">
+
+  <!-- BACK BUTTON -->
+  <button class="back-btn" (click)="goBack()">← Back</button>
+
+  <!-- CUSTOMER NAME -->
+  <h2>{{ customer?.fullName }}</h2>
+
+  <!-- CUSTOMER INFO CARD -->
+  <div class="card">
+    <h3>Customer Info</h3>
+    <p><strong>Email:</strong> {{ customer?.email }}</p>
+    <p><strong>Phone:</strong> {{ customer?.phone }}</p>
+    <p><strong>Role:</strong> {{ customer?.roleName }}</p>
+    <p><strong>Subscription:</strong> {{ customer?.subscriptionName }}</p>
+  </div>
+
+  <!-- STATS CARDS -->
+  <div class="stats">
+    <div class="card">
+      <h4>Total Orders</h4>
+      <p>{{ totalOrders || 0 }}</p>
+    </div>
+
+    <div class="card">
+      <h4>Total Spent</h4>
+      <p>${{ totalSpent?.toFixed(2) || 0 }}</p>
+    </div>
+
+    <div class="card" *ngIf="topOrderedItem">
+      <h4>Top Ordered Item</h4>
+      <p>{{ topOrderedItem?.itemName }} ({{ topOrderedItem?.totalQuantitySold || 0 }} sold)</p>
+    </div>
+  </div>
+
+  <!-- ORDER HISTORY TABLE -->
+  <div class="card">
+    <h3>Order History</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Items</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let o of orders">
+          <!-- ORDER ROW -->
+          <tr (click)="toggleOrderItems(o)" style="cursor:pointer;">
+            <td>#{{ o.orderId }}</td>
+            <td>{{ o.orderDate | date:'medium' }}</td>
+            <td>${{ o.totalAmount?.toFixed(2) || 0 }}</td>
+            <td>{{ o.items?.length || 0 }} Items</td>
+          </tr>
+
+          <!-- EXPANDED ORDER ITEMS ROW -->
+          <tr *ngIf="o.expanded" class="order-items-row">
+            <td colspan="4">
+              <div *ngIf="o.items?.length; else noItems">
+                <div *ngFor="let i of o.items" class="item-row">
+                  <div class="item-name">{{ i.itemName }}</div>
+                  <div class="item-details">{{ i.quantity }} × ${{ i.unitPrice?.toFixed(2) || 0 }}</div>
+                  <div class="item-total">${{ (i.quantity * i.unitPrice)?.toFixed(2) || 0 }}</div>
+                </div>
+              </div>
+              <ng-template #noItems>
+                <p class="no-items">No items in this order</p>
+              </ng-template>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+
+    <!-- PAGINATION CONTROLS -->
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="pageNumber === 1">Previous</button>
+      <span>Page {{ pageNumber }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="pageNumber >= totalPages">Next</button>
+    </div>
+  </div>
+
+</div>

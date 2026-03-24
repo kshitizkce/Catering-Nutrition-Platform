@@ -1,0 +1,30 @@
+<div class="vendors">
+  <h2>Vendors</h2>
+  <input type="text" placeholder="Search vendors..." [(ngModel)]="searchText" class="search" />
+
+  <div class="filters">
+    <button (click)="setFilter('All')" [class.active]="selectedFilter==='All'">All</button>
+    <button (click)="setFilter('Pending')" [class.active]="selectedFilter==='Pending'">Pending</button>
+    <button (click)="setFilter('Approved')" [class.active]="selectedFilter==='Approved'">Approved</button>
+    <button (click)="setFilter('Rejected')" [class.active]="selectedFilter==='Rejected'">Rejected</button>
+  </div>
+
+  <table *ngIf="!loading">
+    <thead>
+      <tr><th>Name</th><th>Email</th><th>Status</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let v of filteredVendors" style="cursor:pointer" (click)="openVendor(v)">
+        <td>{{ v.vendorName }}</td>
+        <td>{{ v.vendorEmail }}</td>
+        <td>{{ v.status }}</td>
+        <td>
+          <button (click)="$event.stopPropagation(); v.status='Approved'">Approve</button>
+          <button (click)="$event.stopPropagation(); v.status='Rejected'">Reject</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="loading">Loading vendors...</p>
+</div>

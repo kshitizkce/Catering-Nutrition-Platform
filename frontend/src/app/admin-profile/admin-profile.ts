@@ -1,81 +1,93 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MenuService } from '../services/menu/menu';
 
 @Component({
-selector: 'app-admin-profile',
-standalone: true,
-imports: [CommonModule],
-templateUrl: './admin-profile.html',
-styleUrls: ['./admin-profile.css']
+  selector: 'app-admin-profile',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './admin-profile.html',
+  styleUrls: ['./admin-profile.css']
 })
 export class AdminProfileComponent implements OnInit {
 
-activePage:string = 'home';
+  activePage: string = 'home';
 
-cateringRequests:any[] = [];
+  cateringRequests: any[] = [];
 
-ngOnInit(){
+  vendors: any[] = [];
 
-const stored = localStorage.getItem("cateringRequests");
+  selectedCustomer: any = null;
+  selectedVendor: any = null;
 
-if(stored){
-this.cateringRequests = JSON.parse(stored);
-}
+  constructor(private menuService: MenuService) {}
 
-}
+  ngOnInit() {
+    const stored = localStorage.getItem("cateringRequests");
 
-setPage(page:string){
-this.activePage = page;
-}
+    if (stored) {
+      this.cateringRequests = JSON.parse(stored);
+    }
 
-/* ===== REQUEST ACTIONS ===== */
+    this.loadVendors();
+  }
 
-approveRequest(index:number){
+  loadVendors() {
+    this.menuService.getVendors().subscribe({
+      next: (res: any) => {
+        this.vendors = res;
+      },
+      error: (err: any) => {
+        console.error(err);
+      }
+    });
+  }
 
-this.cateringRequests[index].status = "Approved";
+  setPage(page: string) {
+    this.activePage = page;
+  }
 
-localStorage.setItem(
-"cateringRequests",
-JSON.stringify(this.cateringRequests)
-);
+  approveRequest(index: number) {
+    this.cateringRequests[index].status = "Approved";
+    localStorage.setItem("cateringRequests", JSON.stringify(this.cateringRequests));
+  }
 
-}
+  rejectRequest(index: number) {
+    this.cateringRequests[index].status = "Rejected";
+    localStorage.setItem("cateringRequests", JSON.stringify(this.cateringRequests));
+  }
 
-rejectRequest(index:number){
+  deleteRequest(index: number) {
+    this.cateringRequests.splice(index, 1);
+    localStorage.setItem("cateringRequests", JSON.stringify(this.cateringRequests));
+  }
 
-this.cateringRequests[index].status = "Rejected";
+  requestInfo() {
+    alert("Vendor information request sent.");
+  }
 
-localStorage.setItem(
-"cateringRequests",
-JSON.stringify(this.cateringRequests)
-);
+  saveSettings() {
+    alert("Settings saved successfully.");
+  }
 
-}
+  logout() {
+    localStorage.clear();
+    window.location.href = "/";
+  }
 
-deleteRequest(index:number){
+  openCustomer(customer: any) {
+    this.selectedCustomer = customer;
+  }
 
-this.cateringRequests.splice(index,1);
+  closeCustomer() {
+    this.selectedCustomer = null;
+  }
 
-localStorage.setItem(
-"cateringRequests",
-JSON.stringify(this.cateringRequests)
-);
+  openVendor(vendor: any) {
+    this.selectedVendor = vendor;
+  }
 
-}
-
-/* ===== EXISTING BUTTON FUNCTIONS ===== */
-
-requestInfo(){
-alert("Vendor information request sent.");
-}
-
-saveSettings(){
-alert("Settings saved successfully.");
-}
-
-logout(){
-localStorage.clear();
-window.location.href = "/";
-}
-
+  closeVendor() {
+    this.selectedVendor = null;
+  }
 }
