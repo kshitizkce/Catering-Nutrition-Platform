@@ -63,7 +63,9 @@ namespace CateringNutrition.API.Services.vendorservice
                     CustomerEmail = o.Customer?.Email ?? "",
                     CustomerPhone = o.Customer?.Phone ?? "",
                     StatusId = o.OrderStatusId,
-                    Status = o.OrderStatusId == 1 ? "Pending" :
+
+                    Status = o.OrderStatusId == 0 ? "cancelled" : 
+                             o.OrderStatusId == 1 ? "Pending" :
                              o.OrderStatusId == 2 ? "Confirmed" :
                              o.OrderStatusId == 3 ? "Shipped" :
                              o.OrderStatusId == 4 ? "Delivered" : "Unknown",
@@ -127,7 +129,9 @@ namespace CateringNutrition.API.Services.vendorservice
                     customerPhone = o.Customer.Phone,
 
                     statusId = o.OrderStatusId,
-                    status = o.OrderStatusId == 1 ? "Pending" :
+
+                    status = o.OrderStatusId == 0 ? "cancelled" : 
+                               o.OrderStatusId == 1 ? "Pending" :
                              o.OrderStatusId == 2 ? "Confirmed" :
                              o.OrderStatusId == 3 ? "Shipped" :
                              o.OrderStatusId == 4 ? "Delivered" : "Unknown",

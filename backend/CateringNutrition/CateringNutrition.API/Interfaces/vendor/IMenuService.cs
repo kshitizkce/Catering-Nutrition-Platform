@@ -25,6 +25,12 @@ namespace CateringNutrition.API.Interfaces.vendor
 
     );
 
+        Task<IEnumerable<MenuItems>> GetMenuItemsForAdminAsync(
+    int vendorId,
+    int categoryId,
+    int pageNumber,
+    int pageSize);
+
 
     }
 

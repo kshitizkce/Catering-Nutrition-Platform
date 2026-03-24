@@ -118,5 +118,25 @@ namespace CateringNutrition.API.Controllers.vendor
             var result = await _service.GetAllCategoriesAsync();
             return Ok(result);
         }
+
+        [HttpGet("admin/menuitems")]
+        public async Task<IActionResult> GetMenuItemsForAdmin(
+    int vendorId,
+    int categoryId,
+    int pageNumber = 1,
+    int pageSize = 50)
+        {
+            if (vendorId <= 0 || categoryId <= 0)
+                return BadRequest("Invalid vendor or category");
+
+            var result = await _service.GetMenuItemsForAdminAsync(
+                vendorId,
+                categoryId,
+                pageNumber,
+                pageSize
+            );
+
+            return Ok(result);
+        }
     }
 }

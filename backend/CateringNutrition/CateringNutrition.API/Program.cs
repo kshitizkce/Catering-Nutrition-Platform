@@ -1,12 +1,17 @@
+using CateringNutrition.API.Controllers.AdminCustomerUsers;
 using CateringNutrition.API.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using CateringNutrition.API.Interfaces.adminInterface;
 using CateringNutrition.API.Interfaces.authorization;
 using CateringNutrition.API.Interfaces.vendor;
+using CateringNutrition.API.Services.AdminCustomersService;
+using CateringNutrition.API.Services.AdminDashboardService;
+using CateringNutrition.API.Services.adminvendorservice;
 using CateringNutrition.API.Services.authorizationservice;
 using CateringNutrition.API.Services.vendorservice;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +30,10 @@ builder.Services.AddScoped<IMenuService, MenuService>();
 builder.Services.AddScoped<TwilioVerifyService>();
 builder.Services.AddScoped<VendorService>();
 builder.Services.AddScoped<CateringNutrition.API.Services.vendorservice.VendorDashboardService>();
+builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
+builder.Services.AddScoped<IAdminVendorService, AdminVendorService>();
+builder.Services.AddScoped<IAdminCustomerUsersService, AdminCustomersUsersSrvice>();
+
 
 // JWT Configuration
 var jwtSettings = builder.Configuration.GetSection("Jwt");

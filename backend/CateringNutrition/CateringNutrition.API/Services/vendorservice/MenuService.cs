@@ -15,6 +15,21 @@ namespace CateringNutrition.API.Services.vendorservice
             _context = context;
         }
 
+        public async Task<IEnumerable<MenuItems>> GetMenuItemsForAdminAsync(
+    int vendorId,
+    int categoryId,
+    int pageNumber = 1,
+    int pageSize = 50)
+        {
+            return await _context.MenuItems
+                .Where(m => m.VendorId == vendorId
+                         && m.CategoryId == categoryId)
+                .OrderByDescending(m => m.CreatedAt)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+
         public async Task<MenuItems> AddMenuItemAsync(MenuItemDto dto)
         {
             var menuItem = new MenuItems
@@ -107,7 +122,6 @@ namespace CateringNutrition.API.Services.vendorservice
         public async Task<IEnumerable<Vendors>> GetAllVendorsAsync()
         {
             return await _context.Vendors
-                .Where(v => v.Status == "Active")
                 .ToListAsync();
         }
 
