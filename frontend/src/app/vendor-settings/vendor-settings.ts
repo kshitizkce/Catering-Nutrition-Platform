@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VendorService } from '../services/vendor/vendor-service';
 import { AuthService } from '../services/auth/auth';
+import { Router } from '@angular/router';
 
 @Component({
 selector:'app-vendor-settings',
@@ -14,11 +15,13 @@ styleUrls:['./vendor-settings.css']
 
 export class VendorSettingsComponent{
 
-constructor(private vendorService: VendorService
-    , private authService :AuthService
+constructor(
+  private vendorService: VendorService,
+  private authService: AuthService,
+  private router: Router   // ✅ added
 ){}
 
-userId!: number; // no default
+userId!: number;
 selectedLogo!: File;
 selectedFile!: File;
 
@@ -61,7 +64,6 @@ ngOnInit() {
 
   this.userId = user.userId;
 
-  // ✅ NOW call API
   this.vendorService.getVendorProfile(this.userId)
     .subscribe({
       next: (data: any) => {
@@ -95,6 +97,7 @@ ngOnInit() {
     });
 }
 
+
 uploadLogo(event:any){
 this.selectedLogo = event.target.files[0];
 
@@ -127,7 +130,6 @@ formData.append("VendorAddress", this.settings.address);
 formData.append("ContactEmail", this.settings.contactEmail);
 formData.append("ContactPhone", this.settings.contactPhone);
 
-// OPTIONAL: send business hours
 formData.append("BusinessHours", JSON.stringify(this.hours));
 
 if(this.selectedLogo)
@@ -148,8 +150,20 @@ alert(err.error?.message || "Save failed");
 
 }
 
+
 cancel(){
 window.location.href = "/vendor-dashboard";
+}
+
+
+/* =========================
+   🔥 NEW LOGOUT FUNCTION
+========================= */
+
+logout(){
+// 🔥 FORCE REDIRECT (stronger than router)
+window.location.href = "/";
+
 }
 
 }

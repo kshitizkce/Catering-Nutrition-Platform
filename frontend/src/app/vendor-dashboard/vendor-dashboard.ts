@@ -138,6 +138,16 @@ export class VendorDashboardComponent implements OnInit {
         console.error(err);
         alert("Update failed");
       }
+      
     );
+
+    
   }
+
+  goBack(){
+// 🔥 FORCE REDIRECT (stronger than router)
+window.location.href = "/role-select";
+
+}
+
 }

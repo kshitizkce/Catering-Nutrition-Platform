@@ -94,5 +94,8 @@ sendPhoneOtp(phone: string): Observable<any> {
 verifyPhoneOtp(phone: string, otp: string): Observable<any> {
   return this.http.post(`${this.apiUrl}/verify-sms-otp`, { phone, otp });
 }
-
+logout(){
+  localStorage.removeItem('user');
+  localStorage.removeItem('token'); // if you store JWT
+}
 }
