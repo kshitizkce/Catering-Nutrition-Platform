@@ -64,11 +64,11 @@ namespace CateringNutrition.API.Services.vendorservice
                     CustomerPhone = o.Customer?.Phone ?? "",
                     StatusId = o.OrderStatusId,
 
-                    Status = o.OrderStatusId == 0 ? "cancelled" : 
-                             o.OrderStatusId == 1 ? "Pending" :
-                             o.OrderStatusId == 2 ? "Confirmed" :
-                             o.OrderStatusId == 3 ? "Shipped" :
-                             o.OrderStatusId == 4 ? "Delivered" : "Unknown",
+                    Status = o.OrderStatusId == 1 ? "Cancelled" : 
+                             o.OrderStatusId == 2 ? "Pending" :
+                             o.OrderStatusId == 3 ? "Confirmed" :
+                             o.OrderStatusId == 4 ? "Shipped" :
+                             o.OrderStatusId == 5 ? "Delivered" : "Unknown",
                     OrderDate = o.OrderDate,
                     DeliveryAddress = o.DeliveryAddress,
                     TotalAmount = o.TotalAmount,
@@ -130,11 +130,11 @@ namespace CateringNutrition.API.Services.vendorservice
 
                     statusId = o.OrderStatusId,
 
-                    status = o.OrderStatusId == 0 ? "cancelled" : 
-                               o.OrderStatusId == 1 ? "Pending" :
-                             o.OrderStatusId == 2 ? "Confirmed" :
-                             o.OrderStatusId == 3 ? "Shipped" :
-                             o.OrderStatusId == 4 ? "Delivered" : "Unknown",
+                    status = o.OrderStatusId == 1 ? "Cancelled" : 
+                               o.OrderStatusId == 2 ? "Pending" :
+                             o.OrderStatusId == 3 ? "Confirmed" :
+                             o.OrderStatusId == 4 ? "Shipped" :
+                             o.OrderStatusId == 5 ? "Delivered" : "Unknown",
 
                     orderDate = o.OrderDate,
                     deliveryAddress = o.DeliveryAddress,

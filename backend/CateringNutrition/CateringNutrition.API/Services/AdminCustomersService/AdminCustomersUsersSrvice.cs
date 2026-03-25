@@ -137,11 +137,11 @@ namespace CateringNutrition.API.Services.AdminCustomersService
                     Email=u.Email,
                     Phone=u.Phone,
                     VendorName = v.VendorName,
-                    OrderStatus = o.OrderStatusId == 0 ? "Cancelled" :
-                                  o.OrderStatusId == 1 ? "Pending" :
-                                  o.OrderStatusId == 2 ? "Confirmed" :
-                                  o.OrderStatusId == 3 ? "Shipped" :
-                                  o.OrderStatusId == 4 ? "Delivered" : "Unknown",
+                    OrderStatus = o.OrderStatusId == 1 ? "Cancelled" :
+                                  o.OrderStatusId == 2 ? "Pending" :
+                                  o.OrderStatusId == 3 ? "Confirmed" :
+                                  o.OrderStatusId == 4 ? "Shipped" :
+                                  o.OrderStatusId == 5 ? "Delivered" : "Unknown",
                     OrderDate = DateTime.Now,
                     DeliveryAddress = o.DeliveryAddress,
                     TotalAmount = o.TotalAmount,
