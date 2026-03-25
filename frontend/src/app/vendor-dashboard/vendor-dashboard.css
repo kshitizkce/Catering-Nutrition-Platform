@@ -226,3 +226,56 @@ gap:5px;
   border-left: 3px solid #007bff;
   font-size: 12px;
 }
+/* TOP BAR */
+
+.top-bar{
+display:flex;
+align-items:center;
+justify-content:flex-start;
+margin-bottom:20px;
+}
+
+
+/* BACK BUTTON */
+
+.back-btn{
+display:flex;
+align-items:center;
+gap:6px;
+
+background:white;
+border:1px solid #e5e7eb;
+
+padding:8px 14px;
+
+border-radius:10px;
+font-size:14px;
+font-weight:500;
+
+cursor:pointer;
+
+transition:all 0.2s ease;
+box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}
+
+.back-btn:hover{
+background:#f9fafb;
+border-color:#d1d5db;
+transform:translateY(-1px);
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.top-bar{
+margin-bottom:15px;
+}
+
+.back-btn{
+font-size:13px;
+padding:6px 12px;
+}
+
+}

@@ -1,8 +1,19 @@
 <div class="settings-page">
 
-<h1>Vendor Settings</h1>
-<p class="subtitle">Manage your account and business information</p>
+<!-- 🔥 TOP BAR -->
+<div class="settings-header">
 
+  <div>
+    <h1>Vendor Settings</h1>
+    <p class="subtitle">Manage your account and business information</p>
+  </div>
+
+  <!-- LOGOUT BUTTON -->
+  <button class="logout-btn" (click)="logout()">
+    Logout
+  </button>
+
+</div>
 <!-- ACCOUNT MANAGEMENT -->
 <div class="card">
 <h2>Account Management</h2>
@@ -135,6 +146,3 @@ Customer review notifications
 <button class="cancel" (click)="cancel()">Cancel</button>
 <button class="save" (click)="saveSettings()">Save All Changes</button>
 </div>
-<button class="logout-btn" (click)="logout()">
-🚪 Logout
-</button>
