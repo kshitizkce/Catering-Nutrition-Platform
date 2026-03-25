@@ -143,10 +143,11 @@
         <!-- ACTION -->
         <td>
           <select (change)="updateOrderStatus(o, $any($event.target).value)">
-            <option [selected]="o.statusId == 1" value="1">Pending</option>
-            <option [selected]="o.statusId == 2" value="2">Confirmed</option>
-            <option [selected]="o.statusId == 3" value="3">Shipped</option>
-            <option [selected]="o.statusId == 4" value="4">Delivered</option>
+            <option [selected]="o.statusId == 1" value="1">Cancelled</option>
+            <option [selected]="o.statusId == 2" value="2">Pending</option>
+            <option [selected]="o.statusId == 3" value="3">Confirmed</option>
+            <option [selected]="o.statusId == 4" value="4">Shipped</option>
+            <option [selected]="o.statusId == 5" value="5">Delivered</option>
           </select>
         </td>
       </tr>
