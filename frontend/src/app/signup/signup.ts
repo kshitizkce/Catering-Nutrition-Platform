@@ -1,11 +1,10 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService, RegisterDto, LoginDto } from '../services/auth/auth';
 import { VendorService } from '../services/vendor/vendor-service';
 import { switchMap, tap } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-signup',
@@ -24,135 +23,128 @@ export class SignupComponent {
   password = '';
 
   emailOtp = '';
-phoneOtp = '';
+  phoneOtp = '';
 
-emailVerified = false;
-phoneVerified = false;
+  emailVerified = false;
+  phoneVerified = false;
 
-showEmailVerify = false;
-showPhoneVerify = false;
+  showEmailVerify = false;
+  showPhoneVerify = false;
 
-showEmailOtpInput = false;
-showPhoneOtpInput = false;
+  showEmailOtpInput = false;
+  showPhoneOtpInput = false;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private vendorService: VendorService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef
   ) {}
 
-  
   switchToLogin() {
-  this.isLogin = true;
-  this.clearSignupState();
-}
-
-switchToSignup() {
-  this.isLogin = false;
-  this.clearSignupState();
-}
-
-// Reset OTP & input state
-clearSignupState() {
-  this.fullName = '';
-  this.email = '';
-  this.phone = '';
-  this.password = '';
-
-  this.emailOtp = '';
-  this.phoneOtp = '';
-
-  this.emailVerified = false;
-  this.phoneVerified = false;
-
-  this.showEmailVerify = false;
-  this.showPhoneVerify = false;
-
-  this.showEmailOtpInput = false;
-  this.showPhoneOtpInput = false;
-}
-
-  // LOGIN
- login() {
-  if (!this.email || !this.password) {
-    alert("Email and password required");
-    return;
+    this.isLogin = true;
+    this.clearSignupState();
+    this.cdr.detectChanges();
   }
 
-  const dto: LoginDto = { email: this.email, password: this.password };
+  switchToSignup() {
+    this.isLogin = false;
+    this.clearSignupState();
+    this.cdr.detectChanges();
+  }
 
-  this.authService.login(dto).pipe(
+  clearSignupState() {
+    this.fullName = '';
+    this.email = '';
+    this.phone = '';
+    this.password = '';
 
-    // ✅ Step 1: store user temporarily
-    tap((res: any) => {
-      this.authService.setUser(res);
-    }),
+    this.emailOtp = '';
+    this.phoneOtp = '';
 
-//     // ✅ Step 2: fetch vendor using userId
-//    switchMap((res: any) => {
-//   return this.vendorService.getVendorByUserId(res.userId).pipe(
-//     tap((vendor: any) => {
-//       res.vendorId = vendor.vendorId;
-//       this.authService.setUser(res);
-//     })
-//   );
-// })
+    this.emailVerified = false;
+    this.phoneVerified = false;
 
-  ).subscribe({
+    this.showEmailVerify = false;
+    this.showPhoneVerify = false;
 
-    next: (vendorRes: any) => {
-      this.ngZone.run(() => {
+    this.showEmailOtpInput = false;
+    this.showPhoneOtpInput = false;
 
-        const user = this.authService.getUser();
+    this.cdr.detectChanges();
+  }
 
-        alert("Login successful");
-
-        // ✅ Store everything
-        localStorage.setItem("token", user.token);
-        localStorage.setItem("user", JSON.stringify(user));
-        localStorage.setItem("userRoles", JSON.stringify(user.roles || [user.role]));
-
-        // ✅ Redirect based on role
-        if ((user.roles || []).length === 1) {
-          const role = user.roles[0] || user.role;
-
-          if (role === "Admin") this.router.navigate(['/admin-profile']);
-          else if (role === "Vendor") this.router.navigate(['/vendor-dashboard']);
-          else this.router.navigate(['/home']);
-
-        } else {
-          this.router.navigate(['/role-select']);
-        }
-
-      });
-    },
-
-    error: async (err: any) => {
-      this.ngZone.run(async () => {
-
-        let msg = "Login failed";
-
-        if (err.error) {
-          if (typeof err.error === 'string') msg = err.error;
-          else if (err.error.message) msg = err.error.message;
-          else if (err.error instanceof Blob) {
-            const text = await err.error.text();
-            try {
-              const json = JSON.parse(text);
-              msg = json.message || text;
-            } catch {
-              msg = text;
-            }
-          }
-        }
-
-        alert(msg);
-      });
+  // LOGIN
+  login() {
+    if (!this.email || !this.password) {
+      alert("Email and password required");
+      return;
     }
 
-  });
-}
+    const dto: LoginDto = { email: this.email, password: this.password };
+
+    this.authService.login(dto).pipe(
+
+      tap((res: any) => {
+        this.authService.setUser(res);
+      })
+
+    ).subscribe({
+
+      next: (vendorRes: any) => {
+        this.ngZone.run(() => {
+
+          const user = this.authService.getUser();
+
+          alert("Login successful");
+
+          localStorage.setItem("token", user.token);
+          localStorage.setItem("user", JSON.stringify(user));
+          localStorage.setItem("userRoles", JSON.stringify(user.roles || [user.role]));
+
+          if ((user.roles || []).length === 1) {
+            const role = user.roles[0] || user.role;
+
+            if (role === "Admin") this.router.navigate(['/admin-profile']);
+            else if (role === "Vendor") this.router.navigate(['/vendor-dashboard']);
+            else this.router.navigate(['/home']);
+
+          } else {
+            this.router.navigate(['/role-select']);
+          }
+
+          this.cdr.detectChanges();
+        });
+      },
+
+      error: async (err: any) => {
+        this.ngZone.run(async () => {
+
+          let msg = "Login failed";
+
+          if (err.error) {
+            if (typeof err.error === 'string') msg = err.error;
+            else if (err.error.message) msg = err.error.message;
+            else if (err.error instanceof Blob) {
+              const text = await err.error.text();
+              try {
+                const json = JSON.parse(text);
+                msg = json.message || text;
+              } catch {
+                msg = text;
+              }
+            }
+          }
+
+          alert(msg);
+          this.cdr.detectChanges();
+        });
+      }
+
+    });
+  }
+
   // SIGNUP
   signup(roleType: 'customer' | 'vendor') {
 
@@ -162,14 +154,14 @@ clearSignupState() {
     }
 
     if (!this.emailVerified) {
-  alert("Please verify email first");
-  return;
-}
+      alert("Please verify email first");
+      return;
+    }
 
-if (!this.phoneVerified) {
-  alert("Please verify phone first");
-  return;
-}
+    if (!this.phoneVerified) {
+      alert("Please verify phone first");
+      return;
+    }
 
     const dto: RegisterDto = {
       fullName: this.fullName,
@@ -182,27 +174,27 @@ if (!this.phoneVerified) {
 
     this.authService.register(dto, roleType).subscribe({
 
-next: (res: any) => {
-  this.ngZone.run(() => {
+      next: (res: any) => {
+        this.ngZone.run(() => {
 
-    alert(res.message || "Registration successful. Please login.");
+          alert(res.message || "Registration successful. Please login.");
 
-    
-    // clear form
-    this.fullName = '';
-    this.email = '';
-    this.phone = '';
-    this.password = '';
+          this.fullName = '';
+          this.email = '';
+          this.phone = '';
+          this.password = '';
 
-    // force UI refresh event
-    this.isLogin = false;
+          this.isLogin = false;
 
-    setTimeout(() => {
-      this.isLogin = true;
-    }, 0);
+          setTimeout(() => {
+            this.isLogin = true;
+            this.cdr.detectChanges();
+          }, 0);
 
-  });
-},
+          this.cdr.detectChanges();
+        });
+      },
+
       error: (err: any) => {
         this.ngZone.run(() => {
 
@@ -213,7 +205,7 @@ next: (res: any) => {
             "Registration failed";
 
           alert(msg);
-
+          this.cdr.detectChanges();
         });
       }
 
@@ -221,97 +213,105 @@ next: (res: any) => {
   }
 
   onEmailChange() {
-  this.showEmailVerify = this.email.length > 3;
-
-  // Reset verification if user deletes or changes email
-  this.emailVerified = false;
-  this.showEmailOtpInput = false;
-  this.emailOtp = '';
-}
-
-sendEmailOtp() {
-
-  if (!this.email) {
-    alert("Enter email first");
-    return;
+    this.showEmailVerify = this.email.length > 3;
+    this.emailVerified = false;
+    this.showEmailOtpInput = false;
+    this.emailOtp = '';
+    this.cdr.detectChanges();
   }
 
-  this.authService.sendEmailOtp(this.email).subscribe({
-    next: (res:any) => {
-      alert(res.message);
-      this.showEmailOtpInput = true;
-    },
-    error: (err:any) => {
-      alert(err?.error?.message || "Failed to send OTP");
-    }
-  });
+  sendEmailOtp() {
 
-}
-
-verifyEmailOtp() {
-
-  this.authService.verifyEmailOtp(this.email, this.emailOtp).subscribe({
-
-    next:(res:any)=>{
-      alert(res.message);
-      this.emailVerified = true;
-      this.showEmailOtpInput = false;
-    },
-
-    error:(err:any)=>{
-      alert(err?.error?.message || "Invalid OTP");
+    if (!this.email) {
+      alert("Enter email first");
+      return;
     }
 
-  });
-
-}
-sendPhoneOtp() {
-
-  if (!this.phone) {
-    alert("Enter phone first");
-    return;
+    this.authService.sendEmailOtp(this.email).subscribe({
+      next: (res: any) => {
+        alert(res.message);
+        this.showEmailOtpInput = true;
+        this.cdr.detectChanges();
+      },
+      error: (err: any) => {
+        alert(err?.error?.message || "Failed to send OTP");
+        this.cdr.detectChanges();
+      }
+    });
   }
 
-  this.authService.sendPhoneOtp(this.phone).subscribe({
+  verifyEmailOtp() {
 
-    next:(res:any)=>{
-      alert(res.message);
-      this.showPhoneOtpInput = true;
-    },
+    this.authService.verifyEmailOtp(this.email, this.emailOtp).subscribe({
 
-    error:(err:any)=>{
-      alert(err?.error?.message || "OTP send failed");
+      next: (res: any) => {
+        alert(res.message);
+        this.emailVerified = true;
+        this.showEmailOtpInput = false;
+        this.cdr.detectChanges();
+      },
+
+      error: (err: any) => {
+        alert(err?.error?.message || "Invalid OTP");
+        this.cdr.detectChanges();
+      }
+
+    });
+
+  }
+
+  sendPhoneOtp() {
+
+    if (!this.phone) {
+      alert("Enter phone first");
+      return;
     }
 
-  });
+    this.authService.sendPhoneOtp(this.phone).subscribe({
 
-}
+      next: (res: any) => {
+        alert(res.message);
+        this.showPhoneOtpInput = true;
+        this.cdr.detectChanges();
+      },
 
-verifyPhoneOtp() {
+      error: (err: any) => {
+        alert(err?.error?.message || "OTP send failed");
+        this.cdr.detectChanges();
+      }
 
-  this.authService.verifyPhoneOtp(this.phone, this.phoneOtp).subscribe({
+    });
 
-    next:(res:any)=>{
-      alert(res.message);
-      this.phoneVerified = true;
-      this.showPhoneOtpInput = false;
-    },
+  }
 
-    error:(err:any)=>{
-      alert(err?.error?.message || "Invalid OTP");
-    }
+  verifyPhoneOtp() {
 
-  });
+    this.authService.verifyPhoneOtp(this.phone, this.phoneOtp).subscribe({
 
-}
-onPhoneChange() {
-  this.showPhoneVerify = this.phone.length > 5;
+      next: (res: any) => {
+        alert(res.message);
+        this.phoneVerified = true;
+        this.showPhoneOtpInput = false;
+        this.cdr.detectChanges();
+      },
 
-  // Reset verification if user deletes or changes phone
-  this.phoneVerified = false;
-  this.showPhoneOtpInput = false;
-  this.phoneOtp = '';
-}
+      error: (err: any) => {
+        alert(err?.error?.message || "Invalid OTP");
+        this.cdr.detectChanges();
+      }
+
+    });
+
+  }
+
+  onPhoneChange() {
+    this.showPhoneVerify = this.phone.length > 5;
+    this.phoneVerified = false;
+    this.showPhoneOtpInput = false;
+    this.phoneOtp = '';
+    this.cdr.detectChanges();
+  }
+
   signupAsCustomer() {
     this.signup('customer');
   }

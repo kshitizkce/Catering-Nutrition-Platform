@@ -15,6 +15,7 @@ import { VendorsComponent } from './vendors/vendors';
 import { VendorDetailsComponent } from './vendor-details/vendor-details';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password';
 import { ResetPasswordComponent } from './reset-password/reset-password';
+import { VendorMealCatering } from './vendor-meal-catering/vendor-meal-catering';
 
 // Admin components
 import { AdminLayoutComponent } from './admin-layout/admin-layout';
@@ -24,6 +25,8 @@ import { AdminOrdersComponent } from './admin-orders/admin-orders';
 import { AdminCustomersComponent } from './admin-customers/admin-customers';
 import { AdminVendorDetailsComponent } from './admin-vendor-details/admin-vendor-details';
 import { AdminCustomerDetailsComponent } from './admin-customer-details/admin-customer-details'; // ✅ FIX
+import { AdminMealCatering } from './admin-meal-catering/admin-meal-catering';
+
 
 // Vendor components
 import { VendorDashboardComponent } from './vendor-dashboard/vendor-dashboard';
@@ -33,6 +36,10 @@ import { VendorSettingsComponent } from './vendor-settings/vendor-settings';
 import { VendorLayoutComponent } from './vendor-layout/vendor-layout';
 import { VendorSubscribersComponent } from './vendor-subscribers/vendor-subscribers';
 import { AdminMenuComponent } from './admin-menu/admin-menu';
+import { MealCateringGuard } from './vendor-meal-catering/vendor-meal-guard-catering';
+
+
+
 
 export const routes: Routes = [
 
@@ -49,7 +56,6 @@ export const routes: Routes = [
 
   // Profiles
   { path: 'vendor-profile', component: VendorProfileComponent },
-  { path: 'admin-profile', component: AdminProfileComponent },
 
   // General
   { path: 'menu', component: MenuComponent },
@@ -68,6 +74,9 @@ export const routes: Routes = [
       { path: 'admin-orders', component: AdminOrdersComponent },
       { path: 'admin-menu', component: AdminMenuComponent },
       { path: 'admin-customers', component: AdminCustomersComponent },
+      { path: 'vendor-subscribers', component: VendorSubscribersComponent },
+      { path: 'admin-profile', component: AdminProfileComponent },
+            { path: 'admin-meal-catering', component: AdminMealCatering },
       { path: 'admin-customer-details/:id', component: AdminCustomerDetailsComponent },
       { path: 'admin-vendor-details/:id', component: AdminVendorDetailsComponent },
       { path: 'admin-dashboard', redirectTo: 'dashboard', pathMatch: 'full' }
@@ -83,7 +92,13 @@ export const routes: Routes = [
       { path: 'vendor-menu', component: VendorMenuComponent },
       { path: 'vendor-orders', component: VendorOrdersComponent },
       { path: 'vendor-settings', component: VendorSettingsComponent },
-      { path: 'vendor-subscribers', component: VendorSubscribersComponent }
+      { path: 'vendor-meal-catering', component: VendorMealCatering }, 
+      {
+  path: 'vendor-meal-catering',
+  loadComponent: () => import('./vendor-meal-catering/vendor-meal-catering')
+    .then(m => m.VendorMealCatering),
+  canActivate: [MealCateringGuard] // ✅ ADD THIS
+}
     ]
   }
 ];

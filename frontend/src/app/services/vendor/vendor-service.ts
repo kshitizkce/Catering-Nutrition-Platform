@@ -2,6 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface Customer {
+  fullName: string;
+  email: string;
+  phone: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -44,4 +50,7 @@ getVendorByUserId(userId: number) {
   return this.http.get(`${this.baseUrl}/by-user/${userId}`);
 
 }
+getUserDetails(userId: number): Observable<Customer> {
+    return this.http.get<Customer>(`${this.baseUrl}/user/${userId}`);
+  }
 }

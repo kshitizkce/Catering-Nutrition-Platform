@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VendorService } from '../services/vendor/vendor-service';
 import { AuthService } from '../services/auth/auth';
@@ -13,44 +13,50 @@ import { AuthService } from '../services/auth/auth';
 export class VendorOrdersComponent implements OnInit {
 
   orders: any[] = [];
-vendorId: number = 0; // default
-  constructor(private vendorService: VendorService,
-    private authService: AuthService)    
-    {}
+  vendorId: number = 0;
 
- ngOnInit(): void {
-  const user = this.authService.getUser();
+  constructor(
+    private vendorService: VendorService,
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  if (!user) {
-    console.error("User not logged in");
-    return;
-  }
+  ngOnInit(): void {
+    const user = this.authService.getUser();
 
-  const userId = user.userId;
-
-  if (!userId) {
-    console.error("User ID not found");
-    return;
-  }
-
-  // ✅ Step 1: get vendorId from backend
-  this.vendorService.getVendorByUserId(userId).subscribe({
-    next: (vendor: any) => {
-      this.vendorId = vendor.vendorId;
-
-      if (!this.vendorId) {
-        console.error("Vendor ID not found");
-        return;
-      }
-
-      // ✅ Step 2: NOW load orders
-      this.loadOrders();
-    },
-    error: (err) => {
-      console.error("Failed to fetch vendor:", err);
+    if (!user) {
+      console.error("User not logged in");
+      return;
     }
-  });
-}
+
+    const userId = user.userId;
+
+    if (!userId) {
+      console.error("User ID not found");
+      return;
+    }
+
+    // ✅ Step 1: get vendorId from backend
+    this.vendorService.getVendorByUserId(userId).subscribe({
+      next: (vendor: any) => {
+        this.vendorId = vendor.vendorId;
+
+        if (!this.vendorId) {
+          console.error("Vendor ID not found");
+          return;
+        }
+
+        this.cdr.detectChanges();
+
+        // ✅ Step 2: NOW load orders
+        this.loadOrders();
+      },
+      error: (err) => {
+        console.error("Failed to fetch vendor:", err);
+        this.cdr.detectChanges();
+      }
+    });
+  }
 
   loadOrders() {
     this.vendorService.getOrders(this.vendorId).subscribe({
@@ -60,14 +66,17 @@ vendorId: number = 0; // default
           ...o,
           showItems: false
         }));
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Error loading orders:', err);
+        this.cdr.detectChanges();
       }
     });
   }
 
   toggleItems(order: any) {
     order.showItems = !order.showItems;
+    this.cdr.detectChanges();
   }
 }

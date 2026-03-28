@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MenuService } from '../services/menu/menu';
@@ -12,25 +12,28 @@ import { MenuService } from '../services/menu/menu';
 })
 export class VendorDetailsComponent implements OnInit {
 
-  menuItems:any[] = [];
-  vendorId:number = 0;
+  menuItems: any[] = [];
+  vendorId: number = 0;
 
   constructor(
-    private route:ActivatedRoute,
-    private menuService:MenuService
-  ){}
+    private route: ActivatedRoute,
+    private menuService: MenuService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
 
     // get vendor id from URL
     this.vendorId = Number(this.route.snapshot.paramMap.get('name'));
+    this.cdr.detectChanges();
 
     // call API
-    this.menuService.getVendorMenu(this.vendorId).subscribe((data:any)=>{
+    this.menuService.getVendorMenu(this.vendorId).subscribe((data: any) => {
 
-      console.log("menu items:",data);
+      console.log("menu items:", data);
 
       this.menuItems = data;
+      this.cdr.detectChanges();
 
     });
 

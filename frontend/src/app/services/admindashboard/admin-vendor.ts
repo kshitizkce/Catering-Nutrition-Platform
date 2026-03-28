@@ -21,10 +21,16 @@ export interface Vendor {
   vendorName: string;
   vendorEmail: string;
   vendorPhone: string;
-  city?: string;
+  city: string;
   status: string;
-}
 
+  // 🔥 NEW FIELDS
+  vendorAddress?: string;
+  rating?: number;
+  businessHours?: string;
+  businessLogo?: string;
+  businessFile?: string;
+}
 export interface VendorDetailsResponse {
   vendor: Vendor;
   totalOrders: number;
@@ -47,6 +53,7 @@ export interface VendorDetailsResponse {
 })
 export class AdminVendorService {
   private apiBase = 'http://localhost:5197/api/adminvendor';
+  private fileApibase = 'http://localhost:5197';
 
   constructor(private http: HttpClient) {}
 
@@ -57,4 +64,35 @@ export class AdminVendorService {
   getAllVendors(): Observable<Vendor[]> {
   return this.http.get<Vendor[]>(`${this.apiBase}/all`);
 }
+
+deleteVendor(vendorId: number) {
+  return this.http.delete(`${this.apiBase}/${vendorId}`);
+}
+
+getVendorFileUrlfromApi(filePath: string): string {
+  if (!filePath) return ''; // handle empty file
+
+  // Remove leading slash and 'uploads/' if present
+  const fileName = filePath.replace(/^\/?uploads\//, ''); 
+  // Explanation:
+  // ^     = start of string
+  // /?    = optional leading slash
+  // uploads/ = literal string
+  // Result: "378e3559-06bc-483e-bd43-6c5e8f52aff3.png"
+
+  return `${this.fileApibase}/uploads/${fileName}`;
+}
+
+approveVendor(vendorId: number) {
+  return this.http.put<Vendor>(`${this.apiBase}/approve/${vendorId}`, {});
+}
+
+rejectVendor(vendorId: number) {
+  return this.http.put<Vendor>(`${this.apiBase}/reject/${vendorId}`, {});
+}
+
+sendVendorEmail(payload: { toEmail: string; subject?: string; message: string }) {
+  return this.http.post(`${this.apiBase}/send-email`, payload, { responseType: 'text' });
+}
+
 }

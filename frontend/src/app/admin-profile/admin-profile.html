@@ -1,0 +1,50 @@
+<div class="settings-page">
+
+  <!-- 🔥 TOP BAR -->
+  <div class="settings-header">
+    <div>
+      <h1>Admin Setting</h1>
+      <p class="subtitle">Manage your account</p>
+    </div>
+
+    <!-- LOGOUT BUTTON -->
+    <button class="logout-btn" (click)="logout()">
+      Logout
+    </button>
+  </div>
+
+  <!-- ACCOUNT MANAGEMENT -->
+  <div class="card">
+    <h2>Account Management</h2>
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>Owner Name</label>
+        <input [(ngModel)]="settings.ownerName" placeholder="Owner Name">
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input [(ngModel)]="settings.email" placeholder="Email">
+      </div>
+
+      <div class="form-group">
+        <label>Phone</label>
+        <input [(ngModel)]="settings.phone" placeholder="Phone">
+      </div>
+
+      <div class="form-group">
+        <label>Change Password</label>
+        <input type="password" [(ngModel)]="settings.password" placeholder="New Password">
+      </div>
+
+    </div>
+
+    <!-- 🔹 Buttons -->
+    <div class="buttons">
+      <button class="save-btn" (click)="saveSettings()">Save</button>
+      <button class="cancel-btn" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>

@@ -25,7 +25,7 @@
           <th>Name</th>
           <th>Email</th>
           <th>Phone</th>
-          <th>Status</th>
+          <th>Action</th>
         </tr>
       </thead>
 
@@ -35,9 +35,11 @@
   <td class="name">{{ c.fullName }}</td>
   <td>{{ c.email }}</td>
   <td>{{ c.phone }}</td>
-  <td>
-    <span class="status" [ngClass]="c.status?.toLowerCase()">{{ c.status }}</span>
-  </td>
+  <td (click)="$event.stopPropagation()">
+      <button class="delete-btn" (click)="deleteCustomer(c.userId)">
+        Delete
+      </button>
+    </td>
 </tr>
       </tbody>
     </table>

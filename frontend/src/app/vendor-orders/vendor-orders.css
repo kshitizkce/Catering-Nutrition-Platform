@@ -16,6 +16,7 @@ border-radius:12px;
 font-size:12px;
 }
 
+.cancelled{background:rgb(190, 124, 124);color:red;}
 .delivered{background:#d4f8d4;color:green;}
 .shipped{background:#d4e6ff;color:blue;}
 .confirmed{background:#e6d4ff;color:purple;}

@@ -14,8 +14,12 @@
 
     <a routerLink="/vendor-orders" routerLinkActive="active">Orders</a>
 
-        <a routerLink="/vendor-subscribers" routerLinkActive="active">Subscribers</a> <!-- Added -->
-
+    <!-- ✅ SHOW ONLY IF ENABLED -->
+    <a *ngIf="isMealCateringEnabled"
+       routerLink="/vendor-meal-catering"
+       routerLinkActive="active">
+       Event Catering
+    </a>
 
     <a routerLink="/vendor-settings" routerLinkActive="active">Settings</a>
 
@@ -44,10 +48,7 @@
 
 </div>
 
-
 <!-- PAGE CONTENT -->
 <div class="main">
-
   <router-outlet></router-outlet>
-
 </div>

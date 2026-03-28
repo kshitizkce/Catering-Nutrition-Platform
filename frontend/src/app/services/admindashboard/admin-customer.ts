@@ -2,6 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface AdminProfileUpdate {
+  userId: number;
+  ownerName?: string;
+  email?: string;
+  password?: string;
+}
+
 export interface OrderItem {
   menuItemId: number;
   itemName: string;
@@ -12,7 +19,9 @@ export interface OrderItem {
 export interface Order {
   orderId: number;
   vendorName: string;
+  vendorId :number;
   orderStatus: string;
+  statusId : number;
   deliveryAddress: string;
   orderDate: string;
   totalAmount: number;
@@ -74,4 +83,12 @@ export class AdminCustomerService {
 getAllOrders(): Observable<Order[]> {
   return this.http.get<Order[]>(`${this.apiUrl}/allorders`);
 }
+
+deleteCustomer(userId: number) {
+  return this.http.delete(`${this.apiUrl}/${userId}`);
+}
+
+updateProfile(payload: AdminProfileUpdate) {
+    return this.http.post(`${this.apiUrl}/update-profile`, payload);
+  }
 }

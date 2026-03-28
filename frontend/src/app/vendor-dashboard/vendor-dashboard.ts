@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VendorService } from '../services/vendor/vendor-service';
-import { AuthService} from '../services/auth/auth';
-
+import { AuthService } from '../services/auth/auth';
 
 @Component({
   selector: 'app-vendor-dashboard',
@@ -12,9 +11,8 @@ import { AuthService} from '../services/auth/auth';
   templateUrl: './vendor-dashboard.html',
   styleUrls: ['./vendor-dashboard.css']
 })
-export class VendorDashboardComponent implements OnInit {
+export class VendorDashboardComponent implements OnInit, AfterViewInit {
   settings: any = {};
-  
 
   vendor: any = {
     businessName: 'Vendor Name',
@@ -33,43 +31,49 @@ export class VendorDashboardComponent implements OnInit {
   };
 
   orders: any[] = [];
-    vendorId : number = 0;
+  vendorId: number = 0;
 
-  constructor(private vendorService: VendorService, private authService: AuthService) {}
+  constructor(
+    private vendorService: VendorService,
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef   // ✅ FIX: Injected properly
+  ) {}
 
   ngOnInit() {
+    const user = this.authService.getUser();
 
-  const user = this.authService.getUser();
+    if (!user || !user.userId) {
+      alert("User not logged in");
+      return;
+    }
 
-  if (!user || !user.userId) {
-    alert("User not logged in");
-    return;
+    const userId = user.userId;
+
+    this.vendorService.getVendorByUserId(userId).subscribe({
+      next: (vendor: any) => {
+        this.vendorId = vendor.vendorId;
+
+        if (!this.vendorId) {
+          console.error("Vendor ID not found!");
+          return;
+        }
+
+        this.loadDashboard();
+        this.loadVendorProfile();
+      },
+      error: (err) => {
+        console.error("Failed to fetch vendor:", err);
+        alert("Vendor not found");
+
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+      }
+    });
   }
 
-  const userId = user.userId;
-
-  // ✅ Step 1: fetch vendorId from backend
-  this.vendorService.getVendorByUserId(userId).subscribe({
-    next: (vendor: any) => {
-
-      this.vendorId = vendor.vendorId;
-
-      if (!this.vendorId) {
-        console.error("Vendor ID not found!");
-        return;
-      }
-
-      // ✅ Step 2: now safe to call APIs
-      this.loadDashboard();
-      this.loadVendorProfile();
-
-    },
-    error: (err) => {
-      console.error("Failed to fetch vendor:", err);
-      alert("Vendor not found");
-    }
-  });
-}
+  // ✅ Safe lifecycle for manual change detection
+  ngAfterViewInit() {
+    setTimeout(() => this.cdr.detectChanges());
+  }
 
   loadDashboard() {
     this.vendorService.getDashboard(this.vendorId).subscribe(
@@ -92,34 +96,42 @@ export class VendorDashboardComponent implements OnInit {
             this.vendor.rating = res.recentOrders[0].vendorRating || 0;
           }
         }
+
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
       },
       (err) => {
         console.error(err);
         alert("Failed to fetch dashboard data");
+
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
       }
     );
   }
 
   loadVendorProfile() {
-  const userId = this.authService.getUserId();
+    const userId = this.authService.getUserId();
 
-  if (!userId) {
-    console.error("User ID not found!");
-    return;
-  }
-
-  this.vendorService.getVendorProfile(userId).subscribe(
-    (data: any) => {
-      this.settings.logo = data.businessLogo 
-        ? 'http://localhost:5197' + data.businessLogo
-        : '';
-    },
-    (err) => {
-      console.error(err);
-      this.settings.logo = '';
+    if (!userId) {
+      console.error("User ID not found!");
+      return;
     }
-  );
-}
+
+    this.vendorService.getVendorProfile(userId).subscribe(
+      (data: any) => {
+        this.settings.logo = data.businessLogo
+          ? 'http://localhost:5197' + data.businessLogo
+          : '';
+
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+      },
+      (err) => {
+        console.error(err);
+        this.settings.logo = '';
+
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+      }
+    );
+  }
 
   updateOrderStatus(order: any, statusId: number) {
     const payload = {
@@ -133,21 +145,19 @@ export class VendorDashboardComponent implements OnInit {
       () => {
         alert("Order updated");
         this.loadDashboard();
+
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
       },
       err => {
         console.error(err);
         alert("Update failed");
-      }
-      
-    );
 
-    
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+      }
+    );
   }
 
-  goBack(){
-// 🔥 FORCE REDIRECT (stronger than router)
-window.location.href = "/role-select";
-
-}
-
+  goBack() {
+    window.location.href = "/role-select";
+  }
 }

@@ -24,6 +24,10 @@ export class AdminDashboardComponent implements AfterViewInit {
     this.loadDashboard();
   }
 
+  goBack() {
+    window.location.href = "/role-select";
+  }
+
   loadDashboard() {
     this.dashboardService.getDashboardData().subscribe({
       next: (data) => {

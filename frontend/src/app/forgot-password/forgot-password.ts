@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -21,39 +21,43 @@ export class ForgotPasswordComponent {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private ngZone: NgZone   // ✅ Inject NgZone
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef
   ) {}
 
   sendResetLink() {
-  if (!this.email) {
-    alert("Email required"); // show alert if email empty
-    return;
-  }
+    if (!this.email) {
+      alert("Email required");
+      return;
+    }
 
-  if (this.loading) return;
+    if (this.loading) return;
 
-  this.loading = true;
+    this.loading = true;
+    this.cdr.detectChanges();
 
-  this.auth.forgotPassword(this.email)
-    .pipe(finalize(() => {
-      // always reset loading inside Angular zone
-      this.ngZone.run(() => {
-        this.loading = false;
+    this.auth.forgotPassword(this.email)
+      .pipe(finalize(() => {
+        this.ngZone.run(() => {
+          this.loading = false;
+          this.cdr.detectChanges();
+        });
+      }))
+      .subscribe({
+        next: (res: any) => {
+          this.ngZone.run(() => {
+            alert(res.message || "Reset link sent successfully");
+            this.cdr.detectChanges();
+          });
+        },
+        error: (err: any) => {
+          this.ngZone.run(() => {
+            alert(err.error?.message || err.error || "Something went wrong");
+            this.cdr.detectChanges();
+          });
+        }
       });
-    }))
-    .subscribe({
-      next: (res: any) => {
-        this.ngZone.run(() => {
-          alert(res.message || "Reset link sent successfully"); // show success as alert
-        });
-      },
-      error: (err: any) => {
-        this.ngZone.run(() => {
-          alert(err.error?.message || err.error || "Something went wrong"); // show error as alert
-        });
-      }
-    });
-}
+  }
 
   goBack() {
     this.router.navigate(['/']);

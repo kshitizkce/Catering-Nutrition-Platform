@@ -1,0 +1,171 @@
+/* ======================== PAGE ======================== */
+.settings-page {
+  max-width: 1000px;
+  margin: auto;
+  padding: 25px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f7f7f7;
+}
+
+/* ======================== HEADER ======================== */
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.settings-header h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: #777;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* ======================== LOGOUT BUTTON ======================== */
+.logout-btn {
+  background: white;
+  border: 1px solid #e5e7eb;
+  color: #333;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.logout-btn:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+/* ======================== CARD ======================== */
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.card h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* ======================== FORM ======================== */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #666;
+  font-weight: 500;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+/* Input focus (orange highlight) */
+.form-group input:focus {
+  border-color: #ff7a00;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 122, 0, 0.2);
+}
+
+/* ======================== BUTTONS ======================== */
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+/* 🔥 SAVE BUTTON */
+.save-btn {
+  background: linear-gradient(135deg, #ff7a00, #ff9500);
+  color: white;
+  border: none;
+  padding: 10px 26px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.save-btn:hover {
+  background: linear-gradient(135deg, #ff6a00, #ff8800);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(255, 122, 0, 0.3);
+}
+
+/* ❄️ CANCEL BUTTON */
+.cancel-btn {
+  background: #f3f4f6;
+  color: #444;
+  border: 1px solid #d1d5db;
+  padding: 10px 26px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.cancel-btn:hover {
+  background: #e5e7eb;
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+}
+
+/* ======================== RESPONSIVE ======================== */
+@media (max-width: 768px) {
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logout-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .save-btn,
+  .cancel-btn {
+    width: 100%;
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,7 +23,8 @@ export class ResetPasswordComponent {
     private route: ActivatedRoute,
     private auth: AuthService,
     private router: Router,
-    private ngZone: NgZone  // ✅ inject NgZone
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef
   ) {
     this.token = this.route.snapshot.queryParams['token'];
   }
@@ -43,25 +44,31 @@ export class ResetPasswordComponent {
     if (this.loading) return;
 
     this.loading = true;
+    this.cdr.detectChanges();
 
     this.auth.resetPassword(this.token, this.newPassword)
       .pipe(finalize(() => {
-        // always reset loading inside Angular zone
         this.ngZone.run(() => {
           this.loading = false;
+          this.cdr.detectChanges();
         });
       }))
       .subscribe({
         next: (res: any) => {
           this.ngZone.run(() => {
             alert(res.message || "Password reset successful");
-            // redirect after 1s
-            setTimeout(() => this.router.navigate(['/']), 1000);
+            this.cdr.detectChanges();
+
+            setTimeout(() => {
+              this.router.navigate(['/']);
+              this.cdr.detectChanges();
+            }, 1000);
           });
         },
         error: (err: any) => {
           this.ngZone.run(() => {
             alert(err.error?.message || err.error || "Reset failed");
+            this.cdr.detectChanges();
           });
         }
       });

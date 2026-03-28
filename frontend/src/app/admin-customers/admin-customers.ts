@@ -66,4 +66,21 @@ export class AdminCustomersComponent implements OnInit {
   trackByUserId(index: number, customer: Customer) {
     return customer.userId;
   }
+
+  deleteCustomer(userId: number) {
+  if (!confirm('Are you sure you want to delete this customer?')) return;
+
+  this.customerService.deleteCustomer(userId).subscribe({
+    next: () => {
+      // remove from UI instantly
+      this.customers = this.customers.filter(c => c.userId !== userId);
+      alert('Customer deleted successfully');
+      this.cdr.detectChanges();
+    },
+    error: (err) => {
+      console.error(err);
+      alert('Failed to delete customer');
+    }
+  });
+}
 }

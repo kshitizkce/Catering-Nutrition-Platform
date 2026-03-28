@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MenuService } from '../services/menu/menu';
-import { VendorService}from '../services/vendor/vendor-service';
+import { VendorService } from '../services/vendor/vendor-service';
 import { AuthService } from '../services/auth/auth';
-
-
 
 interface Category {
   categoryId: number;
@@ -19,12 +17,12 @@ interface MenuItem {
   vendorId: number;
   categoryId: number;
   itemName: string;
-  rating :number,
+  rating: number;
   itemDescription?: string;
   price: number;
   calories?: number;
   isAvailable: boolean;
-  imageUrl?: string; // updated for backend
+  imageUrl?: string;
 }
 
 @Component({
@@ -35,7 +33,8 @@ interface MenuItem {
   styleUrls: ['./vendor-menu.css']
 })
 export class VendorMenuComponent implements OnInit {
-vendorId: number = 0; // default
+
+  vendorId: number = 0;
   categories: Category[] = [];
   selectedCategory!: Category;
 
@@ -49,45 +48,47 @@ vendorId: number = 0; // default
   newItem: MenuItem = this.getEmptyItem();
   selectedFile: File | null = null;
 
-  constructor(private menuService: MenuService,
-    private vendorService :VendorService,
-        private authService : AuthService
-
+  constructor(
+    private menuService: MenuService,
+    private vendorService: VendorService,
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef   // ✅ added
   ) {}
 
   ngOnInit(): void {
-  const user = this.authService.getUser();
+    const user = this.authService.getUser();
 
-  if (!user) {
-    console.error("User not logged in");
-    return;
-  }
-
-  const userId = user.userId;
-
-  if (!userId) {
-    console.error("User ID not found");
-    return;
-  }
-
-  // ✅ Step 1: get vendorId from backend
-  this.vendorService.getVendorByUserId(userId).subscribe({
-    next: (vendor: any) => {
-      this.vendorId = vendor.vendorId;
-
-      if (!this.vendorId) {
-        console.error("Vendor ID not found");
-        return;
-      }
-
-      // ✅ Step 2: NOW load categories
-      this.loadCategories();
-    },
-    error: (err) => {
-      console.error("Failed to fetch vendor:", err);
+    if (!user) {
+      console.error("User not logged in");
+      return;
     }
-  });
-}
+
+    const userId = user.userId;
+
+    if (!userId) {
+      console.error("User ID not found");
+      return;
+    }
+
+    this.vendorService.getVendorByUserId(userId).subscribe({
+      next: (vendor: any) => {
+        this.vendorId = vendor.vendorId;
+
+        if (!this.vendorId) {
+          console.error("Vendor ID not found");
+          return;
+        }
+
+        this.loadCategories();
+
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+      },
+      error: (err) => {
+        console.error("Failed to fetch vendor:", err);
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+      }
+    });
+  }
 
   getEmptyItem(): MenuItem {
     return {
@@ -98,7 +99,7 @@ vendorId: number = 0; // default
       price: 0,
       calories: 0,
       isAvailable: true,
-      rating : 0,
+      rating: 0,
       imageUrl: ''
     };
   }
@@ -110,8 +111,13 @@ vendorId: number = 0; // default
         if (this.categories.length > 0) {
           this.selectCategory(this.categories[0]);
         }
+
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
       },
-      error: err => console.error('Failed to load categories', err)
+      error: err => {
+        console.error('Failed to load categories', err);
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+      }
     });
   }
 
@@ -120,6 +126,8 @@ vendorId: number = 0; // default
     this.pageNumber = 1;
     this.loadMenuItems();
     this.newItem.categoryId = category.categoryId;
+
+    setTimeout(() => this.cdr.detectChanges()); // ✅ safe
   }
 
   loadMenuItems() {
@@ -129,8 +137,14 @@ vendorId: number = 0; // default
       this.pageNumber,
       this.pageSize
     ).subscribe({
-      next: (res: MenuItem[]) => this.menuItems = res,
-      error: err => console.error('Failed to load menu items', err)
+      next: (res: MenuItem[]) => {
+        this.menuItems = res;
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+      },
+      error: err => {
+        console.error('Failed to load menu items', err);
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+      }
     });
   }
 
@@ -148,15 +162,19 @@ vendorId: number = 0; // default
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    // If using actual upload API:
+
     if (this.selectedFile) {
-    this.menuService.uploadImage(this.selectedFile).subscribe({
-      next: res => {
-        this.newItem.imageUrl = res.imageUrl; // store URL returned by API
-      },
-      error: err => console.error('Image upload failed', err)
-    });
-  }
+      this.menuService.uploadImage(this.selectedFile).subscribe({
+        next: res => {
+          this.newItem.imageUrl = res.imageUrl;
+          setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+        },
+        error: err => {
+          console.error('Image upload failed', err);
+          setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+        }
+      });
+    }
   }
 
   addMenuItem() {
@@ -167,8 +185,12 @@ vendorId: number = 0; // default
       next: () => {
         this.loadMenuItems();
         this.resetForm();
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
       },
-      error: err => console.error('Failed to add menu item', err)
+      error: err => {
+        console.error('Failed to add menu item', err);
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+      }
     });
   }
 
@@ -183,8 +205,12 @@ vendorId: number = 0; // default
       next: () => {
         this.loadMenuItems();
         this.editingItem = null;
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
       },
-      error: err => console.error('Failed to update menu item', err)
+      error: err => {
+        console.error('Failed to update menu item', err);
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+      }
     });
   }
 
@@ -192,8 +218,14 @@ vendorId: number = 0; // default
     if (!menuItemId) return;
 
     this.menuService.deleteMenuItem(menuItemId).subscribe({
-      next: () => this.loadMenuItems(),
-      error: err => console.error('Failed to delete menu item', err)
+      next: () => {
+        this.loadMenuItems();
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+      },
+      error: err => {
+        console.error('Failed to delete menu item', err);
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+      }
     });
   }
 
@@ -205,22 +237,26 @@ vendorId: number = 0; // default
     this.newItem = this.getEmptyItem();
     this.showForm = false;
     this.selectedFile = null;
+
+    setTimeout(() => this.cdr.detectChanges()); // ✅ safe
   }
 
   toggleSoldOut(item: MenuItem) {
-  // Flip the isAvailable flag
-  const updatedItem = { ...item, isAvailable: !item.isAvailable };
+    const updatedItem = { ...item, isAvailable: !item.isAvailable };
 
-  // Call update API
-  this.menuService.updateMenuItem(item.menuItemId!, updatedItem).subscribe({
-    next: () => {
-      // Update the item in the local array
-      const index = this.menuItems.findIndex(m => m.menuItemId === item.menuItemId);
-      if (index !== -1) {
-        this.menuItems[index].isAvailable = updatedItem.isAvailable;
+    this.menuService.updateMenuItem(item.menuItemId!, updatedItem).subscribe({
+      next: () => {
+        const index = this.menuItems.findIndex(m => m.menuItemId === item.menuItemId);
+        if (index !== -1) {
+          this.menuItems[index].isAvailable = updatedItem.isAvailable;
+        }
+
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+      },
+      error: err => {
+        console.error('Failed to toggle availability', err);
+        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
       }
-    },
-    error: err => console.error('Failed to toggle availability', err)
-  });
-}
+    });
+  }
 }

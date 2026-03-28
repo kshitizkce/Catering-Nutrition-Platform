@@ -179,4 +179,21 @@ p {
   td button {
     margin-top: 6px;
   }
+
+  .delete-btn {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #c62828;
+}
+.table-container {
+  overflow-x: auto;
+}
 }

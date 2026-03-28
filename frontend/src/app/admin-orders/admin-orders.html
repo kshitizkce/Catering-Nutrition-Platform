@@ -17,72 +17,85 @@
   <!-- TABLE -->
   <div class="table-container" *ngIf="!loading">
 
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Customer</th>
-          <th>Vendor</th>
-          <th>Amount</th>
-          <th>Status</th>
-          <th>Date</th>
-        </tr>
-      </thead>
+    <!-- TABLE HEADER -->
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Customer</th>
+      <th>Vendor</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Action</th> <!-- ✅ New column -->
+      <th>Date</th>
+    </tr>
+  </thead>
 
-      <tbody>
-        <ng-container *ngFor="let o of filteredOrders">
+  <tbody>
+    <ng-container *ngFor="let o of filteredOrders">
 
-          <!-- ORDER ROW -->
-          <tr (click)="toggleOrder(o)">
-            <td>#{{ o.orderId }}</td>
-            <td>
-              <div class="customer">
-                <span class="name">{{ o.fullname }}</span>
-                <small>{{ o.email }}</small>
+      <!-- ORDER ROW -->
+      <tr (click)="toggleOrder(o)">
+        <td>#{{ o.orderId }}</td>
+        <td>
+          <div class="customer">
+            <span class="name">{{ o.fullname }}</span>
+            <small>{{ o.email }}</small>
+          </div>
+        </td>
+        <td>{{ o.vendorName }}</td>
+        <td>${{ o.totalAmount }}</td>
+
+        <td>
+          <span class="status" [ngClass]="o.orderStatus.toLowerCase()">
+            {{ o.orderStatus }}
+          </span>
+        </td>
+
+        <!-- ACTION COLUMN (DROPDOWN) -->
+        <td>
+          <select
+            [(ngModel)]="o.statusId"
+            (click)="$event.stopPropagation()"
+            (ngModelChange)="updateOrderStatus(o, $event)">
+            <option [value]="1">Cancelled</option>
+            <option [value]="2">Pending</option>
+            <option [value]="3">Confirmed</option>
+            <option [value]="4">Shipped</option>
+            <option [value]="5">Delivered</option>
+          </select>
+        </td>
+
+        <td>{{ o.orderDate | date:'mediumDate' }}</td>
+      </tr>
+
+      <!-- EXPANDED ROW -->
+      <tr *ngIf="o.expanded">
+        <td colspan="7">
+          <div class="order-details">
+            <p><strong>Address:</strong> {{ o.deliveryAddress }}</p>
+            <p><strong>Phone:</strong> {{ o.phone }}</p>
+
+            <!-- ITEMS -->
+            <div *ngIf="o.items?.length; else noItems">
+              <div *ngFor="let i of o.items" class="item-row">
+                <div>{{ i.itemName }}</div>
+                <div>{{ i.quantity }} × ${{ i.unitPrice }}</div>
+                <div>${{ i.quantity * i.unitPrice }}</div>
               </div>
-            </td>
-            <td>{{ o.vendorName }}</td>
-            <td>${{ o.totalAmount }}</td>
+            </div>
 
-            <td>
-              <span class="status"
-                [ngClass]="o.orderStatus.toLowerCase()">
-                {{ o.orderStatus }}
-              </span>
-            </td>
+            <ng-template #noItems>
+              <p class="no-items">No items in this order</p>
+            </ng-template>
 
-            <td>{{ o.orderDate | date:'mediumDate' }}</td>
-          </tr>
+          </div>
+        </td>
+      </tr>
 
-          <!-- EXPANDED ROW -->
-          <tr *ngIf="o.expanded">
-            <td colspan="6">
-              <div class="order-details">
-
-                <p><strong>Address:</strong> {{ o.deliveryAddress }}</p>
-                <p><strong>Phone:</strong> {{ o.phone }}</p>
-
-                <!-- ITEMS -->
-                <div *ngIf="o.items?.length; else noItems">
-                  <div *ngFor="let i of o.items" class="item-row">
-                    <div>{{ i.itemName }}</div>
-                    <div>{{ i.quantity }} × ${{ i.unitPrice }}</div>
-                    <div>${{ i.quantity * i.unitPrice }}</div>
-                  </div>
-                </div>
-
-                <ng-template #noItems>
-                  <p class="no-items">No items in this order</p>
-                </ng-template>
-
-              </div>
-            </td>
-          </tr>
-
-        </ng-container>
-      </tbody>
-    </table>
-
+    </ng-container>
+  </tbody>
+</table>
   </div>
 
   <p *ngIf="loading">Loading orders...</p>

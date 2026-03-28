@@ -4,23 +4,59 @@
 
   <div class="filters">
     <button (click)="setFilter('All')" [class.active]="selectedFilter==='All'">All</button>
-    <button (click)="setFilter('Pending')" [class.active]="selectedFilter==='Pending'">Pending</button>
-    <button (click)="setFilter('Approved')" [class.active]="selectedFilter==='Approved'">Approved</button>
-    <button (click)="setFilter('Rejected')" [class.active]="selectedFilter==='Rejected'">Rejected</button>
+    <button (click)="setFilter('Active')" [class.active]="selectedFilter==='Active'">Active</button>
+    <button (click)="setFilter('Inactive')" [class.active]="selectedFilter==='Inactive'">Inactive</button>
+    <button (click)="setFilter('Verified')" [class.active]="selectedFilter==='Verified'">Verified</button>
+    <button (click)="setFilter('Not Verified')" [class.active]="selectedFilter==='Not Verified'">Not Verified</button>
   </div>
 
   <table *ngIf="!loading">
     <thead>
-      <tr><th>Name</th><th>Email</th><th>Status</th><th>Actions</th></tr>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>City</th>
+        <th>Address</th>
+        <th>Rating</th>
+        <th>Business Hours</th>
+        <th>Logo</th>
+        <th>File</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
     </thead>
     <tbody>
       <tr *ngFor="let v of filteredVendors" style="cursor:pointer" (click)="openVendor(v)">
         <td>{{ v.vendorName }}</td>
         <td>{{ v.vendorEmail }}</td>
-        <td>{{ v.status }}</td>
+        <td>{{ v.vendorPhone }}</td>
+        <td>{{ v.city }}</td>
+        <td>{{ v.vendorAddress || 'N/A' }}</td>
+        <td>{{ v.rating ?? 'N/A' }}</td>
+        <td>{{ v.businessHours || 'N/A' }}</td>
+
+        <!-- LOGO IMAGE -->
         <td>
-          <button (click)="$event.stopPropagation(); v.status='Approved'">Approve</button>
-          <button (click)="$event.stopPropagation(); v.status='Rejected'">Reject</button>
+          <img *ngIf="v.businessLogo" [src]="getVendorFileUrl(v.businessLogo)" width="40" height="40" />
+          <span *ngIf="!v.businessLogo">N/A</span>
+        </td>
+
+        <!-- FILE LINK -->
+        <td>
+          <a *ngIf="v.businessFile" [href]="getVendorFileUrl(v.businessFile)" target="_blank">
+            View
+          </a>
+          <span *ngIf="!v.businessFile">N/A</span>
+        </td>
+
+        <td>{{ v.status }}</td>
+
+        <!-- ACTIONS -->
+        <td (click)="$event.stopPropagation()">
+          <button (click)="approve(v)">Approve</button>
+          <button (click)="reject(v)">Reject</button>
+          <button class="delete-btn" (click)="deleteVendor(v.vendorId)">Delete</button>
         </td>
       </tr>
     </tbody>

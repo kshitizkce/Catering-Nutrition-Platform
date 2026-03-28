@@ -1,5 +1,17 @@
 <div class="dashboard">
 
+  <!-- VENDOR SELECTION -->
+  <div class="section-title">
+  <h3>Select Vendor</h3>
+</div>
+
+<select [(ngModel)]="vendorId" (change)="onVendorChange($event)">
+  <option value="" disabled>Select Vendor</option>
+  <option *ngFor="let v of vendors" [value]="v.vendorId">
+    {{ v.vendorName }}
+  </option>
+</select>
+
   <!-- SUBSCRIBERS SECTION -->
   <div class="section-title">
     <h3>Subscribers List</h3>
@@ -14,12 +26,15 @@
         <th>Status</th>
         <th>Action</th>
       </tr>
+
       <tr *ngFor="let s of subscribers">
         <td>{{ s.name }}</td>
+
         <td>
           <span *ngIf="!editingSubscriber || editingSubscriber.subscriberId !== s.subscriberId">
             {{ s.plan }}
           </span>
+
           <select *ngIf="editingSubscriber && editingSubscriber.subscriberId === s.subscriberId"
                   [(ngModel)]="editingSubscriber.plan"
                   [disabled]="!isOpen">
@@ -27,13 +42,16 @@
             <option value="Paid">Paid</option>
           </select>
         </td>
+
         <td>{{ s.status }}</td>
+
         <td>
           <button *ngIf="!editingSubscriber || editingSubscriber.subscriberId !== s.subscriberId"
                   (click)="editSubscriber(s)"
                   [disabled]="!isOpen">
             Update Plan
           </button>
+
           <span *ngIf="editingSubscriber && editingSubscriber.subscriberId === s.subscriberId">
             <button (click)="saveSubscriber()">Save</button>
             <button (click)="cancelEdit()">Cancel</button>

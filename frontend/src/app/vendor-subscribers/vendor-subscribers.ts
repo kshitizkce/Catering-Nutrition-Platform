@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { VendorService } from '../services/vendor/vendor-service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../services/auth/auth';
+import { MenuService } from '../services/menu/menu';
 
 
 @Component({
@@ -15,54 +15,58 @@ import { AuthService } from '../services/auth/auth';
 export class VendorSubscribersComponent implements OnInit {
 
   vendorId: number = 0;
+  vendors: any[] = []; // ✅ vendor list
+
   subscribers: any[] = [];
   subscribersLoaded: boolean = false;
   editingSubscriber: any = null;
-  isOpen: boolean = false;
+  isOpen: boolean = true; // admin can always edit
 
-  constructor(private vendorService: VendorService
-    ,private authService: AuthService
+  constructor(
+    private vendorService: VendorService,
+    private menuService :MenuService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-  const user = this.authService.getUser();
-
-  if (!user) {
-    console.error("User not logged in");
-    return;
+    this.loadVendors();
   }
 
-  const userId = user.userId;
+  // ✅ Load all vendors for dropdown
+  loadVendors() {
+     this.menuService.getVendors().subscribe({
+    next: (res: any) => {
+      this.vendors = res || [];
 
-  if (!userId) {
-    console.error("User ID not found");
-    return;
-  }
+      // ✅ Set first vendor as default
+      if (this.vendors.length > 0) {
+        this.vendorId = this.vendors[0].vendorId;
 
-  // ✅ Step 1: get vendorId from backend
-  this.vendorService.getVendorByUserId(userId).subscribe({
-    next: (vendor: any) => {
-      this.vendorId = vendor.vendorId;
-
-      if (!this.vendorId) {
-        console.error("Vendor ID not found");
-        return;
+        // 🔥 Automatically load subscribers for first vendor
+        this.loadSubscribers();
       }
 
-      // Get store status from localStorage
-    const savedStatus = localStorage.getItem('restaurantOpen');
-    this.isOpen = savedStatus === 'true';
-
-    this.loadSubscribers();
+      this.cdr.detectChanges();
     },
     error: (err) => {
-      console.error("Failed to fetch vendor:", err);
+      console.error("Failed to fetch vendors", err);
     }
   });
 }
 
+  // ✅ When admin selects a vendor
+  onVendorChange(event: any) {
+    this.vendorId = Number(event.target.value);
+    this.loadSubscribers();
+  }
+
+  // ✅ Load subscribers based on selected vendor
   loadSubscribers() {
+    if (!this.vendorId) return;
+
     this.subscribersLoaded = false;
+    this.cdr.detectChanges();
+
     this.vendorService.getSubscribers(this.vendorId).subscribe(
       (res: any) => {
         this.subscribers = (res || []).map((s: any) => ({
@@ -72,18 +76,21 @@ export class VendorSubscribersComponent implements OnInit {
           status: s.status || 'Unknown'
         }));
         this.subscribersLoaded = true;
+        this.cdr.detectChanges();
       },
       (err) => {
         console.error(err);
         this.subscribers = [];
         this.subscribersLoaded = true;
         alert("Failed to fetch subscribers");
+        this.cdr.detectChanges();
       }
     );
   }
 
   editSubscriber(sub: any) {
     this.editingSubscriber = { ...sub };
+    this.cdr.detectChanges();
   }
 
   saveSubscriber() {
@@ -91,21 +98,27 @@ export class VendorSubscribersComponent implements OnInit {
 
     const planId = this.editingSubscriber.plan === 'Paid' ? 2 : 1;
 
-    this.vendorService.updateSubscriber(this.vendorId, this.editingSubscriber.subscriberId, { subscriptionTypeId: planId })
-      .subscribe(
-        (res: any) => {
-          alert(res.message || 'Subscriber updated successfully');
-          this.loadSubscribers();
-          this.editingSubscriber = null;
-        },
-        (err) => {
-          console.error(err);
-          alert('Failed to update subscriber');
-        }
-      );
+    this.vendorService.updateSubscriber(
+      this.vendorId,
+      this.editingSubscriber.subscriberId,
+      { subscriptionTypeId: planId }
+    ).subscribe(
+      (res: any) => {
+        alert(res.message || 'Subscriber updated successfully');
+        this.loadSubscribers();
+        this.editingSubscriber = null;
+        this.cdr.detectChanges();
+      },
+      (err) => {
+        console.error(err);
+        alert('Failed to update subscriber');
+        this.cdr.detectChanges();
+      }
+    );
   }
 
   cancelEdit() {
     this.editingSubscriber = null;
+    this.cdr.detectChanges();
   }
 }
