@@ -103,8 +103,8 @@ namespace CateringNutrition.API.Controllers.vendor
 
         [HttpPost("profile")]
         public async Task<IActionResult> SaveProfile([FromForm] VendorProfileDto dto,
-                                                    IFormFile? logo,
-                                                    IFormFile? file)
+                                            IFormFile? logo,
+                                            IFormFile? file)
         {
             try
             {

@@ -10,5 +10,7 @@ namespace CateringNutrition.API.Interfaces.adminInterface
 
         Task<List<AdminOrderDto>> GetAllOrdersAsync();
 
+        Task<bool> DeleteUserAsync(int userId);
+
     }
 }

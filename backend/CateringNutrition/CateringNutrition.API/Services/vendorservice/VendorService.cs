@@ -315,7 +315,8 @@ namespace CateringNutrition.API.Services.vendorservice
                     UpdatedAt = null,
                     BusinessHours = null,
                     BusinessLogo = null,
-                    BusinessFile = null
+                    BusinessFile = null,
+                    MealCateringStatus=0
                 };
 
                 _context.Vendors.Add(vendor);
@@ -337,7 +338,8 @@ namespace CateringNutrition.API.Services.vendorservice
                 ContactPhone = vendor.VendorPhone,
                 BusinessHours = vendor.BusinessHours,
                 BusinessLogo = vendor.BusinessLogo,
-                BusinessFile = vendor.BusinessFile
+                BusinessFile = vendor.BusinessFile,
+                MealCateringStatus = vendor.MealCateringStatus
             };
         }
 
@@ -406,6 +408,7 @@ namespace CateringNutrition.API.Services.vendorservice
             vendor.VendorEmail = dto.ContactEmail;
             vendor.VendorPhone = dto.ContactPhone;
             vendor.BusinessHours = dto.BusinessHours;
+            vendor.MealCateringStatus = dto.MealCateringStatus;
             vendor.UpdatedAt = DateTime.Now;
 
             await _context.SaveChangesAsync();

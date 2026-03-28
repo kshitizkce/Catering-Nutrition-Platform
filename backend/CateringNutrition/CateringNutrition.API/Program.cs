@@ -100,11 +100,18 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
+
+
 // Enable CORS
 app.UseCors("AllowAll");
 
-//app.UseHttpsRedirection();
-app.UseStaticFiles(); // Serve wwwroot static files
+app.UseStaticFiles();
+
+var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+if (!Directory.Exists(uploadsPath))
+{
+    Directory.CreateDirectory(uploadsPath);
+}
 
 
 app.UseRouting();

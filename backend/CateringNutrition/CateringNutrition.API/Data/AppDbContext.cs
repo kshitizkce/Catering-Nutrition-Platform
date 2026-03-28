@@ -1,4 +1,5 @@
 ﻿using CateringNutrition.API.Models.authorization;
+using CateringNutrition.API.Models.cateringEvent;
 using CateringNutrition.API.Models.vendor;
 using EllipticCurve.Utils;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,13 @@ namespace CateringNutrition.API.Data
         public DbSet<Orders> Orders { get; set; }
         public DbSet<OrderItems> OrderItems { get; set; }
         public DbSet<Subscribers> Subscribers { get; set; }
+        public DbSet<CateringEvents> CateringEvents { get; set; }
+
+
+
+        public DbSet<EventConfirmations> EventConfirmations { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

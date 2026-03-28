@@ -11,6 +11,7 @@
         public string? Password { get; set; }
 
         // VENDOR TABLE
+        public int MealCateringStatus { get; set; }
         public string BusinessName { get; set; }
         public string? BusinessDescription { get; set; }
         public string? VendorAddress { get; set; }

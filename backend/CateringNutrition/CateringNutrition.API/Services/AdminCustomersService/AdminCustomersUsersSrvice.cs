@@ -36,6 +36,19 @@ namespace CateringNutrition.API.Services.AdminCustomersService
                 .ToListAsync();
         }
 
+        public async Task<bool> DeleteUserAsync(int userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+
+            if (user == null)
+                return false;
+
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<AdminCustomerUserDetailsDto> GetCustomerDetailsAsync(int userId, int pageNumber, int pageSize)
         {
             // 1️⃣ User Info
@@ -136,6 +149,7 @@ namespace CateringNutrition.API.Services.AdminCustomersService
                     Fullname = u.FullName,
                     Email=u.Email,
                     Phone=u.Phone,
+                    VendorId = o.VendorId, 
                     VendorName = v.VendorName,
                     OrderStatus = o.OrderStatusId == 1 ? "Cancelled" :
                                   o.OrderStatusId == 2 ? "Pending" :

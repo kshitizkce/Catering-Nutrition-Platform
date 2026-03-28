@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CateringNutrition.API.Data;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CateringNutrition.API.Models.vendor
@@ -38,6 +40,8 @@ namespace CateringNutrition.API.Models.vendor
         [Required]
         [RegularExpression("Active|Inactive", ErrorMessage = "Status must be Active or Inactive")]
         public string Status { get; set; } = "Active";
+        public int MealCateringStatus { get; set; }
+
 
         public DateTime CreatedAt { get; set; }
 
