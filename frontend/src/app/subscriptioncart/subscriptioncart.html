@@ -1,0 +1,64 @@
+<div class="cart-page">
+
+  <h2>Your Meal Plan</h2>
+
+  <!-- EMPTY -->
+  <div *ngIf="items.length === 0" class="empty">
+    No meals added yet 🍽️
+  </div>
+
+  <!-- ITEMS -->
+  <div *ngFor="let item of items; let i = index" class="cart-item">
+
+    <!-- ✅ IMAGE (NEW but safe for CSS) -->
+    <img [src]="item.imageUrl || 'assets/no-image.png'" class="item-img">
+
+    <div class="item-info">
+      <h3>{{item.name}}</h3>
+
+      <p>🔥 {{item.customCalories}} kcal | 💪 {{item.customProtein}}g</p>
+      <span class="style">{{item.preparationStyle}}</span>
+    </div>
+
+    <!-- ✅ QUANTITY CONTROLS (NEW) -->
+    <div class="qty">
+      <button (click)="cartService.decrease(i)">-</button>
+      <span>{{item.quantity}}</span>
+      <button (click)="cartService.increase(i)">+</button>
+    </div>
+
+    <div class="item-actions">
+      <button (click)="remove(i)">❌</button>
+    </div>
+
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-box">
+
+    <!-- ✅ FIX: USE TOTAL QUANTITY -->
+    <p>{{cartService.getTotalQuantity()}} / {{mealsLimit}} meals selected</p>
+
+    <div class="progress-bar">
+      <div class="fill"
+           [style.width.%]="mealsLimit ? (cartService.getTotalQuantity() / mealsLimit) * 100 : 0">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+
+    <button (click)="goBack()">➕ Add More Meals</button>
+
+    <!-- ✅ FIX: ENABLE ONLY WHEN TOTAL MATCH -->
+    <button class="confirm"
+            [disabled]="cartService.getTotalQuantity() !== mealsLimit"
+            (click)="confirmOrder()">
+      Confirm Meal Plan
+    </button>
+
+  </div>
+
+</div>

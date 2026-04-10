@@ -1,0 +1,101 @@
+<div class="checkout-page">
+
+  <div class="checkout-grid">
+
+    <!-- LEFT SIDE -->
+    <div class="left">
+
+      <!-- ADDRESS -->
+      <div class="card">
+        <h2>📍 Delivery Address</h2>
+
+        <div *ngFor="let addr of addresses"
+             (click)="selectedAddressId = addr.addressId"
+             [class.active]="selectedAddressId === addr.addressId"
+             class="select-card">
+
+          <h4>{{addr.streetAddress}}</h4>
+          <p>{{addr.city}}, {{addr.province}}</p>
+          <span>{{addr.postalCode}}</span>
+
+        </div>
+      </div>
+
+      <!-- PAYMENT -->
+      <div class="card">
+        <h2>💳 Payment Method</h2>
+
+        <div *ngFor="let pay of payments"
+             (click)="selectedPaymentId = pay.paymentId"
+             [class.active]="selectedPaymentId === pay.paymentId"
+             class="select-card">
+
+          <h4>{{pay.cardBrand}} •••• {{pay.cardLast4}}</h4>
+          <p>{{pay.cardHolderName}}</p>
+          <span>Exp: {{pay.expiryMonth}}/{{pay.expiryYear}}</span>
+
+        </div>
+
+        <!-- STRIPE -->
+        <div class="stripe-box">
+          <h3>Or Pay with Card</h3>
+          <div id="card-element"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+<div class="summary">
+
+  <h2>🧾 Order Summary</h2>
+
+  <!-- 🔥 SHOW TYPE -->
+  <div class="row">
+    <span>Type</span>
+    <span>
+      {{ isSubscription ? 'Subscription Plan' : 'One-Time Order' }}
+    </span>
+  </div>
+
+  <!-- 🔥 OPTIONAL PLAN DETAILS -->
+  <div *ngIf="isSubscription" class="row">
+    <span>Plan</span>
+    <span>{{ subscriptionData?.plan | titlecase }}</span>
+  </div>
+
+  <div *ngIf="isSubscription" class="row">
+    <span>Meals</span>
+    <span>{{ subscriptionData?.meals }}</span>
+  </div>
+
+  <!-- 💰 SUBTOTAL -->
+<div class="row">
+  <span>Subtotal</span>
+  <span>
+    ${{ (isSubscription ? subscriptionAmount : subtotal) | number:'1.2-2' }}
+  </span>
+</div>
+
+<div class="row">
+  <span>Tax</span>
+  <span>${{ tax | number:'1.2-2' }}</span>
+</div>
+
+<div class="row">
+  <span>Service Fee</span>
+  <span>${{ service | number:'1.2-2' }}</span>
+</div>
+
+<div class="row total">
+  <span>Total</span>
+  <span>${{ total | number:'1.2-2' }}</span>
+</div>
+
+<button class="checkout-btn" (click)="checkout()">
+  Pay ${{ total | number:'1.2-2' }}
+</button>
+</div>
+  </div>
+
+</div>

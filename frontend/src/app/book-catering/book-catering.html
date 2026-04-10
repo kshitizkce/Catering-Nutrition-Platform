@@ -1,166 +1,169 @@
-<div class="page">
+<app-navbar [userEmail]="userEmail"></app-navbar>
 
-<!-- NAVBAR -->
-<nav class="navbar">
+  <div class="container">
 
-  <div class="logo">
-    🍽 Smart Catering
-  </div>
-
-  <div class="nav-links">
-
-    <span (click)="router.navigate(['/home'])">
-      🏠 Home
-    </span>
-
-    <span (click)="router.navigate(['/menu'])">
-      📋 Menu
-    </span>
-
-    <span (click)="router.navigate(['/profile'])">
-      👤 Account
-    </span>
-
-  </div>
-
-</nav>
-<div class="booking-page">
-
-  <!-- HERO HEADER -->
-  <div class="hero">
-    <h1>Book Catering Service</h1>
-    <p>Perfect meals for your perfect event</p>
-    <span>We cater events of all sizes with custom menu options</span>
-  </div>
-
-
-  <!-- WHY CHOOSE -->
-  <section class="why-section">
-
-    <h2>Why Choose Our Catering?</h2>
-
-    <div class="why-grid">
-
-      <div class="why-card">
-        👨‍🍳
-        <h3>Expert Chefs</h3>
-        <p>Professional culinary team</p>
-      </div>
-
-      <div class="why-card">
-        🥗
-        <h3>Fresh Ingredients</h3>
-        <p>Locally sourced quality</p>
-      </div>
-
-      <div class="why-card">
-        ⚡
-        <h3>On-Time Delivery</h3>
-        <p>Always punctual service</p>
-      </div>
-
-      <div class="why-card">
-        💰
-        <h3>Best Prices</h3>
-        <p>Competitive rates</p>
-      </div>
-
+    <!-- HERO -->
+    <div class="hero">
+      <h1>Book Catering Service</h1>
+      <p>Perfect meals for your perfect event</p>
+      <span>We cater events of all sizes with custom menu options</span>
     </div>
 
-  </section>
-
-
-  <!-- EVENT DETAILS -->
-  <section class="form-section">
-
-    <h2>Event Details</h2>
-
-    <!-- EVENT TYPE -->
-    <label>Event Type *</label>
-
-<div class="event-types">
-
-  <button
-  *ngFor="let type of eventTypes"
-  (click)="selectEvent(type)"
-  [class.active]="selectedEventType === type">
-
-  {{type}}
-
-  </button>
-
-</div>
-
-
-    <!-- GUESTS -->
-    <label>Number of Guests *</label>
-    <input type="number" placeholder="e.g., 50">
-
-
-    <!-- DATE + TIME -->
-    <div class="row">
-
-      <div class="field">
-        <label>Event Date *</label>
-        <input type="date">
-      </div>
-
-      <div class="field">
-        <label>Event Time *</label>
-        <input type="time">
-      </div>
-
+    <!-- INFO BOX -->
+    <div class="info-box">
+      <h3>ℹ️ Important Booking Information</h3>
+      <ul>
+        <li>Please book at least <b>7 days before</b> your event</li>
+        <li>You will be notified <b>3 days before</b> the event</li>
+      </ul>
     </div>
 
+    <!-- WHY -->
+    <section class="why-section">
+      <h2>Why Choose Our Catering?</h2>
 
-    <!-- LOCATION -->
-    <label>Event Location *</label>
-    <textarea placeholder="Enter full event address"></textarea>
+      <div class="why-grid">
+        <div class="why-card">👨‍🍳 <h4>Expert Chefs</h4><p>Professional culinary team</p></div>
+        <div class="why-card">🥗 <h4>Fresh Ingredients</h4><p>Locally sourced quality</p></div>
+        <div class="why-card">⚡ <h4>On-Time Delivery</h4><p>Always punctual</p></div>
+        <div class="why-card">💰 <h4>Best Prices</h4><p>Competitive rates</p></div>
+      </div>
+    </section>
 
+    
 
-    <!-- BUDGET -->
-    <label>Budget Range *</label>
+    <!-- FORM -->
+    <section class="form-section" id="formSection">
 
-    <select>
-      <option>Select budget range</option>
-      <option>$10 - $20 per person</option>
-      <option>$20 - $40 per person</option>
-      <option>$40 - $60 per person</option>
-      <option>$60+ per person</option>
-    </select>
+      <h2>📋 Event Details</h2>
 
+      <!-- EVENT TYPE -->
+      <label>Event Type *</label>
+      <div class="event-types">
+        <button *ngFor="let type of eventTypes"
+          (click)="selectEvent(type)"
+          [class.active]="selectedEventType === type">
+          {{type}}
+        </button>
+      </div>
 
-    <!-- DIETARY -->
-   <label>Dietary Requirements</label>
+      <!-- GUESTS -->
+      <label>Number of Guests *</label>
+      <input type="number" [(ngModel)]="guests" placeholder="e.g., 50">
 
-<div class="diet-grid">
+      <!-- DATE + TIME ROW -->
+      <div class="row">
+        <input type="date" [(ngModel)]="date">
 
-  <button
-  *ngFor="let diet of dietaryOptions"
-  (click)="toggleDiet(diet)"
-  [class.active]="selectedDietary.includes(diet)">
+        <!-- Start Time -->
+        <input type="time" [(ngModel)]="startTime" placeholder="Start Time">
 
-  {{diet}}
+        <!-- End Time -->
+        <input type="time" [(ngModel)]="endTime" placeholder="End Time">
+      </div>
 
-  </button>
+      <!-- LOCATION -->
+      <label>Location *</label>
+      <textarea [(ngModel)]="location"></textarea>
 
-</div>
+      <!-- BUDGET -->
+      <label>Budget *</label>
+      <select [(ngModel)]="budget">
+        <option value="">Select budget</option>
+        <option>$10 - $20</option>
+        <option>$20 - $40</option>
+        <option>$40+</option>
+      </select>
 
+      <!-- VENDOR DROPDOWN -->
+      <label>Select Vendor</label>
+<select [(ngModel)]="selectedVendorId" name="vendor" class="form-control">
+  <option [ngValue]="0" disabled>Select Vendor</option>
 
-    <!-- NOTES -->
-    <label>Additional Notes</label>
-    <textarea placeholder="Any special requests or requirements?"></textarea>
+  <option *ngFor="let v of vendors" [ngValue]="v.vendorId">
+    {{ v.vendorName }}
+  </option>
+</select>
 
+      <!-- DIETARY -->
+      <label>Dietary</label>
+      <div class="diet-grid">
+        <button *ngFor="let diet of dietaryOptions"
+          (click)="toggleDiet(diet)"
+          [class.active]="selectedDietary.includes(diet)">
+          {{diet}}
+        </button>
+      </div>
 
-    <!-- BUTTON -->
-    <button class="submit-btn" (click)="submitRequest()">
-Get Quote & Browse Menu
-</button>
+      <!-- NOTES -->
+      <label>Notes</label>
+      <textarea [(ngModel)]="notes"></textarea>
 
-    <p class="note">
-      We'll contact you within 24 hours with a customized quote
-    </p>
+      <!-- FILE UPLOAD -->
+      <div class="upload-box">
+        ⬆️ Upload files
+        <p>JPG, PDF up to 10MB</p>
+        <input type="file" (change)="onFileSelected($event)">
+      </div>
 
-  </section>
+      <!-- SUBMIT -->
+      <button class="submit-btn" (click)="submitRequest()">
+        Get Quote
+      </button>
 
-</div>
+      <p class="note">We’ll contact you within 24 hours</p>
+
+    </section>
+
+    <!-- ================= USER EVENTS TABLE ================= -->
+<section class="events-section">
+  <h2>📋 My Catering Events</h2>
+
+  <table class="events-table" *ngIf="events.length > 0; else noData">
+    <thead>
+  <tr>
+    <th>Event Type</th>
+    <th>Date</th>
+    <th>Guests</th>
+    <th>Location</th>
+    <th>Budget</th>
+    <th>Status</th>
+    <th>File</th>
+    <th>Action</th> <!-- ✅ NEW -->
+  </tr>
+</thead>
+
+<tbody>
+  <tr *ngFor="let e of events">
+    <td>{{ e.eventType }}</td>
+    <td>{{ e.eventDate | date }}</td>
+    <td>{{ e.numberOfGuests }}</td>
+    <td>{{ e.eventLocation }}</td>
+    <td>{{ e.budgetRange }}</td>
+    <td>{{ e.eventStatus }}</td>
+
+    <td>
+      <a *ngIf="e.cateringDetailFile"
+         [href]="'http://localhost:5197' + e.cateringDetailFile"
+         target="_blank">
+        View File
+      </a>
+      <span *ngIf="!e.cateringDetailFile">No File</span>
+    </td>
+
+    <!-- ✅ ACTION BUTTON -->
+    <td>
+      <button class="edit-btn" (click)="editEvent(e)">
+        ✏️ Edit
+      </button>
+    </td>
+  </tr>
+</tbody>
+  </table>
+
+  <ng-template #noData>
+    <p>No events found.</p>
+  </ng-template>
+</section>
+
+  </div>

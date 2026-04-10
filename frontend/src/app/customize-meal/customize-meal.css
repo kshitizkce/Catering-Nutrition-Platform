@@ -1,0 +1,152 @@
+.page {
+  background: #f4f6f9;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.back {
+  color: #16a34a;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+/* GRID */
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.nutrition-grid div {
+  background: #f3f4f6;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* ROW */
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+input, select {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  width: 100%;
+}
+
+/* RESULT */
+.result-box {
+  background: #e7f7ee;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.price-box {
+  margin-top: 15px;
+  padding: 12px;
+  border: 2px solid #16a34a;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  color: #16a34a;
+}
+
+/* BUTTONS */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.add {
+  flex: 1;
+  background: #16a34a;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+}
+
+.reset {
+  background: #ccc;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+/* SUMMARY */
+.summary {
+  background: #eef2f7;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .nutrition-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+}
+/* BUTTON ROW FIX */
+.button-row {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  align-items: center;
+}
+
+/* ADD TO CART BUTTON */
+.add-btn {
+  flex: 1;
+  padding: 14px;
+  background: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* RESET BUTTON */
+.reset-btn {
+  padding: 14px 20px;
+  background: #d1d5db;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}

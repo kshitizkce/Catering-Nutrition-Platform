@@ -1,18 +1,7 @@
+<app-navbar [userEmail]="userEmail"></app-navbar>
+
 <div class="profile-page">
-
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="logo">🍽 Smart Catering</div>
-
-    <div class="nav-links">
-      <a (click)="goHome()">Home</a>
-      <a (click)="goMenu()">Menu</a>
-      <a class="active" (click)="goAccount()">Account</a>
-    </div>
-  </nav>
-
   <div class="container">
-
     <h1 class="page-title">My Profile</h1>
 
     <div class="profile-grid">
@@ -21,46 +10,48 @@
       <div class="profile-card">
 
         <div class="avatar">
-          {{userName ? userName.charAt(0).toUpperCase() : 'U'}}
+          {{ userName ? userName.charAt(0).toUpperCase() : 'U' }}
         </div>
 
         <h2>{{userName}}</h2>
         <p class="email">{{userEmail}}</p>
-        <p class="phone">+1 (555) 123-4567</p>
+        <p class="phone">{{phone}}</p>
 
-        <div class="membership">
-          ⭐ Gold Member
-          <small>Member since Jan 2026</small>
+        <div class="membership" *ngIf="subscription">
+          ⭐ {{subscriptionName}} Member
+          <small>
+            Started {{subscription.createdAt | date}} • {{daysLeft}} days left
+          </small>
         </div>
 
         <div class="stats">
           <div class="stat">
-            <h3>24</h3>
+            <h3>{{totalOrders}}</h3>
             <span>Orders</span>
           </div>
 
           <div class="stat">
-            <h3>$2400</h3>
+            <h3>${{totalSpent}}</h3>
             <span>Spent</span>
           </div>
 
           <div class="stat">
-            <h3>150</h3>
-            <span>Points</span>
+            <h3>{{daysLeft}}</h3>
+            <span>Days Left</span>
           </div>
 
           <div class="stat">
-            <h3>8</h3>
+            <h3>0</h3>
             <span>Saved</span>
           </div>
         </div>
 
-        <button class="edit-btn" (click)="editProfile()">Edit Profile</button>
+        <button class="edit-btn" (click)="openSection('edit')">Edit Profile</button>
         <button class="logout-btn" (click)="logout()">Logout</button>
 
       </div>
 
-      <!-- RIGHT SIDE -->
+      <!-- RIGHT SECTION -->
       <div class="right-section">
 
         <!-- QUICK ACTIONS -->
@@ -68,116 +59,382 @@
           <h2>Quick Actions</h2>
 
           <div class="action-grid">
-            <div class="action orange" (click)="openSection('orders')">
-              Order History
+            <div class="action-card" (click)="openSection('orders')">
+              🧾 Orders
+              <small>View your history</small>
             </div>
 
-            <div class="action green" (click)="openSection('track')">
-              Track Order
+            <div class="action-card" (click)="goToTracking()">
+              🚚 Track
+              <small>Latest delivery</small>
             </div>
 
-            <div class="action blue" (click)="openSection('subscriptions')">
-              Subscriptions
+            <div class="action-card" (click)="openSection('subscriptions')">
+              ⭐ Subscription
+              <small>Plan details</small>
             </div>
 
-            <div class="action purple" (click)="openSection('saved')">
-              Saved Items
+            <div class="action-card" (click)="openSection('saved')">
+              ❤️ Saved
+              <small>Favorite items</small>
             </div>
           </div>
         </div>
 
         <!-- ACCOUNT SETTINGS -->
         <div class="card">
-
           <h2>Account Settings</h2>
 
-          <div class="setting-item" (click)="openSection('personal')">
-            Personal Information
-          </div>
+          <div class="settings-list">
 
-          <div class="setting-item" (click)="openSection('address')">
-            Saved Addresses
-          </div>
+            <div class="setting-item" (click)="openSection('personal')">
+              👤 Personal Info
+              <span>View & manage profile</span>
+            </div>
 
-          <div class="setting-item" (click)="openSection('payment')">
-            Payment Methods
-          </div>
+            <div class="setting-item" (click)="openSection('address')">
+              📍 Addresses
+              <span>Manage delivery locations</span>
+            </div>
 
-          <div class="setting-item" (click)="openSection('notifications')">
-            Notifications
-          </div>
+            <div class="setting-item" (click)="openSection('payment')">
+              💳 Payments
+              <span>Cards & billing</span>
+            </div>
 
+            <div class="setting-item" (click)="openSection('notifications')">
+              🔔 Notifications
+              <span>Email & alerts</span>
+            </div>
+
+          </div>
         </div>
 
-        <!-- REWARDS -->
-        <div class="rewards-card">
+        <!-- ORDERS -->
+        <div *ngIf="activeSection === 'orders'" id="ordersSection" class="card">
+          <h2>Your Orders</h2>
 
-          <h2>Rewards Points</h2>
+          <div *ngFor="let order of orders" class="order-card highlight">
 
-          <p>Your Balance</p>
-          <h1>150</h1>
+            <div class="order-header">
+              <div>
+                <strong>#{{order.orderId}}</strong>
+                <span class="status">{{getStatusText(order)}}</span>
+              </div>
 
-          <div class="progress-bar">
-            <div class="progress"></div>
+              <div class="order-meta">
+                <span>{{order.orderDate | date}}</span>
+                <strong>${{order.totalAmount}}</strong>
+              </div>
+            </div>
+
+            <div class="vendor">
+              🏪 {{order.vendorName || 'Unknown Vendor'}}
+            </div>
+  <!-- ✅ DELIVERY STATUS (ADDED) -->
+  <div class="delivery-status" *ngIf="order.deliveryStatus">
+    <div *ngIf="order.deliveryStatus === 'Driver Assigned'">🚗 Driver Assigned</div>
+    <div *ngIf="order.deliveryStatus === 'Picked Up'">📦 Picked Up</div>
+    <div *ngIf="order.deliveryStatus === 'On The Way'">🛵 On The Way</div>
+    <div *ngIf="order.deliveryStatus === 'Delivered'">✅ Delivered</div>
+  </div>
+
+
+
+            <div class="items-section" *ngIf="order.items && order.items.length > 0">
+              <div class="item-row" *ngFor="let item of order.items">
+
+                <div class="item-name">
+                  {{item.itemName}}
+                </div>
+
+                <div class="item-details">
+                  <span>Qty: {{item.quantity}}</span>
+                  <span>Price: ${{item.unitPrice}}</span>
+                  <span class="item-total">
+                    ${{item.quantity * item.unitPrice}}
+                  </span>
+                </div>
+
+              </div>
+            </div>
+
+            <div *ngIf="!order.items || order.items.length === 0" class="no-items">
+              No items available
+            </div>
+
+          </div>
+        </div>
+
+        TRACK
+  
+          <!-- <div *ngIf="latestOrder" class="order-card highlight">
+
+            <div class="order-header">
+              <div>
+                <strong>#{{latestOrder.orderId}}</strong>
+                <span class="status">
+                  {{getStatusText(latestOrder)}}
+                </span>
+              </div>
+
+              <div class="order-meta">
+                <span>{{latestOrder.orderDate | date}}</span>
+                <strong>${{latestOrder.totalAmount}}</strong>
+              </div>
+            </div>
+
+            <div class="vendor">
+              🏪 {{latestOrder.vendorName || 'Unknown Vendor'}}
+            </div>
+             <div class="delivery-status" *ngIf="latestOrder.deliveryStatus">
+    <div *ngIf="latestOrder.deliveryStatus === 'Driver Assigned'">🚗 Driver Assigned</div>
+    <div *ngIf="latestOrder.deliveryStatus === 'Picked Up'">📦 Picked Up</div>
+    <div *ngIf="latestOrder.deliveryStatus === 'On The Way'">🛵 On The Way</div>
+    <div *ngIf="latestOrder.deliveryStatus === 'Delivered'">✅ Delivered</div>
+  </div>
+
+            <div class="items-section" *ngIf="latestOrder.items && latestOrder.items.length > 0">
+              <div class="item-row" *ngFor="let item of latestOrder.items">
+
+                <div class="item-name">
+                  {{item.itemName}}
+                </div>
+
+                <div class="item-details">
+                  <span>Qty: {{item.quantity}}</span>
+                  <span>Price: ${{item.unitPrice}}</span>
+                  <span class="item-total">
+                    ${{item.quantity * item.unitPrice}}
+                  </span>
+                </div>
+
+              </div>
+            </div>
+
+            <div *ngIf="!latestOrder.items || latestOrder.items.length === 0" class="no-items">
+              No items available
+            </div>
+
           </div>
 
-          <button class="catalog-btn">
-            View Rewards Catalog
-          </button>
+          <p *ngIf="!latestOrder">No recent orders</p>
+        </div> --> 
 
+        <!-- SUBSCRIPTION -->
+        <div *ngIf="activeSection === 'subscriptions'" id="subscriptionsSection" class="card">
+          <h2>Your Subscription</h2>
+
+          <div *ngIf="subscription" class="order-card highlight">
+            <div class="row">
+              <strong>{{subscriptionName}} Plan</strong>
+              <span class="status">Active</span>
+            </div>
+
+            <p>Started: {{subscription.createdAt | date}}</p>
+            <p>{{daysLeft}} days remaining</p>
+          </div>
         </div>
 
-        <!-- DYNAMIC SECTIONS -->
-
-        <div *ngIf="activeSection === 'orders'" class="card">
-          <h2>Your Order History</h2>
-          <p>No orders yet.</p>
-        </div>
-
-        <div *ngIf="activeSection === 'track'" class="card">
-          <h2>Track Your Order</h2>
-          <p>Tracking system coming soon.</p>
-        </div>
-
-        <div *ngIf="activeSection === 'subscriptions'" class="card">
-          <h2>Your Subscriptions</h2>
-          <p>No active subscriptions.</p>
-        </div>
-
-        <div *ngIf="activeSection === 'saved'" class="card">
+        <!-- SAVED -->
+        <div *ngIf="activeSection === 'saved'" id="savedSection" class="card">
           <h2>Saved Items</h2>
-          <p>No saved items yet.</p>
+
+          <div class="order-card">
+            <p>No saved meals yet 🍽️</p>
+          </div>
         </div>
 
-        <div *ngIf="activeSection === 'personal'" class="card">
+        <!-- PERSONAL INFO -->
+        <div *ngIf="activeSection === 'personal'" id="personalSection" class="card">
           <h2>Personal Information</h2>
-          <p>Name: {{userName}}</p>
-          <p>Email: {{userEmail}}</p>
+
+          <div class="order-card profile-card">
+            <div class="info-row">
+              <span class="label">Name</span>
+              <span class="value">{{ userName }}</span>
+            </div>
+
+            <div class="info-row">
+              <span class="label">Email</span>
+              <span class="value">{{ userEmail }}</span>
+            </div>
+
+            <div class="info-row">
+              <span class="label">Phone</span>
+              <span class="value">{{ phone || 'Not provided' }}</span>
+            </div>
+
+            <div class="info-row">
+              <span class="label">Registered On</span>
+              <span class="value">{{ registeredDate | date:'mediumDate' }}</span>
+            </div>
+          </div>
         </div>
 
-        <div *ngIf="activeSection === 'address'" class="card">
-          <h2>Saved Addresses</h2>
-          <p>No address added.</p>
-        </div>
+        <!-- ADDRESS -->
+<div *ngIf="activeSection === 'address'" id="addressSection" class="card">
+  <h2 class="section-title">📍 Saved Addresses</h2>
 
-        <div *ngIf="activeSection === 'payment'" class="card">
-          <h2>Payment Methods</h2>
-          <p>No payment methods added.</p>
-        </div>
+  <div *ngIf="addresses.length > 0; else noAddress">
+    <div *ngFor="let addr of addresses" class="order-card">
+      <p><strong>{{addr.street}}</strong></p>
+      <p>{{addr.city}}, {{addr.province}}</p>
+      <p>{{addr.postalCode}}</p>
+      <p>{{addr.country}}</p>
 
-        <div *ngIf="activeSection === 'notifications'" class="card">
-          <h2>Notifications</h2>
-          <p>Email notifications enabled.</p>
-        </div>
+      <!-- DELETE BUTTON -->
+      <button (click)="deleteAddress()" class="btn btn-danger">
+        Delete Address
+      </button>
+    </div>
+  </div>
 
-        <div *ngIf="activeSection === 'edit'" class="card">
-          <h2>Edit Profile</h2>
-          <p>You can edit your profile information here.</p>
-        </div>
+  <ng-template #noAddress>
+    <div class="empty-state">
+      <p>No address added yet</p>
+      <span>Manage your delivery locations here</span>
+    </div>
+  </ng-template>
+</div>
+<!-- PAYMENT -->
+<div *ngIf="activeSection === 'payment'" id="paymentSection" class="card">
+  <h2 class="section-title">💳 Saved Payment Methods</h2>
 
-      </div>
+  <div *ngIf="payments.length > 0; else noPayment">
+    <div *ngFor="let pay of payments" class="order-card">
+
+      <p><strong>{{ pay.cardHolderName }}</strong></p>
+      <p>{{ pay.cardBrand }}</p>
+      <p>**** **** **** {{ pay.cardLast4 }}</p>
+      <p>Expires: {{ pay.expiryMonth }}/{{ pay.expiryYear }}</p>
+
+      <!-- Billing Address ID display (optional) -->
+      <p *ngIf="pay.billingAddressId">
+        Billing Address ID: {{ pay.billingAddressId }}
+      </p>
+
+      <!-- DELETE BUTTON -->
+      <button (click)="deletePayment()" class="btn btn-danger">
+        Delete Payment
+      </button>
 
     </div>
+  </div>
 
+  <ng-template #noPayment>
+    <div class="empty-state">
+      <p>No payment method added yet</p>
+      <span>Manage your payment details here</span>
+    </div>
+  </ng-template>
+</div>
+
+        <!-- NOTIFICATIONS -->
+        <div *ngIf="activeSection === 'notifications'" id="notificationsSection" class="card">
+          <h2 class="section-title">🔔 Notifications</h2>
+
+          <div class="notification-item">
+            <span>Email Notifications</span>
+            <input type="checkbox" checked />
+          </div>
+
+          <div class="notification-item">
+            <span>Order Updates</span>
+            <input type="checkbox" checked />
+          </div>
+
+          <div class="notification-item">
+            <span>Promotions</span>
+            <input type="checkbox" />
+          </div>
+        </div>
+
+<!-- EDIT PROFILE -->
+<div *ngIf="activeSection === 'edit'" id="editSection" class="card">
+  <h2 class="section-title">✏️ Edit Profile</h2>
+
+  <!-- USER INFO -->
+  <div class="form-group">
+    <label>Full Name</label>
+    <input [(ngModel)]="userName" placeholder="Enter full name" />
+  </div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input [(ngModel)]="userEmail" placeholder="Enter email" />
+  </div>
+
+  <div class="form-group">
+    <label>Phone</label>
+    <input [(ngModel)]="phone" placeholder="Enter phone number" />
+  </div>
+
+  <!-- ================= ADDRESS ================= -->
+  <h3>📍 Address</h3>
+
+  <div class="form-group">
+    <label>Street</label>
+    <input [(ngModel)]="street" placeholder="Street address" />
+  </div>
+
+  <div class="form-group">
+    <label>City</label>
+    <input [(ngModel)]="city" placeholder="City" />
+  </div>
+
+  <div class="form-group">
+    <label>Province</label>
+    <input [(ngModel)]="province" placeholder="Province" />
+  </div>
+
+  <div class="form-group">
+    <label>Postal Code</label>
+    <input [(ngModel)]="postalCode" placeholder="Postal Code" />
+  </div>
+
+  <div class="form-group">
+    <label>Country</label>
+    <input [(ngModel)]="country" placeholder="Country" />
+  </div>
+
+  <!-- ================= PAYMENT ================= -->
+  <h3>💳 Payment</h3>
+
+  <div class="form-group">
+    <label>Card Holder Name</label>
+    <input [(ngModel)]="cardHolderName" placeholder="Name on card" />
+  </div>
+
+  <div class="form-group">
+    <label>Card Brand</label>
+    <input [(ngModel)]="cardBrand" placeholder="Visa / MasterCard" />
+  </div>
+
+  <div class="form-group">
+    <label>Card Last 4 Digits</label>
+    <input [(ngModel)]="cardLast4" maxlength="4" placeholder="1234" />
+  </div>
+
+  <div class="form-group">
+    <label>Expiry Month</label>
+    <input [(ngModel)]="expiryMonth" type="number" placeholder="MM" />
+  </div>
+
+  <div class="form-group">
+    <label>Expiry Year</label>
+    <input [(ngModel)]="expiryYear" type="number" placeholder="YYYY" />
+  </div>
+
+  <div class="form-group">
+    <label>Payment Token / Reference</label>
+    <input [(ngModel)]="paymentToken" placeholder="Token (from payment gateway)" />
+  </div>
+
+  <!-- SAVE BUTTON -->
+  <button class="btn-save" (click)="editProfile()">Save Changes</button>
+</div>
+      </div>
+    </div>
   </div>
 </div>

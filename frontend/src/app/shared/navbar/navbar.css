@@ -1,0 +1,34 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* FULL WIDTH WRAPPER */
+.page-wrapper {
+  width: 100%;
+}
+
+/* MAIN PAGE */
+.page {
+  width: 100%;
+  padding: 20px 40px;
+  box-sizing: border-box;
+}
+
+/* NAVBAR */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 12px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}

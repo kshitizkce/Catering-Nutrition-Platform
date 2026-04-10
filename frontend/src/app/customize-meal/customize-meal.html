@@ -1,0 +1,104 @@
+<div class="page" *ngIf="meal">
+
+<div class="container">
+
+  <!-- BACK -->
+  <div class="back" (click)="goBack()">← Back to Menu</div>
+
+  <!-- TITLE -->
+  <h1>Customize Your Meal</h1>
+  <p class="subtitle">Adjust your meal to match your nutrition goals</p>
+
+  <!-- MEAL INFO -->
+  <div class="card">
+    <h2>{{meal.itemName}}</h2>
+
+    <div class="nutrition-grid">
+      <div><span>Calories</span><b>{{meal.cal}} kcal</b></div>
+      <div><span>Protein</span><b>{{meal.protein}}g</b></div>
+      <div><span>Carbs</span><b>{{meal.carbs}}g</b></div>
+      <div><span>Fat</span><b>{{meal.fat}}g</b></div>
+    </div>
+
+    <p class="price">Price: ${{meal.price}}</p>
+  </div>
+
+  <!-- GOALS -->
+  <div class="card">
+    <h3>Set Your Nutrition Goals</h3>
+
+    <div class="row">
+      <input type="number" [(ngModel)]="targetCalories">
+      <input type="number" [(ngModel)]="targetProtein">
+    </div>
+  </div>
+
+  <!-- STYLE -->
+  <div class="card">
+    <h3>Protein Preparation Style</h3>
+
+    <select [(ngModel)]="style">
+      <option>Grilled Chicken</option>
+      <option>Fried</option>
+      <option>Roasted</option>
+    </select>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result-box">
+
+    <h3>Adjusted Meal Details</h3>
+
+    <div class="result-row">
+      <span>Portion Size</span>
+      <b>{{portion.toFixed(2)}}x</b>
+    </div>
+
+    <div class="result-row">
+      <span>Calories</span>
+      <b>{{updated.cal}} kcal</b>
+    </div>
+
+    <div class="result-row">
+      <span>Protein</span>
+      <b>{{updated.protein}}g</b>
+    </div>
+
+    <div class="result-row">
+      <span>Carbs</span>
+      <b>{{updated.carbs}}g</b>
+    </div>
+
+    <div class="result-row">
+      <span>Fat</span>
+      <b>{{updated.fat}}g</b>
+    </div>
+
+    <div class="price-box">
+      Price <b>${{updated.price}}</b>
+    </div>
+
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="button-row">
+
+   
+
+    <button 
+  class="add-btn"
+  [disabled]="!mealsLimitLoaded"
+  (click)="addToCart()">
+  Add to Cart
+</button>
+
+
+    <button class="reset-btn" (click)="reset()">
+      Reset
+    </button>
+
+  </div>
+
+</div>
+
+</div>

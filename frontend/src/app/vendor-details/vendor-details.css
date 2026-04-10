@@ -1,85 +1,197 @@
-.page{
-padding-top:80px;
-background:#f5f6f8;
-min-height:100vh;
+
+/* PAGE */
+.page {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f8f9fb;
+  min-height: 100vh;
+  color: #333;
 }
 
-.navbar{
-position:fixed;
-top:0;
-width:100%;
-height:70px;
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-padding:0 30px;
-
-background:white;
-border-bottom:1px solid #eee;
+/* NAVBAR */
+.navbar {
+  background: #ffffff;
+  padding: 15px 30px;
+  border-bottom: 1px solid #eee;
+  font-weight: bold;
+  color: #ff6a00;
 }
 
-.nav-links{
-display:flex;
-gap:25px;
+/* CONTAINER */
+.container {
+  padding: 20px 40px;
 }
 
-.vendor-container{
-max-width:1100px;
-margin:auto;
-padding:40px;
-text-align:center;
+/* BACK BUTTON */
+.back {
+  cursor: pointer;
+  color: #ff6a00;
+  font-weight: 500;
+  margin-bottom: 15px;
 }
 
-.subtitle{
-color:#666;
-margin-bottom:30px;
+/* HEADER */
+.vendor-header h1 {
+  margin: 10px 0 20px;
+  font-size: 28px;
+  color: #222;
 }
 
-.menu-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
+/* CATEGORY BAR */
+.category-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
 }
 
-.menu-card{
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,0.08);
+.category-bar button {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
-.menu-card img{
-width:100%;
-height:170px;
-object-fit:cover;
-border-radius:8px;
-margin-bottom:10px;
+.category-bar button:hover {
+  background: #ff6a00;
+  color: white;
+  border-color: #ff6a00;
 }
 
-.nutrition{
-display:flex;
-justify-content:space-between;
-font-size:13px;
-margin:10px 0;
-color:#444;
+.category-bar button.active {
+  background: #ff6a00;
+  color: white;
+  border-color: #ff6a00;
 }
 
-.price{
-font-weight:bold;
-margin-bottom:10px;
+/* MENU GRID */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
 }
 
-button{
-background:#ff7a00;
-border:none;
-color:white;
-padding:8px 14px;
-border-radius:6px;
-cursor:pointer;
+/* MENU CARD */
+.menu-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: 0.2s;
 }
 
-button:hover{
-background:#e56700;
+.menu-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* IMAGE */
+.menu-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* TEXT */
+.menu-card h3 {
+  margin: 10px 15px 5px;
+  font-size: 18px;
+}
+
+.menu-card p {
+  margin: 0 15px 10px;
+  font-size: 13px;
+  color: #666;
+}
+
+/* ⭐ RATING */
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 5px 15px;
+}
+
+.rating i {
+  font-style: normal;
+  color: #ccc;
+}
+
+.rating i.filled {
+  color: #ff6a00;
+}
+
+.rating-value {
+  font-size: 13px;
+  color: #555;
+}
+
+/* NUTRITION */
+.nutrition {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  font-size: 13px;
+  border-top: 1px solid #eee;
+}
+
+.nutrition span {
+  display: block;
+  color: #888;
+  font-size: 12px;
+}
+
+.nutrition b {
+  color: #222;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+/* CUSTOMIZE BUTTON */
+.customize-btn {
+  background: transparent;
+  border: 1px solid #ff6a00;
+  color: #ff6a00;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.3s;
+}
+
+.customize-btn:hover {
+  background: #ff6a00;
+  color: white;
+}
+
+/* ORDER / ADD BUTTON (MATCHING LOGOUT STYLE) */
+.order-btn {
+  background: #ff6a00;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.3s;
+}
+
+.order-btn:hover {
+  background: #e65c00;
+}
+
+/* OPTIONAL: SIDEBAR / PROFILE BUTTONS (like logout style) */
+button.logout-style {
+  background: #ff6a00;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
 }

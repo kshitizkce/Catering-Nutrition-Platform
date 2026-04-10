@@ -1,105 +1,140 @@
-<div class="page">
+<div class="page-wrapper">
+  <div class="page">
 
-<!-- NAVBAR -->
-<nav class="navbar">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+  <div class="logo">🍽 Smart Catering</div>
 
-<div class="logo">🍽 Smart Catering</div>
+  <div class="nav-links">
 
-<div class="nav-links">
+    <span (click)="goHome()">🏠 Home</span>
 
-<span (click)="goHome()">🏠 Home</span>
+    <!-- 🛒 CART -->
+    <span (click)="goToCart()">🛒 Cart</span>
 
-<span (click)="goToMenu()">📋 Menu</span>
+    <span (click)="goToSubscriptionCart()">🍱 Meal Cart</span>
 
-<span (click)="goToAccount()">👤 Account</span>
+    <!-- 👤 EMAIL OR ACCOUNT -->
+    <span (click)="goToAccount()">
+      👤 {{ userEmail || 'Account' }}
+    </span>
 
-</div>
-
+  </div>
 </nav>
 
+    <!-- HERO -->
+    <div class="hero">
+      <h1>Fresh, Healthy Meals</h1>
+      <p>Delivered to your door</p>
+    </div>
 
-<!-- HERO -->
+    <!-- SEARCH -->
+    <div class="search-container">
 
-<div class="hero">
+  <input
+    type="text"
+    placeholder="Search caterers..."
+    [(ngModel)]="searchText"
+    (input)="onSearchChange()"
+    (keyup.enter)="search()"
+  />
 
-<h1>Fresh, Healthy Meals</h1>
-
-<p>Delivered to your door</p>
-
-<button (click)="bookCatering()">
-BOOK CATERING →
-</button>
-
-</div>
-
-
-<!-- SEARCH -->
-
-<div class="search-container">
-
-<input
-type="text"
-placeholder="Search catering services..."
-[(ngModel)]="searchText"
-(input)="onSearchChange()"
-(keyup.enter)="search()"
-/>
-
-<button class="search-btn" (click)="search()">
-➜
-</button>
+  <!-- REAL BUTTON -->
+  <button class="search-btn" (click)="search()">
+    🔍
+  </button>
 
 </div>
 
+    <!-- ACTIONS -->
+    <div class="actions">
+      <div class="action-card yellow" (click)="bookCatering()">
+        📅 Book Catering
+      </div>
 
-<!-- OPTIONS -->
+      <div class="action-card green" (click)="goToSubscription()">
+        💳 Meal Subscription
+      </div>
+    </div>
 
-<div class="options">
+    <div class="main-grid">
 
-<div class="card yellow" (click)="bookCatering()">
-📅 Book Catering
+  <!-- ✅ LEFT COLUMN -->
+  <div class="card-box">
+
+    <div class="header">
+      <h2>Caterers & Daily Meal Restaurants</h2>
+      <span class="view-all" (click)="viewAllVendors()">View All →</span>
+    </div>
+
+    <!-- VENDOR LOOP -->
+    <div class="vendor-item" *ngFor="let vendor of filteredVendors">
+
+      <div class="vendor-left">
+        <div class="avatar">🍽</div>
+
+        <div class="vendor-info">
+          <h3>{{ vendor.vendorName }}</h3>
+
+          <p>
+            {{ vendor.mealCateringStatus === 1 
+                ? '🍽 Catering Service' 
+                : '🍱 Daily Meal Service' }}
+          </p>
+
+          <div class="rating">
+            ⭐ {{ vendor.rating | number:'1.1-1' }}
+          </div>
+        </div>
+      </div>
+
+      <button class="view-btn" (click)="viewVendor(vendor)">
+        View
+      </button>
+
+    </div>
+
+  </div> <!-- ✅🔥 THIS LINE WAS MISSING -->
+
+
+
+  <!-- ✅ RIGHT COLUMN -->
+  <div class="card-box purple">
+
+    <h2>Your Preference</h2>
+    <p class="sub">Based on your previous orders</p>
+
+    <div class="preference-card" *ngIf="preference && preference.length">
+
+      <div *ngFor="let pref of preference">
+
+        <div class="pref-header">
+          <div class="avatar purple-avatar">🍽</div>
+
+          <div>
+            <h3>{{ pref.vendorName }}</h3>
+            <p>Weekly Preference</p>
+          </div>
+        </div>
+
+        <div class="order-list">
+          <div class="order-item" *ngFor="let item of pref.items">
+            🍽 {{ item }}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="pref-actions">
+      <button class="reorder">Reorder Package</button>
+      <button class="view-outline">View Vendor</button>
+    </div>
+
+  </div>
+
 </div>
 
-<div class="card green" (click)="goToSubscription()">
-💳 Meal Subscription
-</div>
-
-</div>
-
-
-<!-- TOP CATERERS -->
-
-<div class="caterers">
-
-<div class="header">
-
-<h2>Top Caterers</h2>
-
-<button class="view-all-btn" (click)="viewAllVendors()">
-View All →
-</button>
-
-</div>
-
-
-<!-- VENDOR LIST (NOW DYNAMIC FOR SEARCH) -->
-
-<div class="caterer-card" *ngFor="let vendor of filteredVendors">
-
-<div>
-<h3>{{vendor.name}}</h3>
-
-<p>{{vendor.description}}</p>
-
-</div>
-
-<button (click)="viewVendor(vendor)">
-View Vendor
-</button>
-
-</div>
-
-
-</div>
-
+  </div>
 </div>

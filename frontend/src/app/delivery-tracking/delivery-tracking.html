@@ -1,0 +1,76 @@
+<div class="delivery-container">
+
+  <!-- 🔷 HEADER -->
+  <h2>🚚 Live Delivery Tracking</h2>
+
+  <!-- 🔷 STATUS TIMELINE -->
+  <div *ngIf="order" class="timeline">
+
+    <div class="step" [class.active]="order.orderStatusId >= 2">
+      📝 Pending
+    </div>
+
+    <div class="step" [class.active]="order.orderStatusId >= 3">
+      ✅ Confirmed
+    </div>
+
+    <div class="step" [class.active]="order.orderStatusId >= 4">
+      🚚 Shipped
+    </div>
+
+    <div class="step" [class.active]="order.orderStatusId >= 5">
+      🎉 Delivered
+    </div>
+
+  </div>
+
+  <!-- 🔷 CURRENT STATUS -->
+  <div *ngIf="order" class="status-card">
+    <h3>Status: {{ getStatusText(order.orderStatusId) }}</h3>
+    <p>🕒 {{ order.createdAt | date:'medium' }}</p>
+  </div>
+
+  <!-- 🔷 ACTION BUTTONS -->
+  <div *ngIf="order" class="actions">
+
+    <button *ngIf="order.deliveryStatus === 'Driver Assigned'" 
+            (click)="updateDeliveryStatus('Picked Up')">
+      📦 Picked Up
+    </button>
+
+    <button *ngIf="order.deliveryStatus === 'Picked Up'" 
+            (click)="updateDeliveryStatus('On The Way')">
+      🛵 On The Way
+    </button>
+
+    <button *ngIf="order.deliveryStatus === 'On The Way'" 
+            (click)="updateDeliveryStatus('Delivered')">
+      ✅ Delivered
+    </button>
+
+  </div>
+
+  <!-- 🔷 ORDER ITEMS -->
+  <div *ngIf="order?.items?.length > 0" class="items">
+    <h3>🍽 Order Items</h3>
+
+    <div *ngFor="let item of order.items" class="item-card">
+      
+      <img [src]="item.imageUrl || 'https://via.placeholder.com/80'" />
+
+      <div class="item-info">
+        <h4>{{ item.itemName }}</h4>
+        <p>Qty: {{ item.quantity }}</p>
+        <p>Calories: {{ item.customCalories }}</p>
+        <p>Protein: {{ item.customProtein }}</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 🔷 NO ORDER -->
+  <div *ngIf="!order">
+    ❓ No active order found
+  </div>
+
+</div>

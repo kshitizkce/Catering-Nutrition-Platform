@@ -75,5 +75,8 @@ addMenuItem(dto: MenuItemDto): Observable<any> {
   );
 }
 
+getMenuItemById(id: number) {
+  return this.http.get(`${this.api}/menuitems/${id}`);
+}
 
 }

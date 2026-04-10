@@ -1,0 +1,171 @@
+.cart-page {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.item-info h3 {
+  margin: 0;
+}
+
+.style {
+  font-size: 12px;
+  color: gray;
+}
+
+.item-actions button {
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+}
+
+.progress-box {
+  margin: 20px 0;
+}
+
+.progress-bar {
+  height: 10px;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: #ff6600;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions button {
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+}
+
+.confirm {
+  background: #ff6600;
+  color: white;
+}
+
+.confirm:disabled {
+  background: gray;
+}
+/* Adjusting the image inside the card */
+.item-img {
+  width: 100%; /* Makes the image responsive and fit the container */
+  height: auto; /* Maintains aspect ratio */
+  object-fit: cover; /* Ensures the image covers the space without distortion */
+  border-radius: 8px; /* Optional: add rounded corners for a clean design */
+  max-width: 120px; /* Limit max width of the image */
+  margin-right: 15px; /* Adds some spacing between image and content */
+}
+
+.cart-item {
+  display: flex;
+  align-items: center; /* Aligns the content vertically */
+  justify-content: space-between; /* Ensures spacing between the content and buttons */
+  border: 1px solid #ddd; /* Optional: Adds a light border around the item */
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f9f9f9; /* Optional: Light background */
+}
+
+.cart-item .item-info {
+  flex-grow: 1;
+}
+
+.item-info h3 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.item-info p {
+  font-size: 14px;
+  color: #555;
+}
+
+.item-info span {
+  display: block;
+  font-size: 12px;
+  color: #999;
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+}
+
+.qty button {
+  background-color: #ff6f00;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.qty button:hover {
+  background-color: #e65c00;
+}
+
+.item-actions button {
+  background-color: #ff3b30;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.item-actions button:hover {
+  background-color: #e2362c;
+}
+
+/* Optional: Styles for the Add More Meals and Confirm Meal Plan buttons */
+button {
+  background-color: #ff6f00;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e65c00;
+}
+
+/* For the progress bar */
+.progress-bar {
+  background-color: #e0e0e0;
+  height: 10px;
+  border-radius: 5px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.progress-bar .fill {
+  background-color: #ff6f00;
+  height: 100%;
+  border-radius: 5px;
+}

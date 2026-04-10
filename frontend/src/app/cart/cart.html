@@ -1,0 +1,100 @@
+  <app-navbar [userEmail]="userEmail"></app-navbar>
+
+<div class="cart-page">
+
+  <!-- LEFT SIDE -->
+  <div class="cart-left">
+
+    <h2>🛒 Your Cart</h2>
+
+    <!-- EMPTY -->
+    <div *ngIf="cartItems.length === 0" class="empty">
+      Your cart is empty
+    </div>
+
+    <!-- ITEMS -->
+    <div *ngFor="let item of cartItems" class="cart-card">
+
+      <!-- IMAGE -->
+      <img 
+        [src]="item.imageUrl || 'https://via.placeholder.com/100'" 
+        class="food-img"
+      />
+
+      <!-- DETAILS -->
+      <div class="details">
+
+        <h4>{{item.itemName}}</h4>
+
+        <p class="desc">{{item.itemDescription}}</p>
+
+        <div class="rating">
+          ⭐ {{item.rating || 4.5}}
+        </div>
+
+        <!-- QUANTITY CONTROLS -->
+        <div class="qty-control">
+
+          <button (click)="decreaseQty(item)">−</button>
+
+          <span>{{item.quantity}}</span>
+
+          <button (click)="increaseQty(item)">+</button>
+
+        </div>
+
+        <p class="price">${{item.unitPrice}}</p>
+
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div class="right">
+
+        <p class="total">
+          ${{item.unitPrice * item.quantity}}
+        </p>
+
+        <button class="remove" (click)="removeItem(item)">
+          🗑️
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDE (SUMMARY) -->
+  <div class="cart-summary" *ngIf="cartItems.length">
+
+    <h3>Order Summary</h3>
+
+    <div class="row">
+      <span>Subtotal</span>
+      <span>${{subtotal}}</span>
+    </div>
+
+    <div class="row">
+      <span>Tax (13%)</span>
+      <span>${{tax}}</span>
+    </div>
+
+    <div class="row">
+      <span>Service (5%)</span>
+      <span>${{service}}</span>
+    </div>
+
+    <hr>
+
+    <div class="row total-row">
+      <span>Total</span>
+      <span>${{total}}</span>
+    </div>
+
+    <button (click)="proceedToCheckout()">
+      Proceed to Checkout
+    </button>
+
+  </div>
+
+</div>

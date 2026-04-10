@@ -1,85 +1,279 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { VendorService } from '../services/vendor/vendor-service';
+import { CateringService } from '../services/customerbookcatering/Catering.service';
+import { AuthService } from '../services/auth/auth';
+import { NavbarComponent } from '../shared/navbar/navbar';
+
+
 
 @Component({
-selector: 'app-book-catering',
-standalone: true,
-imports: [CommonModule],
-templateUrl: './book-catering.html',
-styleUrls: ['./book-catering.css']
+  selector: 'app-book-catering',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    DatePipe,
+    NavbarComponent
+  ],
+  templateUrl: './book-catering.html',
+  styleUrls: ['./book-catering.css']
 })
-export class BookCateringComponent {
+export class BookCateringComponent implements OnInit {
 
-constructor(public router: Router){}
+  constructor(
+    public router: Router,
+    private service: CateringService,
+    private vendorservice: VendorService,
+    private userService: AuthService,
+    private cd: ChangeDetectorRef
+  ) {}
 
-eventType:string = "";
-guests:number = 0;
-date:string = "";
-time:string = "";
-location:string = "";
-budget:string = "";
+  // ================= STATE =================
+  selectedEventType: string = '';
+  guests: number = 0;
+  date: string = '';
+  startTime: string = '';
+  endTime: string = '';
+  location: string = '';
+  budget: string = '';
+  notes: string = '';
 
-eventTypes = [
-"Corporate Event",
-"Wedding",
-"Birthday Party",
-"Conference",
-"Other"
-];
+  selectedVendorId: number = 0;
+  vendorId: number = 0;
 
-selectedEventType:string = "";
+  selectedFile: File | null = null;
 
-dietaryOptions = [
-"Vegetarian",
-"Vegan",
-"Gluten-Free",
-"Halal",
-"Kosher",
-"Nut-Free"
-];
+  selectedDietary: string[] = [];
 
-selectedDietary:string[] = [];
+  dietaryOptions: string[] = [
+    'Vegetarian',
+    'Vegan',
+    'Gluten-Free',
+    'Halal',
+    'Kosher'
+  ];
 
-selectEvent(type:string){
-this.selectedEventType = type;
+  eventTypes: string[] = [
+    'Wedding',
+    'Birthday',
+    'Corporate',
+    'Party',
+    'Other'
+  ];
+
+  events: any[] = [];
+  vendors: any[] = [];
+  isEditMode: boolean = false;
+editingEventId: number = 0;
+userEmail: string = '';
+
+
+  // ================= INIT =================
+  ngOnInit() {
+    this.initializeUser();
+    this.loadEvents();
+      this.loadUserEvents(); // ✅ ADD THIS
+
+  }
+
+
+  editEvent(e: any) {
+  this.isEditMode = true;
+  this.editingEventId = e.eventId;
+
+  // Fill form
+  this.selectedEventType = e.eventType;
+  this.guests = e.numberOfGuests;
+  this.date = e.eventDate?.split('T')[0];
+  this.startTime = e.eventStartTime || '';
+  this.endTime = e.eventEndTime || '';
+  this.location = e.eventLocation;
+  this.budget = e.budgetRange;
+  this.notes = e.additionalNote || '';
+
+  this.selectedVendorId = e.vendorId || 0;
+
+  // ✅ Scroll to FORM (not top)
+  setTimeout(() => {
+    document.getElementById('formSection')?.scrollIntoView({ behavior: 'smooth' });
+  }, 100);
 }
 
-toggleDiet(diet:string){
+  // ================= EVENT SELECT =================
+  selectEvent(type: string) {
+    this.selectedEventType = type;
+  }
 
-if(this.selectedDietary.includes(diet)){
-this.selectedDietary =
-this.selectedDietary.filter(d => d !== diet);
-}else{
-this.selectedDietary.push(diet);
+  // ================= DIETARY TOGGLE =================
+  toggleDiet(diet: string) {
+    if (this.selectedDietary.includes(diet)) {
+      this.selectedDietary = this.selectedDietary.filter(d => d !== diet);
+    } else {
+      this.selectedDietary.push(diet);
+    }
+  }
+
+  // ================= GET LOGGED-IN USER =================
+  initializeUser() {
+    const user = this.userService.getUser();
+
+    if (!user) {
+      console.error("User not logged in");
+      return;
+    }
+
+    const userId = user.userId;
+
+    if (!userId) {
+      console.error("User ID not found");
+      return;
+    }
+
+    if (user) {
+    this.userEmail = user.email;
+  }
+  }
+
+  // ================= LOAD VENDORS =================
+  loadEvents() {
+    this.vendorservice.getMealCateringVendors().subscribe({
+      next: (res: any[]) => {
+
+        console.log('Loaded vendors:', res);
+
+        this.vendors = [...(res || [])];
+
+        if (this.vendors.length > 0) {
+          this.selectedVendorId = this.vendors[0].vendorId;
+        }
+
+        this.cd.detectChanges();
+      },
+      error: err => {
+        console.error('Error loading vendors:', err);
+      }
+    });
+  }
+
+ loadUserEvents() {
+  const user = this.userService.getUser();
+
+  if (!user || !user.userId) {
+    console.error("User not found");
+    return;
+  }
+
+  this.service.getUserEvents(user.userId).subscribe({
+    next: (res: any) => {
+      this.events = res.data || [];   // ✅ FIX HERE
+      this.cd.detectChanges();
+    },
+    error: err => {
+      console.error("Error loading user events:", err);
+    }
+  });
 }
 
+  // ================= FILE =================
+  onFileSelected(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      this.selectedFile = event.target.files[0];
+    }
+  }
+
+  // ================= SUBMIT =================
+  submitRequest() {
+
+  const user = this.userService.getUser();
+
+  if (!user || !user.userId) {
+    alert("User not logged in");
+    return;
+  }
+
+  const formData = new FormData();
+
+  formData.append('EventType', this.selectedEventType);
+  formData.append('NumberOfGuests', this.guests.toString());
+  formData.append('EventDate', this.date);
+  formData.append('EventStartTime', this.startTime);
+  formData.append('EventEndTime', this.endTime);
+  formData.append('EventLocation', this.location);
+  formData.append('BudgetRange', this.budget);
+  formData.append('AdditionalNote', this.notes);
+  formData.append('UserId', user.userId.toString());
+  formData.append('VendorId', this.selectedVendorId.toString());
+
+  formData.append('DietaryPreferences', JSON.stringify(this.selectedDietary));
+
+  if (this.selectedFile) {
+    formData.append('CateringDetailFile', this.selectedFile);
+  }
+
+  // ✅ EDIT MODE
+  if (this.isEditMode) {
+  this.service.updateEvent(this.editingEventId, formData).subscribe({
+    next: () => {
+      alert('Event updated successfully');
+
+      this.resetForm();
+
+      setTimeout(() => {
+        this.loadUserEvents(); // ✅ FIXED
+      }, 300);
+    },
+    error: err => console.error(err)
+  });
+}
+  // ✅ CREATE MODE
+  else {
+  this.service.createEvent(formData).subscribe({
+    next: () => {
+      alert('Event created successfully');
+      this.resetForm();
+
+      setTimeout(() => {this.loadUserEvents();}, 300); // 🔥 IMPORTANT (200–500ms works best)
+
+      this.cd.detectChanges();
+    },
+    error: err => console.error(err)
+  });
+}
 }
 
-submitRequest(){
+  goHome() {
+    this.router.navigate(['/home']);
+  }
 
-const request = {
-eventType:this.selectedEventType,
-guests:this.guests,
-date:this.date,
-budget:this.budget,
-status:"Pending"
-};
+  // 🔥 MAIN FIX (NO MENU PAGE ANYMORE)
+  goToMenu() {
+    this.router.navigate(['/vendors']);
+  }
 
-let requests:any[] =
-JSON.parse(localStorage.getItem("cateringRequests") || "[]");
+  goToAccount() {
+    this.router.navigate(['/profile']);
+  }
 
-requests.push(request);
 
-localStorage.setItem(
-"cateringRequests",
-JSON.stringify(requests)
-);
+  // ================= RESET =================
+  resetForm() {
+  this.selectedEventType = '';
+  this.guests = 0;
+  this.date = '';
+  this.startTime = '';
+  this.endTime = '';
+  this.location = '';
+  this.budget = '';
+  this.notes = '';
+  this.selectedVendorId = 0;
+  this.selectedFile = null;
+  this.selectedDietary = [];
 
-alert("Catering request submitted successfully!");
-
-this.router.navigate(['/home']);
-
+  // ✅ RESET EDIT MODE
+  this.isEditMode = false;
+  this.editingEventId = 0;
 }
-
 }

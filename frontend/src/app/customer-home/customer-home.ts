@@ -1,8 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth/auth';
 import { MenuService } from '../services/menu/menu';
+import { VendorService } from '../services/vendor/vendor-service';
+import { PreferenceService } from '../services/preference/preference.service';
+import { ChangeDetectorRef } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-customer-home',
@@ -11,97 +17,151 @@ import { MenuService } from '../services/menu/menu';
   templateUrl: './customer-home.html',
   styleUrls: ['./customer-home.css']
 })
-export class CustomerHomeComponent implements OnInit {
-
-  vendors: any[] = [];
-  filteredVendors: any[] = [];
-  searchText: string = '';
+export class CustomerHomeComponent {
 
   constructor(
-    private router: Router,
-    private menuService: MenuService
-  ) {}
+  private router: Router,
+  private menuService: MenuService,
+  private userService: AuthService,
+  private vendorService : VendorService,
+    private preferenceService: PreferenceService,
+    private cd: ChangeDetectorRef
 
-  ngOnInit(): void {
+) {}
 
-    /* Load vendors from backend API */
+preference: any;
 
-    this.menuService.getVendors().subscribe({
 
-      next: (data: any) => {
+  searchText: string = '';
+  userEmail: string = '';
 
-        console.log("Vendors loaded:", data);
+   vendors: any[] = [];
+filteredVendors: any[] = [];
 
-        this.vendors = data;
-        this.filteredVendors = data;
 
-      },
+  ngOnInit() {
+  this.initializeUser();
+  this.loadVendors();
+  this.loadPreference();
+}
 
-      error: (err) => {
-
-        console.error("Vendor API error:", err);
-
-      }
-
-    });
-
+  // ✅ SEARCH
+  onSearchChange() {
+    this.filteredVendors = this.vendors.filter(v =>
+    v.vendorName.toLowerCase().includes(this.searchText.toLowerCase())
+  );
   }
 
-  /* SEARCH FUNCTION */
-
-  search(): void {
-
-    const text = this.searchText.trim().toLowerCase();
-
-    if (text === '') {
-      this.filteredVendors = this.vendors;
-      return;
-    }
-
-    this.filteredVendors = this.vendors.filter(vendor =>
-      vendor?.name?.toLowerCase().includes(text)
-    );
-
+  search() {
+    this.onSearchChange();
   }
 
-  /* LIVE SEARCH */
-
-  onSearchChange(): void {
-    this.search();
-  }
-
-  /* NAVIGATION */
-
-  bookCatering(): void {
-    this.router.navigate(['/book-catering']);
-  }
-
-  goToSubscription(): void {
-    this.router.navigate(['/subscription']);
-  }
-
-  goToMenu(): void {
-    this.router.navigate(['/menu']);
-  }
-
-  goHome(): void {
+  // ✅ NAVIGATION FIXED
+  goHome() {
     this.router.navigate(['/home']);
   }
 
-  goToAccount(): void {
+  
+  goToAccount() {
     this.router.navigate(['/profile']);
   }
 
-  viewVendor(vendor: any): void {
-
-    if (!vendor?.vendorId) return;
-
-    this.router.navigate(['/vendor', vendor.vendorId]);
-
+  bookCatering() {
+    this.router.navigate(['/book-catering']);
   }
 
-  viewAllVendors(): void {
+  goToSubscription() {
+    this.router.navigate(['/subscription']);
+  }
+
+  // ✅ VENDORS
+  viewAllVendors() {
     this.router.navigate(['/vendors']);
   }
+
+  viewVendor(v: any) {
+  
+
+  this.router.navigate(['/vendor-details', v.VendorId || v.vendorId]);
+  }
+
+  initializeUser() {
+  const user = this.userService.getUser();
+
+  if (user) {
+    this.userEmail = user.email;
+  }
+
+  if (!user) {
+    console.error("User not logged in");
+    return;
+  }
+
+  const userId = user.userId;
+
+  if (!userId) {
+    console.error("User ID not found");
+    return;
+  }
+
+  // ✅ set email for UI
+  this.userEmail = user.email;
+}
+
+loadVendors() {
+  this.menuService.getVendors().subscribe({
+    next: (res: any[]) => {
+
+      // ✅ sort by rating DESC
+      const sorted = res.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+
+      // ✅ take top 5
+      this.vendors = sorted;
+      this.filteredVendors = sorted.slice(0, 5);
+
+      this.cd.detectChanges(); // trigger UI update
+    },
+    error: err => console.error(err)
+  });
+}
+
+goToCart() {
+  this.router.navigate(['/cart']);
+}
+
+goToSubscriptionCart() {
+
+  const user = this.userService.getUser();
+  const userId = user.userId;
+
+  this.vendorService.getSubscriber(userId)
+    .subscribe({
+      next: (res: any) => {
+
+        if (res && res.userId) {
+          // ✅ Has subscription → go to subscription cart
+          this.router.navigate(['/subscriptioncart']);
+        } else {
+          alert("❌ No active meal subscription found");
+        }
+
+      },
+      error: () => {
+        alert("❌ You don't have a meal subscription");
+      }
+    });
+}
+
+loadPreference() {
+  const user = this.userService.getUser();
+  if (!user) return;
+
+  this.preferenceService.getWeeklyPreference(user.userId).subscribe({
+    next: res => {
+      this.preference = res;
+      this.cd.detectChanges(); 
+    }
+  });
+}
 
 }

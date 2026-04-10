@@ -246,3 +246,267 @@ body {
     padding: 30px;
   }
 }
+/* ACTION CARD */
+.action-card {
+  background: #f8f9fa;
+  padding: 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.action-card small {
+  display: block;
+  font-size: 12px;
+  color: #777;
+}
+
+.action-card:hover {
+  background: linear-gradient(to right, #ff6600, #ff8800);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* ORDER CARD ENHANCED */
+.order-card {
+  padding: 15px;
+  border-radius: 12px;
+  background: #f8f9fa;
+  margin-bottom: 12px;
+  transition: 0.3s;
+}
+
+.order-card:hover {
+  background: #e9ecef;
+  transform: scale(1.02);
+}
+
+.order-card .row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+/* STATUS */
+.status {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 10px;
+  background: #ffe5d0;
+  color: #ff6600;
+}
+
+/* HIGHLIGHT */
+.highlight {
+  border-left: 4px solid #ff6600;
+}
+/* SETTINGS LIST */
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* SETTING ITEM */
+.setting-item {
+  background: #f8f9fa;
+  padding: 14px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+.setting-item span {
+  font-size: 12px;
+  color: #777;
+  margin-top: 3px;
+}
+
+.setting-item:hover {
+  background: linear-gradient(to right, #ff6600, #ff8800);
+  color: white;
+  transform: translateX(5px);
+}
+
+.setting-item:hover span {
+  color: #fff;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.section-title {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Personal Info */
+.info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.label {
+  color: #777;
+  font-size: 14px;
+}
+
+.value {
+  font-weight: 500;
+  color: #222;
+}
+
+/* Empty states */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: #777;
+}
+
+.empty-state p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.empty-state span {
+  font-size: 13px;
+}
+
+/* Notifications */
+.notification-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* Form */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.form-group input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Button */
+.btn-save {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-save:hover {
+  background: #0056b3;
+}
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.order-meta {
+  text-align: right;
+  font-size: 14px;
+}
+
+.vendor {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.items-section {
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 14px;
+}
+
+.item-name {
+  font-weight: 500;
+}
+
+.item-details {
+  display: flex;
+  gap: 12px;
+  color: #555;
+}
+
+.item-total {
+  font-weight: bold;
+  color: #000;
+}
+
+.no-items {
+  font-size: 13px;
+  color: #888;
+  margin-top: 8px;
+}
+
+/* Enhance existing order card */
+.order-card.highlight {
+  border: 1px solid #e0e0e0;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+
+.order-card.highlight:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #f1f1f1;
+  font-size: 12px;
+}
+.delivery-status {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #f4f6f8;
+  border-radius: 8px;
+  font-size: 14px;
+}

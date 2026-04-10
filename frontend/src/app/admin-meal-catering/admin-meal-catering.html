@@ -26,6 +26,7 @@
         <th>Location</th>
         <th>Budget</th>
         <th>Status</th>
+        <th>File</th> 
         <th>Actions</th>
       </tr>
     </thead>
@@ -54,6 +55,18 @@
             <option>Cancelled</option>
           </select>
         </td>
+
+        <td>
+  <a *ngIf="e.cateringDetailFile"
+     [href]="'http://localhost:5197' + e.cateringDetailFile"
+     target="_blank">
+    View File
+  </a>
+
+  <span *ngIf="!e.cateringDetailFile">
+    No File
+  </span>
+</td>
 
         <!-- ACTION -->
         <td>

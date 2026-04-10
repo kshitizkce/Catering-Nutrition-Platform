@@ -1,23 +1,73 @@
-<div class="vendors-page">
+<app-navbar [userEmail]="userEmail"></app-navbar>
 
-<h1>Thunder Bay Caterers</h1>
+<div class="page">
 
-<div class="vendor-grid">
+  <!-- CONTENT -->
+  <div class="container">
 
-<div class="vendor-card" *ngFor="let vendor of vendors">
+    <h1 class="title">Select a Vendor</h1>
+    <p class="subtitle">Choose from our trusted nutrition partners</p>
 
-<h3>{{vendor.vendorName}}</h3>
+    <div class="vendor-grid">
 
-<p>{{vendor.description}}</p>
+      <div class="vendor-card" *ngFor="let v of vendors">
 
-<p class="rating">⭐ {{vendor.rating}}</p>
+        <!-- IMAGE -->
+        <div class="image-wrapper">
+          <img 
+            [src]="v.businessLogo ? 'http://localhost:5197' + v.businessLogo : 'https://via.placeholder.com/300x200'" 
+            alt="vendor">
+          
+          <!-- STATUS BADGE -->
+          <span class="status-badge" [ngClass]="isVendorOpen(v) ? 'open' : 'closed'">
+            {{ isVendorOpen(v) ? 'Open' : 'Closed' }}
+          </span>
+        </div>
 
-<button (click)="openVendor(vendor)">
-View Menu →
-</button>
+        <div class="card-body">
 
-</div>
+          <!-- HEADER -->
+          <div class="header">
+            <h3>{{v.businessName}}</h3>
+            <span class="rating">⭐ {{v.rating || 4.5}}</span>
+          </div>
 
-</div>
+          <!-- DESCRIPTION -->
+          <p class="desc">{{v.businessDescription}}</p>
+
+          <!-- META INFO -->
+          <div class="meta">
+            <div>📍 {{v.city}}</div>
+            <div>🍱 {{v.serviceType}}</div>
+          </div>
+
+          <!-- BUSINESS HOURS -->
+          <div class="hours-box">
+            <div class="hours-title">Today Hours</div>
+            <div class="hours-value">{{ getTodayHours(v) }}</div>
+          </div>
+
+          <!-- NEXT OPEN -->
+          <div *ngIf="!isVendorOpen(v)" class="next-open">
+            ⏰ Opens {{ getNextOpenTime(v) }}
+          </div>
+
+          <!-- ACTION -->
+          <button 
+            class="view-btn"
+            (click)="viewVendor(v)"
+            [disabled]="!isVendorOpen(v)"
+            [ngClass]="{'disabled': !isVendorOpen(v)}">
+
+            {{ isVendorOpen(v) ? 'View Menu' : 'Closed' }}
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </div>

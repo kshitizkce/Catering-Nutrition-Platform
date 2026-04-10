@@ -22,6 +22,10 @@ export class VendorService {
     return this.http.get(`${this.baseUrl}/${vendorId}/subscribers`);
   }
 
+  getSubscriber(userId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/sub/${userId}`);
+  }
+
   updateSubscriber(vendorId: number, subscriberId: number, payload: any): Observable<any> {
     // payload must be JSON object
     return this.http.put(`${this.baseUrl}/${vendorId}/subscriber/${subscriberId}`, payload);
@@ -53,4 +57,18 @@ getVendorByUserId(userId: number) {
 getUserDetails(userId: number): Observable<Customer> {
     return this.http.get<Customer>(`${this.baseUrl}/user/${userId}`);
   }
+
+   getMealCateringVendors(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/meal-catering`);
+  }
+
+  getVendors() {
+    return this.http.get<any[]>(`${this.baseUrl}/vendors`);
+  }
+
+  createSubscription(data: any) {
+  return this.http.post(`${this.baseUrl}/create`, data);
+}
+
+ 
 }

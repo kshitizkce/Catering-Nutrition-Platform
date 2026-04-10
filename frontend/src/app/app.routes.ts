@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// Common components
+// Common/Customer components
 import { SignupComponent } from './signup/signup';
 import { RoleSelectComponent } from './role-select/role-select';
 import { CustomerHomeComponent } from './customer-home/customer-home';
@@ -10,12 +10,26 @@ import { VendorProfileComponent } from './vendor-profile/vendor-profile';
 import { AdminProfileComponent } from './admin-profile/admin-profile';
 import { MenuComponent } from './menu/menu';
 import { SubscriptionComponent } from './meal-subscription/meal-subscription';
+import { CartComponent } from './cart/cart';
+import { OrderSuccessComponent } from './order-success/order-success';
+import { DeliveryTrackingComponent } from './delivery-tracking/delivery-tracking';
+
+
+import { SubscriptionCartComponent } from './subscriptioncart/subscriptioncart';
+
+
+import {CheckoutComponent} from './checkout/checkout'
 import { BookCateringComponent } from './book-catering/book-catering';
 import { VendorsComponent } from './vendors/vendors';
 import { VendorDetailsComponent } from './vendor-details/vendor-details';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password';
 import { ResetPasswordComponent } from './reset-password/reset-password';
 import { VendorMealCatering } from './vendor-meal-catering/vendor-meal-catering';
+
+
+
+
+
 
 // Admin components
 import { AdminLayoutComponent } from './admin-layout/admin-layout';
@@ -37,6 +51,7 @@ import { VendorLayoutComponent } from './vendor-layout/vendor-layout';
 import { VendorSubscribersComponent } from './vendor-subscribers/vendor-subscribers';
 import { AdminMenuComponent } from './admin-menu/admin-menu';
 import { MealCateringGuard } from './vendor-meal-catering/vendor-meal-guard-catering';
+import { CustomizeMealComponent } from './customize-meal/customize-meal';
 
 
 
@@ -53,6 +68,15 @@ export const routes: Routes = [
   // Customer
   { path: 'home', component: CustomerHomeComponent },
   { path: 'profile', component: CustomerProfileComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'checkout', component: CheckoutComponent },
+    { path: 'order-success', component: OrderSuccessComponent },
+    
+        { path: 'subscriptioncart', component: SubscriptionCartComponent },
+                { path: 'deliverytracking', component: DeliveryTrackingComponent },
+
+
+
 
   // Profiles
   { path: 'vendor-profile', component: VendorProfileComponent },
@@ -62,7 +86,12 @@ export const routes: Routes = [
   { path: 'subscription', component: SubscriptionComponent },
   { path: 'book-catering', component: BookCateringComponent },
   { path: 'vendors', component: VendorsComponent },
-  { path: 'vendor/:name', component: VendorDetailsComponent },
+          { path: 'vendor-details/:vendorId', component: VendorDetailsComponent },
+          {
+  path: 'customize-meal/:id',
+  component: CustomizeMealComponent
+},
+
 
   // ✅ ADMIN ROUTES
   {
@@ -79,7 +108,8 @@ export const routes: Routes = [
             { path: 'admin-meal-catering', component: AdminMealCatering },
       { path: 'admin-customer-details/:id', component: AdminCustomerDetailsComponent },
       { path: 'admin-vendor-details/:id', component: AdminVendorDetailsComponent },
-      { path: 'admin-dashboard', redirectTo: 'dashboard', pathMatch: 'full' }
+      { path: 'admin-dashboard', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'vendor/:id', component: AdminVendorDetailsComponent }
     ]
   },
   
@@ -93,6 +123,7 @@ export const routes: Routes = [
       { path: 'vendor-orders', component: VendorOrdersComponent },
       { path: 'vendor-settings', component: VendorSettingsComponent },
       { path: 'vendor-meal-catering', component: VendorMealCatering }, 
+
       {
   path: 'vendor-meal-catering',
   loadComponent: () => import('./vendor-meal-catering/vendor-meal-catering')

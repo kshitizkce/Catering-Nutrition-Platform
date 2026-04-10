@@ -1,0 +1,20 @@
+<nav class="navbar">
+  <div class="logo">🍽 Smart Catering</div>
+
+  <div class="nav-links">
+
+    <span (click)="goHome()">🏠 Home</span>
+
+    <!-- 🛒 CART -->
+    <span (click)="goToCart()">🛒 Cart</span>
+
+        <span (click)="goToSubscriptionCart()">🍱 Meal Cart</span>
+
+
+    <!-- 👤 EMAIL OR ACCOUNT -->
+    <span (click)="goToAccount()">
+      👤 {{ userEmail || 'Account' }}
+    </span>
+
+  </div>
+</nav>

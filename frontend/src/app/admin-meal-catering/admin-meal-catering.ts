@@ -66,7 +66,7 @@ export class AdminMealCatering implements OnInit, OnDestroy {
 
   // ✅ LOAD VENDORS
   loadVendors() {
-    this.menuService.getVendors().subscribe({
+    this.userService.getMealCateringVendors().subscribe({
       next: (res: any[]) => {
         this.vendors = res;
 

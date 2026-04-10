@@ -1,32 +1,84 @@
-<div class="vendor-menu-page">
+<div class="page">
 
-<h1>Vendor Menu</h1>
+  <app-navbar [userEmail]="userEmail"></app-navbar>
 
-<div class="menu-grid">
+  <div class="container">
 
-<div class="menu-card" *ngFor="let item of menuItems">
+    <!-- BACK -->
+    <div class="back" (click)="goBack()">← Back to Vendors</div>
 
-<img [src]="item.imageUrl" alt="food">
+    <!-- HEADER -->
+    <div class="vendor-header">
+      <h1>{{ vendorName || 'Vendor Menu' }}</h1>
+    </div>
 
-<h3>{{item.name}}</h3>
+    <!-- CATEGORY FILTER -->
+    <div class="category-bar">
 
-<p>{{item.description}}</p>
+      <button
+        *ngFor="let c of categories"
+        (click)="filterByCategory(c.categoryId)"
+        [class.active]="selectedCategoryId === c.categoryId">
 
-<div class="nutrition">
+        {{ c.categoryName }}
 
-<span>🔥 Calories: {{item.calories}}</span>
-<span>💪 Protein: {{item.protein}}g</span>
-<span>🥑 Fat: {{item.fat}}g</span>
-<span>🍞 Carbs: {{item.carbs}}g</span>
+      </button>
+
+    </div>
+
+    <!-- MENU GRID -->
+    <div class="menu-grid">
+
+      <div class="menu-card" *ngFor="let item of menu">
+
+        <img
+          [src]="item.imageUrl ? item.imageUrl : 'https://via.placeholder.com/300x200'"
+          alt="meal">
+
+        <h3>{{ item.itemName }}</h3>
+        <p>{{ item.itemDescription }}</p>
+
+        <!-- ⭐ RATING -->
+        <div class="rating">
+          <span *ngFor="let star of [1,2,3,4,5]">
+            <i [class.filled]="star <= item.rating">★</i>
+          </span>
+          <span class="rating-value">
+            {{ item.rating || 0 }}
+          </span>
+        </div>
+
+        <div class="nutrition">
+          <div><span>Calories</span><b>{{ item.calories }}</b></div>
+          <div><span>Price</span><b>${{ item.price }}</b></div>
+        </div>
+
+        <div class="actions">
+
+
+
+<!-- 🍱 CUSTOMIZE (ONLY if subscribed) -->
+<button 
+  *ngIf="hasSubscriptionRecord && isSubscribed"
+  (click)="goToCustomize(item)"
+  class="customize-btn"
+  [disabled]="currentCount >= mealsLimit">
+  Customize Meal
+</button>
+
+<!-- 🛒 ADD TO CART (ALWAYS visible) -->
+<button 
+  (click)="orderNow(item)" 
+  class="order-btn">
+  Add to Cart
+</button>
 
 </div>
 
-<div class="price">
-$ {{item.price}}
-</div>
+      </div>
 
-</div>
+    </div>
 
-</div>
+  </div>
 
 </div>
