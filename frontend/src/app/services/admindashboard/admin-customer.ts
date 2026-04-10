@@ -66,7 +66,7 @@ export interface CustomerDetailsResponse {
   providedIn: 'root'
 })
 export class AdminCustomerService {
-  private apiUrl = 'http://localhost:5197/api/admincustomeruser'; // your API URL
+  private apiUrl = 'https://a711-192-197-60-11.ngrok-free.app/api/admincustomeruser'; // your API URL
 
   constructor(private http: HttpClient) {}
 

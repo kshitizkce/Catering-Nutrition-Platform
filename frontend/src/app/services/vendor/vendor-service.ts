@@ -12,7 +12,7 @@ export interface Customer {
   providedIn: 'root'
 })
 export class VendorService {
-  baseUrl = 'http://localhost:5197/api/vendor';
+  baseUrl = 'https://a711-192-197-60-11.ngrok-free.app/api/vendor';
 
   constructor(private http: HttpClient) {}
 

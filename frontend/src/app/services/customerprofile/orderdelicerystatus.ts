@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OrderService {
-  private apiUrl = 'http://localhost:5197/api/deliveryStatus';
+  private apiUrl = 'https://a711-192-197-60-11.ngrok-free.app/api/deliveryStatus';
 
   constructor(private http: HttpClient) {}
 

@@ -55,7 +55,7 @@ getVendorId() {
   return this.getUser()?.vendorId;
 }
 
-  private apiUrl = "http://localhost:5197/api/auth";
+  private apiUrl = "https://a711-192-197-60-11.ngrok-free.app/api/auth";
 
   constructor(private http: HttpClient) {
   const user = localStorage.getItem('user');

@@ -52,8 +52,8 @@ export interface VendorDetailsResponse {
   providedIn: 'root'
 })
 export class AdminVendorService {
-  private apiBase = 'http://localhost:5197/api/adminvendor';
-  private fileApibase = 'http://localhost:5197';
+  private apiBase = 'https://a711-192-197-60-11.ngrok-free.app/api/adminvendor';
+  private fileApibase = 'https://a711-192-197-60-11.ngrok-free.app';
 
   constructor(private http: HttpClient) {}
 

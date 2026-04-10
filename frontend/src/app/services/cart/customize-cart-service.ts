@@ -14,7 +14,7 @@ export class SubscriptionCartService {
     this.loadFromStorage(); // ✅ LOAD ON INIT
   }
 
-    private baseUrl = 'http://localhost:5197/api/subscription-order';
+    private baseUrl = 'https://a711-192-197-60-11.ngrok-free.app/api/subscription-order';
 
 
     deleteSubscriber(userId: number) {

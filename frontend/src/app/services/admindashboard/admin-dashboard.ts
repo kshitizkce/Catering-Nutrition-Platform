@@ -20,7 +20,7 @@ export interface AdminDashboard {
 })
 export class AdminDashboardService {
 
-  private apiUrl = 'http://localhost:5197/api/AdminDashboard';
+  private apiUrl = 'https://a711-192-197-60-11.ngrok-free.app/api/AdminDashboard';
 
   constructor(private http: HttpClient) {}
 

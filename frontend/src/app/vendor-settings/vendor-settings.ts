@@ -87,7 +87,7 @@ export class VendorSettingsComponent implements OnInit{
           this.settings.mealCateringStatus = data.mealCateringStatus === 1;
 
           this.settings.logo = data.businessLogo 
-            ? 'http://localhost:5197' + data.businessLogo
+            ? 'https://a711-192-197-60-11.ngrok-free.app' + data.businessLogo
             : '';
 
           if (data.businessHours) {

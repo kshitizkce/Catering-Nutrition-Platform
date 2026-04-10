@@ -9,9 +9,9 @@ import { MenuItemDto } from '../../models/menu-item-dto';
 })
 export class MenuService {
 
-  private api = 'http://localhost:5197/api/menu';
+  private api = 'https://a711-192-197-60-11.ngrok-free.app/api/menu';
 
-  // http://localhost:5197/api/menu/categories
+  // https://a711-192-197-60-11.ngrok-free.app/api/menu/categories
 
   constructor(private http: HttpClient) {}
 

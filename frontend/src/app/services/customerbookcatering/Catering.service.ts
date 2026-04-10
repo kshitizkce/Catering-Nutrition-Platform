@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CateringService {
 
-  private baseUrl = 'http://localhost:5197/api/CateringEvent';
+  private baseUrl = 'https://a711-192-197-60-11.ngrok-free.app/api/CateringEvent';
 
   constructor(private http: HttpClient) {}
 

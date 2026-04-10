@@ -119,7 +119,7 @@ export class VendorDashboardComponent implements OnInit, AfterViewInit {
     this.vendorService.getVendorProfile(userId).subscribe(
       (data: any) => {
         this.settings.logo = data.businessLogo
-          ? 'http://localhost:5197' + data.businessLogo
+          ? 'https://a711-192-197-60-11.ngrok-free.app' + data.businessLogo
           : '';
 
         setTimeout(() => this.cdr.detectChanges()); // ✅ safe

@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CheckoutService {
 
-  private baseUrl = 'http://localhost:5197/api/CustomerProfile';
+  private baseUrl = 'https://a711-192-197-60-11.ngrok-free.app/api/CustomerProfile';
 
   constructor(private http: HttpClient) {}
 
