@@ -6,6 +6,7 @@ import { VendorService } from '../services/vendor/vendor-service';
 import { CateringService } from '../services/customerbookcatering/Catering.service';
 import { AuthService } from '../services/auth/auth';
 import { NavbarComponent } from '../shared/navbar/navbar';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 
 
@@ -28,6 +29,7 @@ export class BookCateringComponent implements OnInit {
     private service: CateringService,
     private vendorservice: VendorService,
     private userService: AuthService,
+    private sanitizer: DomSanitizer,
     private cd: ChangeDetectorRef
   ) {}
 
@@ -79,6 +81,9 @@ userEmail: string = '';
 
   }
 
+  getSafeUrl(url: string): SafeUrl {
+  return this.sanitizer.bypassSecurityTrustUrl(url);
+}
 
   editEvent(e: any) {
   this.isEditMode = true;

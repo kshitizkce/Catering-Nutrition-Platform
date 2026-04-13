@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { VendorService } from '../services/vendor/vendor-service';
 import { NavbarComponent } from '../shared/navbar/navbar';
 import { AuthService } from '../services/auth/auth';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class VendorsComponent implements OnInit {
     public router: Router,
     private vendorService: VendorService,
     private userService: AuthService,
+    private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -31,6 +33,10 @@ export class VendorsComponent implements OnInit {
     this.initializeUser();
   }
 
+  getSafeUrl(url: string): SafeUrl {
+  return this.sanitizer.bypassSecurityTrustUrl(url);
+}
+  
   initializeUser() {
   const user = this.userService.getUser();
 

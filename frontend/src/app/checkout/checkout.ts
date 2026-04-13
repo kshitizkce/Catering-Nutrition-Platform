@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { loadStripe } from '@stripe/stripe-js';
 import { switchMap, map } from 'rxjs/operators';
+import { NavbarComponent } from '../shared/navbar/navbar';
+
 
 
 @Component({
@@ -16,9 +18,11 @@ import { switchMap, map } from 'rxjs/operators';
   standalone: true,
   templateUrl: './checkout.html',
   styleUrls: ['./checkout.css'],
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule,NavbarComponent]
 })
 export class CheckoutComponent implements OnInit {
+
+    userEmail = '';
 
   isSubscription = false;
 subscriptionData: any;
@@ -68,6 +72,7 @@ subscriptionAmount = 0;
 }
 
 ngOnInit() {
+  this.initializeUser();
 
   const user = this.authService.getUser();
   this.userId = user.userId;
@@ -113,6 +118,15 @@ loadCart() {
     this.cdr.detectChanges();
   });
 }
+
+initializeUser() {
+    const user = this.authService.getUser();
+    if (!user) return;
+
+    this.userId = user.userId;
+    this.userEmail = user.email;
+  }
+
   loadAddresses() {
     this.checkoutService.getAddresses(this.userId)
       .subscribe(res => {

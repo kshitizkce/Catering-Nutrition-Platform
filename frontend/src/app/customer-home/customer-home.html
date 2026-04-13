@@ -22,11 +22,24 @@
   </div>
 </nav>
 
-    <!-- HERO -->
-    <div class="hero">
-      <h1>Fresh, Healthy Meals</h1>
-      <p>Delivered to your door</p>
+    <div class="hero-slider">
+
+  <div class="slide"
+       *ngFor="let slide of slides; let i = index"
+       [class.active]="i === currentIndex">
+
+    <img [src]="slide.image" />
+
+    <div class="overlay">
+      <h1>{{ slide.title }}</h1>
+      <p>{{ slide.subtitle }}</p>
+
+      <button class="cta" (click)="viewAllVendors()" >Order Now</button>
     </div>
+
+  </div>
+
+</div>
 
     <!-- SEARCH -->
     <div class="search-container">
@@ -68,73 +81,129 @@
     </div>
 
     <!-- VENDOR LOOP -->
-    <div class="vendor-item" *ngFor="let vendor of filteredVendors">
+<div class="vendor-item" *ngFor="let vendor of filteredVendors">
 
-      <div class="vendor-left">
-        <div class="avatar">🍽</div>
+  <div class="vendor-left">
+    <div class="avatar">🍽</div>
 
-        <div class="vendor-info">
-          <h3>{{ vendor.vendorName }}</h3>
+    <div class="vendor-info">
+      <h3>{{ vendor.vendorName }}</h3>
 
-          <p>
-            {{ vendor.mealCateringStatus === 1 
-                ? '🍽 Catering Service' 
-                : '🍱 Daily Meal Service' }}
-          </p>
+      <p>
+        {{ vendor.mealCateringStatus === 1 
+            ? '🍽 Catering Service' 
+            : '🍱 Daily Meal Service' }}
+      </p>
 
-          <div class="rating">
-            ⭐ {{ vendor.rating | number:'1.1-1' }}
-          </div>
-        </div>
+      <!-- ⭐ RATING FIX -->
+      <div class="rating">
+        ⭐ {{ vendor.rating || 4.5 }}
       </div>
 
-      <button class="view-btn" (click)="viewVendor(vendor)">
-        View
-      </button>
+      <!-- 🟢 OPEN / CLOSED -->
+      <div class="status">
+        <span [ngClass]="isVendorOpen(vendor) ? 'open' : 'closed'">
+          {{ isVendorOpen(vendor) ? 'Open' : 'Closed' }}
+        </span>
+      </div>
+
+      <!-- ⏰ HOURS -->
+      <div class="hours">
+        {{ getTodayHours(vendor) }}
+      </div>
+
+      <!-- NEXT OPEN -->
+      <div *ngIf="!isVendorOpen(vendor)" class="next-open">
+        Opens {{ getNextOpenTime(vendor) }}
+      </div>
 
     </div>
+  </div>
 
+ <button
+  class="view-btn"
+  (click)="viewVendor(vendor)"
+  [disabled]="!isVendorOpen(vendor)"
+  [ngClass]="{ 'disabled-btn': !isVendorOpen(vendor) }"
+>
+  {{ isVendorOpen(vendor) ? 'View' : 'Closed' }}
+</button>
+
+</div>
   </div> <!-- ✅🔥 THIS LINE WAS MISSING -->
 
 
 
-  <!-- ✅ RIGHT COLUMN -->
-  <div class="card-box purple">
+<div class="pref-wrapper" *ngIf="preference?.length">
 
-    <h2>Your Preference</h2>
-    <p class="sub">Based on your previous orders</p>
+  <div class="pref-title">
+    <h2>📊 Weekly Preferences</h2>
+    <p>Your most ordered meals this week</p>
+  </div>
 
-    <div class="preference-card" *ngIf="preference && preference.length">
+  <div *ngFor="let pref of preference" class="pref-card">
 
-      <div *ngFor="let pref of preference">
+    <!-- VENDOR HEADER -->
+    <div class="pref-header">
 
-        <div class="pref-header">
-          <div class="avatar purple-avatar">🍽</div>
+      <div class="vendor-left">
+        <div class="avatar">🍔</div>
 
-          <div>
-            <h3>{{ pref.vendorName }}</h3>
-            <p>Weekly Preference</p>
-          </div>
+        <div class="vendor-info">
+          <h3>{{ pref.vendorName }}</h3>
+          <p class="sub-text">Top ordered vendor this week</p>
         </div>
+      </div>
 
-        <div class="order-list">
-          <div class="order-item" *ngFor="let item of pref.items">
-            🍽 {{ item }}
+      <div class="vendor-badge">
+        ⭐ Preferred
+      </div>
+
+    </div>
+
+    <!-- ITEMS -->
+    <div class="items-section">
+
+      <div *ngFor="let item of pref.items" class="item-card">
+
+        <img
+          class="item-img"
+          [src]="item.imageUrl || 'assets/no-image.png'"
+          alt="item"
+        />
+
+        <div class="item-details">
+
+          <div class="item-name">
+            {{ item.itemName }}
           </div>
+
+          <div class="item-meta">
+            <span>🍽 Menu ID: {{ item.menuItemId }}</span>
+            <span>🔥 Qty: {{ item.quantity }}</span>
+          </div>
+
         </div>
 
       </div>
 
     </div>
 
+    <!-- ACTIONS -->
     <div class="pref-actions">
-      <button class="reorder">Reorder Package</button>
-      <button class="view-outline">View Vendor</button>
+
+      <button class="btn-cart" (click)="reorderToCart(pref)">
+        🛒 Add to Cart
+      </button>
+
+      <button class="btn-sub" (click)="reorderToSubscription(pref)">
+        🍱 Subscription
+      </button>
+
     </div>
 
   </div>
 
 </div>
-
   </div>
 </div>

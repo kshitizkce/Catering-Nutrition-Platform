@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminVendorService, Vendor } from '../services/admindashboard/admin-vendor';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin-vendors',
@@ -21,6 +22,7 @@ export class AdminVendorsComponent implements OnInit {
   constructor(
     private router: Router, 
     private vendorService: AdminVendorService,
+    private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef  // ✅ inject ChangeDetectorRef
   ) {}
 
@@ -39,6 +41,10 @@ export class AdminVendorsComponent implements OnInit {
       }
     });
   }
+
+  getSafeUrl(url: string): SafeUrl {
+  return this.sanitizer.bypassSecurityTrustUrl(url);
+}
 
   get filteredVendors() {
     return this.vendors.filter(v =>

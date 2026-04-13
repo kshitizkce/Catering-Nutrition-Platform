@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth/auth';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../shared/navbar/navbar';
-
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -33,6 +33,7 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private authService: AuthService,
     private router: Router,
+    private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -43,6 +44,9 @@ export class CartComponent implements OnInit {
     this.userId = user.userId;
     this.loadCart();
   }
+  getSafeUrl(url: string): SafeUrl {
+  return this.sanitizer.bypassSecurityTrustUrl(url);
+}
 
    initializeUser() {
     const user = this.authService.getUser();

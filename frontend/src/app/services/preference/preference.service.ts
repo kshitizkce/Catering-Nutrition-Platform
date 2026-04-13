@@ -13,7 +13,7 @@ export interface WeeklyPreferenceDto {
 })
 export class PreferenceService {
 
-  private apiUrl = 'https://a711-192-197-60-11.ngrok-free.app/api/preference';
+  private apiUrl = ' https://biconical-sara-counteractive.ngrok-free.dev/api/preference';
 
   constructor(private http: HttpClient) {}
 

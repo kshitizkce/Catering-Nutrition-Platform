@@ -9,9 +9,9 @@ import { MenuItemDto } from '../../models/menu-item-dto';
 })
 export class MenuService {
 
-  private api = 'https://a711-192-197-60-11.ngrok-free.app/api/menu';
+  private api = ' https://biconical-sara-counteractive.ngrok-free.dev/api/menu';
 
-  // https://a711-192-197-60-11.ngrok-free.app/api/menu/categories
+  //  https://biconical-sara-counteractive.ngrok-free.dev/api/menu/categories
 
   constructor(private http: HttpClient) {}
 

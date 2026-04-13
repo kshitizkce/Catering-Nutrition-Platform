@@ -38,13 +38,13 @@
 
         <!-- LOGO IMAGE -->
         <td>
-          <img *ngIf="v.businessLogo" [src]="getVendorFileUrl(v.businessLogo)" width="40" height="40" />
+          <img *ngIf="v.businessLogo" [src]="getSafeUrl(getVendorFileUrl(v.businessLogo))" width="40" height="40" />
           <span *ngIf="!v.businessLogo">N/A</span>
         </td>
 
         <!-- FILE LINK -->
         <td>
-          <a *ngIf="v.businessFile" [href]="getVendorFileUrl(v.businessFile)" target="_blank">
+          <a *ngIf="v.businessFile" [href]="getSafeUrl(getVendorFileUrl(v.businessFile))" target="_blank">
             View
           </a>
           <span *ngIf="!v.businessFile">N/A</span>

@@ -38,8 +38,8 @@
           <select *ngIf="editingSubscriber && editingSubscriber.subscriberId === s.subscriberId"
                   [(ngModel)]="editingSubscriber.plan"
                   [disabled]="!isOpen">
-            <option value="Free">Free</option>
-            <option value="Paid">Paid</option>
+            <option value="Free">Weekly</option>
+            <option value="Paid">Monthly</option>
           </select>
         </td>
 

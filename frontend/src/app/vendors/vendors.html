@@ -15,7 +15,7 @@
         <!-- IMAGE -->
         <div class="image-wrapper">
           <img 
-            [src]="v.businessLogo ? 'https://a711-192-197-60-11.ngrok-free.app' + v.businessLogo : 'https://via.placeholder.com/300x200'" 
+            [src]="getSafeUrl(v.businessLogo ? ' https://biconical-sara-counteractive.ngrok-free.dev' + v.businessLogo : 'https://via.placeholder.com/300x200')" 
             alt="vendor">
           
           <!-- STATUS BADGE -->

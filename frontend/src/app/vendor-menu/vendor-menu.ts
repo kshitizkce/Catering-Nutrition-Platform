@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MenuService } from '../services/menu/menu';
 import { VendorService } from '../services/vendor/vendor-service';
 import { AuthService } from '../services/auth/auth';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 interface Category {
   categoryId: number;
@@ -52,42 +53,29 @@ export class VendorMenuComponent implements OnInit {
     private menuService: MenuService,
     private vendorService: VendorService,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef   // ✅ added
+    private sanitizer: DomSanitizer,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     const user = this.authService.getUser();
 
-    if (!user) {
-      console.error("User not logged in");
-      return;
-    }
+    if (!user) return;
 
     const userId = user.userId;
-
-    if (!userId) {
-      console.error("User ID not found");
-      return;
-    }
 
     this.vendorService.getVendorByUserId(userId).subscribe({
       next: (vendor: any) => {
         this.vendorId = vendor.vendorId;
-
-        if (!this.vendorId) {
-          console.error("Vendor ID not found");
-          return;
-        }
-
         this.loadCategories();
-
-        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+        setTimeout(() => this.cdr.detectChanges());
       },
-      error: (err) => {
-        console.error("Failed to fetch vendor:", err);
-        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
-      }
+      error: err => console.error(err)
     });
+  }
+
+  getSafeUrl(url: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
   getEmptyItem(): MenuItem {
@@ -100,7 +88,7 @@ export class VendorMenuComponent implements OnInit {
       calories: 0,
       isAvailable: true,
       rating: 0,
-      imageUrl: ''
+      imageUrl: ''   // ✅ FIXED SAFE DEFAULT
     };
   }
 
@@ -111,12 +99,7 @@ export class VendorMenuComponent implements OnInit {
         if (this.categories.length > 0) {
           this.selectCategory(this.categories[0]);
         }
-
-        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
-      },
-      error: err => {
-        console.error('Failed to load categories', err);
-        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+        setTimeout(() => this.cdr.detectChanges());
       }
     });
   }
@@ -126,8 +109,6 @@ export class VendorMenuComponent implements OnInit {
     this.pageNumber = 1;
     this.loadMenuItems();
     this.newItem.categoryId = category.categoryId;
-
-    setTimeout(() => this.cdr.detectChanges()); // ✅ safe
   }
 
   loadMenuItems() {
@@ -139,11 +120,7 @@ export class VendorMenuComponent implements OnInit {
     ).subscribe({
       next: (res: MenuItem[]) => {
         this.menuItems = res;
-        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
-      },
-      error: err => {
-        console.error('Failed to load menu items', err);
-        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+        setTimeout(() => this.cdr.detectChanges());
       }
     });
   }
@@ -160,37 +137,48 @@ export class VendorMenuComponent implements OnInit {
     }
   }
 
+  // 🔥 FIXED IMAGE UPLOAD
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
 
-    if (this.selectedFile) {
-      this.menuService.uploadImage(this.selectedFile).subscribe({
-        next: res => {
-          this.newItem.imageUrl = res.imageUrl;
-          setTimeout(() => this.cdr.detectChanges()); // ✅ safe
-        },
-        error: err => {
-          console.error('Image upload failed', err);
-          setTimeout(() => this.cdr.detectChanges()); // ✅ safe
+    if (!this.selectedFile) return;
+
+    this.menuService.uploadImage(this.selectedFile).subscribe({
+      next: res => {
+
+        // ✅ FIX: support both backend response types
+        const uploadedUrl = res.imageUrl || res.imageUrl;
+
+        this.newItem.imageUrl = uploadedUrl;
+
+        // IMPORTANT: also update editing item if open
+        if (this.editingItem) {
+          this.editingItem.imageUrl = uploadedUrl;
         }
-      });
-    }
+
+        setTimeout(() => this.cdr.detectChanges());
+      },
+      error: err => console.error('Image upload failed', err)
+    });
   }
 
+  // 🔥 FIXED ADD
   addMenuItem() {
-    this.newItem.vendorId = this.vendorId;
-    this.newItem.categoryId = this.selectedCategory.categoryId;
 
-    this.menuService.addMenuItem(this.newItem).subscribe({
+    const payload: MenuItem = {
+      ...this.newItem,
+      imageUrl: this.newItem.imageUrl || ''   // ✅ FORCE INCLUDE IMAGE
+    };
+
+    payload.vendorId = this.vendorId;
+    payload.categoryId = this.selectedCategory.categoryId;
+
+    this.menuService.addMenuItem(payload).subscribe({
       next: () => {
         this.loadMenuItems();
         this.resetForm();
-        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
       },
-      error: err => {
-        console.error('Failed to add menu item', err);
-        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
-      }
+      error: err => console.error(err)
     });
   }
 
@@ -198,19 +186,24 @@ export class VendorMenuComponent implements OnInit {
     this.editingItem = { ...item };
   }
 
+  // 🔥 FIXED UPDATE
   saveEdit() {
     if (!this.editingItem) return;
 
-    this.menuService.updateMenuItem(this.editingItem.menuItemId!, this.editingItem).subscribe({
+    const payload: MenuItem = {
+      ...this.editingItem,
+      imageUrl: this.editingItem.imageUrl || ''   // ✅ FIX NULL ISSUE
+    };
+
+    this.menuService.updateMenuItem(
+      this.editingItem.menuItemId!,
+      payload
+    ).subscribe({
       next: () => {
         this.loadMenuItems();
         this.editingItem = null;
-        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
       },
-      error: err => {
-        console.error('Failed to update menu item', err);
-        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
-      }
+      error: err => console.error(err)
     });
   }
 
@@ -218,14 +211,8 @@ export class VendorMenuComponent implements OnInit {
     if (!menuItemId) return;
 
     this.menuService.deleteMenuItem(menuItemId).subscribe({
-      next: () => {
-        this.loadMenuItems();
-        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
-      },
-      error: err => {
-        console.error('Failed to delete menu item', err);
-        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
-      }
+      next: () => this.loadMenuItems(),
+      error: err => console.error(err)
     });
   }
 
@@ -237,26 +224,25 @@ export class VendorMenuComponent implements OnInit {
     this.newItem = this.getEmptyItem();
     this.showForm = false;
     this.selectedFile = null;
-
-    setTimeout(() => this.cdr.detectChanges()); // ✅ safe
   }
 
   toggleSoldOut(item: MenuItem) {
-    const updatedItem = { ...item, isAvailable: !item.isAvailable };
 
-    this.menuService.updateMenuItem(item.menuItemId!, updatedItem).subscribe({
-      next: () => {
-        const index = this.menuItems.findIndex(m => m.menuItemId === item.menuItemId);
-        if (index !== -1) {
-          this.menuItems[index].isAvailable = updatedItem.isAvailable;
-        }
+    const updatedItem: MenuItem = {
+      ...item,
+      isAvailable: !item.isAvailable,
+      imageUrl: item.imageUrl || ''   // ✅ FIX SAFETY
+    };
 
-        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
-      },
-      error: err => {
-        console.error('Failed to toggle availability', err);
-        setTimeout(() => this.cdr.detectChanges()); // ✅ safe
-      }
-    });
+    this.menuService.updateMenuItem(item.menuItemId!, updatedItem)
+      .subscribe({
+        next: () => {
+          const i = this.menuItems.findIndex(m => m.menuItemId === item.menuItemId);
+          if (i !== -1) {
+            this.menuItems[i].isAvailable = updatedItem.isAvailable;
+          }
+        },
+        error: err => console.error(err)
+      });
   }
 }

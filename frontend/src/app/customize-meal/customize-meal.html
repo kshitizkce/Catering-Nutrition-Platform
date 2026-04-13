@@ -1,3 +1,5 @@
+<app-navbar [userEmail]="userEmail"></app-navbar>
+
 <div class="page" *ngIf="meal">
 
 <div class="container">
@@ -20,7 +22,6 @@
       <div><span>Fat</span><b>{{meal.fat}}g</b></div>
     </div>
 
-    <p class="price">Price: ${{meal.price}}</p>
   </div>
 
   <!-- GOALS -->
@@ -75,7 +76,7 @@
     </div>
 
     <div class="price-box">
-      Price <b>${{updated.price}}</b>
+      Price <b>Subscription Paid</b>
     </div>
 
   </div>

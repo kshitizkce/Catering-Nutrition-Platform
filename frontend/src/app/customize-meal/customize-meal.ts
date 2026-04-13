@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SubscriptionCartService } from '../services/cart/customize-cart-service';
+import { NavbarComponent } from '../shared/navbar/navbar';
 import { AuthService } from '../services/auth/auth';
 import { VendorService } from '../services/vendor/vendor-service';
 import { MenuService } from '../services/menu/menu';
@@ -10,7 +11,7 @@ import { MenuService } from '../services/menu/menu';
 @Component({
   selector: 'app-customize-meal',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,NavbarComponent],
   templateUrl: './customize-meal.html',
   styleUrls: ['./customize-meal.css']
 })
@@ -27,6 +28,8 @@ export class CustomizeMealComponent implements OnInit {
 
   meal: any;
   userId!: number;
+    userEmail = '';
+
 
   targetCalories = 520;
   targetProtein = 42;
@@ -37,6 +40,7 @@ export class CustomizeMealComponent implements OnInit {
 
   ngOnInit() {
 
+    this.initializeUser();
     const user = this.auth.getUser();
     this.userId = user.userId;
 
@@ -76,6 +80,15 @@ export class CustomizeMealComponent implements OnInit {
     this.targetCalories = this.meal.cal;
     this.targetProtein = this.meal.protein;
   }
+
+  initializeUser() {
+    const user = this.auth.getUser();
+    if (!user) return;
+
+    this.userId = user.userId;
+    this.userEmail = user.email;
+  }
+
 
   get updated() {
     if (!this.meal) {

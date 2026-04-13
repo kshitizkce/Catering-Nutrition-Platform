@@ -14,7 +14,7 @@ export class SubscriptionCartService {
     this.loadFromStorage(); // ✅ LOAD ON INIT
   }
 
-    private baseUrl = 'https://a711-192-197-60-11.ngrok-free.app/api/subscription-order';
+    private baseUrl = ' https://biconical-sara-counteractive.ngrok-free.dev/api/subscription-order';
 
 
     deleteSubscriber(userId: number) {

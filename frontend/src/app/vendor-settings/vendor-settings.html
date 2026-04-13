@@ -50,7 +50,7 @@
 <input type="file" (change)="uploadLogo($event)" accept="image/*">
 
 <div *ngIf="settings.logo" class="logo-preview">
-<img [src]="settings.logo">
+<img [src]="getSafeUrl(settings.logo)">
 </div>
 </div>
 

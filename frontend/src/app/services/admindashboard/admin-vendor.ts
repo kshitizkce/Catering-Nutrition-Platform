@@ -52,8 +52,8 @@ export interface VendorDetailsResponse {
   providedIn: 'root'
 })
 export class AdminVendorService {
-  private apiBase = 'https://a711-192-197-60-11.ngrok-free.app/api/adminvendor';
-  private fileApibase = 'https://a711-192-197-60-11.ngrok-free.app';
+  private apiBase = ' https://biconical-sara-counteractive.ngrok-free.dev/api/adminvendor';
+  private fileApibase = ' https://biconical-sara-counteractive.ngrok-free.dev';
 
   constructor(private http: HttpClient) {}
 

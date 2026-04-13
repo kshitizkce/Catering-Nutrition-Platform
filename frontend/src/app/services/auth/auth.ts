@@ -55,7 +55,7 @@ getVendorId() {
   return this.getUser()?.vendorId;
 }
 
-  private apiUrl = "https://a711-192-197-60-11.ngrok-free.app/api/auth";
+  private apiUrl = " https://biconical-sara-counteractive.ngrok-free.dev/api/auth";
 
   constructor(private http: HttpClient) {
   const user = localStorage.getItem('user');

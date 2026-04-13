@@ -12,7 +12,7 @@
 
 <div class="vendor-header">
   <!-- Show business logo if available -->
-  <img *ngIf="settings.logo" [src]="settings.logo" class="vendor-logo">
+  <img *ngIf="settings.logo" [src]="getSafeUrl(settings.logo)" class="vendor-logo">
 
   <!-- Fallback avatar -->
   <div *ngIf="!settings.logo" class="avatar">

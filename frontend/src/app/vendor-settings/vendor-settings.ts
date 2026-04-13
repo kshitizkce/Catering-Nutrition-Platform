@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { VendorService } from '../services/vendor/vendor-service';
 import { AuthService } from '../services/auth/auth';
 import { Router } from '@angular/router';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector:'app-vendor-settings',
@@ -18,6 +19,7 @@ export class VendorSettingsComponent implements OnInit{
     private vendorService: VendorService,
     private authService: AuthService,
     private router: Router,
+    private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef
   ){}
 
@@ -87,7 +89,7 @@ export class VendorSettingsComponent implements OnInit{
           this.settings.mealCateringStatus = data.mealCateringStatus === 1;
 
           this.settings.logo = data.businessLogo 
-            ? 'https://a711-192-197-60-11.ngrok-free.app' + data.businessLogo
+            ? ' https://biconical-sara-counteractive.ngrok-free.dev' + data.businessLogo
             : '';
 
           if (data.businessHours) {
@@ -107,6 +109,10 @@ export class VendorSettingsComponent implements OnInit{
       });
   }
 
+
+  getSafeUrl(url: string): SafeUrl {
+  return this.sanitizer.bypassSecurityTrustUrl(url);
+}
   uploadLogo(event:any){
     this.selectedLogo = event.target.files[0];
 

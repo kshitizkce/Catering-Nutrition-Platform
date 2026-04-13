@@ -25,7 +25,7 @@ export interface CateringEvent {
 })
 export class VendorMealCateringService {
 
-  private api = 'https://a711-192-197-60-11.ngrok-free.app/api/events';
+  private api = ' https://biconical-sara-counteractive.ngrok-free.dev/api/events';
 
   constructor(private http: HttpClient) {}
 

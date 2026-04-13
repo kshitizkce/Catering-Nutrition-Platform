@@ -2,17 +2,20 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { OrderService } from '../services/customerprofile/orderdelicerystatus';
 import { AuthService } from '../services/auth/auth';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../shared/navbar/navbar';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-delivery-tracking',
   templateUrl: './delivery-tracking.html',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,NavbarComponent],
   styleUrls: ['./delivery-tracking.css']
 })
 export class DeliveryTrackingComponent implements OnInit {
   order: any = null;
   userId!: number;
+      userEmail = '';
+
   isUpdating: boolean = false;
   intervalId: any;
 
@@ -23,6 +26,7 @@ export class DeliveryTrackingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.initializeUser();
     const user = this.auth.getUser();
     this.userId = user.userId;
 
@@ -34,6 +38,13 @@ export class DeliveryTrackingComponent implements OnInit {
     }, 5000);
   }
 
+   initializeUser() {
+    const user = this.auth.getUser();
+    if (!user) return;
+
+    this.userId = user.userId;
+    this.userEmail = user.email;
+  }
   loadOrderStatus() {
     this.orderService.getLatestOrder(this.userId).subscribe(
       (response: any) => {

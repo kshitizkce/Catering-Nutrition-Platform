@@ -5,6 +5,7 @@ import { AuthService } from '../services/auth/auth';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { forkJoin } from 'rxjs';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -29,6 +30,7 @@ vendorId: number | null = null;
     private service: VendorMealCateringService,
     private  authService:AuthService,
     private userService: VendorService,
+    private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -63,6 +65,10 @@ vendorId: number | null = null;
       console.error("Failed to fetch vendor:", err);
     }
   });
+}
+
+getSafeUrl(url: string): SafeUrl {
+  return this.sanitizer.bypassSecurityTrustUrl(url);
 }
 
   ngOnDestroy() {}

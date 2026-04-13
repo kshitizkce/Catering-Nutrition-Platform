@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PaymentService {
 
-  private baseUrl = 'https://a711-192-197-60-11.ngrok-free.app/api/payment';
+  private baseUrl = ' https://biconical-sara-counteractive.ngrok-free.dev/api/payment';
 
   constructor(private http: HttpClient) {}
 

@@ -17,7 +17,7 @@
 
       <!-- IMAGE -->
       <img 
-        [src]="item.imageUrl || 'https://via.placeholder.com/100'" 
+        [src]="getSafeUrl(item.imageUrl || 'https://via.placeholder.com/100')"
         class="food-img"
       />
 

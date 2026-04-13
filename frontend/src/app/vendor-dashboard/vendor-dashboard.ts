@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VendorService } from '../services/vendor/vendor-service';
 import { AuthService } from '../services/auth/auth';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-vendor-dashboard',
@@ -36,6 +37,7 @@ export class VendorDashboardComponent implements OnInit, AfterViewInit {
   constructor(
     private vendorService: VendorService,
     private authService: AuthService,
+    private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef   // ✅ FIX: Injected properly
   ) {}
 
@@ -69,6 +71,10 @@ export class VendorDashboardComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  getSafeUrl(url: string): SafeUrl {
+  return this.sanitizer.bypassSecurityTrustUrl(url);
+}
 
   // ✅ Safe lifecycle for manual change detection
   ngAfterViewInit() {
@@ -119,7 +125,7 @@ export class VendorDashboardComponent implements OnInit, AfterViewInit {
     this.vendorService.getVendorProfile(userId).subscribe(
       (data: any) => {
         this.settings.logo = data.businessLogo
-          ? 'https://a711-192-197-60-11.ngrok-free.app' + data.businessLogo
+          ? ' https://biconical-sara-counteractive.ngrok-free.dev' + data.businessLogo
           : '';
 
         setTimeout(() => this.cdr.detectChanges()); // ✅ safe

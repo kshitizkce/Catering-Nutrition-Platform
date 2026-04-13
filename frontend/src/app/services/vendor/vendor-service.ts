@@ -12,7 +12,7 @@ export interface Customer {
   providedIn: 'root'
 })
 export class VendorService {
-  baseUrl = 'https://a711-192-197-60-11.ngrok-free.app/api/vendor';
+  baseUrl = ' https://biconical-sara-counteractive.ngrok-free.dev/api/vendor';
 
   constructor(private http: HttpClient) {}
 
@@ -26,10 +26,12 @@ export class VendorService {
     return this.http.get<any>(`${this.baseUrl}/sub/${userId}`);
   }
 
-  updateSubscriber(vendorId: number, subscriberId: number, payload: any): Observable<any> {
-    // payload must be JSON object
-    return this.http.put(`${this.baseUrl}/${vendorId}/subscriber/${subscriberId}`, payload);
-  }
+  updateSubscriber(vendorId: number ,subscriberId: number, payload: any) {
+  return this.http.put(
+    `${this.baseUrl}/update/${subscriberId}`,
+    payload
+  );
+}
 
   getOrders(vendorId: number) {
   return this.http.get(`${this.baseUrl}/${vendorId}/orders`);

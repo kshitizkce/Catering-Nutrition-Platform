@@ -4,11 +4,14 @@ import { SubscriptionCartService } from '../services/cart/customize-cart-service
 import { VendorService } from '../services/vendor/vendor-service';
 import { AuthService } from '../services/auth/auth';
 import { Router } from '@angular/router';
+import { NavbarComponent } from '../shared/navbar/navbar';
+
+
 
 @Component({
   selector: 'app-subscription-cart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,NavbarComponent],
   templateUrl: './subscriptioncart.html',
   styleUrls: ['./subscriptioncart.css']
 })
@@ -17,6 +20,7 @@ export class SubscriptionCartComponent implements OnInit {
   items: any[] = [];
   mealsLimit = 0;
   userId!: number;
+   userEmail = '';
 
   constructor(
     public cartService: SubscriptionCartService,
@@ -27,6 +31,7 @@ export class SubscriptionCartComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.initializeUser();
 
     const user = this.auth.getUser();
     this.userId = user.userId;
@@ -70,6 +75,15 @@ export class SubscriptionCartComponent implements OnInit {
     } else {
       this.router.navigate(['/vendors']);
     }
+  }
+
+
+  initializeUser() {
+    const user = this.auth.getUser();
+    if (!user) return;
+
+    this.userId = user.userId;
+    this.userEmail = user.email;
   }
 
 confirmOrder() {
