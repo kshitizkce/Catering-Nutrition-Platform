@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { VendorService } from '../services/vendor/vendor-service';
 import { AuthService } from '../services/auth/auth';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-vendor-dashboard',
@@ -38,6 +40,7 @@ export class VendorDashboardComponent implements OnInit, AfterViewInit {
     private vendorService: VendorService,
     private authService: AuthService,
     private sanitizer: DomSanitizer,
+    private router: Router,
     private cdr: ChangeDetectorRef   // ✅ FIX: Injected properly
   ) {}
 
@@ -164,6 +167,6 @@ export class VendorDashboardComponent implements OnInit, AfterViewInit {
   }
 
   goBack() {
-    window.location.href = "/role-select";
-  }
+  this.router.navigate(['/role-select']);
+}
 }
