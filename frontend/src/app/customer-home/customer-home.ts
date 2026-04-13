@@ -50,17 +50,17 @@ currentIndex = 0;
 
 slides = [
   {
-    image: '/banner1.jpg',
+    image: 'banner1.jpg',
     title: 'Fresh & Healthy Meals',
     subtitle: 'Delivered straight to your door'
   },
   {
-    image: '/banner2.jpg',
+    image: 'banner2.jpg',
     title: 'Custom Meal Plans',
     subtitle: 'Perfect for your lifestyle'
   },
   {
-    image: '/banner3.jpg',
+    image: 'banner3.jpg',
     title: 'Trusted Food Service with Catering Services',
     subtitle: 'For home & business events'
   }
