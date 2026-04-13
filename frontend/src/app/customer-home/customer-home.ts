@@ -285,7 +285,7 @@ reorderToCart(pref: any) {
       userId: this.userService.getUser().userId,
       vendorId: pref.vendorId,
       menuItemId: item.menuItemId,
-      quantity: item.quantity
+      quantity: 1
     };
 
     this.cartService.addToCart(payload).subscribe({
