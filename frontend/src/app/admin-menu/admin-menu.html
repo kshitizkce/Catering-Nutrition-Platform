@@ -76,33 +76,44 @@
       </div>
     </div>
 
-    <!-- MENU ITEMS -->
-    <div class="menu-grid">
-      <div class="card" *ngFor="let item of menuItems">
+<div class="menu-grid">
+  <div class="card" *ngFor="let item of menuItems">
 
-        <div *ngIf="!item.isAvailable" class="soldout-badge">Sold Out</div>
+  <div class="image-wrapper">
+  <img 
+    [src]="getSafeUrl(
+      item.imageUrl 
+        ? item.imageUrl.replace(
+            'http://localhost:5197',
+            'https://biconical-sara-counteractive.ngrok-free.dev'
+          )
+        : 'https://via.placeholder.com/300x200'
+    )"
+    alt="{{item.itemName}}">
+</div>
+    <!-- CONTENT -->
+    <div class="content">
+      <h3>{{item.itemName}}</h3>
+      <p>{{item.itemDescription}}</p> 
 
-        <h3>{{item.itemName}}</h3>
-        <p>{{item.itemDescription}}</p> 
+      <div class="info">
+        <span>{{item.calories}} cal</span>
+      </div>
 
-        <div class="info">
-          <span>{{item.calories}} cal</span>
+      <div class="bottom">
+        <span class="price">${{item.price}}</span>
+        <div class="actions">
+          <button class="edit" (click)="editItem(item)">Edit</button>
+          <button class="soldout" (click)="toggleSoldOut(item)">
+            {{item.isAvailable ? 'Mark Sold Out' : 'Mark Available'}}
+          </button>
+          <button class="delete" (click)="deleteItem(item.menuItemId)">Delete</button>
         </div>
-
-        <div class="bottom">
-          <span class="price">${{item.price}}</span>
-          <div class="actions">
-            <button class="edit" (click)="editItem(item)">Edit</button>
-            <button class="soldout" (click)="toggleSoldOut(item)">
-              {{item.isAvailable ? 'Mark Sold Out' : 'Mark Available'}}
-            </button>
-            <button class="delete" (click)="deleteItem(item.menuItemId)">Delete</button>
-          </div>
-        </div>
-
       </div>
     </div>
 
+  </div>
+</div>
     <!-- PAGINATION -->
     <div class="pagination">
       <button (click)="prevPage()" [disabled]="pageNumber === 1">⬅ Previous</button>

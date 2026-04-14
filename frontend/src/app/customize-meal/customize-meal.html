@@ -29,20 +29,110 @@
     <h3>Set Your Nutrition Goals</h3>
 
     <div class="row">
-      <input type="number" [(ngModel)]="targetCalories">
-      <input type="number" [(ngModel)]="targetProtein">
-    </div>
+
+  <div class="field">
+    <label>
+      Target Calories (per meal)
+      <small>(300 - 900 kcal)</small>
+    </label>
+    <input 
+      type="number"
+      [(ngModel)]="targetCalories"
+      min="300"
+      max="900">
   </div>
 
+  <div class="field">
+    <label>
+      Target Protein (per meal)
+      <small>(20g - 60g)</small>
+    </label>
+    <input 
+      type="number"
+      [(ngModel)]="targetProtein"
+      min="20"
+      max="60">
+  </div>
+
+</div>
   <!-- STYLE -->
   <div class="card">
-    <h3>Protein Preparation Style</h3>
+    <h3>Preparation Style</h3>
 
-    <select [(ngModel)]="style">
-      <option>Grilled Chicken</option>
-      <option>Fried</option>
-      <option>Roasted</option>
-    </select>
+<select [(ngModel)]="style">
+
+  <!-- Default -->
+  <option value="Standard" selected>Standard</option>
+
+  <!-- Indian -->
+  <optgroup label="Indian">
+    <option value="Tandoori">Tandoori</option>
+    <option value="Butter Masala">Butter Masala</option>
+    <option value="Vindaloo">Vindaloo</option>
+    <option value="Curry">Curry</option>
+    <option value="Bhuna">Bhuna</option>
+    <option value="Masala">Masala</option>
+  </optgroup>
+
+  <!-- Nepali -->
+  <optgroup label="Nepali">
+    <option value="Momo Style (Steamed)">Momo Style (Steamed)</option>
+    <option value="Chhoila">Chhoila</option>
+    <option value="Thakali Style">Thakali Style</option>
+    <option value="Gundruk Style">Gundruk Style</option>
+    <option value="Dal Bhat Set">Dal Bhat Set</option>
+  </optgroup>
+
+  <!-- North American -->
+  <optgroup label="North American">
+    <option value="Grilled">Grilled</option>
+    <option value="BBQ Smoked">BBQ Smoked</option>
+    <option value="Fried">Fried</option>
+    <option value="Baked">Baked</option>
+    <option value="Roasted">Roasted</option>
+    <option value="Air Fried">Air Fried</option>
+  </optgroup>
+
+  <!-- Mexican -->
+  <optgroup label="Mexican">
+    <option value="Grilled Taco Style">Grilled Taco Style</option>
+    <option value="Enchilada Style">Enchilada Style</option>
+    <option value="Burrito Style">Burrito Style</option>
+    <option value="Fajita Style">Fajita Style</option>
+    <option value="Spicy Chipotle">Spicy Chipotle</option>
+    <option value="Quesadilla Style">Quesadilla Style</option>
+  </optgroup>
+
+  <!-- Italian -->
+  <optgroup label="Italian">
+    <option value="Alfredo">Alfredo</option>
+    <option value="Marinara">Marinara</option>
+    <option value="Carbonara">Carbonara</option>
+    <option value="Pesto">Pesto</option>
+    <option value="Napoli Style">Napoli Style</option>
+    <option value="Oven Baked">Oven Baked</option>
+  </optgroup>
+
+  <!-- Vietnamese -->
+  <optgroup label="Vietnamese">
+    <option value="Pho Style">Pho Style</option>
+    <option value="Lemongrass Grill">Lemongrass Grill</option>
+    <option value="Rice Bowl Style">Rice Bowl Style</option>
+    <option value="Spring Roll Style">Spring Roll Style</option>
+    <option value="Herb Fresh Style">Herb Fresh Style</option>
+  </optgroup>
+
+  <!-- Chinese -->
+  <optgroup label="Chinese">
+    <option value="Stir Fry">Stir Fry</option>
+    <option value="Sweet & Sour">Sweet & Sour</option>
+    <option value="Szechuan Spicy">Szechuan Spicy</option>
+    <option value="Hakka Style">Hakka Style</option>
+    <option value="Kung Pao">Kung Pao</option>
+    <option value="Steamed Dumpling Style">Steamed Dumpling Style</option>
+  </optgroup>
+
+</select>
   </div>
 
   <!-- RESULT -->

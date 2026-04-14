@@ -2,6 +2,7 @@ import { Component, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import Chart from 'chart.js/auto';
 import { AdminDashboardService, AdminDashboard } from '../services/admindashboard/admin-dashboard';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -17,6 +18,7 @@ export class AdminDashboardComponent implements AfterViewInit {
 
   constructor(
     private dashboardService: AdminDashboardService,
+        private router: Router,
     private cdr: ChangeDetectorRef  // <-- inject ChangeDetectorRef
   ) {}
 
@@ -25,8 +27,10 @@ export class AdminDashboardComponent implements AfterViewInit {
   }
 
   goBack() {
-    window.location.href = "/role-select";
-  }
+  this.router.navigate(['/role-select']);
+}
+
+ 
 
   loadDashboard() {
     this.dashboardService.getDashboardData().subscribe({

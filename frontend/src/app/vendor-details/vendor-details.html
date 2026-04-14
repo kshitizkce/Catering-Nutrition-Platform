@@ -58,18 +58,20 @@
 
 
 <!-- 🍱 CUSTOMIZE (ONLY if subscribed) -->
+<!-- 🧠 CUSTOMIZE BUTTON -->
 <button 
   *ngIf="hasSubscriptionRecord && isSubscribed"
   (click)="goToCustomize(item)"
   class="customize-btn"
-  [disabled]="currentCount >= mealsLimit">
+  [disabled]="!item.isAvailable || currentCount >= mealsLimit">
   Customize Meal
 </button>
 
-<!-- 🛒 ADD TO CART (ALWAYS visible) -->
+<!-- 🛒 ADD TO CART -->
 <button 
   (click)="orderNow(item)" 
-  class="order-btn">
+  class="order-btn"
+  [disabled]="!item.isAvailable">
   Add to Cart
 </button>
 

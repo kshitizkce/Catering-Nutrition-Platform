@@ -103,6 +103,8 @@
       <th>Order</th>
       <th>Customer</th>
       <th>Items</th>
+        <th>Custom Nutrition</th>
+
       <th>Amount</th>
       <th>Status</th>
       <th>Action</th>
@@ -132,6 +134,26 @@
           </div>
         </td>
 
+            <!-- ✅ CUSTOM NUTRITION + STYLE -->
+    <td>
+      <div *ngFor="let item of o.items" class="item-box custom-nutrition">
+
+        <small *ngIf="item.customCalories">
+          🔥 Calories: {{item.customCalories}} kcal
+        </small><br *ngIf="item.customCalories">
+
+        <small *ngIf="item.customProtein">
+          💪 Protein: {{item.customProtein}} g
+        </small><br *ngIf="item.customProtein">
+
+        <small *ngIf="item.preparationStyle">
+          🍽️ Style: {{item.preparationStyle}}
+        </small>
+
+      </div>
+    </td>
+
+
         <td>${{o.totalAmount}}</td>
 
         <td>
@@ -150,6 +172,7 @@
             <option [selected]="o.statusId == 5" value="5">Delivered</option>
           </select>
         </td>
+        
       </tr>
 
     </ng-container>

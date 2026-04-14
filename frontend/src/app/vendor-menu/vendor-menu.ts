@@ -228,21 +228,26 @@ export class VendorMenuComponent implements OnInit {
 
   toggleSoldOut(item: MenuItem) {
 
-    const updatedItem: MenuItem = {
-      ...item,
-      isAvailable: !item.isAvailable,
-      imageUrl: item.imageUrl || ''   // ✅ FIX SAFETY
-    };
+  const updatedItem: MenuItem = {
+    ...item,
+    isAvailable: !item.isAvailable,
+    imageUrl: item.imageUrl || ''
+  };
 
-    this.menuService.updateMenuItem(item.menuItemId!, updatedItem)
-      .subscribe({
-        next: () => {
-          const i = this.menuItems.findIndex(m => m.menuItemId === item.menuItemId);
-          if (i !== -1) {
-            this.menuItems[i].isAvailable = updatedItem.isAvailable;
-          }
-        },
-        error: err => console.error(err)
-      });
-  }
+  this.menuService.updateMenuItem(item.menuItemId!, updatedItem)
+    .subscribe({
+      next: () => {
+
+        const i = this.menuItems.findIndex(m => m.menuItemId === item.menuItemId);
+
+        if (i !== -1) {
+          this.menuItems[i].isAvailable = updatedItem.isAvailable;
+
+          // ✅ Force UI update
+          this.cdr.detectChanges();
+        }
+      },
+      error: err => console.error(err)
+    });
+}
 }

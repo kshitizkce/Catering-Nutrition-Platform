@@ -285,6 +285,7 @@ reorderToCart(pref: any) {
       userId: this.userService.getUser().userId,
       vendorId: pref.vendorId,
       menuItemId: item.menuItemId,
+      unitPrice: item.price ?? 0,
       quantity: 1
     };
 

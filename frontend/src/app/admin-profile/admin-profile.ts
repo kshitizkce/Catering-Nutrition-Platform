@@ -78,11 +78,13 @@ export class AdminProfileComponent implements OnInit {
   }
 
   cancel() {
-    window.location.href = "/admin-dashboard";
+      this.router.navigate(['/admin-dashboard']);
+
   }
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
+  
 }

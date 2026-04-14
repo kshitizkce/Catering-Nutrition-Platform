@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MenuService } from '../services/menu/menu';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+
 
 interface Category {
   categoryId: number;
@@ -53,12 +55,18 @@ export class AdminMenuComponent implements OnInit {
 
   constructor(
     private menuService: MenuService,
+        private sanitizer: DomSanitizer,
+
     private cdr: ChangeDetectorRef // ✅ Added ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.loadVendors();
     this.loadCategories();
+  }
+  
+   getSafeUrl(url: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
   // ✅ Load Vendors
@@ -149,29 +157,48 @@ export class AdminMenuComponent implements OnInit {
     }
   }
 
-  onFileSelected(event: any) {
+    onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
 
-    if (this.selectedFile) {
-      this.menuService.uploadImage(this.selectedFile).subscribe({
-        next: res => {
-          this.newItem.imageUrl = res.imageUrl;
-          this.cdr.detectChanges(); // ✅ Detect changes after file upload
+    if (!this.selectedFile) return;
+
+    this.menuService.uploadImage(this.selectedFile).subscribe({
+      next: res => {
+
+        // ✅ FIX: support both backend response types
+        const uploadedUrl = res.imageUrl || res.imageUrl;
+
+        this.newItem.imageUrl = uploadedUrl;
+
+        // IMPORTANT: also update editing item if open
+        if (this.editingItem) {
+          this.editingItem.imageUrl = uploadedUrl;
         }
-      });
-    }
+
+        setTimeout(() => this.cdr.detectChanges());
+      },
+      error: err => console.error('Image upload failed', err)
+    });
   }
 
-  addMenuItem() {
-    this.newItem.vendorId = this.selectedVendorId;
-    this.newItem.categoryId = this.selectedCategory.categoryId;
 
-    this.menuService.addMenuItem(this.newItem).subscribe({
+  
+   addMenuItem() {
+
+    const payload: MenuItem = {
+      ...this.newItem,
+      imageUrl: this.newItem.imageUrl || ''   // ✅ FORCE INCLUDE IMAGE
+    };
+
+    payload.vendorId = this.vendorId;
+    payload.categoryId = this.selectedCategory.categoryId;
+
+    this.menuService.addMenuItem(payload).subscribe({
       next: () => {
         this.loadMenuItems();
         this.resetForm();
-        this.cdr.detectChanges(); // ✅ Detect changes after add
-      }
+      },
+      error: err => console.error(err)
     });
   }
 
@@ -183,13 +210,20 @@ export class AdminMenuComponent implements OnInit {
   saveEdit() {
     if (!this.editingItem) return;
 
+    const payload: MenuItem = {
+      ...this.editingItem,
+      imageUrl: this.editingItem.imageUrl || ''   // ✅ FIX NULL ISSUE
+    };
+
     this.menuService.updateMenuItem(
       this.editingItem.menuItemId!,
-      this.editingItem
-    ).subscribe(() => {
-      this.loadMenuItems();
-      this.editingItem = null;
-      this.cdr.detectChanges(); // ✅ Detect changes after edit
+      payload
+    ).subscribe({
+      next: () => {
+        this.loadMenuItems();
+        this.editingItem = null;
+      },
+      error: err => console.error(err)
     });
   }
 
@@ -214,15 +248,27 @@ export class AdminMenuComponent implements OnInit {
     this.cdr.detectChanges(); // ✅ Detect changes after reset
   }
 
-  toggleSoldOut(item: MenuItem) {
-    const updatedItem = { ...item, isAvailable: !item.isAvailable };
+toggleSoldOut(item: MenuItem) {
 
-    this.menuService.updateMenuItem(item.menuItemId!, updatedItem).subscribe(() => {
-      const index = this.menuItems.findIndex(m => m.menuItemId === item.menuItemId);
-      if (index !== -1) {
-        this.menuItems[index].isAvailable = updatedItem.isAvailable;
-      }
-      this.cdr.detectChanges(); // ✅ Detect changes after toggle
+  const updatedItem: MenuItem = {
+    ...item,
+    isAvailable: !item.isAvailable,
+    imageUrl: item.imageUrl || ''
+  };
+
+  this.menuService.updateMenuItem(item.menuItemId!, updatedItem)
+    .subscribe({
+      next: () => {
+
+        const i = this.menuItems.findIndex(m => m.menuItemId === item.menuItemId);
+
+        if (i !== -1) {
+          this.menuItems[i].isAvailable = updatedItem.isAvailable;
+
+          // ✅ Force UI update
+          this.cdr.detectChanges();
+        }
+      },
+      error: err => console.error(err)
     });
-  }
-}
+}}

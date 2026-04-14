@@ -262,6 +262,8 @@ export class CustomerProfileComponent implements OnInit {
 
   logout() {
     localStorage.clear();
+      this.router.navigate(['/']);
+
   }
 
   deleteAddress() {

@@ -172,12 +172,16 @@ export class VendorSettingsComponent implements OnInit{
 
   }
 
-  cancel(){
-    window.location.href = "/vendor-dashboard";
-  }
+  
 
-  logout(){
-    window.location.href = "/";
-  }
+   cancel() {
+  this.router.navigate(['/vendor-dashboard']);
+}
+
+
+
+  logout() {
+  this.router.navigate(['/']);
+}
 
 }

@@ -67,10 +67,23 @@
     <div class="menu-grid">
       <div class="card" *ngFor="let item of menuItems">
 
+        <!-- IMAGE (ADDED) -->
+        <div class="image-wrapper">
+  <img 
+    [src]="getSafeUrl(
+      item.imageUrl 
+        ? item.imageUrl.replace(
+            'http://localhost:5197',
+            'https://biconical-sara-counteractive.ngrok-free.dev'
+          )
+        : 'https://via.placeholder.com/300x200'
+    )"
+    alt="{{item.itemName}}">
+</div>
+
         <!-- SOLD OUT BADGE -->
         <div *ngIf="!item.isAvailable" class="soldout-badge">Sold Out</div>
 
-        <!-- <img *ngIf="item.imageUrl" [src]="item.imageUrl" class="food-img"> -->
         <h3>{{item.itemName}}</h3>
         <p>{{item.itemDescription}}</p> 
 

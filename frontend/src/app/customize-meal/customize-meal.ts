@@ -138,9 +138,26 @@ export class CustomizeMealComponent implements OnInit {
     console.log("ADDED?", success);
     console.log("CART NOW:", this.cartService.getItems());
 
+    if (!this.validateNutrition()) return;
+
     if (success) {
       alert("Added to subscription cart");
       this.router.navigate(['/vendor-details', this.meal.vendorId]);
     }
   }
+
+  validateNutrition() {
+
+  if (this.targetCalories < 300 || this.targetCalories > 900) {
+    alert("Calories must be between 300 and 900 per meal");
+    return false;
+  }
+
+  if (this.targetProtein < 20 || this.targetProtein > 60) {
+    alert("Protein must be between 20g and 60g per meal");
+    return false;
+  }
+
+  return true;
+}
 }
