@@ -45,4 +45,13 @@ export class VendorMealCateringService {
   sendDetails(eventId: number, formData: FormData) {
     return this.http.post(`${this.api}/${eventId}/send-details`, formData);
   }
+  // ✅ Confirm event
+confirmEvent(token: string) {
+  return this.http.get(`${this.api}/confirm/${token}`);
+}
+
+// ✅ Cancel event
+cancelEvent(token: string) {
+  return this.http.get(`${this.api}/cancel/${token}`);
+}
 }

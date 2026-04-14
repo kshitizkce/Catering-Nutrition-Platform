@@ -5,6 +5,8 @@ import { VendorService } from '../services/vendor/vendor-service';
 import { AuthService } from '../services/auth/auth';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../shared/navbar/navbar';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+
 
 
 
@@ -27,6 +29,7 @@ export class SubscriptionCartComponent implements OnInit {
     private vendorService: VendorService,
     private auth: AuthService,
     private router: Router,
+        private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef   // ✅ ADD THIS
   ) {}
 
@@ -52,6 +55,10 @@ export class SubscriptionCartComponent implements OnInit {
 
         this.cdr.detectChanges(); // ✅ FORCE UI UPDATE
       });
+  }
+
+  getSafeUrl(url: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
   // ✅ CENTRALIZED LOAD (IMPORTANT)

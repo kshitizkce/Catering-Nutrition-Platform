@@ -31,9 +31,16 @@
 
       <div class="menu-card" *ngFor="let item of menu">
 
-        <img
-          [src]="item.imageUrl ? item.imageUrl : 'https://via.placeholder.com/300x200'"
-          alt="meal">
+       <img 
+    [src]="getSafeUrl(
+      item.imageUrl 
+        ? item.imageUrl.replace(
+            'http://localhost:5197',
+            'https://biconical-sara-counteractive.ngrok-free.dev'
+          )
+        : 'https://via.placeholder.com/300x200'
+    )"
+    alt="{{item.itemName}}">
 
         <h3>{{ item.itemName }}</h3>
         <p>{{ item.itemDescription }}</p>

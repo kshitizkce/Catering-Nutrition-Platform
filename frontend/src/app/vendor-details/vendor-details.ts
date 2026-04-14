@@ -7,6 +7,8 @@ import { NavbarComponent } from '../shared/navbar/navbar';
 import { AuthService } from '../services/auth/auth';
 import { CartService } from '../services/cart/cart.service';
 import { SubscriptionCartService } from '../services/cart/customize-cart-service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-vendor-details',
@@ -39,6 +41,7 @@ export class VendorDetailsComponent implements OnInit {
     private userService: AuthService,
     private cartService: CartService,
     private subCartService: SubscriptionCartService,
+        private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -51,6 +54,9 @@ export class VendorDetailsComponent implements OnInit {
     this.loadCategories();
     this.loadAllMenu();
   }
+  getSafeUrl(url: string): SafeUrl {
+  return this.sanitizer.bypassSecurityTrustUrl(url);
+}
 
   initializeUser() {
     const user = this.userService.getUser();

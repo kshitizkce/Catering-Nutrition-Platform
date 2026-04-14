@@ -152,7 +152,16 @@
     <div class="form-group">
       <label>Food Image</label>
       <input type="file" (change)="onFileSelected($event)">
-      <img *ngIf="editingItem.imageUrl" [src]="editingItem.imageUrl" class="preview-img">
+      <img class="preview-img"
+    [src]="getSafeUrl(
+      editingItem.imageUrl 
+        ? editingItem.imageUrl.replace(
+            'http://localhost:5197',
+            'https://biconical-sara-counteractive.ngrok-free.dev'
+          )
+        : 'https://via.placeholder.com/300x200'
+    )"
+    alt="{{editingItem.itemName}}">
     </div>
 
     <div class="edit-buttons">

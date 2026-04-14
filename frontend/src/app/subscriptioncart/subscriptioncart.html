@@ -12,7 +12,16 @@
   <div *ngFor="let item of items; let i = index" class="cart-item">
 
     <!-- ✅ IMAGE (NEW but safe for CSS) -->
-    <img [src]="item.imageUrl || 'assets/no-image.png'" class="item-img">
+    <img class="item-img"
+    [src]="getSafeUrl(
+      item.imageUrl 
+        ? item.imageUrl.replace(
+            'http://localhost:5197',
+            'https://biconical-sara-counteractive.ngrok-free.dev'
+          )
+        : 'https://via.placeholder.com/300x200'
+    )"
+    alt="{{item.itemName}}">
 
     <div class="item-info">
       <h3>{{item.name}}</h3>
